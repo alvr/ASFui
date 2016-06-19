@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
@@ -18,7 +20,7 @@ namespace ASFui
         {
             if (ASFClient == null)
             {
-                ASFClient = new Client(new BasicHttpBinding(), new EndpointAddress("http://localhost:1242/ASF"));
+                ASFClient = new Client(new BasicHttpBinding(), new EndpointAddress(GetEndpointAddress()));
             }
 
             return ASFClient.HandleCommand(Command);
@@ -36,6 +38,15 @@ namespace ASFui
             Command += String.Join(",", Text);
 
             return Command;
+        }
+
+        private static string GetEndpointAddress()
+        {
+            JObject Json = JObject.Parse(File.ReadAllText(@"config/ASF.json"));
+            string Hostname = Json["WCFHostname"].ToString();
+            string Port = Json["WCFPort"].ToString();
+
+            return "http://" + Hostname + ":" + Port + "/ASF";
         }
     }
 }
