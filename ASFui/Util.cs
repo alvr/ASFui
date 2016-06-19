@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.ServiceModel;
 
 namespace ASFui
@@ -20,6 +22,20 @@ namespace ASFui
             }
 
             return ASFClient.HandleCommand(Command);
+        }
+
+        public static string GenerateCommand(string Command, string User, string Args = "")
+        {
+            return Command + " " + User + " " + Args;
+        }
+
+        public static string MultiToOne(string[] Text)
+        {
+            string Command = null;
+            Text = Text.Where(x => !String.IsNullOrEmpty(x) && !String.IsNullOrWhiteSpace(x)).ToArray();
+            Command += String.Join(",", Text);
+
+            return Command;
         }
     }
 }
