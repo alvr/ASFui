@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace ASFui
@@ -18,6 +19,15 @@ namespace ASFui
                 Environment.Exit(-1);
             }
             InitializeComponent();
+        }
+
+        private void ASFui_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                Hide();
+                TrayIcon.Visible = true;
+            }
         }
 
         private void ASFui_FormClosing(object sender, FormClosingEventArgs e)
@@ -270,6 +280,25 @@ namespace ASFui
             btnReloadBots.Enabled = false;
             btnStart.Enabled = true;
             ASFRunning = false;
+        }
+
+        private void TrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+            TrayIcon.Visible = false;
+        }
+
+        private void tsmiOpen_Click(object sender, EventArgs e)
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+            TrayIcon.Visible = false;
+        }
+
+        private void tsmiClose_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

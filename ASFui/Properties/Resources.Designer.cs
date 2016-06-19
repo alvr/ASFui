@@ -59,5 +59,15 @@ namespace ASFui.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon ASFui {
+            get {
+                object obj = ResourceManager.GetObject("ASFui", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

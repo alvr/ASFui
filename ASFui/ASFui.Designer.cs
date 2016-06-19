@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ASFui));
+            this.components = new System.ComponentModel.Container();
             this.rtbOutput = new System.Windows.Forms.RichTextBox();
             this.BackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.ASFProcess = new System.Diagnostics.Process();
@@ -55,9 +55,10 @@
             this.gbBots = new System.Windows.Forms.GroupBox();
             this.tlpBots = new System.Windows.Forms.TableLayoutPanel();
             this.btnStartBot = new System.Windows.Forms.Button();
-            this.btnStatusBot = new System.Windows.Forms.Button();
-            this.btnStatusAll = new System.Windows.Forms.Button();
             this.btnStopBot = new System.Windows.Forms.Button();
+            this.btnStatusAll = new System.Windows.Forms.Button();
+            this.btnStatusBot = new System.Windows.Forms.Button();
+            this.btnPauseBot = new System.Windows.Forms.Button();
             this.gbInput = new System.Windows.Forms.GroupBox();
             this.tbInput = new System.Windows.Forms.TextBox();
             this.gbChat = new System.Windows.Forms.GroupBox();
@@ -68,12 +69,16 @@
             this.tlpGames = new System.Windows.Forms.TableLayoutPanel();
             this.btnOwns = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
-            this.btnPauseBot = new System.Windows.Forms.Button();
             this.gbASF = new System.Windows.Forms.GroupBox();
             this.tlpASF = new System.Windows.Forms.TableLayoutPanel();
             this.btnASFHelp = new System.Windows.Forms.Button();
             this.btnASFUpdate = new System.Windows.Forms.Button();
             this.btnASFVersion = new System.Windows.Forms.Button();
+            this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.cmsTrayIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiClose = new System.Windows.Forms.ToolStripMenuItem();
             this.gbKeys.SuspendLayout();
             this.tlpKeys.SuspendLayout();
             this.gb2FA.SuspendLayout();
@@ -89,6 +94,7 @@
             this.tlpGames.SuspendLayout();
             this.gbASF.SuspendLayout();
             this.tlpASF.SuspendLayout();
+            this.cmsTrayIcon.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtbOutput
@@ -400,16 +406,16 @@
             this.btnStartBot.UseVisualStyleBackColor = true;
             this.btnStartBot.Click += new System.EventHandler(this.btnStartBot_Click);
             // 
-            // btnStatusBot
+            // btnStopBot
             // 
-            this.btnStatusBot.Enabled = false;
-            this.btnStatusBot.Location = new System.Drawing.Point(246, 3);
-            this.btnStatusBot.Name = "btnStatusBot";
-            this.btnStatusBot.Size = new System.Drawing.Size(75, 25);
-            this.btnStatusBot.TabIndex = 2;
-            this.btnStatusBot.Text = "Status";
-            this.btnStatusBot.UseVisualStyleBackColor = true;
-            this.btnStatusBot.Click += new System.EventHandler(this.btnStatusBot_Click);
+            this.btnStopBot.Enabled = false;
+            this.btnStopBot.Location = new System.Drawing.Point(84, 3);
+            this.btnStopBot.Name = "btnStopBot";
+            this.btnStopBot.Size = new System.Drawing.Size(75, 25);
+            this.btnStopBot.TabIndex = 1;
+            this.btnStopBot.Text = "Stop";
+            this.btnStopBot.UseVisualStyleBackColor = true;
+            this.btnStopBot.Click += new System.EventHandler(this.btnStopBot_Click);
             // 
             // btnStatusAll
             // 
@@ -422,16 +428,27 @@
             this.btnStatusAll.UseVisualStyleBackColor = true;
             this.btnStatusAll.Click += new System.EventHandler(this.btnStatusAll_Click);
             // 
-            // btnStopBot
+            // btnStatusBot
             // 
-            this.btnStopBot.Enabled = false;
-            this.btnStopBot.Location = new System.Drawing.Point(84, 3);
-            this.btnStopBot.Name = "btnStopBot";
-            this.btnStopBot.Size = new System.Drawing.Size(75, 25);
-            this.btnStopBot.TabIndex = 1;
-            this.btnStopBot.Text = "Stop";
-            this.btnStopBot.UseVisualStyleBackColor = true;
-            this.btnStopBot.Click += new System.EventHandler(this.btnStopBot_Click);
+            this.btnStatusBot.Enabled = false;
+            this.btnStatusBot.Location = new System.Drawing.Point(246, 3);
+            this.btnStatusBot.Name = "btnStatusBot";
+            this.btnStatusBot.Size = new System.Drawing.Size(75, 25);
+            this.btnStatusBot.TabIndex = 2;
+            this.btnStatusBot.Text = "Status";
+            this.btnStatusBot.UseVisualStyleBackColor = true;
+            this.btnStatusBot.Click += new System.EventHandler(this.btnStatusBot_Click);
+            // 
+            // btnPauseBot
+            // 
+            this.btnPauseBot.Enabled = false;
+            this.btnPauseBot.Location = new System.Drawing.Point(165, 3);
+            this.btnPauseBot.Name = "btnPauseBot";
+            this.btnPauseBot.Size = new System.Drawing.Size(75, 25);
+            this.btnPauseBot.TabIndex = 4;
+            this.btnPauseBot.Text = "Pause";
+            this.btnPauseBot.UseVisualStyleBackColor = true;
+            this.btnPauseBot.Click += new System.EventHandler(this.btnPauseBot_Click);
             // 
             // gbInput
             // 
@@ -545,17 +562,6 @@
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
-            // btnPauseBot
-            // 
-            this.btnPauseBot.Enabled = false;
-            this.btnPauseBot.Location = new System.Drawing.Point(165, 3);
-            this.btnPauseBot.Name = "btnPauseBot";
-            this.btnPauseBot.Size = new System.Drawing.Size(75, 25);
-            this.btnPauseBot.TabIndex = 4;
-            this.btnPauseBot.Text = "Pause";
-            this.btnPauseBot.UseVisualStyleBackColor = true;
-            this.btnPauseBot.Click += new System.EventHandler(this.btnPauseBot_Click);
-            // 
             // gbASF
             // 
             this.gbASF.Controls.Add(this.tlpASF);
@@ -615,6 +621,41 @@
             this.btnASFVersion.UseVisualStyleBackColor = true;
             this.btnASFVersion.Click += new System.EventHandler(this.btnASFVersion_Click);
             // 
+            // TrayIcon
+            // 
+            this.TrayIcon.ContextMenuStrip = this.cmsTrayIcon;
+            this.TrayIcon.Icon = global::ASFui.Properties.Resources.ASFui;
+            this.TrayIcon.Text = "ASFui";
+            this.TrayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TrayIcon_MouseDoubleClick);
+            // 
+            // cmsTrayIcon
+            // 
+            this.cmsTrayIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiOpen,
+            this.tsmiClose});
+            this.cmsTrayIcon.Name = "cmsTrayIcon";
+            this.cmsTrayIcon.Size = new System.Drawing.Size(153, 70);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Text = "toolStripMenuItem1";
+            // 
+            // tsmiOpen
+            // 
+            this.tsmiOpen.Name = "tsmiOpen";
+            this.tsmiOpen.Size = new System.Drawing.Size(152, 22);
+            this.tsmiOpen.Text = "Open";
+            this.tsmiOpen.Click += new System.EventHandler(this.tsmiOpen_Click);
+            // 
+            // tsmiClose
+            // 
+            this.tsmiClose.Name = "tsmiClose";
+            this.tsmiClose.Size = new System.Drawing.Size(152, 22);
+            this.tsmiClose.Text = "Close";
+            this.tsmiClose.Click += new System.EventHandler(this.tsmiClose_Click);
+            // 
             // ASFui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -636,11 +677,12 @@
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.rtbOutput);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::ASFui.Properties.Resources.ASFui;
             this.MaximizeBox = false;
             this.Name = "ASFui";
             this.Text = "ASFui";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ASFui_FormClosing);
+            this.Resize += new System.EventHandler(this.ASFui_Resize);
             this.gbKeys.ResumeLayout(false);
             this.tlpKeys.ResumeLayout(false);
             this.gb2FA.ResumeLayout(false);
@@ -657,6 +699,7 @@
             this.tlpGames.ResumeLayout(false);
             this.gbASF.ResumeLayout(false);
             this.tlpASF.ResumeLayout(false);
+            this.cmsTrayIcon.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -708,6 +751,11 @@
         private System.Windows.Forms.Button btnASFHelp;
         private System.Windows.Forms.Button btnASFUpdate;
         private System.Windows.Forms.Button btnASFVersion;
+        private System.Windows.Forms.NotifyIcon TrayIcon;
+        private System.Windows.Forms.ContextMenuStrip cmsTrayIcon;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiOpen;
+        private System.Windows.Forms.ToolStripMenuItem tsmiClose;
     }
 }
 
