@@ -76,9 +76,11 @@
             this.btnASFVersion = new System.Windows.Forms.Button();
             this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsTrayIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.StatusStrip = new System.Windows.Forms.StatusStrip();
+            this.tsslLastCommand = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslCommandOutput = new System.Windows.Forms.ToolStripStatusLabel();
             this.gbKeys.SuspendLayout();
             this.tlpKeys.SuspendLayout();
             this.gb2FA.SuspendLayout();
@@ -95,6 +97,7 @@
             this.gbASF.SuspendLayout();
             this.tlpASF.SuspendLayout();
             this.cmsTrayIcon.SuspendLayout();
+            this.StatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtbOutput
@@ -634,33 +637,53 @@
             this.tsmiOpen,
             this.tsmiClose});
             this.cmsTrayIcon.Name = "cmsTrayIcon";
-            this.cmsTrayIcon.Size = new System.Drawing.Size(153, 70);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem1.Text = "toolStripMenuItem1";
+            this.cmsTrayIcon.Size = new System.Drawing.Size(104, 48);
             // 
             // tsmiOpen
             // 
             this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.Size = new System.Drawing.Size(152, 22);
+            this.tsmiOpen.Size = new System.Drawing.Size(103, 22);
             this.tsmiOpen.Text = "Open";
             this.tsmiOpen.Click += new System.EventHandler(this.tsmiOpen_Click);
             // 
             // tsmiClose
             // 
             this.tsmiClose.Name = "tsmiClose";
-            this.tsmiClose.Size = new System.Drawing.Size(152, 22);
+            this.tsmiClose.Size = new System.Drawing.Size(103, 22);
             this.tsmiClose.Text = "Close";
             this.tsmiClose.Click += new System.EventHandler(this.tsmiClose_Click);
+            // 
+            // StatusStrip
+            // 
+            this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslLastCommand,
+            this.tsslCommandOutput});
+            this.StatusStrip.Location = new System.Drawing.Point(0, 464);
+            this.StatusStrip.Name = "StatusStrip";
+            this.StatusStrip.Size = new System.Drawing.Size(694, 22);
+            this.StatusStrip.SizingGrip = false;
+            this.StatusStrip.TabIndex = 31;
+            // 
+            // tsslLastCommand
+            // 
+            this.tsslLastCommand.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsslLastCommand.Name = "tsslLastCommand";
+            this.tsslLastCommand.Size = new System.Drawing.Size(98, 17);
+            this.tsslLastCommand.Text = "Last Command:";
+            // 
+            // tsslCommandOutput
+            // 
+            this.tsslCommandOutput.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsslCommandOutput.Name = "tsslCommandOutput";
+            this.tsslCommandOutput.Size = new System.Drawing.Size(42, 17);
+            this.tsslCommandOutput.Text = "None.";
             // 
             // ASFui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(694, 473);
+            this.ClientSize = new System.Drawing.Size(694, 486);
+            this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.gbASF);
             this.Controls.Add(this.gbChat);
             this.Controls.Add(this.gbKeys);
@@ -700,6 +723,8 @@
             this.gbASF.ResumeLayout(false);
             this.tlpASF.ResumeLayout(false);
             this.cmsTrayIcon.ResumeLayout(false);
+            this.StatusStrip.ResumeLayout(false);
+            this.StatusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -753,9 +778,11 @@
         private System.Windows.Forms.Button btnASFVersion;
         private System.Windows.Forms.NotifyIcon TrayIcon;
         private System.Windows.Forms.ContextMenuStrip cmsTrayIcon;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem tsmiOpen;
         private System.Windows.Forms.ToolStripMenuItem tsmiClose;
+        private System.Windows.Forms.StatusStrip StatusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel tsslLastCommand;
+        private System.Windows.Forms.ToolStripStatusLabel tsslCommandOutput;
     }
 }
 
