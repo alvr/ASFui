@@ -81,6 +81,7 @@
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.tsslLastCommand = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslCommandOutput = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnASFuiSettings = new System.Windows.Forms.Button();
             this.gbKeys.SuspendLayout();
             this.tlpKeys.SuspendLayout();
             this.gb2FA.SuspendLayout();
@@ -125,7 +126,7 @@
             this.ASFProcess.StartInfo.Arguments = "--server";
             this.ASFProcess.StartInfo.CreateNoWindow = true;
             this.ASFProcess.StartInfo.Domain = "";
-            this.ASFProcess.StartInfo.FileName = "ASF.exe";
+            this.ASFProcess.StartInfo.FileName = Properties.Settings.Default.ASFBinary;
             this.ASFProcess.StartInfo.LoadUserProfile = false;
             this.ASFProcess.StartInfo.Password = null;
             this.ASFProcess.StartInfo.RedirectStandardError = true;
@@ -678,11 +679,22 @@
             this.tsslCommandOutput.Size = new System.Drawing.Size(42, 17);
             this.tsslCommandOutput.Text = "None.";
             // 
+            // btnASFuiSettings
+            // 
+            this.btnASFuiSettings.Location = new System.Drawing.Point(416, 438);
+            this.btnASFuiSettings.Name = "btnASFuiSettings";
+            this.btnASFuiSettings.Size = new System.Drawing.Size(23, 23);
+            this.btnASFuiSettings.TabIndex = 32;
+            this.btnASFuiSettings.Text = "🔧";
+            this.btnASFuiSettings.UseVisualStyleBackColor = true;
+            this.btnASFuiSettings.Click += new System.EventHandler(this.btnASFuiSettings_Click);
+            // 
             // ASFui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 486);
+            this.Controls.Add(this.btnASFuiSettings);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.gbASF);
             this.Controls.Add(this.gbChat);
@@ -783,6 +795,7 @@
         private System.Windows.Forms.StatusStrip StatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel tsslLastCommand;
         private System.Windows.Forms.ToolStripStatusLabel tsslCommandOutput;
+        private System.Windows.Forms.Button btnASFuiSettings;
     }
 }
 

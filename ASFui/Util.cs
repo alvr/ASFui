@@ -14,7 +14,7 @@ namespace ASFui
 
         public static bool CheckBinary()
         {
-            return File.Exists("ASF.exe");
+            return File.Exists(Properties.Settings.Default.ASFBinary);
         }
 
         public static string SendCommand(string Command)

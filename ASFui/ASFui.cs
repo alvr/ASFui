@@ -12,11 +12,20 @@ namespace ASFui
 
         public ASFui()
         {
-            if (!Util.CheckBinary())
+            while (!Util.CheckBinary())
             {
-                MessageBox.Show("ASF binary should be in the same folder as ASFui.",
-                    "ASF binary not found.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Environment.Exit(-1);
+                DialogResult result = MessageBox.Show("ASF binary setting not configured. Configure now?",
+                    "ASF binary not found.", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (result == DialogResult.Yes)
+                {
+                    Properties.Settings.Default.ASFBinary = "Setting not configured.";
+                    SettingsForm Settings = new SettingsForm();
+                    Settings.ShowDialog();
+                }
+                else
+                {
+                    Environment.Exit(-1);
+                }
             }
 
             if (Util.CheckIfASFIsRunning())
@@ -119,6 +128,12 @@ namespace ASFui
             GetBotList();
             EnableElements();
             tsslCommandOutput.Text = "Updated Bot list.";
+        }
+
+        private void btnASFuiSettings_Click(object sender, EventArgs e)
+        {
+            SettingsForm Settings = new SettingsForm();
+            Settings.ShowDialog();
         }
         #endregion
 
