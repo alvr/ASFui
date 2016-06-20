@@ -18,6 +18,13 @@ namespace ASFui
                     "ASF binary not found.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(-1);
             }
+
+            if (Util.CheckIfASFIsRunning())
+            {
+                MessageBox.Show("An instance of ASF is already running. Close it.",
+                    "ASF already running.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(-2);
+            }
             InitializeComponent();
         }
 

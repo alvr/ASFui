@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
@@ -47,6 +48,11 @@ namespace ASFui
             string Port = Json["WCFPort"].ToString();
 
             return "http://" + Hostname + ":" + Port + "/ASF";
+        }
+
+        public static bool CheckIfASFIsRunning()
+        {
+            return Process.GetProcessesByName("ASF").Length > 0 || Process.GetProcessesByName("ArchiSteamFarm").Length > 0;
         }
     }
 }
