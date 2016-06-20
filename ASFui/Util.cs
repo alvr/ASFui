@@ -43,7 +43,7 @@ namespace ASFui
 
         private static string GetEndpointAddress()
         {
-            JObject Json = JObject.Parse(File.ReadAllText(@"config/ASF.json"));
+            JObject Json = JObject.Parse(File.ReadAllText(Path.GetDirectoryName(Properties.Settings.Default.ASFBinary) + @"/config/ASF.json"));
             string Hostname = Json["WCFHostname"].ToString();
             string Port = Json["WCFPort"].ToString();
 
