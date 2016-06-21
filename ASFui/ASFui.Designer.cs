@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.ASFProcess = new System.Diagnostics.Process();
             this.rtbOutput = new System.Windows.Forms.RichTextBox();
             this.BackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.ASFProcess = new System.Diagnostics.Process();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -74,9 +74,9 @@
             this.btnASFHelp = new System.Windows.Forms.Button();
             this.btnASFUpdate = new System.Windows.Forms.Button();
             this.btnASFVersion = new System.Windows.Forms.Button();
+            this.btnAPI = new System.Windows.Forms.Button();
             this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsTrayIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiClose = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.tsslLastCommand = new System.Windows.Forms.ToolStripStatusLabel();
@@ -101,6 +101,26 @@
             this.StatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
+            // ASFProcess
+            // 
+            this.ASFProcess.StartInfo.Arguments = "--server";
+            this.ASFProcess.StartInfo.CreateNoWindow = true;
+            this.ASFProcess.StartInfo.Domain = "";
+            this.ASFProcess.StartInfo.FileName = "ASF.exe";
+            this.ASFProcess.StartInfo.LoadUserProfile = false;
+            this.ASFProcess.StartInfo.Password = null;
+            this.ASFProcess.StartInfo.RedirectStandardError = true;
+            this.ASFProcess.StartInfo.RedirectStandardInput = true;
+            this.ASFProcess.StartInfo.RedirectStandardOutput = true;
+            this.ASFProcess.StartInfo.StandardErrorEncoding = null;
+            this.ASFProcess.StartInfo.StandardOutputEncoding = null;
+            this.ASFProcess.StartInfo.UserName = "";
+            this.ASFProcess.StartInfo.UseShellExecute = false;
+            this.ASFProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            this.ASFProcess.SynchronizingObject = this;
+            this.ASFProcess.OutputDataReceived += new System.Diagnostics.DataReceivedEventHandler(this.ProcesoASF_OutputDataReceived);
+            this.ASFProcess.ErrorDataReceived += new System.Diagnostics.DataReceivedEventHandler(this.ASFProcess_ErrorDataReceived);
+            // 
             // rtbOutput
             // 
             this.rtbOutput.BackColor = System.Drawing.SystemColors.InactiveCaption;
@@ -120,26 +140,6 @@
             this.BackgroundWorker.WorkerReportsProgress = true;
             this.BackgroundWorker.WorkerSupportsCancellation = true;
             this.BackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
-            // 
-            // ASFProcess
-            // 
-            this.ASFProcess.StartInfo.Arguments = "--server";
-            this.ASFProcess.StartInfo.CreateNoWindow = true;
-            this.ASFProcess.StartInfo.Domain = "";
-            this.ASFProcess.StartInfo.FileName = Properties.Settings.Default.ASFBinary;
-            this.ASFProcess.StartInfo.LoadUserProfile = false;
-            this.ASFProcess.StartInfo.Password = null;
-            this.ASFProcess.StartInfo.RedirectStandardError = true;
-            this.ASFProcess.StartInfo.RedirectStandardInput = true;
-            this.ASFProcess.StartInfo.RedirectStandardOutput = true;
-            this.ASFProcess.StartInfo.StandardErrorEncoding = null;
-            this.ASFProcess.StartInfo.StandardOutputEncoding = null;
-            this.ASFProcess.StartInfo.UserName = "";
-            this.ASFProcess.StartInfo.UseShellExecute = false;
-            this.ASFProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            this.ASFProcess.SynchronizingObject = this;
-            this.ASFProcess.OutputDataReceived += new System.Diagnostics.DataReceivedEventHandler(this.ProcesoASF_OutputDataReceived);
-            this.ASFProcess.ErrorDataReceived += new System.Diagnostics.DataReceivedEventHandler(this.ASFProcess_ErrorDataReceived);
             // 
             // btnStop
             // 
@@ -578,13 +578,15 @@
             // 
             // tlpASF
             // 
-            this.tlpASF.ColumnCount = 3;
-            this.tlpASF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpASF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpASF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpASF.ColumnCount = 4;
+            this.tlpASF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpASF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpASF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpASF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpASF.Controls.Add(this.btnASFHelp, 0, 0);
             this.tlpASF.Controls.Add(this.btnASFUpdate, 1, 0);
             this.tlpASF.Controls.Add(this.btnASFVersion, 2, 0);
+            this.tlpASF.Controls.Add(this.btnAPI, 3, 0);
             this.tlpASF.Location = new System.Drawing.Point(6, 19);
             this.tlpASF.Name = "tlpASF";
             this.tlpASF.RowCount = 1;
@@ -597,7 +599,7 @@
             this.btnASFHelp.Enabled = false;
             this.btnASFHelp.Location = new System.Drawing.Point(3, 3);
             this.btnASFHelp.Name = "btnASFHelp";
-            this.btnASFHelp.Size = new System.Drawing.Size(129, 27);
+            this.btnASFHelp.Size = new System.Drawing.Size(95, 27);
             this.btnASFHelp.TabIndex = 0;
             this.btnASFHelp.Text = "Help";
             this.btnASFHelp.UseVisualStyleBackColor = true;
@@ -606,9 +608,9 @@
             // btnASFUpdate
             // 
             this.btnASFUpdate.Enabled = false;
-            this.btnASFUpdate.Location = new System.Drawing.Point(138, 3);
+            this.btnASFUpdate.Location = new System.Drawing.Point(104, 3);
             this.btnASFUpdate.Name = "btnASFUpdate";
-            this.btnASFUpdate.Size = new System.Drawing.Size(129, 27);
+            this.btnASFUpdate.Size = new System.Drawing.Size(95, 27);
             this.btnASFUpdate.TabIndex = 1;
             this.btnASFUpdate.Text = "Update";
             this.btnASFUpdate.UseVisualStyleBackColor = true;
@@ -617,13 +619,24 @@
             // btnASFVersion
             // 
             this.btnASFVersion.Enabled = false;
-            this.btnASFVersion.Location = new System.Drawing.Point(273, 3);
+            this.btnASFVersion.Location = new System.Drawing.Point(205, 3);
             this.btnASFVersion.Name = "btnASFVersion";
-            this.btnASFVersion.Size = new System.Drawing.Size(130, 27);
+            this.btnASFVersion.Size = new System.Drawing.Size(95, 27);
             this.btnASFVersion.TabIndex = 2;
             this.btnASFVersion.Text = "Version";
             this.btnASFVersion.UseVisualStyleBackColor = true;
             this.btnASFVersion.Click += new System.EventHandler(this.btnASFVersion_Click);
+            // 
+            // btnAPI
+            // 
+            this.btnAPI.Enabled = false;
+            this.btnAPI.Location = new System.Drawing.Point(306, 3);
+            this.btnAPI.Name = "btnAPI";
+            this.btnAPI.Size = new System.Drawing.Size(97, 27);
+            this.btnAPI.TabIndex = 3;
+            this.btnAPI.Text = "API";
+            this.btnAPI.UseVisualStyleBackColor = true;
+            this.btnAPI.Click += new System.EventHandler(this.btnAPI_Click);
             // 
             // TrayIcon
             // 
@@ -635,17 +648,9 @@
             // cmsTrayIcon
             // 
             this.cmsTrayIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiOpen,
             this.tsmiClose});
             this.cmsTrayIcon.Name = "cmsTrayIcon";
-            this.cmsTrayIcon.Size = new System.Drawing.Size(104, 48);
-            // 
-            // tsmiOpen
-            // 
-            this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.Size = new System.Drawing.Size(103, 22);
-            this.tsmiOpen.Text = "Open";
-            this.tsmiOpen.Click += new System.EventHandler(this.tsmiOpen_Click);
+            this.cmsTrayIcon.Size = new System.Drawing.Size(104, 26);
             // 
             // tsmiClose
             // 
@@ -744,13 +749,10 @@
 
         #endregion
         private System.ComponentModel.BackgroundWorker BackgroundWorker;
-        private System.Diagnostics.Process ASFProcess;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Label lbCurrentBot;
-        protected System.Windows.Forms.ComboBox cbBotList;
-        public System.Windows.Forms.RichTextBox rtbOutput;
         private System.Windows.Forms.Button btnReloadBots;
         private System.Windows.Forms.GroupBox gbKeys;
         private System.Windows.Forms.TableLayoutPanel tlpKeys;
@@ -790,12 +792,15 @@
         private System.Windows.Forms.Button btnASFVersion;
         private System.Windows.Forms.NotifyIcon TrayIcon;
         private System.Windows.Forms.ContextMenuStrip cmsTrayIcon;
-        private System.Windows.Forms.ToolStripMenuItem tsmiOpen;
         private System.Windows.Forms.ToolStripMenuItem tsmiClose;
         private System.Windows.Forms.StatusStrip StatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel tsslLastCommand;
         private System.Windows.Forms.ToolStripStatusLabel tsslCommandOutput;
         private System.Windows.Forms.Button btnASFuiSettings;
+        private System.Windows.Forms.Button btnAPI;
+        private System.Windows.Forms.RichTextBox rtbOutput;
+        private System.Windows.Forms.ComboBox cbBotList;
+        private System.Diagnostics.Process ASFProcess;
     }
 }
 

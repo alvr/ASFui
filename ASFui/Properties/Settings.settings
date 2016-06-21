@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ASFBinary" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Setting not configured.</Value>
+      <Value Profile="(Default)">ASF.exe</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -69,6 +69,7 @@ namespace ASFui
             // 
             this.lbPath.AutoSize = true;
             this.lbPath.Location = new System.Drawing.Point(6, 24);
+            this.lbPath.MaximumSize = new System.Drawing.Size(335, 0);
             this.lbPath.Name = "lbPath";
             this.lbPath.Size = new System.Drawing.Size(114, 13);
             this.lbPath.TabIndex = 0;

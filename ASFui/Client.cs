@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
@@ -8,7 +8,8 @@ namespace ASFui
     // https://github.com/JustArchi/ArchiSteamFarm/blob/master/ArchiSteamFarm/WCF.cs
 
     [ServiceContract]
-    interface IWCF
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    internal interface IWCF
     {
         [OperationContract]
         string HandleCommand(string input);
