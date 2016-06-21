@@ -155,22 +155,28 @@ namespace ASFui
         #region Keys Buttons
         private void btnRedeem_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("redeem", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
-            tsslCommandOutput.Text = @"!redeem <" + cbBotList.SelectedItem + @">: " + result;
+            Task.Run(() => {
+                var result = Util.SendCommand(Util.GenerateCommand("redeem", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
+                tsslCommandOutput.Text = @"!redeem <" + cbBotList.SelectedItem + @">: " + result;
+            });
         }
 
         private void btnAddLicense_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("addlicense", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
-            tsslCommandOutput.Text = @"!addlicense <" + cbBotList.SelectedItem + @">: " + result;
+            Task.Run(() => {
+                var result = Util.SendCommand(Util.GenerateCommand("addlicense", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
+                tsslCommandOutput.Text = @"!addlicense <" + cbBotList.SelectedItem + @">: " + result;
+            });
         }
         #endregion
 
         #region Games Buttons
         private void btnOwns_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("owns", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
-            tsslCommandOutput.Text = @"!owns <" + cbBotList.SelectedItem + @">: " + result;
+            Task.Run(() => {
+                var result = Util.SendCommand(Util.GenerateCommand("owns", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
+                tsslCommandOutput.Text = @"!owns <" + cbBotList.SelectedItem + @">: " + result;
+            });
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
@@ -267,15 +273,21 @@ namespace ASFui
         private void btn2FAOk_Click(object sender, EventArgs e)
         {
             tsslCommandOutput.Text = @"!2faok <" + cbBotList.SelectedItem + @">: This could take a while.";
-            var result = Util.SendCommand(Util.GenerateCommand("2faok", cbBotList.SelectedItem.ToString()));
-            tsslCommandOutput.Text = @"!2faok <" + cbBotList.SelectedItem + @">: " + result;
+            Task.Run(() =>
+            {
+                var result = Util.SendCommand(Util.GenerateCommand("2faok", cbBotList.SelectedItem.ToString()));
+                tsslCommandOutput.Text = @"!2faok <" + cbBotList.SelectedItem + @">: " + result;
+            });
         }
 
         private void btn2FANo_Click(object sender, EventArgs e)
         {
             tsslCommandOutput.Text = @"!2fano <" + cbBotList.SelectedItem + @">: This could take a while.";
-            var result = Util.SendCommand(Util.GenerateCommand("2fano", cbBotList.SelectedItem.ToString()));
-            tsslCommandOutput.Text = @"!2fano <" + cbBotList.SelectedItem + @">: " + result;
+            Task.Run(() =>
+            {
+                var result = Util.SendCommand(Util.GenerateCommand("2fano", cbBotList.SelectedItem.ToString()));
+                tsslCommandOutput.Text = @"!2fano <" + cbBotList.SelectedItem + @">: " + result;
+            });
         }
         #endregion
         #endregion
@@ -340,13 +352,6 @@ namespace ASFui
         }
 
         private void TrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            Show();
-            WindowState = FormWindowState.Normal;
-            TrayIcon.Visible = false;
-        }
-
-        private void tsmiOpen_Click(object sender, EventArgs e)
         {
             Show();
             WindowState = FormWindowState.Normal;

@@ -665,6 +665,7 @@
             this.tsslLastCommand,
             this.tsslCommandOutput});
             this.StatusStrip.Location = new System.Drawing.Point(0, 464);
+            this.StatusStrip.MaximumSize = new System.Drawing.Size(0, 22);
             this.StatusStrip.Name = "StatusStrip";
             this.StatusStrip.Size = new System.Drawing.Size(694, 22);
             this.StatusStrip.SizingGrip = false;
