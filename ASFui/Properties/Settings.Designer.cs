@@ -25,7 +25,7 @@ namespace ASFui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ASF.exe")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ASFBinary {
             get {
                 return ((string)(this["ASFBinary"]));

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -11,6 +10,7 @@ namespace ASFui
     public partial class ASFui : Form
     {
         private bool _asfRunning;
+        private ASFProcess _asf;
 
         public ASFui()
         {
@@ -37,7 +37,6 @@ namespace ASFui
                 Environment.Exit(-2);
             }
             InitializeComponent();
-            ASFProcess.StartInfo.FileName = Properties.Settings.Default.ASFBinary;
         }
 
         private void ASFui_Resize(object sender, EventArgs e)
@@ -50,33 +49,9 @@ namespace ASFui
         private void ASFui_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!_asfRunning || !Properties.Settings.Default.IsLocal) return;
-            ASFProcess.Kill();
-            ASFProcess.CancelOutputRead();
-            BackgroundWorker.CancelAsync();
+            _asf.Stop();
         }
-
-        private void BackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            if (!Properties.Settings.Default.IsLocal) return;
-            ASFProcess.Start();
-            ASFProcess.BeginOutputReadLine();
-            ASFProcess.WaitForExit();
-        }
-
-        private void ASFProcess_OutputDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            rtbOutput.AppendText(e.Data + Environment.NewLine);
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
-        }
-
-        private void ASFProcess_ErrorDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            rtbOutput.AppendText(e.Data + Environment.NewLine);
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
-        }
-
+        
         private void GetBotList()
         {
             cbBotList.Items.Clear();
@@ -98,7 +73,11 @@ namespace ASFui
         {
             btnStart.Enabled = false;
             rtbOutput.AppendText(@"Starting ASF..." + Environment.NewLine);
-            BackgroundWorker.RunWorkerAsync();
+            if (Properties.Settings.Default.IsLocal)
+            {
+                _asf = new ASFProcess(rtbOutput);
+                _asf.Start();
+            }
             btnStop.Enabled = true;
             btnClear.Enabled = true;
             cbBotList.Enabled = true;
@@ -114,9 +93,10 @@ namespace ASFui
         {
             btnStop.Enabled = false;
             rtbOutput.AppendText("Stopping ASF..." + Environment.NewLine);
-            BackgroundWorker.CancelAsync();
-            Util.SendCommand("exit");
-            ASFProcess.CancelOutputRead();
+            if (Properties.Settings.Default.IsLocal)
+            {
+                _asf.Stop();
+            }
             DisableElements();
             tsslCommandOutput.Text = @"Stopped ASF server.";
         }

@@ -39,27 +39,21 @@ namespace ASFui
 
         private static string GetEndpointAddress()
         {
-            if (Settings.Default.IsLocal)
-            {
-                var json =
-                    JObject.Parse(
-                        File.ReadAllText(Path.GetDirectoryName(Settings.Default.ASFBinary) + @"/config/ASF.json"));
-                var hostname = json["WCFHostname"].ToString();
-                var port = json["WCFPort"].ToString();
+            if (!Settings.Default.IsLocal) return Settings.Default.RemoteURL;
+            var json =
+                JObject.Parse(
+                    File.ReadAllText(Path.GetDirectoryName(Settings.Default.ASFBinary) + @"/config/ASF.json"));
+            var hostname = json["WCFHostname"].ToString();
+            var port = json["WCFPort"].ToString();
 
-                return "http://" + hostname + ":" + port + "/ASF";
-            }
-            else
-            {
-                return Settings.Default.RemoteURL;
-            }
+            return "http://" + hostname + ":" + port + "/ASF";
         }
 
         public static bool CheckIfAsfIsRunning()
         {
             return Process.GetProcessesByName("ASF").Length > 0 ||
                    Process.GetProcessesByName("ArchiSteamFarm").Length > 0 ||
-                   Process.GetProcessesByName(Settings.Default.ASFBinary).Length > 0;
+                   Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Settings.Default.ASFBinary)).Length > 0;
         }
     }
 }

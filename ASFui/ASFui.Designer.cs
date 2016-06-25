@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.rtbOutput = new System.Windows.Forms.RichTextBox();
-            this.BackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -81,7 +80,6 @@
             this.tsslLastCommand = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslCommandOutput = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnASFuiSettings = new System.Windows.Forms.Button();
-            this.ASFProcess = new System.Diagnostics.Process();
             this.gbKeys.SuspendLayout();
             this.tlpKeys.SuspendLayout();
             this.gb2FA.SuspendLayout();
@@ -114,12 +112,6 @@
             this.rtbOutput.Size = new System.Drawing.Size(670, 100);
             this.rtbOutput.TabIndex = 0;
             this.rtbOutput.Text = "";
-            // 
-            // BackgroundWorker
-            // 
-            this.BackgroundWorker.WorkerReportsProgress = true;
-            this.BackgroundWorker.WorkerSupportsCancellation = true;
-            this.BackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
             // 
             // btnStop
             // 
@@ -675,25 +667,6 @@
             this.btnASFuiSettings.UseVisualStyleBackColor = true;
             this.btnASFuiSettings.Click += new System.EventHandler(this.btnASFuiSettings_Click);
             // 
-            // ASFProcess
-            // 
-            this.ASFProcess.StartInfo.Arguments = "--server";
-            this.ASFProcess.StartInfo.CreateNoWindow = true;
-            this.ASFProcess.StartInfo.Domain = "";
-            this.ASFProcess.StartInfo.LoadUserProfile = false;
-            this.ASFProcess.StartInfo.Password = null;
-            this.ASFProcess.StartInfo.RedirectStandardError = true;
-            this.ASFProcess.StartInfo.RedirectStandardInput = true;
-            this.ASFProcess.StartInfo.RedirectStandardOutput = true;
-            this.ASFProcess.StartInfo.StandardErrorEncoding = null;
-            this.ASFProcess.StartInfo.StandardOutputEncoding = null;
-            this.ASFProcess.StartInfo.UserName = "";
-            this.ASFProcess.StartInfo.UseShellExecute = false;
-            this.ASFProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            this.ASFProcess.SynchronizingObject = this;
-            this.ASFProcess.OutputDataReceived += new System.Diagnostics.DataReceivedEventHandler(this.ASFProcess_OutputDataReceived);
-            this.ASFProcess.ErrorDataReceived += new System.Diagnostics.DataReceivedEventHandler(this.ASFProcess_ErrorDataReceived);
-            // 
             // ASFui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -748,7 +721,6 @@
         }
 
         #endregion
-        private System.ComponentModel.BackgroundWorker BackgroundWorker;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnClear;
@@ -800,7 +772,6 @@
         private System.Windows.Forms.Button btnAPI;
         private System.Windows.Forms.RichTextBox rtbOutput;
         private System.Windows.Forms.ComboBox cbBotList;
-        private System.Diagnostics.Process ASFProcess;
     }
 }
 
