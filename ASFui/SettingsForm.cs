@@ -1,5 +1,11 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Runtime.Serialization.Formatters;
 using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
+using static System.Net.HttpWebRequest;
 
 namespace ASFui
 {
@@ -9,6 +15,10 @@ namespace ASFui
         {
             InitializeComponent();
             lbPath.Text = Properties.Settings.Default.ASFBinary;
+            rbLocal.Checked = Properties.Settings.Default.IsLocal;
+            rbRemote.Checked = !Properties.Settings.Default.IsLocal;
+            tbRemoteURL.Enabled = rbRemote.Checked;
+            tbRemoteURL.Text = Properties.Settings.Default.RemoteURL;
         }
 
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -21,7 +31,57 @@ namespace ASFui
             ofdBinarySearch.ShowDialog();
             Properties.Settings.Default.ASFBinary = ofdBinarySearch.FileName;
             lbPath.Text = Properties.Settings.Default.ASFBinary;
-            Properties.Settings.Default.Save();
+        }
+
+        private void rbRemote_CheckedChanged(object sender, EventArgs e)
+        {
+            tbRemoteURL.Enabled = rbRemote.Checked;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.IsLocal = rbLocal.Checked;
+            Properties.Settings.Default.RemoteURL = tbRemoteURL.Text;
+            if (rbRemote.Checked)
+            {
+                if (CheckUrl())
+                {
+                    Properties.Settings.Default.Save();
+                    lbSaved.Text = @"Settings saved.";
+                }
+                else
+                {
+                    MessageBox.Show(@"Invalid remote URL", @"Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                Properties.Settings.Default.Save();
+                lbSaved.Text = @"Settings saved.";
+            }
+        }
+
+        private bool CheckUrl()
+        {
+            const string validContentType = "text/xml; charset=utf-8";
+
+            var request = WebRequest.Create(tbRemoteURL.Text);
+            request.Method = "GET";
+            request.ContentType = validContentType;
+
+            try
+            {
+                var response = request.GetResponse();
+                return response.ContentType == validContentType;
+            }
+            catch (WebException ex)
+            {
+                if (ex.Response == null) return false;
+                using (var responseEx = ex.Response)
+                {
+                    return responseEx.ContentType == validContentType;
+                }
+            }
         }
     }
 }

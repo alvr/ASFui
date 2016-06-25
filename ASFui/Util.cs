@@ -39,11 +39,20 @@ namespace ASFui
 
         private static string GetEndpointAddress()
         {
-            var json = JObject.Parse(File.ReadAllText(Path.GetDirectoryName(Settings.Default.ASFBinary) + @"/config/ASF.json"));
-            var hostname = json["WCFHostname"].ToString();
-            var port = json["WCFPort"].ToString();
+            if (Settings.Default.IsLocal)
+            {
+                var json =
+                    JObject.Parse(
+                        File.ReadAllText(Path.GetDirectoryName(Settings.Default.ASFBinary) + @"/config/ASF.json"));
+                var hostname = json["WCFHostname"].ToString();
+                var port = json["WCFPort"].ToString();
 
-            return "http://" + hostname + ":" + port + "/ASF";
+                return "http://" + hostname + ":" + port + "/ASF";
+            }
+            else
+            {
+                return Settings.Default.RemoteURL;
+            }
         }
 
         public static bool CheckIfAsfIsRunning()

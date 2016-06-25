@@ -5,5 +5,11 @@
     <Setting Name="ASFBinary" Type="System.String" Scope="User">
       <Value Profile="(Default)">ASF.exe</Value>
     </Setting>
+    <Setting Name="IsLocal" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RemoteURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.ASFProcess = new System.Diagnostics.Process();
             this.rtbOutput = new System.Windows.Forms.RichTextBox();
             this.BackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.btnStop = new System.Windows.Forms.Button();
@@ -82,6 +81,7 @@
             this.tsslLastCommand = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslCommandOutput = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnASFuiSettings = new System.Windows.Forms.Button();
+            this.ASFProcess = new System.Diagnostics.Process();
             this.gbKeys.SuspendLayout();
             this.tlpKeys.SuspendLayout();
             this.gb2FA.SuspendLayout();
@@ -100,26 +100,6 @@
             this.cmsTrayIcon.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ASFProcess
-            // 
-            this.ASFProcess.StartInfo.Arguments = "--server";
-            this.ASFProcess.StartInfo.CreateNoWindow = true;
-            this.ASFProcess.StartInfo.Domain = "";
-            this.ASFProcess.StartInfo.FileName = "ASF.exe";
-            this.ASFProcess.StartInfo.LoadUserProfile = false;
-            this.ASFProcess.StartInfo.Password = null;
-            this.ASFProcess.StartInfo.RedirectStandardError = true;
-            this.ASFProcess.StartInfo.RedirectStandardInput = true;
-            this.ASFProcess.StartInfo.RedirectStandardOutput = true;
-            this.ASFProcess.StartInfo.StandardErrorEncoding = null;
-            this.ASFProcess.StartInfo.StandardOutputEncoding = null;
-            this.ASFProcess.StartInfo.UserName = "";
-            this.ASFProcess.StartInfo.UseShellExecute = false;
-            this.ASFProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            this.ASFProcess.SynchronizingObject = this;
-            this.ASFProcess.OutputDataReceived += new System.Diagnostics.DataReceivedEventHandler(this.ProcesoASF_OutputDataReceived);
-            this.ASFProcess.ErrorDataReceived += new System.Diagnostics.DataReceivedEventHandler(this.ASFProcess_ErrorDataReceived);
             // 
             // rtbOutput
             // 
@@ -694,6 +674,25 @@
             this.btnASFuiSettings.Text = "🔧";
             this.btnASFuiSettings.UseVisualStyleBackColor = true;
             this.btnASFuiSettings.Click += new System.EventHandler(this.btnASFuiSettings_Click);
+            // 
+            // ASFProcess
+            // 
+            this.ASFProcess.StartInfo.Arguments = "--server";
+            this.ASFProcess.StartInfo.CreateNoWindow = true;
+            this.ASFProcess.StartInfo.Domain = "";
+            this.ASFProcess.StartInfo.LoadUserProfile = false;
+            this.ASFProcess.StartInfo.Password = null;
+            this.ASFProcess.StartInfo.RedirectStandardError = true;
+            this.ASFProcess.StartInfo.RedirectStandardInput = true;
+            this.ASFProcess.StartInfo.RedirectStandardOutput = true;
+            this.ASFProcess.StartInfo.StandardErrorEncoding = null;
+            this.ASFProcess.StartInfo.StandardOutputEncoding = null;
+            this.ASFProcess.StartInfo.UserName = "";
+            this.ASFProcess.StartInfo.UseShellExecute = false;
+            this.ASFProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            this.ASFProcess.SynchronizingObject = this;
+            this.ASFProcess.OutputDataReceived += new System.Diagnostics.DataReceivedEventHandler(this.ASFProcess_OutputDataReceived);
+            this.ASFProcess.ErrorDataReceived += new System.Diagnostics.DataReceivedEventHandler(this.ASFProcess_ErrorDataReceived);
             // 
             // ASFui
             // 

@@ -37,6 +37,7 @@ namespace ASFui
                 Environment.Exit(-2);
             }
             InitializeComponent();
+            ASFProcess.StartInfo.FileName = Properties.Settings.Default.ASFBinary;
         }
 
         private void ASFui_Resize(object sender, EventArgs e)
@@ -48,7 +49,7 @@ namespace ASFui
 
         private void ASFui_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!_asfRunning) return;
+            if (!_asfRunning || !Properties.Settings.Default.IsLocal) return;
             ASFProcess.Kill();
             ASFProcess.CancelOutputRead();
             BackgroundWorker.CancelAsync();
@@ -56,12 +57,13 @@ namespace ASFui
 
         private void BackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
+            if (!Properties.Settings.Default.IsLocal) return;
             ASFProcess.Start();
             ASFProcess.BeginOutputReadLine();
             ASFProcess.WaitForExit();
         }
 
-        private void ProcesoASF_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        private void ASFProcess_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
             rtbOutput.AppendText(e.Data + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
@@ -141,14 +143,20 @@ namespace ASFui
         #region Cards Buttons
         private void btnFarm_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("farm", cbBotList.SelectedItem.ToString()));
-            tsslCommandOutput.Text = @"!farm <" + cbBotList.SelectedItem + @">: " + result;
+            Task.Run(() =>
+            {
+                var result = Util.SendCommand(Util.GenerateCommand("farm", cbBotList.SelectedItem.ToString()));
+                tsslCommandOutput.Text = @"!farm <" + cbBotList.SelectedItem + @">: " + result;
+            });
         }
 
         private void btnLoot_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("loot", cbBotList.SelectedItem.ToString()));
-            tsslCommandOutput.Text = @"!loot <" + cbBotList.SelectedItem + @">: " + result;
+            Task.Run(() =>
+            {
+                var result = Util.SendCommand(Util.GenerateCommand("loot", cbBotList.SelectedItem.ToString()));
+                tsslCommandOutput.Text = @"!loot <" + cbBotList.SelectedItem + @">: " + result;
+            });
         }
         #endregion
 
@@ -181,8 +189,12 @@ namespace ASFui
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("play", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
-            tsslCommandOutput.Text = @"!play <" + cbBotList.SelectedItem + @">: " + result;
+            Task.Run(() =>
+            {
+                var result =
+                    Util.SendCommand(Util.GenerateCommand("play", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
+                tsslCommandOutput.Text = @"!play <" + cbBotList.SelectedItem + @">: " + result;
+            });
         }
         #endregion
 

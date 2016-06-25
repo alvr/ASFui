@@ -34,5 +34,29 @@ namespace ASFui.Properties {
                 this["ASFBinary"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsLocal {
+            get {
+                return ((bool)(this["IsLocal"]));
+            }
+            set {
+                this["IsLocal"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RemoteURL {
+            get {
+                return ((string)(this["RemoteURL"]));
+            }
+            set {
+                this["RemoteURL"] = value;
+            }
+        }
     }
 }
