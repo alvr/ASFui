@@ -11,6 +11,7 @@ namespace ASFui
     {
         private bool _asfRunning;
         private ASFProcess _asf;
+        private readonly bool _isLocal;
 
         public ASFui()
         {
@@ -37,6 +38,8 @@ namespace ASFui
                 Environment.Exit(-2);
             }
             InitializeComponent();
+            Util.CheckVersion();
+            _isLocal = Properties.Settings.Default.IsLocal;
         }
 
         private void ASFui_Resize(object sender, EventArgs e)
@@ -86,6 +89,7 @@ namespace ASFui
             btnReloadBots.Focus();
             _asfRunning = true;
             btnASFuiSettings.Enabled = false;
+            Task.Delay(1500).ContinueWith(b => GetBotList());
             tsslCommandOutput.Text = @"Started ASF server.";
         }
 
@@ -126,7 +130,14 @@ namespace ASFui
             Task.Run(() =>
             {
                 var result = Util.SendCommand(Util.GenerateCommand("farm", cbBotList.SelectedItem.ToString()));
-                tsslCommandOutput.Text = @"!farm <" + cbBotList.SelectedItem + @">: " + result;
+                if (_isLocal)
+                {
+                    tsslCommandOutput.Text = @"!farm <" + cbBotList.SelectedItem + @">: " + result;
+                }
+                else
+                {
+                    rtbOutput.AppendText(@"!farm <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                }
             });
         }
 
@@ -135,7 +146,30 @@ namespace ASFui
             Task.Run(() =>
             {
                 var result = Util.SendCommand(Util.GenerateCommand("loot", cbBotList.SelectedItem.ToString()));
-                tsslCommandOutput.Text = @"!loot <" + cbBotList.SelectedItem + @">: " + result;
+                if (_isLocal)
+                {
+                    tsslCommandOutput.Text = @"!loot <" + cbBotList.SelectedItem + @">: " + result;
+                }
+                else
+                {
+                    rtbOutput.AppendText(@"!loot <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                }
+            });
+        }
+
+        private void btnLootAll_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                var result = Util.SendCommand("lootall");
+                if (_isLocal)
+                {
+                    tsslCommandOutput.Text = @"!lootall: " + result;
+                }
+                else
+                {
+                    rtbOutput.AppendText(@"!lootall: " + result + Environment.NewLine);
+                }
             });
         }
         #endregion
@@ -145,7 +179,14 @@ namespace ASFui
         {
             Task.Run(() => {
                 var result = Util.SendCommand(Util.GenerateCommand("redeem", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
-                tsslCommandOutput.Text = @"!redeem <" + cbBotList.SelectedItem + @">: " + result;
+                if (_isLocal)
+                {
+                    tsslCommandOutput.Text = @"!redeem <" + cbBotList.SelectedItem + @">: " + result;
+                }
+                else
+                {
+                    rtbOutput.AppendText(@"!redeem <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                }
             });
         }
 
@@ -153,7 +194,14 @@ namespace ASFui
         {
             Task.Run(() => {
                 var result = Util.SendCommand(Util.GenerateCommand("addlicense", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
-                tsslCommandOutput.Text = @"!addlicense <" + cbBotList.SelectedItem + @">: " + result;
+                if (_isLocal)
+                {
+                    tsslCommandOutput.Text = @"!addlicense <" + cbBotList.SelectedItem + @">: " + result;
+                }
+                else
+                {
+                    rtbOutput.AppendText(@"!addlicense <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                }
             });
         }
         #endregion
@@ -163,7 +211,14 @@ namespace ASFui
         {
             Task.Run(() => {
                 var result = Util.SendCommand(Util.GenerateCommand("owns", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
-                tsslCommandOutput.Text = @"!owns <" + cbBotList.SelectedItem + @">: " + result;
+                if (_isLocal)
+                {
+                    tsslCommandOutput.Text = @"!own <" + cbBotList.SelectedItem + @">: " + result;
+                }
+                else
+                {
+                    rtbOutput.AppendText(@"!own <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                }
             });
         }
 
@@ -173,7 +228,14 @@ namespace ASFui
             {
                 var result =
                     Util.SendCommand(Util.GenerateCommand("play", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
-                tsslCommandOutput.Text = @"!play <" + cbBotList.SelectedItem + @">: " + result;
+                if (_isLocal)
+                {
+                    tsslCommandOutput.Text = @"!play <" + cbBotList.SelectedItem + @">: " + result;
+                }
+                else
+                {
+                    rtbOutput.AppendText(@"!play <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                }
             });
         }
         #endregion
@@ -182,13 +244,27 @@ namespace ASFui
         private void btnLeave_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("leave", cbBotList.SelectedItem.ToString()));
-            tsslCommandOutput.Text = @"!leave <" + cbBotList.SelectedItem + @">: " + result;
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!leave <" + cbBotList.SelectedItem + @">: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!leave <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            }
         }
 
         private void btnRejoin_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("rejoinchat", cbBotList.SelectedItem.ToString()));
-            tsslCommandOutput.Text = @"!rejoinchat <" + cbBotList.SelectedItem + @">: " + result;
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!rejoinchat <" + cbBotList.SelectedItem + @">: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!rejoinchat <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            }
         }
         #endregion
 
@@ -196,30 +272,62 @@ namespace ASFui
         private void btnStartBot_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("start", cbBotList.SelectedItem.ToString()));
-            tsslCommandOutput.Text = @"!start <" + cbBotList.SelectedItem + @">: " + result;
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!start <" + cbBotList.SelectedItem + @">: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!start <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            }
         }
 
         private void btnStopBot_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("stop", cbBotList.SelectedItem.ToString()));
-            tsslCommandOutput.Text = @"!stop <" + cbBotList.SelectedItem + @">: " + result;
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!stop <" + cbBotList.SelectedItem + @">: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!stop <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            }
         }
 
         private void btnPauseBot_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("pause", cbBotList.SelectedItem.ToString()));
-            tsslCommandOutput.Text = @"!pause <" + cbBotList.SelectedItem + @">: " + result;
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!pause <" + cbBotList.SelectedItem + @">: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!pause <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            }
         }
 
         private void btnStatusBot_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("status", cbBotList.SelectedItem.ToString()));
-            tsslCommandOutput.Text = @"!status <" + cbBotList.SelectedItem + @">: " + result;
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!status <" + cbBotList.SelectedItem + @">: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!status <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            }
         }
 
         private void btnStatusAll_Click(object sender, EventArgs e)
         {
-            Util.SendCommand("statusall");
+            var result = Util.SendCommand("statusall");
+            if (!_isLocal)
+            {
+                rtbOutput.AppendText(@"!statusall: " + result + Environment.NewLine);
+            }
         }
         #endregion
 
@@ -227,25 +335,53 @@ namespace ASFui
         private void btnASFHelp_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand("help");
-            tsslCommandOutput.Text = @"!help: " + result;
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!help: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!help: " + result + Environment.NewLine);
+            }
         }
 
         private void btnASFUpdate_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand("update");
-            tsslCommandOutput.Text = @"!update: " + result;
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!update: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!update: " + result + Environment.NewLine);
+            }
         }
 
         private void btnASFVersion_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand("version");
-            tsslCommandOutput.Text = @"!version: " + result;
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!version: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!version: " + result + Environment.NewLine);
+            }
         }
 
         private void btnAPI_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand("api");
-            tsslCommandOutput.Text = @"!api: " + result;
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!api: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!api: " + result + Environment.NewLine);
+            }
         }
         #endregion
 
@@ -253,13 +389,27 @@ namespace ASFui
         private void btn2FA_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("2fa", cbBotList.SelectedItem.ToString()));
-            tsslCommandOutput.Text = @"!2fa <" + cbBotList.SelectedItem + @">: " + result;
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!2fa <" + cbBotList.SelectedItem + @">: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!2fa <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            }
         }
 
         private void btn2FAOff_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("2faoff", cbBotList.SelectedItem.ToString()));
-            tsslCommandOutput.Text = @"!2faoff <" + cbBotList.SelectedItem + @">: " + result;
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!2faoff <" + cbBotList.SelectedItem + @">: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!2faoff <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            }
         }
 
         private void btn2FAOk_Click(object sender, EventArgs e)
@@ -268,7 +418,14 @@ namespace ASFui
             Task.Run(() =>
             {
                 var result = Util.SendCommand(Util.GenerateCommand("2faok", cbBotList.SelectedItem.ToString()));
-                tsslCommandOutput.Text = @"!2faok <" + cbBotList.SelectedItem + @">: " + result;
+                if (_isLocal)
+                {
+                    tsslCommandOutput.Text = @"!2faok <" + cbBotList.SelectedItem + @">: " + result;
+                }
+                else
+                {
+                    rtbOutput.AppendText(@"!2faok <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                }
             });
         }
 
@@ -278,7 +435,14 @@ namespace ASFui
             Task.Run(() =>
             {
                 var result = Util.SendCommand(Util.GenerateCommand("2fano", cbBotList.SelectedItem.ToString()));
-                tsslCommandOutput.Text = @"!2fano <" + cbBotList.SelectedItem + @">: " + result;
+                if (_isLocal)
+                {
+                    tsslCommandOutput.Text = @"!2fano <" + cbBotList.SelectedItem + @">: " + result;
+                }
+                else
+                {
+                    rtbOutput.AppendText(@"!2fano <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                }
             });
         }
         #endregion
@@ -289,6 +453,7 @@ namespace ASFui
             tbInput.Enabled = true;
             btnFarm.Enabled = true;
             btnLoot.Enabled = true;
+            btnLootAll.Enabled = true;
             btnRedeem.Enabled = true;
             btnAddLicense.Enabled = true;
             btnOwns.Enabled = true;
@@ -315,6 +480,7 @@ namespace ASFui
             tbInput.Enabled = false;
             btnFarm.Enabled = false;
             btnLoot.Enabled = false;
+            btnLootAll.Enabled = false;
             btnRedeem.Enabled = false;
             btnAddLicense.Enabled = false;
             btnOwns.Enabled = false;

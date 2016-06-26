@@ -4,7 +4,9 @@ using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.ServiceModel;
+using System.Windows.Forms;
 
 namespace ASFui
 {
@@ -55,5 +57,28 @@ namespace ASFui
                    Process.GetProcessesByName("ArchiSteamFarm").Length > 0 ||
                    Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Settings.Default.ASFBinary)).Length > 0;
         }
+
+        public static void CheckVersion()
+        {
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            var thisVersion = fvi.FileVersion;
+
+            string currentVersion;
+            using (var web = new WebClient())
+            {
+                currentVersion =
+                    web.DownloadString("https://raw.githubusercontent.com/alvr/ASFui/master/version.txt");
+            }
+
+            if (new Version(thisVersion).CompareTo(new Version(currentVersion)) >= 0) return;
+            var option = MessageBox.Show(@"A new version is available, download now?", @"New version", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information);
+            if (option == DialogResult.Yes)
+            {
+                Process.Start("https://github.com/alvr/ASFui/releases/latest");
+            }
+        }
+
     }
 }

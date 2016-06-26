@@ -80,6 +80,7 @@
             this.tsslLastCommand = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslCommandOutput = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnASFuiSettings = new System.Windows.Forms.Button();
+            this.btnLootAll = new System.Windows.Forms.Button();
             this.gbKeys.SuspendLayout();
             this.tlpKeys.SuspendLayout();
             this.gb2FA.SuspendLayout();
@@ -307,15 +308,17 @@
             // 
             // tlpCards
             // 
-            this.tlpCards.ColumnCount = 2;
-            this.tlpCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpCards.ColumnCount = 3;
+            this.tlpCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.31332F));
+            this.tlpCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.34334F));
+            this.tlpCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.34334F));
             this.tlpCards.Controls.Add(this.btnFarm, 0, 0);
             this.tlpCards.Controls.Add(this.btnLoot, 1, 0);
+            this.tlpCards.Controls.Add(this.btnLootAll, 2, 0);
             this.tlpCards.Location = new System.Drawing.Point(6, 19);
             this.tlpCards.Name = "tlpCards";
             this.tlpCards.RowCount = 1;
-            this.tlpCards.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpCards.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpCards.Size = new System.Drawing.Size(194, 33);
             this.tlpCards.TabIndex = 0;
             // 
@@ -324,7 +327,7 @@
             this.btnFarm.Enabled = false;
             this.btnFarm.Location = new System.Drawing.Point(3, 3);
             this.btnFarm.Name = "btnFarm";
-            this.btnFarm.Size = new System.Drawing.Size(91, 27);
+            this.btnFarm.Size = new System.Drawing.Size(58, 27);
             this.btnFarm.TabIndex = 0;
             this.btnFarm.Text = "Farm";
             this.btnFarm.UseVisualStyleBackColor = true;
@@ -333,9 +336,9 @@
             // btnLoot
             // 
             this.btnLoot.Enabled = false;
-            this.btnLoot.Location = new System.Drawing.Point(100, 3);
+            this.btnLoot.Location = new System.Drawing.Point(67, 3);
             this.btnLoot.Name = "btnLoot";
-            this.btnLoot.Size = new System.Drawing.Size(91, 27);
+            this.btnLoot.Size = new System.Drawing.Size(58, 27);
             this.btnLoot.TabIndex = 1;
             this.btnLoot.Text = "Loot";
             this.btnLoot.UseVisualStyleBackColor = true;
@@ -667,6 +670,17 @@
             this.btnASFuiSettings.UseVisualStyleBackColor = true;
             this.btnASFuiSettings.Click += new System.EventHandler(this.btnASFuiSettings_Click);
             // 
+            // btnLootAll
+            // 
+            this.btnLootAll.Enabled = false;
+            this.btnLootAll.Location = new System.Drawing.Point(131, 3);
+            this.btnLootAll.Name = "btnLootAll";
+            this.btnLootAll.Size = new System.Drawing.Size(60, 27);
+            this.btnLootAll.TabIndex = 2;
+            this.btnLootAll.Text = "Loot All";
+            this.btnLootAll.UseVisualStyleBackColor = true;
+            this.btnLootAll.Click += new System.EventHandler(this.btnLootAll_Click);
+            // 
             // ASFui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -772,6 +786,7 @@
         private System.Windows.Forms.Button btnAPI;
         private System.Windows.Forms.RichTextBox rtbOutput;
         private System.Windows.Forms.ComboBox cbBotList;
+        private System.Windows.Forms.Button btnLootAll;
     }
 }
 
