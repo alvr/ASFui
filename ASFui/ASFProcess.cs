@@ -46,13 +46,18 @@ namespace ASFui
             int s;
             while ((s = ASF.StandardOutput.Read()) != 0)
             {
-                sb.Append(Convert.ToChar(s));
-                if(s == '\n')
+                MethodInvoker mi1 = delegate 
                 {
                     output.AppendText(sb.ToString());
                     output.SelectionStart = output.Text.Length;
                     output.ScrollToCaret();
                     sb.Clear();
+                };
+
+                sb.Append(Convert.ToChar(s));
+                if(s == '\n')
+                {
+                    output.Invoke(mi1);
                 }
 
                 if (sb.ToString().EndsWith("\"android:\"):") || sb.ToString().EndsWith("login:") ||

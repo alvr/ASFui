@@ -50,13 +50,16 @@
             this.tlpCards = new System.Windows.Forms.TableLayoutPanel();
             this.btnFarm = new System.Windows.Forms.Button();
             this.btnLoot = new System.Windows.Forms.Button();
+            this.btnLootAll = new System.Windows.Forms.Button();
             this.gbBots = new System.Windows.Forms.GroupBox();
             this.tlpBots = new System.Windows.Forms.TableLayoutPanel();
             this.btnStartBot = new System.Windows.Forms.Button();
-            this.btnStopBot = new System.Windows.Forms.Button();
-            this.btnStatusAll = new System.Windows.Forms.Button();
             this.btnStatusBot = new System.Windows.Forms.Button();
+            this.btnStopBot = new System.Windows.Forms.Button();
             this.btnPauseBot = new System.Windows.Forms.Button();
+            this.btnResumeBot = new System.Windows.Forms.Button();
+            this.btnPasswordBot = new System.Windows.Forms.Button();
+            this.btnStatusAll = new System.Windows.Forms.Button();
             this.gbInput = new System.Windows.Forms.GroupBox();
             this.tbInput = new System.Windows.Forms.TextBox();
             this.gbChat = new System.Windows.Forms.GroupBox();
@@ -80,7 +83,7 @@
             this.tsslLastCommand = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslCommandOutput = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnASFuiSettings = new System.Windows.Forms.Button();
-            this.btnLootAll = new System.Windows.Forms.Button();
+            this.btnASFuiHelp = new System.Windows.Forms.Button();
             this.gbKeys.SuspendLayout();
             this.tlpKeys.SuspendLayout();
             this.gb2FA.SuspendLayout();
@@ -107,10 +110,10 @@
             this.rtbOutput.Enabled = false;
             this.rtbOutput.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbOutput.ForeColor = System.Drawing.Color.Black;
-            this.rtbOutput.Location = new System.Drawing.Point(12, 332);
+            this.rtbOutput.Location = new System.Drawing.Point(13, 362);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(670, 100);
+            this.rtbOutput.Size = new System.Drawing.Size(730, 100);
             this.rtbOutput.TabIndex = 0;
             this.rtbOutput.Text = "";
             // 
@@ -118,7 +121,7 @@
             // 
             this.btnStop.Enabled = false;
             this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStop.Location = new System.Drawing.Point(526, 438);
+            this.btnStop.Location = new System.Drawing.Point(587, 468);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 23);
             this.btnStop.TabIndex = 1;
@@ -129,7 +132,7 @@
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(445, 438);
+            this.btnStart.Location = new System.Drawing.Point(506, 468);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 2;
@@ -140,7 +143,7 @@
             // btnClear
             // 
             this.btnClear.Enabled = false;
-            this.btnClear.Location = new System.Drawing.Point(607, 438);
+            this.btnClear.Location = new System.Drawing.Point(668, 468);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 3;
@@ -153,7 +156,7 @@
             this.cbBotList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBotList.Enabled = false;
             this.cbBotList.FormattingEnabled = true;
-            this.cbBotList.Location = new System.Drawing.Point(81, 438);
+            this.cbBotList.Location = new System.Drawing.Point(82, 468);
             this.cbBotList.Name = "cbBotList";
             this.cbBotList.Size = new System.Drawing.Size(121, 21);
             this.cbBotList.TabIndex = 4;
@@ -161,7 +164,7 @@
             // lbCurrentBot
             // 
             this.lbCurrentBot.AutoSize = true;
-            this.lbCurrentBot.Location = new System.Drawing.Point(12, 443);
+            this.lbCurrentBot.Location = new System.Drawing.Point(13, 473);
             this.lbCurrentBot.Name = "lbCurrentBot";
             this.lbCurrentBot.Size = new System.Drawing.Size(63, 13);
             this.lbCurrentBot.TabIndex = 6;
@@ -170,7 +173,7 @@
             // btnReloadBots
             // 
             this.btnReloadBots.Enabled = false;
-            this.btnReloadBots.Location = new System.Drawing.Point(208, 437);
+            this.btnReloadBots.Location = new System.Drawing.Point(209, 467);
             this.btnReloadBots.Name = "btnReloadBots";
             this.btnReloadBots.Size = new System.Drawing.Size(23, 23);
             this.btnReloadBots.TabIndex = 7;
@@ -181,9 +184,9 @@
             // gbKeys
             // 
             this.gbKeys.Controls.Add(this.tlpKeys);
-            this.gbKeys.Location = new System.Drawing.Point(476, 12);
+            this.gbKeys.Location = new System.Drawing.Point(506, 12);
             this.gbKeys.Name = "gbKeys";
-            this.gbKeys.Size = new System.Drawing.Size(206, 58);
+            this.gbKeys.Size = new System.Drawing.Size(236, 58);
             this.gbKeys.TabIndex = 27;
             this.gbKeys.TabStop = false;
             this.gbKeys.Text = "Keys";
@@ -199,7 +202,7 @@
             this.tlpKeys.Name = "tlpKeys";
             this.tlpKeys.RowCount = 1;
             this.tlpKeys.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpKeys.Size = new System.Drawing.Size(194, 33);
+            this.tlpKeys.Size = new System.Drawing.Size(224, 33);
             this.tlpKeys.TabIndex = 1;
             // 
             // btnRedeem
@@ -207,7 +210,7 @@
             this.btnRedeem.Enabled = false;
             this.btnRedeem.Location = new System.Drawing.Point(3, 3);
             this.btnRedeem.Name = "btnRedeem";
-            this.btnRedeem.Size = new System.Drawing.Size(91, 27);
+            this.btnRedeem.Size = new System.Drawing.Size(106, 27);
             this.btnRedeem.TabIndex = 0;
             this.btnRedeem.Text = "Redeem Key";
             this.btnRedeem.UseVisualStyleBackColor = true;
@@ -216,9 +219,9 @@
             // btnAddLicense
             // 
             this.btnAddLicense.Enabled = false;
-            this.btnAddLicense.Location = new System.Drawing.Point(100, 3);
+            this.btnAddLicense.Location = new System.Drawing.Point(115, 3);
             this.btnAddLicense.Name = "btnAddLicense";
-            this.btnAddLicense.Size = new System.Drawing.Size(91, 27);
+            this.btnAddLicense.Size = new System.Drawing.Size(106, 27);
             this.btnAddLicense.TabIndex = 1;
             this.btnAddLicense.Text = "Add License";
             this.btnAddLicense.UseVisualStyleBackColor = true;
@@ -227,9 +230,9 @@
             // gb2FA
             // 
             this.gb2FA.Controls.Add(this.tlp2FA);
-            this.gb2FA.Location = new System.Drawing.Point(12, 268);
+            this.gb2FA.Location = new System.Drawing.Point(13, 298);
             this.gb2FA.Name = "gb2FA";
-            this.gb2FA.Size = new System.Drawing.Size(670, 58);
+            this.gb2FA.Size = new System.Drawing.Size(730, 58);
             this.gb2FA.TabIndex = 26;
             this.gb2FA.TabStop = false;
             this.gb2FA.Text = "2FA";
@@ -249,7 +252,7 @@
             this.tlp2FA.Name = "tlp2FA";
             this.tlp2FA.RowCount = 1;
             this.tlp2FA.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp2FA.Size = new System.Drawing.Size(658, 31);
+            this.tlp2FA.Size = new System.Drawing.Size(718, 31);
             this.tlp2FA.TabIndex = 1;
             // 
             // btn2FA
@@ -257,7 +260,7 @@
             this.btn2FA.Enabled = false;
             this.btn2FA.Location = new System.Drawing.Point(3, 3);
             this.btn2FA.Name = "btn2FA";
-            this.btn2FA.Size = new System.Drawing.Size(158, 25);
+            this.btn2FA.Size = new System.Drawing.Size(173, 25);
             this.btn2FA.TabIndex = 0;
             this.btn2FA.Text = "Generate Token";
             this.btn2FA.UseVisualStyleBackColor = true;
@@ -266,9 +269,9 @@
             // btn2FAOk
             // 
             this.btn2FAOk.Enabled = false;
-            this.btn2FAOk.Location = new System.Drawing.Point(331, 3);
+            this.btn2FAOk.Location = new System.Drawing.Point(361, 3);
             this.btn2FAOk.Name = "btn2FAOk";
-            this.btn2FAOk.Size = new System.Drawing.Size(158, 25);
+            this.btn2FAOk.Size = new System.Drawing.Size(173, 25);
             this.btn2FAOk.TabIndex = 2;
             this.btn2FAOk.Text = "Accept Pending Confirmations";
             this.btn2FAOk.UseVisualStyleBackColor = true;
@@ -277,9 +280,9 @@
             // btn2FANo
             // 
             this.btn2FANo.Enabled = false;
-            this.btn2FANo.Location = new System.Drawing.Point(495, 3);
+            this.btn2FANo.Location = new System.Drawing.Point(540, 3);
             this.btn2FANo.Name = "btn2FANo";
-            this.btn2FANo.Size = new System.Drawing.Size(160, 25);
+            this.btn2FANo.Size = new System.Drawing.Size(175, 25);
             this.btn2FANo.TabIndex = 3;
             this.btn2FANo.Text = "Deny Pending Confirmations";
             this.btn2FANo.UseVisualStyleBackColor = true;
@@ -288,9 +291,9 @@
             // btn2FAOff
             // 
             this.btn2FAOff.Enabled = false;
-            this.btn2FAOff.Location = new System.Drawing.Point(167, 3);
+            this.btn2FAOff.Location = new System.Drawing.Point(182, 3);
             this.btn2FAOff.Name = "btn2FAOff";
-            this.btn2FAOff.Size = new System.Drawing.Size(158, 25);
+            this.btn2FAOff.Size = new System.Drawing.Size(173, 25);
             this.btn2FAOff.TabIndex = 1;
             this.btn2FAOff.Text = "Deactivate 2FA";
             this.btn2FAOff.UseVisualStyleBackColor = true;
@@ -301,7 +304,7 @@
             this.gbCards.Controls.Add(this.tlpCards);
             this.gbCards.Location = new System.Drawing.Point(264, 12);
             this.gbCards.Name = "gbCards";
-            this.gbCards.Size = new System.Drawing.Size(206, 58);
+            this.gbCards.Size = new System.Drawing.Size(236, 58);
             this.gbCards.TabIndex = 24;
             this.gbCards.TabStop = false;
             this.gbCards.Text = "Cards";
@@ -319,7 +322,7 @@
             this.tlpCards.Name = "tlpCards";
             this.tlpCards.RowCount = 1;
             this.tlpCards.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpCards.Size = new System.Drawing.Size(194, 33);
+            this.tlpCards.Size = new System.Drawing.Size(224, 33);
             this.tlpCards.TabIndex = 0;
             // 
             // btnFarm
@@ -327,7 +330,7 @@
             this.btnFarm.Enabled = false;
             this.btnFarm.Location = new System.Drawing.Point(3, 3);
             this.btnFarm.Name = "btnFarm";
-            this.btnFarm.Size = new System.Drawing.Size(58, 27);
+            this.btnFarm.Size = new System.Drawing.Size(68, 27);
             this.btnFarm.TabIndex = 0;
             this.btnFarm.Text = "Farm";
             this.btnFarm.UseVisualStyleBackColor = true;
@@ -336,105 +339,156 @@
             // btnLoot
             // 
             this.btnLoot.Enabled = false;
-            this.btnLoot.Location = new System.Drawing.Point(67, 3);
+            this.btnLoot.Location = new System.Drawing.Point(77, 3);
             this.btnLoot.Name = "btnLoot";
-            this.btnLoot.Size = new System.Drawing.Size(58, 27);
+            this.btnLoot.Size = new System.Drawing.Size(68, 27);
             this.btnLoot.TabIndex = 1;
             this.btnLoot.Text = "Loot";
             this.btnLoot.UseVisualStyleBackColor = true;
             this.btnLoot.Click += new System.EventHandler(this.btnLoot_Click);
+            // 
+            // btnLootAll
+            // 
+            this.btnLootAll.Enabled = false;
+            this.btnLootAll.Location = new System.Drawing.Point(151, 3);
+            this.btnLootAll.Name = "btnLootAll";
+            this.btnLootAll.Size = new System.Drawing.Size(70, 27);
+            this.btnLootAll.TabIndex = 2;
+            this.btnLootAll.Text = "Loot All";
+            this.btnLootAll.UseVisualStyleBackColor = true;
+            this.btnLootAll.Click += new System.EventHandler(this.btnLootAll_Click);
             // 
             // gbBots
             // 
             this.gbBots.Controls.Add(this.tlpBots);
             this.gbBots.Location = new System.Drawing.Point(264, 140);
             this.gbBots.Name = "gbBots";
-            this.gbBots.Size = new System.Drawing.Size(418, 58);
+            this.gbBots.Size = new System.Drawing.Size(478, 88);
             this.gbBots.TabIndex = 23;
             this.gbBots.TabStop = false;
             this.gbBots.Text = "Manage bots";
             // 
             // tlpBots
             // 
-            this.tlpBots.ColumnCount = 5;
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tlpBots.ColumnCount = 12;
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
             this.tlpBots.Controls.Add(this.btnStartBot, 0, 0);
-            this.tlpBots.Controls.Add(this.btnStopBot, 1, 0);
-            this.tlpBots.Controls.Add(this.btnStatusAll, 4, 0);
-            this.tlpBots.Controls.Add(this.btnStatusBot, 3, 0);
-            this.tlpBots.Controls.Add(this.btnPauseBot, 2, 0);
+            this.tlpBots.Controls.Add(this.btnStatusBot, 4, 1);
+            this.tlpBots.Controls.Add(this.btnStopBot, 3, 0);
+            this.tlpBots.Controls.Add(this.btnPauseBot, 6, 0);
+            this.tlpBots.Controls.Add(this.btnResumeBot, 9, 0);
+            this.tlpBots.Controls.Add(this.btnPasswordBot, 0, 1);
+            this.tlpBots.Controls.Add(this.btnStatusAll, 8, 1);
             this.tlpBots.Location = new System.Drawing.Point(6, 19);
             this.tlpBots.Name = "tlpBots";
-            this.tlpBots.RowCount = 1;
-            this.tlpBots.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpBots.Size = new System.Drawing.Size(406, 31);
+            this.tlpBots.RowCount = 2;
+            this.tlpBots.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpBots.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpBots.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpBots.Size = new System.Drawing.Size(466, 63);
             this.tlpBots.TabIndex = 0;
             // 
             // btnStartBot
             // 
+            this.tlpBots.SetColumnSpan(this.btnStartBot, 3);
             this.btnStartBot.Enabled = false;
             this.btnStartBot.Location = new System.Drawing.Point(3, 3);
             this.btnStartBot.Name = "btnStartBot";
-            this.btnStartBot.Size = new System.Drawing.Size(75, 25);
+            this.btnStartBot.Size = new System.Drawing.Size(108, 25);
             this.btnStartBot.TabIndex = 0;
             this.btnStartBot.Text = "Start";
             this.btnStartBot.UseVisualStyleBackColor = true;
             this.btnStartBot.Click += new System.EventHandler(this.btnStartBot_Click);
             // 
-            // btnStopBot
-            // 
-            this.btnStopBot.Enabled = false;
-            this.btnStopBot.Location = new System.Drawing.Point(84, 3);
-            this.btnStopBot.Name = "btnStopBot";
-            this.btnStopBot.Size = new System.Drawing.Size(75, 25);
-            this.btnStopBot.TabIndex = 1;
-            this.btnStopBot.Text = "Stop";
-            this.btnStopBot.UseVisualStyleBackColor = true;
-            this.btnStopBot.Click += new System.EventHandler(this.btnStopBot_Click);
-            // 
-            // btnStatusAll
-            // 
-            this.btnStatusAll.Enabled = false;
-            this.btnStatusAll.Location = new System.Drawing.Point(327, 3);
-            this.btnStatusAll.Name = "btnStatusAll";
-            this.btnStatusAll.Size = new System.Drawing.Size(76, 25);
-            this.btnStatusAll.TabIndex = 3;
-            this.btnStatusAll.Text = "Status All";
-            this.btnStatusAll.UseVisualStyleBackColor = true;
-            this.btnStatusAll.Click += new System.EventHandler(this.btnStatusAll_Click);
-            // 
             // btnStatusBot
             // 
+            this.tlpBots.SetColumnSpan(this.btnStatusBot, 4);
             this.btnStatusBot.Enabled = false;
-            this.btnStatusBot.Location = new System.Drawing.Point(246, 3);
+            this.btnStatusBot.Location = new System.Drawing.Point(155, 34);
             this.btnStatusBot.Name = "btnStatusBot";
-            this.btnStatusBot.Size = new System.Drawing.Size(75, 25);
+            this.btnStatusBot.Size = new System.Drawing.Size(146, 25);
             this.btnStatusBot.TabIndex = 2;
             this.btnStatusBot.Text = "Status";
             this.btnStatusBot.UseVisualStyleBackColor = true;
             this.btnStatusBot.Click += new System.EventHandler(this.btnStatusBot_Click);
             // 
+            // btnStopBot
+            // 
+            this.tlpBots.SetColumnSpan(this.btnStopBot, 3);
+            this.btnStopBot.Enabled = false;
+            this.btnStopBot.Location = new System.Drawing.Point(117, 3);
+            this.btnStopBot.Name = "btnStopBot";
+            this.btnStopBot.Size = new System.Drawing.Size(108, 25);
+            this.btnStopBot.TabIndex = 1;
+            this.btnStopBot.Text = "Stop";
+            this.btnStopBot.UseVisualStyleBackColor = true;
+            this.btnStopBot.Click += new System.EventHandler(this.btnStopBot_Click);
+            // 
             // btnPauseBot
             // 
+            this.tlpBots.SetColumnSpan(this.btnPauseBot, 3);
             this.btnPauseBot.Enabled = false;
-            this.btnPauseBot.Location = new System.Drawing.Point(165, 3);
+            this.btnPauseBot.Location = new System.Drawing.Point(231, 3);
             this.btnPauseBot.Name = "btnPauseBot";
-            this.btnPauseBot.Size = new System.Drawing.Size(75, 25);
+            this.btnPauseBot.Size = new System.Drawing.Size(108, 25);
             this.btnPauseBot.TabIndex = 4;
             this.btnPauseBot.Text = "Pause";
             this.btnPauseBot.UseVisualStyleBackColor = true;
             this.btnPauseBot.Click += new System.EventHandler(this.btnPauseBot_Click);
+            // 
+            // btnResumeBot
+            // 
+            this.tlpBots.SetColumnSpan(this.btnResumeBot, 3);
+            this.btnResumeBot.Enabled = false;
+            this.btnResumeBot.Location = new System.Drawing.Point(345, 3);
+            this.btnResumeBot.Name = "btnResumeBot";
+            this.btnResumeBot.Size = new System.Drawing.Size(118, 25);
+            this.btnResumeBot.TabIndex = 5;
+            this.btnResumeBot.Text = "Resume";
+            this.btnResumeBot.UseVisualStyleBackColor = true;
+            this.btnResumeBot.Click += new System.EventHandler(this.btnResume_Click);
+            // 
+            // btnPasswordBot
+            // 
+            this.tlpBots.SetColumnSpan(this.btnPasswordBot, 4);
+            this.btnPasswordBot.Enabled = false;
+            this.btnPasswordBot.Location = new System.Drawing.Point(3, 34);
+            this.btnPasswordBot.Name = "btnPasswordBot";
+            this.btnPasswordBot.Size = new System.Drawing.Size(146, 25);
+            this.btnPasswordBot.TabIndex = 6;
+            this.btnPasswordBot.Text = "Password";
+            this.btnPasswordBot.UseVisualStyleBackColor = true;
+            this.btnPasswordBot.Click += new System.EventHandler(this.btnPassword_Click);
+            // 
+            // btnStatusAll
+            // 
+            this.tlpBots.SetColumnSpan(this.btnStatusAll, 4);
+            this.btnStatusAll.Enabled = false;
+            this.btnStatusAll.Location = new System.Drawing.Point(307, 34);
+            this.btnStatusAll.Name = "btnStatusAll";
+            this.btnStatusAll.Size = new System.Drawing.Size(156, 25);
+            this.btnStatusAll.TabIndex = 3;
+            this.btnStatusAll.Text = "Status All";
+            this.btnStatusAll.UseVisualStyleBackColor = true;
+            this.btnStatusAll.Click += new System.EventHandler(this.btnStatusAll_Click);
             // 
             // gbInput
             // 
             this.gbInput.Controls.Add(this.tbInput);
             this.gbInput.Location = new System.Drawing.Point(12, 12);
             this.gbInput.Name = "gbInput";
-            this.gbInput.Size = new System.Drawing.Size(246, 250);
+            this.gbInput.Size = new System.Drawing.Size(246, 280);
             this.gbInput.TabIndex = 22;
             this.gbInput.TabStop = false;
             this.gbInput.Text = "Input";
@@ -446,15 +500,15 @@
             this.tbInput.Location = new System.Drawing.Point(6, 19);
             this.tbInput.Multiline = true;
             this.tbInput.Name = "tbInput";
-            this.tbInput.Size = new System.Drawing.Size(234, 222);
+            this.tbInput.Size = new System.Drawing.Size(234, 252);
             this.tbInput.TabIndex = 6;
             // 
             // gbChat
             // 
             this.gbChat.Controls.Add(this.tlpChat);
-            this.gbChat.Location = new System.Drawing.Point(476, 76);
+            this.gbChat.Location = new System.Drawing.Point(506, 76);
             this.gbChat.Name = "gbChat";
-            this.gbChat.Size = new System.Drawing.Size(206, 58);
+            this.gbChat.Size = new System.Drawing.Size(236, 58);
             this.gbChat.TabIndex = 29;
             this.gbChat.TabStop = false;
             this.gbChat.Text = "Chat";
@@ -470,7 +524,7 @@
             this.tlpChat.Name = "tlpChat";
             this.tlpChat.RowCount = 1;
             this.tlpChat.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpChat.Size = new System.Drawing.Size(194, 33);
+            this.tlpChat.Size = new System.Drawing.Size(224, 33);
             this.tlpChat.TabIndex = 1;
             // 
             // btnLeave
@@ -478,7 +532,7 @@
             this.btnLeave.Enabled = false;
             this.btnLeave.Location = new System.Drawing.Point(3, 3);
             this.btnLeave.Name = "btnLeave";
-            this.btnLeave.Size = new System.Drawing.Size(91, 27);
+            this.btnLeave.Size = new System.Drawing.Size(106, 27);
             this.btnLeave.TabIndex = 0;
             this.btnLeave.Text = "Leave Chat";
             this.btnLeave.UseVisualStyleBackColor = true;
@@ -487,9 +541,9 @@
             // btnRejoin
             // 
             this.btnRejoin.Enabled = false;
-            this.btnRejoin.Location = new System.Drawing.Point(100, 3);
+            this.btnRejoin.Location = new System.Drawing.Point(115, 3);
             this.btnRejoin.Name = "btnRejoin";
-            this.btnRejoin.Size = new System.Drawing.Size(91, 27);
+            this.btnRejoin.Size = new System.Drawing.Size(106, 27);
             this.btnRejoin.TabIndex = 1;
             this.btnRejoin.Text = "Rejoin Chat";
             this.btnRejoin.UseVisualStyleBackColor = true;
@@ -500,7 +554,7 @@
             this.gbGames.Controls.Add(this.tlpGames);
             this.gbGames.Location = new System.Drawing.Point(264, 76);
             this.gbGames.Name = "gbGames";
-            this.gbGames.Size = new System.Drawing.Size(206, 58);
+            this.gbGames.Size = new System.Drawing.Size(236, 58);
             this.gbGames.TabIndex = 28;
             this.gbGames.TabStop = false;
             this.gbGames.Text = "Games";
@@ -516,7 +570,7 @@
             this.tlpGames.Name = "tlpGames";
             this.tlpGames.RowCount = 1;
             this.tlpGames.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpGames.Size = new System.Drawing.Size(194, 33);
+            this.tlpGames.Size = new System.Drawing.Size(224, 33);
             this.tlpGames.TabIndex = 0;
             // 
             // btnOwns
@@ -524,7 +578,7 @@
             this.btnOwns.Enabled = false;
             this.btnOwns.Location = new System.Drawing.Point(3, 3);
             this.btnOwns.Name = "btnOwns";
-            this.btnOwns.Size = new System.Drawing.Size(91, 27);
+            this.btnOwns.Size = new System.Drawing.Size(106, 27);
             this.btnOwns.TabIndex = 0;
             this.btnOwns.Text = "Own";
             this.btnOwns.UseVisualStyleBackColor = true;
@@ -533,9 +587,9 @@
             // btnPlay
             // 
             this.btnPlay.Enabled = false;
-            this.btnPlay.Location = new System.Drawing.Point(100, 3);
+            this.btnPlay.Location = new System.Drawing.Point(115, 3);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(91, 27);
+            this.btnPlay.Size = new System.Drawing.Size(106, 27);
             this.btnPlay.TabIndex = 1;
             this.btnPlay.Text = "Play";
             this.btnPlay.UseVisualStyleBackColor = true;
@@ -544,9 +598,9 @@
             // gbASF
             // 
             this.gbASF.Controls.Add(this.tlpASF);
-            this.gbASF.Location = new System.Drawing.Point(264, 204);
+            this.gbASF.Location = new System.Drawing.Point(264, 234);
             this.gbASF.Name = "gbASF";
-            this.gbASF.Size = new System.Drawing.Size(418, 58);
+            this.gbASF.Size = new System.Drawing.Size(478, 58);
             this.gbASF.TabIndex = 30;
             this.gbASF.TabStop = false;
             this.gbASF.Text = "ArchiSteamFarm";
@@ -566,7 +620,7 @@
             this.tlpASF.Name = "tlpASF";
             this.tlpASF.RowCount = 1;
             this.tlpASF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpASF.Size = new System.Drawing.Size(406, 33);
+            this.tlpASF.Size = new System.Drawing.Size(466, 33);
             this.tlpASF.TabIndex = 0;
             // 
             // btnASFHelp
@@ -574,7 +628,7 @@
             this.btnASFHelp.Enabled = false;
             this.btnASFHelp.Location = new System.Drawing.Point(3, 3);
             this.btnASFHelp.Name = "btnASFHelp";
-            this.btnASFHelp.Size = new System.Drawing.Size(95, 27);
+            this.btnASFHelp.Size = new System.Drawing.Size(110, 27);
             this.btnASFHelp.TabIndex = 0;
             this.btnASFHelp.Text = "Help";
             this.btnASFHelp.UseVisualStyleBackColor = true;
@@ -583,9 +637,9 @@
             // btnASFUpdate
             // 
             this.btnASFUpdate.Enabled = false;
-            this.btnASFUpdate.Location = new System.Drawing.Point(104, 3);
+            this.btnASFUpdate.Location = new System.Drawing.Point(119, 3);
             this.btnASFUpdate.Name = "btnASFUpdate";
-            this.btnASFUpdate.Size = new System.Drawing.Size(95, 27);
+            this.btnASFUpdate.Size = new System.Drawing.Size(110, 27);
             this.btnASFUpdate.TabIndex = 1;
             this.btnASFUpdate.Text = "Update";
             this.btnASFUpdate.UseVisualStyleBackColor = true;
@@ -594,9 +648,9 @@
             // btnASFVersion
             // 
             this.btnASFVersion.Enabled = false;
-            this.btnASFVersion.Location = new System.Drawing.Point(205, 3);
+            this.btnASFVersion.Location = new System.Drawing.Point(235, 3);
             this.btnASFVersion.Name = "btnASFVersion";
-            this.btnASFVersion.Size = new System.Drawing.Size(95, 27);
+            this.btnASFVersion.Size = new System.Drawing.Size(110, 27);
             this.btnASFVersion.TabIndex = 2;
             this.btnASFVersion.Text = "Version";
             this.btnASFVersion.UseVisualStyleBackColor = true;
@@ -605,9 +659,9 @@
             // btnAPI
             // 
             this.btnAPI.Enabled = false;
-            this.btnAPI.Location = new System.Drawing.Point(306, 3);
+            this.btnAPI.Location = new System.Drawing.Point(351, 3);
             this.btnAPI.Name = "btnAPI";
-            this.btnAPI.Size = new System.Drawing.Size(97, 27);
+            this.btnAPI.Size = new System.Drawing.Size(112, 27);
             this.btnAPI.TabIndex = 3;
             this.btnAPI.Text = "API";
             this.btnAPI.UseVisualStyleBackColor = true;
@@ -639,10 +693,10 @@
             this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsslLastCommand,
             this.tsslCommandOutput});
-            this.StatusStrip.Location = new System.Drawing.Point(0, 464);
+            this.StatusStrip.Location = new System.Drawing.Point(0, 494);
             this.StatusStrip.MaximumSize = new System.Drawing.Size(0, 22);
             this.StatusStrip.Name = "StatusStrip";
-            this.StatusStrip.Size = new System.Drawing.Size(694, 22);
+            this.StatusStrip.Size = new System.Drawing.Size(754, 22);
             this.StatusStrip.SizingGrip = false;
             this.StatusStrip.TabIndex = 31;
             // 
@@ -662,7 +716,7 @@
             // 
             // btnASFuiSettings
             // 
-            this.btnASFuiSettings.Location = new System.Drawing.Point(416, 438);
+            this.btnASFuiSettings.Location = new System.Drawing.Point(477, 468);
             this.btnASFuiSettings.Name = "btnASFuiSettings";
             this.btnASFuiSettings.Size = new System.Drawing.Size(23, 23);
             this.btnASFuiSettings.TabIndex = 32;
@@ -670,22 +724,22 @@
             this.btnASFuiSettings.UseVisualStyleBackColor = true;
             this.btnASFuiSettings.Click += new System.EventHandler(this.btnASFuiSettings_Click);
             // 
-            // btnLootAll
+            // btnASFuiHelp
             // 
-            this.btnLootAll.Enabled = false;
-            this.btnLootAll.Location = new System.Drawing.Point(131, 3);
-            this.btnLootAll.Name = "btnLootAll";
-            this.btnLootAll.Size = new System.Drawing.Size(60, 27);
-            this.btnLootAll.TabIndex = 2;
-            this.btnLootAll.Text = "Loot All";
-            this.btnLootAll.UseVisualStyleBackColor = true;
-            this.btnLootAll.Click += new System.EventHandler(this.btnLootAll_Click);
+            this.btnASFuiHelp.Location = new System.Drawing.Point(448, 468);
+            this.btnASFuiHelp.Name = "btnASFuiHelp";
+            this.btnASFuiHelp.Size = new System.Drawing.Size(23, 23);
+            this.btnASFuiHelp.TabIndex = 33;
+            this.btnASFuiHelp.Text = "❓";
+            this.btnASFuiHelp.UseVisualStyleBackColor = true;
+            this.btnASFuiHelp.Click += new System.EventHandler(this.btnASFuiHelp_Click);
             // 
             // ASFui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(694, 486);
+            this.ClientSize = new System.Drawing.Size(754, 516);
+            this.Controls.Add(this.btnASFuiHelp);
             this.Controls.Add(this.btnASFuiSettings);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.gbASF);
@@ -787,6 +841,9 @@
         private System.Windows.Forms.RichTextBox rtbOutput;
         private System.Windows.Forms.ComboBox cbBotList;
         private System.Windows.Forms.Button btnLootAll;
+        private System.Windows.Forms.Button btnResumeBot;
+        private System.Windows.Forms.Button btnPasswordBot;
+        private System.Windows.Forms.Button btnASFuiHelp;
     }
 }
 

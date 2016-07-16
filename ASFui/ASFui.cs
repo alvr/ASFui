@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace ASFui
     {
         private bool _asfRunning;
         private ASFProcess _asf;
-        private readonly bool _isLocal;
+        public static bool _isLocal;
 
         public ASFui()
         {
@@ -53,25 +54,34 @@ namespace ASFui
         {
             if (!_asfRunning || !Properties.Settings.Default.IsLocal) return;
             _asf.Stop();
+            Logging.Info(@"Closing ASFui.");
         }
-        
+
         private void GetBotList()
         {
-            cbBotList.Items.Clear();
+            cbBotList.Invoke(new MethodInvoker(delegate { cbBotList.Items.Clear(); }));
+
             var status = Util.SendCommand("statusall");
             var matches = Regex.Matches(status, @"Bot (.*) is");
-            foreach (Match m in matches)
+            cbBotList.Invoke(new MethodInvoker(delegate
             {
-                cbBotList.Items.Add(m.Groups[1].Value);
-            }
-
+                foreach (Match m in matches)
+                {
+                    cbBotList.Items.Add(m.Groups[1].Value);
+                }
+            }));
             if (cbBotList.Items.Count <= 0) return;
-            cbBotList.SelectedIndex = 0;
-            EnableElements();
+            cbBotList.Invoke(new MethodInvoker(delegate
+            {
+                cbBotList.SelectedIndex = 0;
+                EnableElements();
+            }));
         }
 
         #region Buttons Events
+
         #region Start/Stop Buttons
+
         private void BtnStart_Click(object sender, EventArgs e)
         {
             btnStart.Enabled = false;
@@ -89,8 +99,9 @@ namespace ASFui
             btnReloadBots.Focus();
             _asfRunning = true;
             btnASFuiSettings.Enabled = false;
-            Task.Delay(1500).ContinueWith(b => GetBotList());
+            Task.Delay(1000).ContinueWith(b => GetBotList());
             tsslCommandOutput.Text = @"Started ASF server.";
+            Logging.Info("Server started successfully.");
         }
 
         private void BtnStop_Click(object sender, EventArgs e)
@@ -103,6 +114,7 @@ namespace ASFui
             }
             DisableElements();
             tsslCommandOutput.Text = @"Stopped ASF server.";
+            Logging.Info("Server stopped successfully.");
         }
 
         private void BtnClear_Click(object sender, EventArgs e)
@@ -122,22 +134,25 @@ namespace ASFui
             var settings = new SettingsForm();
             settings.ShowDialog();
         }
+
+        private void btnASFuiHelp_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/alvr/ASFui/wiki");
+        }
+
         #endregion
 
         #region Cards Buttons
+
         private void btnFarm_Click(object sender, EventArgs e)
         {
             Task.Run(() =>
             {
                 var result = Util.SendCommand(Util.GenerateCommand("farm", cbBotList.SelectedItem.ToString()));
-                if (_isLocal)
-                {
-                    tsslCommandOutput.Text = @"!farm <" + cbBotList.SelectedItem + @">: " + result;
-                }
-                else
-                {
-                    rtbOutput.AppendText(@"!farm <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                }
+                tsslCommandOutput.Text = @"!farm <" + cbBotList.SelectedItem + @">";
+                rtbOutput.AppendText(@"!farm <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             });
         }
 
@@ -146,14 +161,10 @@ namespace ASFui
             Task.Run(() =>
             {
                 var result = Util.SendCommand(Util.GenerateCommand("loot", cbBotList.SelectedItem.ToString()));
-                if (_isLocal)
-                {
-                    tsslCommandOutput.Text = @"!loot <" + cbBotList.SelectedItem + @">: " + result;
-                }
-                else
-                {
-                    rtbOutput.AppendText(@"!loot <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                }
+                tsslCommandOutput.Text = @"!loot <" + cbBotList.SelectedItem + @">";
+                rtbOutput.AppendText(@"!loot <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             });
         }
 
@@ -169,55 +180,106 @@ namespace ASFui
                 else
                 {
                     rtbOutput.AppendText(@"!lootall: " + result + Environment.NewLine);
+                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                    rtbOutput.ScrollToCaret();
                 }
             });
         }
+
         #endregion
 
         #region Keys Buttons
+
         private void btnRedeem_Click(object sender, EventArgs e)
         {
-            Task.Run(() => {
-                var result = Util.SendCommand(Util.GenerateCommand("redeem", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
-                if (_isLocal)
+            Task.Run(() =>
+            {
+                if (!tbInput.Text.Equals(""))
                 {
-                    tsslCommandOutput.Text = @"!redeem <" + cbBotList.SelectedItem + @">: " + result;
+                    var result =
+                        Util.SendCommand(Util.GenerateCommand("redeem", cbBotList.SelectedItem.ToString(),
+                            Util.MultiToOne(tbInput.Lines)));
+                    if (_isLocal)
+                    {
+                        tsslCommandOutput.Text = @"!redeem <" + cbBotList.SelectedItem + @">: " + result;
+                    }
+                    else
+                    {
+                        rtbOutput.AppendText(@"!redeem <" + cbBotList.SelectedItem + @">: " + result +
+                                             Environment.NewLine);
+                        rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                        rtbOutput.ScrollToCaret();
+                    }
                 }
                 else
                 {
-                    rtbOutput.AppendText(@"!redeem <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                    Logging.Error(@"Input required (!owns)");
+                    MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
             });
         }
 
         private void btnAddLicense_Click(object sender, EventArgs e)
         {
-            Task.Run(() => {
-                var result = Util.SendCommand(Util.GenerateCommand("addlicense", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
-                if (_isLocal)
+            Task.Run(() =>
+            {
+                if (!tbInput.Text.Equals(""))
                 {
-                    tsslCommandOutput.Text = @"!addlicense <" + cbBotList.SelectedItem + @">: " + result;
+                    var result =
+                        Util.SendCommand(Util.GenerateCommand("addlicense", cbBotList.SelectedItem.ToString(),
+                            Util.MultiToOne(tbInput.Lines)));
+                    if (_isLocal)
+                    {
+                        tsslCommandOutput.Text = @"!addlicense <" + cbBotList.SelectedItem + @">: " + result;
+                    }
+                    else
+                    {
+                        rtbOutput.AppendText(@"!addlicense <" + cbBotList.SelectedItem + @">: " + result +
+                                             Environment.NewLine);
+                        rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                        rtbOutput.ScrollToCaret();
+                    }
                 }
                 else
                 {
-                    rtbOutput.AppendText(@"!addlicense <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                    Logging.Error(@"Input required (!owns)");
+                    MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
             });
         }
+
         #endregion
 
         #region Games Buttons
+
         private void btnOwns_Click(object sender, EventArgs e)
         {
-            Task.Run(() => {
-                var result = Util.SendCommand(Util.GenerateCommand("owns", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
-                if (_isLocal)
+            Task.Run(() =>
+            {
+                if (!tbInput.Text.Equals(""))
                 {
-                    tsslCommandOutput.Text = @"!own <" + cbBotList.SelectedItem + @">: " + result;
+                    var result =
+                        Util.SendCommand(Util.GenerateCommand("owns", cbBotList.SelectedItem.ToString(),
+                            Util.MultiToOne(tbInput.Lines)));
+                    if (_isLocal)
+                    {
+                        tsslCommandOutput.Text = @"!own <" + cbBotList.SelectedItem + @">: " + result;
+                    }
+                    else
+                    {
+                        rtbOutput.AppendText(@"!own <" + cbBotList.SelectedItem + @">: " + result +
+                                             Environment.NewLine);
+                        rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                        rtbOutput.ScrollToCaret();
+                    }
                 }
                 else
                 {
-                    rtbOutput.AppendText(@"!own <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                    Logging.Error(@"Input required (!owns)");
+                    MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
             });
         }
@@ -226,21 +288,35 @@ namespace ASFui
         {
             Task.Run(() =>
             {
-                var result =
-                    Util.SendCommand(Util.GenerateCommand("play", cbBotList.SelectedItem.ToString(), Util.MultiToOne(tbInput.Lines)));
-                if (_isLocal)
+                if (!tbInput.Text.Equals(""))
                 {
-                    tsslCommandOutput.Text = @"!play <" + cbBotList.SelectedItem + @">: " + result;
+                    var result =
+                        Util.SendCommand(Util.GenerateCommand("play", cbBotList.SelectedItem.ToString(),
+                            Util.MultiToOne(tbInput.Lines)));
+                    if (_isLocal)
+                    {
+                        tsslCommandOutput.Text = @"!play <" + cbBotList.SelectedItem + @">: " + result;
+                    }
+                    else
+                    {
+                        rtbOutput.AppendText(@"!play <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                        rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                        rtbOutput.ScrollToCaret();
+                    }
                 }
                 else
                 {
-                    rtbOutput.AppendText(@"!play <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                    Logging.Error(@"Input required (!play)");
+                    MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
             });
         }
+
         #endregion
 
         #region Chat Buttons
+
         private void btnLeave_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("leave", cbBotList.SelectedItem.ToString()));
@@ -251,6 +327,8 @@ namespace ASFui
             else
             {
                 rtbOutput.AppendText(@"!leave <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             }
         }
 
@@ -264,11 +342,15 @@ namespace ASFui
             else
             {
                 rtbOutput.AppendText(@"!rejoinchat <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             }
         }
+
         #endregion
 
         #region Bots Buttons
+
         private void btnStartBot_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("start", cbBotList.SelectedItem.ToString()));
@@ -279,6 +361,8 @@ namespace ASFui
             else
             {
                 rtbOutput.AppendText(@"!start <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             }
         }
 
@@ -292,6 +376,8 @@ namespace ASFui
             else
             {
                 rtbOutput.AppendText(@"!stop <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             }
         }
 
@@ -305,6 +391,38 @@ namespace ASFui
             else
             {
                 rtbOutput.AppendText(@"!pause <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
+            }
+        }
+
+        private void btnResume_Click(object sender, EventArgs e)
+        {
+            var result = Util.SendCommand(Util.GenerateCommand("resume", cbBotList.SelectedItem.ToString()));
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!resume <" + cbBotList.SelectedItem + @">: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!resume <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
+            }
+        }
+
+        private void btnPassword_Click(object sender, EventArgs e)
+        {
+            var result = Util.SendCommand(Util.GenerateCommand("password", cbBotList.SelectedItem.ToString()));
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!password <" + cbBotList.SelectedItem + @">: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!password <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             }
         }
 
@@ -318,20 +436,24 @@ namespace ASFui
             else
             {
                 rtbOutput.AppendText(@"!status <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             }
         }
 
         private void btnStatusAll_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand("statusall");
-            if (!_isLocal)
-            {
-                rtbOutput.AppendText(@"!statusall: " + result + Environment.NewLine);
-            }
+            if (_isLocal) return;
+            rtbOutput.AppendText(@"!statusall: " + result + Environment.NewLine);
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
+
         #endregion
 
         #region ASF Buttons
+
         private void btnASFHelp_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand("help");
@@ -342,6 +464,8 @@ namespace ASFui
             else
             {
                 rtbOutput.AppendText(@"!help: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             }
         }
 
@@ -355,6 +479,8 @@ namespace ASFui
             else
             {
                 rtbOutput.AppendText(@"!update: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             }
         }
 
@@ -368,6 +494,8 @@ namespace ASFui
             else
             {
                 rtbOutput.AppendText(@"!version: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             }
         }
 
@@ -381,11 +509,15 @@ namespace ASFui
             else
             {
                 rtbOutput.AppendText(@"!api: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             }
         }
+
         #endregion
 
         #region 2FA Buttons
+
         private void btn2FA_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("2fa", cbBotList.SelectedItem.ToString()));
@@ -396,6 +528,8 @@ namespace ASFui
             else
             {
                 rtbOutput.AppendText(@"!2fa <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             }
         }
 
@@ -409,6 +543,8 @@ namespace ASFui
             else
             {
                 rtbOutput.AppendText(@"!2faoff <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             }
         }
 
@@ -425,6 +561,8 @@ namespace ASFui
                 else
                 {
                     rtbOutput.AppendText(@"!2faok <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                    rtbOutput.ScrollToCaret();
                 }
             });
         }
@@ -442,10 +580,14 @@ namespace ASFui
                 else
                 {
                     rtbOutput.AppendText(@"!2fano <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                    rtbOutput.ScrollToCaret();
                 }
             });
         }
+
         #endregion
+
         #endregion
 
         private void EnableElements()
@@ -463,6 +605,8 @@ namespace ASFui
             btnStartBot.Enabled = true;
             btnStopBot.Enabled = true;
             btnPauseBot.Enabled = true;
+            btnResumeBot.Enabled = true;
+            btnPasswordBot.Enabled = true;
             btnStatusBot.Enabled = true;
             btnStatusAll.Enabled = true;
             btnASFHelp.Enabled = true;
@@ -490,6 +634,8 @@ namespace ASFui
             btnStartBot.Enabled = false;
             btnStopBot.Enabled = false;
             btnPauseBot.Enabled = false;
+            btnResumeBot.Enabled = false;
+            btnPasswordBot.Enabled = false;
             btnStatusBot.Enabled = false;
             btnStatusAll.Enabled = false;
             btnASFHelp.Enabled = false;

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
@@ -21,7 +22,17 @@ namespace ASFui
 
         public string HandleCommand(string input)
         {
-            return Channel.HandleCommand(input);
+            try 
+            {
+                var info = Channel.HandleCommand(input);
+                Logging.Info(input + ": " + info);
+                return info;
+            }
+            catch(Exception e)
+            {
+                Logging.Exception(e, "Error sending command: " + input);
+                return null;
+            }
         }
     }
 }
