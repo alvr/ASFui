@@ -14,7 +14,7 @@ namespace ASFui
     {
         public static bool CheckBinary()
         {
-            return File.Exists(Settings.Default.ASFBinary);
+            return File.Exists(Settings.Default.ASFBinary) || !Settings.Default.IsLocal;
         }
 
         public static string SendCommand(string command)

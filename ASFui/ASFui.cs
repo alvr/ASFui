@@ -96,10 +96,9 @@ namespace ASFui
             cbBotList.Enabled = true;
             rtbOutput.Enabled = true;
             btnReloadBots.Enabled = true;
-            btnReloadBots.Focus();
             _asfRunning = true;
             btnASFuiSettings.Enabled = false;
-            Task.Delay(1000).ContinueWith(b => GetBotList());
+            Task.Delay(2500).ContinueWith(b => GetBotList());
             tsslCommandOutput.Text = @"Started ASF server.";
             Logging.Info("Server started successfully.");
         }
@@ -502,16 +501,12 @@ namespace ASFui
         private void btnAPI_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand("api");
-            if (_isLocal)
+            Task.Run(() =>
             {
-                tsslCommandOutput.Text = @"!api: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!api: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
+                var api = new Api(result);
+                MessageBox.Show(api.AllApi(), @"API result", MessageBoxButtons.OK);
+            });
+
         }
 
         #endregion
