@@ -45,7 +45,6 @@
             this.btn2FA = new System.Windows.Forms.Button();
             this.btn2FAOk = new System.Windows.Forms.Button();
             this.btn2FANo = new System.Windows.Forms.Button();
-            this.btn2FAOff = new System.Windows.Forms.Button();
             this.gbCards = new System.Windows.Forms.GroupBox();
             this.tlpCards = new System.Windows.Forms.TableLayoutPanel();
             this.btnFarm = new System.Windows.Forms.Button();
@@ -172,12 +171,13 @@
             // 
             // btnReloadBots
             // 
+            this.btnReloadBots.BackgroundImage = global::ASFui.Properties.Resources.refresh;
+            this.btnReloadBots.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnReloadBots.Enabled = false;
             this.btnReloadBots.Location = new System.Drawing.Point(209, 467);
             this.btnReloadBots.Name = "btnReloadBots";
             this.btnReloadBots.Size = new System.Drawing.Size(23, 23);
             this.btnReloadBots.TabIndex = 7;
-            this.btnReloadBots.Text = "🔃";
             this.btnReloadBots.UseVisualStyleBackColor = true;
             this.btnReloadBots.Click += new System.EventHandler(this.btnReloadBots_Click);
             // 
@@ -239,15 +239,14 @@
             // 
             // tlp2FA
             // 
-            this.tlp2FA.ColumnCount = 4;
-            this.tlp2FA.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp2FA.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp2FA.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp2FA.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp2FA.ColumnCount = 3;
+            this.tlp2FA.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlp2FA.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlp2FA.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlp2FA.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp2FA.Controls.Add(this.btn2FA, 0, 0);
-            this.tlp2FA.Controls.Add(this.btn2FAOk, 2, 0);
-            this.tlp2FA.Controls.Add(this.btn2FANo, 3, 0);
-            this.tlp2FA.Controls.Add(this.btn2FAOff, 1, 0);
+            this.tlp2FA.Controls.Add(this.btn2FAOk, 1, 0);
+            this.tlp2FA.Controls.Add(this.btn2FANo, 2, 0);
             this.tlp2FA.Location = new System.Drawing.Point(6, 19);
             this.tlp2FA.Name = "tlp2FA";
             this.tlp2FA.RowCount = 1;
@@ -260,7 +259,7 @@
             this.btn2FA.Enabled = false;
             this.btn2FA.Location = new System.Drawing.Point(3, 3);
             this.btn2FA.Name = "btn2FA";
-            this.btn2FA.Size = new System.Drawing.Size(173, 25);
+            this.btn2FA.Size = new System.Drawing.Size(233, 25);
             this.btn2FA.TabIndex = 0;
             this.btn2FA.Text = "Generate Token";
             this.btn2FA.UseVisualStyleBackColor = true;
@@ -269,9 +268,9 @@
             // btn2FAOk
             // 
             this.btn2FAOk.Enabled = false;
-            this.btn2FAOk.Location = new System.Drawing.Point(361, 3);
+            this.btn2FAOk.Location = new System.Drawing.Point(242, 3);
             this.btn2FAOk.Name = "btn2FAOk";
-            this.btn2FAOk.Size = new System.Drawing.Size(173, 25);
+            this.btn2FAOk.Size = new System.Drawing.Size(233, 25);
             this.btn2FAOk.TabIndex = 2;
             this.btn2FAOk.Text = "Accept Pending Confirmations";
             this.btn2FAOk.UseVisualStyleBackColor = true;
@@ -280,24 +279,13 @@
             // btn2FANo
             // 
             this.btn2FANo.Enabled = false;
-            this.btn2FANo.Location = new System.Drawing.Point(540, 3);
+            this.btn2FANo.Location = new System.Drawing.Point(481, 3);
             this.btn2FANo.Name = "btn2FANo";
-            this.btn2FANo.Size = new System.Drawing.Size(175, 25);
+            this.btn2FANo.Size = new System.Drawing.Size(234, 25);
             this.btn2FANo.TabIndex = 3;
             this.btn2FANo.Text = "Deny Pending Confirmations";
             this.btn2FANo.UseVisualStyleBackColor = true;
             this.btn2FANo.Click += new System.EventHandler(this.btn2FANo_Click);
-            // 
-            // btn2FAOff
-            // 
-            this.btn2FAOff.Enabled = false;
-            this.btn2FAOff.Location = new System.Drawing.Point(182, 3);
-            this.btn2FAOff.Name = "btn2FAOff";
-            this.btn2FAOff.Size = new System.Drawing.Size(173, 25);
-            this.btn2FAOff.TabIndex = 1;
-            this.btn2FAOff.Text = "Deactivate 2FA";
-            this.btn2FAOff.UseVisualStyleBackColor = true;
-            this.btn2FAOff.Click += new System.EventHandler(this.btn2FAOff_Click);
             // 
             // gbCards
             // 
@@ -716,21 +704,23 @@
             // 
             // btnASFuiSettings
             // 
+            this.btnASFuiSettings.BackgroundImage = global::ASFui.Properties.Resources.settings;
+            this.btnASFuiSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnASFuiSettings.Location = new System.Drawing.Point(477, 468);
             this.btnASFuiSettings.Name = "btnASFuiSettings";
             this.btnASFuiSettings.Size = new System.Drawing.Size(23, 23);
             this.btnASFuiSettings.TabIndex = 32;
-            this.btnASFuiSettings.Text = "🔧";
             this.btnASFuiSettings.UseVisualStyleBackColor = true;
             this.btnASFuiSettings.Click += new System.EventHandler(this.btnASFuiSettings_Click);
             // 
             // btnASFuiHelp
             // 
+            this.btnASFuiHelp.BackgroundImage = global::ASFui.Properties.Resources.help;
+            this.btnASFuiHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnASFuiHelp.Location = new System.Drawing.Point(448, 468);
             this.btnASFuiHelp.Name = "btnASFuiHelp";
             this.btnASFuiHelp.Size = new System.Drawing.Size(23, 23);
             this.btnASFuiHelp.TabIndex = 33;
-            this.btnASFuiHelp.Text = "❓";
             this.btnASFuiHelp.UseVisualStyleBackColor = true;
             this.btnASFuiHelp.Click += new System.EventHandler(this.btnASFuiHelp_Click);
             // 
@@ -815,7 +805,6 @@
         private System.Windows.Forms.Button btn2FA;
         private System.Windows.Forms.Button btn2FAOk;
         private System.Windows.Forms.Button btn2FANo;
-        private System.Windows.Forms.Button btn2FAOff;
         private System.Windows.Forms.GroupBox gbChat;
         private System.Windows.Forms.TableLayoutPanel tlpChat;
         private System.Windows.Forms.Button btnLeave;

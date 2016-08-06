@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 
 namespace ASFui
 {
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class Bot
     {
         public class Root
@@ -23,13 +25,28 @@ namespace ASFui
         public class CardsFarmer
         {
             [JsonProperty("GamesToFarm")]
-            public Dictionary<uint, float> GamesToFarm { get; set; }
+            public HashSet<Game> GamesToFarm { get; set; }
 
             [JsonProperty("CurrentGamesFarming")]
-            public HashSet<uint> CurrentGamesFarming { get; set; }
+            public HashSet<Game> CurrentGamesFarming { get; set; }
 
             [JsonProperty("ManualMode")]
             public bool ManualMode { get; set; }
+        }
+
+        public class Game
+        {
+            [JsonProperty("AppID")]
+            public uint AppID { get; set; }
+
+            [JsonProperty("GameName")]
+            public string GameName { get; set; }
+
+            [JsonProperty("HoursPlayed")]
+            public float HoursPlayed { get; set; }
+
+            [JsonProperty("CardsRemaining")]
+            public ushort CardsRemaining { get; set; }
         }
 
     }

@@ -609,7 +609,6 @@ namespace ASFui
             btnASFVersion.Enabled = true;
             btnAPI.Enabled = true;
             btn2FA.Enabled = true;
-            btn2FAOff.Enabled = true;
             btn2FAOk.Enabled = true;
             btn2FANo.Enabled = true;
         }
@@ -638,7 +637,6 @@ namespace ASFui
             btnASFVersion.Enabled = false;
             btnAPI.Enabled = false;
             btn2FA.Enabled = false;
-            btn2FAOff.Enabled = false;
             btn2FAOk.Enabled = false;
             btn2FANo.Enabled = false;
 

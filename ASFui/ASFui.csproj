@@ -157,6 +157,9 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\settings.png" />
+    <None Include="Resources\refresh.png" />
+    <None Include="Resources\help.png" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

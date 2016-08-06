@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Text;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace ASFui
 {
@@ -20,14 +18,6 @@ namespace ASFui
             return _data.Bot.Keys;
         }
 
-        private static string GetAppName(uint id)
-        {
-            var url = "http://store.steampowered.com/api/appdetails?appids=" + id;
-            var content = new WebClient().DownloadString(url);
-            var json = JObject.Parse(content);
-            return json[id.ToString()]["data"]["name"].ToString();
-        }
-
         public string AllApi()
         {
             var result = new StringBuilder();
@@ -38,15 +28,16 @@ namespace ASFui
                 result.Append(@"    ⟐ Active: " + _data.Bot[bot].KeepRunning + Environment.NewLine);
 
                 var games = _data.Bot[bot].CardsFarmer.GamesToFarm;
-                if (games.Keys.Count > 0)
+                if (games.Count > 0)
                 {
                     result.Append(@"    ⟐ Games to Farm:" + Environment.NewLine);
 
                     foreach (var game in games)
                     {
-                        var timePlayed = TimeSpan.FromHours(game.Value);
-                        result.Append(@"        ◇ " + GetAppName(game.Key) + @"; Time Farmed: " 
-                            + string.Format("{0:00}:{1:00}", timePlayed.Hours, timePlayed.Minutes) + Environment.NewLine);
+                        var timePlayed = TimeSpan.FromHours(game.HoursPlayed);
+                        result.Append(@"        ◇ " + game.GameName + @"; Hours Played: " 
+                            + $"{timePlayed.Hours:00}:{timePlayed.Minutes:00}"
+                            + @"; Cards Remaining: " + game.CardsRemaining + Environment.NewLine);
                     }
                 }
                 else
@@ -62,7 +53,7 @@ namespace ASFui
 
                     foreach (var game in farming)
                     {
-                        result.Append(@"        ◇ " + GetAppName(game) + Environment.NewLine);
+                        result.Append(@"        ◇ " + game.GameName + Environment.NewLine);
                     }
                 }
                 else
