@@ -72,7 +72,8 @@ namespace ASFui
                     output.AppendText(result + Environment.NewLine);
                     sb.Clear();
                 }
-                else if(sb.ToString().EndsWith("password:"))
+                else if((!sb.ToString().StartsWith("[AES]") ^ sb.ToString().StartsWith("[ProtectedDataForCurrentUser]"))
+                    && sb.ToString().EndsWith("password:"))
                 {
                     var Password = new Password(ASF, sb.ToString());
                     Password.ShowDialog();
