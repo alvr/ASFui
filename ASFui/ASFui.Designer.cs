@@ -83,6 +83,7 @@
             this.tsslCommandOutput = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnASFuiSettings = new System.Windows.Forms.Button();
             this.btnASFuiHelp = new System.Windows.Forms.Button();
+            this.tlpMainContent = new System.Windows.Forms.TableLayoutPanel();
             this.gbKeys.SuspendLayout();
             this.tlpKeys.SuspendLayout();
             this.gb2FA.SuspendLayout();
@@ -100,10 +101,14 @@
             this.tlpASF.SuspendLayout();
             this.cmsTrayIcon.SuspendLayout();
             this.StatusStrip.SuspendLayout();
+            this.tlpMainContent.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtbOutput
             // 
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbOutput.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.rtbOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.rtbOutput.Enabled = false;
@@ -118,6 +123,7 @@
             // 
             // btnStop
             // 
+            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStop.Enabled = false;
             this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStop.Location = new System.Drawing.Point(587, 468);
@@ -130,6 +136,7 @@
             // 
             // btnStart
             // 
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStart.Location = new System.Drawing.Point(506, 468);
             this.btnStart.Name = "btnStart";
@@ -141,6 +148,7 @@
             // 
             // btnClear
             // 
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.Enabled = false;
             this.btnClear.Location = new System.Drawing.Point(668, 468);
             this.btnClear.Name = "btnClear";
@@ -152,6 +160,7 @@
             // 
             // cbBotList
             // 
+            this.cbBotList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbBotList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBotList.Enabled = false;
             this.cbBotList.FormattingEnabled = true;
@@ -162,6 +171,7 @@
             // 
             // lbCurrentBot
             // 
+            this.lbCurrentBot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbCurrentBot.AutoSize = true;
             this.lbCurrentBot.Location = new System.Drawing.Point(13, 473);
             this.lbCurrentBot.Name = "lbCurrentBot";
@@ -171,6 +181,7 @@
             // 
             // btnReloadBots
             // 
+            this.btnReloadBots.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnReloadBots.BackgroundImage = global::ASFui.Properties.Resources.refresh;
             this.btnReloadBots.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnReloadBots.Enabled = false;
@@ -184,15 +195,18 @@
             // gbKeys
             // 
             this.gbKeys.Controls.Add(this.tlpKeys);
-            this.gbKeys.Location = new System.Drawing.Point(506, 12);
+            this.gbKeys.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbKeys.Location = new System.Drawing.Point(242, 3);
             this.gbKeys.Name = "gbKeys";
-            this.gbKeys.Size = new System.Drawing.Size(236, 58);
+            this.gbKeys.Size = new System.Drawing.Size(234, 55);
             this.gbKeys.TabIndex = 27;
             this.gbKeys.TabStop = false;
             this.gbKeys.Text = "Keys";
             // 
             // tlpKeys
             // 
+            this.tlpKeys.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpKeys.ColumnCount = 2;
             this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -202,15 +216,17 @@
             this.tlpKeys.Name = "tlpKeys";
             this.tlpKeys.RowCount = 1;
             this.tlpKeys.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpKeys.Size = new System.Drawing.Size(224, 33);
+            this.tlpKeys.Size = new System.Drawing.Size(222, 33);
             this.tlpKeys.TabIndex = 1;
             // 
             // btnRedeem
             // 
+            this.btnRedeem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRedeem.Enabled = false;
             this.btnRedeem.Location = new System.Drawing.Point(3, 3);
             this.btnRedeem.Name = "btnRedeem";
-            this.btnRedeem.Size = new System.Drawing.Size(106, 27);
+            this.btnRedeem.Size = new System.Drawing.Size(105, 27);
             this.btnRedeem.TabIndex = 0;
             this.btnRedeem.Text = "Redeem Key";
             this.btnRedeem.UseVisualStyleBackColor = true;
@@ -218,10 +234,12 @@
             // 
             // btnAddLicense
             // 
+            this.btnAddLicense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddLicense.Enabled = false;
-            this.btnAddLicense.Location = new System.Drawing.Point(115, 3);
+            this.btnAddLicense.Location = new System.Drawing.Point(114, 3);
             this.btnAddLicense.Name = "btnAddLicense";
-            this.btnAddLicense.Size = new System.Drawing.Size(106, 27);
+            this.btnAddLicense.Size = new System.Drawing.Size(105, 27);
             this.btnAddLicense.TabIndex = 1;
             this.btnAddLicense.Text = "Add License";
             this.btnAddLicense.UseVisualStyleBackColor = true;
@@ -229,6 +247,8 @@
             // 
             // gb2FA
             // 
+            this.gb2FA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gb2FA.Controls.Add(this.tlp2FA);
             this.gb2FA.Location = new System.Drawing.Point(13, 298);
             this.gb2FA.Name = "gb2FA";
@@ -239,6 +259,8 @@
             // 
             // tlp2FA
             // 
+            this.tlp2FA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlp2FA.ColumnCount = 3;
             this.tlp2FA.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlp2FA.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -256,6 +278,7 @@
             // 
             // btn2FA
             // 
+            this.btn2FA.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn2FA.Enabled = false;
             this.btn2FA.Location = new System.Drawing.Point(3, 3);
             this.btn2FA.Name = "btn2FA";
@@ -267,6 +290,7 @@
             // 
             // btn2FAOk
             // 
+            this.btn2FAOk.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn2FAOk.Enabled = false;
             this.btn2FAOk.Location = new System.Drawing.Point(242, 3);
             this.btn2FAOk.Name = "btn2FAOk";
@@ -278,6 +302,7 @@
             // 
             // btn2FANo
             // 
+            this.btn2FANo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn2FANo.Enabled = false;
             this.btn2FANo.Location = new System.Drawing.Point(481, 3);
             this.btn2FANo.Name = "btn2FANo";
@@ -290,15 +315,18 @@
             // gbCards
             // 
             this.gbCards.Controls.Add(this.tlpCards);
-            this.gbCards.Location = new System.Drawing.Point(264, 12);
+            this.gbCards.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbCards.Location = new System.Drawing.Point(3, 3);
             this.gbCards.Name = "gbCards";
-            this.gbCards.Size = new System.Drawing.Size(236, 58);
+            this.gbCards.Size = new System.Drawing.Size(233, 55);
             this.gbCards.TabIndex = 24;
             this.gbCards.TabStop = false;
             this.gbCards.Text = "Cards";
             // 
             // tlpCards
             // 
+            this.tlpCards.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpCards.ColumnCount = 3;
             this.tlpCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.31332F));
             this.tlpCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.34334F));
@@ -310,15 +338,16 @@
             this.tlpCards.Name = "tlpCards";
             this.tlpCards.RowCount = 1;
             this.tlpCards.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpCards.Size = new System.Drawing.Size(224, 33);
+            this.tlpCards.Size = new System.Drawing.Size(221, 33);
             this.tlpCards.TabIndex = 0;
             // 
             // btnFarm
             // 
+            this.btnFarm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnFarm.Enabled = false;
             this.btnFarm.Location = new System.Drawing.Point(3, 3);
             this.btnFarm.Name = "btnFarm";
-            this.btnFarm.Size = new System.Drawing.Size(68, 27);
+            this.btnFarm.Size = new System.Drawing.Size(67, 27);
             this.btnFarm.TabIndex = 0;
             this.btnFarm.Text = "Farm";
             this.btnFarm.UseVisualStyleBackColor = true;
@@ -326,10 +355,11 @@
             // 
             // btnLoot
             // 
+            this.btnLoot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLoot.Enabled = false;
-            this.btnLoot.Location = new System.Drawing.Point(77, 3);
+            this.btnLoot.Location = new System.Drawing.Point(76, 3);
             this.btnLoot.Name = "btnLoot";
-            this.btnLoot.Size = new System.Drawing.Size(68, 27);
+            this.btnLoot.Size = new System.Drawing.Size(67, 27);
             this.btnLoot.TabIndex = 1;
             this.btnLoot.Text = "Loot";
             this.btnLoot.UseVisualStyleBackColor = true;
@@ -337,10 +367,11 @@
             // 
             // btnLootAll
             // 
+            this.btnLootAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLootAll.Enabled = false;
-            this.btnLootAll.Location = new System.Drawing.Point(151, 3);
+            this.btnLootAll.Location = new System.Drawing.Point(149, 3);
             this.btnLootAll.Name = "btnLootAll";
-            this.btnLootAll.Size = new System.Drawing.Size(70, 27);
+            this.btnLootAll.Size = new System.Drawing.Size(69, 27);
             this.btnLootAll.TabIndex = 2;
             this.btnLootAll.Text = "Loot All";
             this.btnLootAll.UseVisualStyleBackColor = true;
@@ -348,6 +379,8 @@
             // 
             // gbBots
             // 
+            this.gbBots.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbBots.Controls.Add(this.tlpBots);
             this.gbBots.Location = new System.Drawing.Point(264, 140);
             this.gbBots.Name = "gbBots";
@@ -358,6 +391,8 @@
             // 
             // tlpBots
             // 
+            this.tlpBots.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpBots.ColumnCount = 12;
             this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
             this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
@@ -390,6 +425,7 @@
             // btnStartBot
             // 
             this.tlpBots.SetColumnSpan(this.btnStartBot, 3);
+            this.btnStartBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStartBot.Enabled = false;
             this.btnStartBot.Location = new System.Drawing.Point(3, 3);
             this.btnStartBot.Name = "btnStartBot";
@@ -402,10 +438,11 @@
             // btnStatusBot
             // 
             this.tlpBots.SetColumnSpan(this.btnStatusBot, 4);
+            this.btnStatusBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStatusBot.Enabled = false;
             this.btnStatusBot.Location = new System.Drawing.Point(155, 34);
             this.btnStatusBot.Name = "btnStatusBot";
-            this.btnStatusBot.Size = new System.Drawing.Size(146, 25);
+            this.btnStatusBot.Size = new System.Drawing.Size(146, 26);
             this.btnStatusBot.TabIndex = 2;
             this.btnStatusBot.Text = "Status";
             this.btnStatusBot.UseVisualStyleBackColor = true;
@@ -414,6 +451,7 @@
             // btnStopBot
             // 
             this.tlpBots.SetColumnSpan(this.btnStopBot, 3);
+            this.btnStopBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStopBot.Enabled = false;
             this.btnStopBot.Location = new System.Drawing.Point(117, 3);
             this.btnStopBot.Name = "btnStopBot";
@@ -426,6 +464,7 @@
             // btnPauseBot
             // 
             this.tlpBots.SetColumnSpan(this.btnPauseBot, 3);
+            this.btnPauseBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPauseBot.Enabled = false;
             this.btnPauseBot.Location = new System.Drawing.Point(231, 3);
             this.btnPauseBot.Name = "btnPauseBot";
@@ -438,6 +477,7 @@
             // btnResumeBot
             // 
             this.tlpBots.SetColumnSpan(this.btnResumeBot, 3);
+            this.btnResumeBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnResumeBot.Enabled = false;
             this.btnResumeBot.Location = new System.Drawing.Point(345, 3);
             this.btnResumeBot.Name = "btnResumeBot";
@@ -450,10 +490,11 @@
             // btnPasswordBot
             // 
             this.tlpBots.SetColumnSpan(this.btnPasswordBot, 4);
+            this.btnPasswordBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPasswordBot.Enabled = false;
             this.btnPasswordBot.Location = new System.Drawing.Point(3, 34);
             this.btnPasswordBot.Name = "btnPasswordBot";
-            this.btnPasswordBot.Size = new System.Drawing.Size(146, 25);
+            this.btnPasswordBot.Size = new System.Drawing.Size(146, 26);
             this.btnPasswordBot.TabIndex = 6;
             this.btnPasswordBot.Text = "Password";
             this.btnPasswordBot.UseVisualStyleBackColor = true;
@@ -462,10 +503,11 @@
             // btnStatusAll
             // 
             this.tlpBots.SetColumnSpan(this.btnStatusAll, 4);
+            this.btnStatusAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStatusAll.Enabled = false;
             this.btnStatusAll.Location = new System.Drawing.Point(307, 34);
             this.btnStatusAll.Name = "btnStatusAll";
-            this.btnStatusAll.Size = new System.Drawing.Size(156, 25);
+            this.btnStatusAll.Size = new System.Drawing.Size(156, 26);
             this.btnStatusAll.TabIndex = 3;
             this.btnStatusAll.Text = "Status All";
             this.btnStatusAll.UseVisualStyleBackColor = true;
@@ -493,16 +535,20 @@
             // 
             // gbChat
             // 
+            this.gbChat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbChat.Controls.Add(this.tlpChat);
-            this.gbChat.Location = new System.Drawing.Point(506, 76);
+            this.gbChat.Location = new System.Drawing.Point(242, 64);
             this.gbChat.Name = "gbChat";
-            this.gbChat.Size = new System.Drawing.Size(236, 58);
+            this.gbChat.Size = new System.Drawing.Size(234, 55);
             this.gbChat.TabIndex = 29;
             this.gbChat.TabStop = false;
             this.gbChat.Text = "Chat";
             // 
             // tlpChat
             // 
+            this.tlpChat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpChat.ColumnCount = 2;
             this.tlpChat.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpChat.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -512,15 +558,16 @@
             this.tlpChat.Name = "tlpChat";
             this.tlpChat.RowCount = 1;
             this.tlpChat.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpChat.Size = new System.Drawing.Size(224, 33);
+            this.tlpChat.Size = new System.Drawing.Size(222, 33);
             this.tlpChat.TabIndex = 1;
             // 
             // btnLeave
             // 
+            this.btnLeave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLeave.Enabled = false;
             this.btnLeave.Location = new System.Drawing.Point(3, 3);
             this.btnLeave.Name = "btnLeave";
-            this.btnLeave.Size = new System.Drawing.Size(106, 27);
+            this.btnLeave.Size = new System.Drawing.Size(105, 27);
             this.btnLeave.TabIndex = 0;
             this.btnLeave.Text = "Leave Chat";
             this.btnLeave.UseVisualStyleBackColor = true;
@@ -528,10 +575,11 @@
             // 
             // btnRejoin
             // 
+            this.btnRejoin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRejoin.Enabled = false;
-            this.btnRejoin.Location = new System.Drawing.Point(115, 3);
+            this.btnRejoin.Location = new System.Drawing.Point(114, 3);
             this.btnRejoin.Name = "btnRejoin";
-            this.btnRejoin.Size = new System.Drawing.Size(106, 27);
+            this.btnRejoin.Size = new System.Drawing.Size(105, 27);
             this.btnRejoin.TabIndex = 1;
             this.btnRejoin.Text = "Rejoin Chat";
             this.btnRejoin.UseVisualStyleBackColor = true;
@@ -539,16 +587,20 @@
             // 
             // gbGames
             // 
+            this.gbGames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbGames.Controls.Add(this.tlpGames);
-            this.gbGames.Location = new System.Drawing.Point(264, 76);
+            this.gbGames.Location = new System.Drawing.Point(3, 64);
             this.gbGames.Name = "gbGames";
-            this.gbGames.Size = new System.Drawing.Size(236, 58);
+            this.gbGames.Size = new System.Drawing.Size(233, 55);
             this.gbGames.TabIndex = 28;
             this.gbGames.TabStop = false;
             this.gbGames.Text = "Games";
             // 
             // tlpGames
             // 
+            this.tlpGames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpGames.ColumnCount = 2;
             this.tlpGames.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpGames.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -563,6 +615,7 @@
             // 
             // btnOwns
             // 
+            this.btnOwns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOwns.Enabled = false;
             this.btnOwns.Location = new System.Drawing.Point(3, 3);
             this.btnOwns.Name = "btnOwns";
@@ -574,6 +627,7 @@
             // 
             // btnPlay
             // 
+            this.btnPlay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPlay.Enabled = false;
             this.btnPlay.Location = new System.Drawing.Point(115, 3);
             this.btnPlay.Name = "btnPlay";
@@ -585,6 +639,8 @@
             // 
             // gbASF
             // 
+            this.gbASF.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbASF.Controls.Add(this.tlpASF);
             this.gbASF.Location = new System.Drawing.Point(264, 234);
             this.gbASF.Name = "gbASF";
@@ -595,6 +651,8 @@
             // 
             // tlpASF
             // 
+            this.tlpASF.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpASF.ColumnCount = 4;
             this.tlpASF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpASF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -613,6 +671,7 @@
             // 
             // btnASFHelp
             // 
+            this.btnASFHelp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnASFHelp.Enabled = false;
             this.btnASFHelp.Location = new System.Drawing.Point(3, 3);
             this.btnASFHelp.Name = "btnASFHelp";
@@ -624,6 +683,7 @@
             // 
             // btnASFUpdate
             // 
+            this.btnASFUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnASFUpdate.Enabled = false;
             this.btnASFUpdate.Location = new System.Drawing.Point(119, 3);
             this.btnASFUpdate.Name = "btnASFUpdate";
@@ -635,6 +695,7 @@
             // 
             // btnASFVersion
             // 
+            this.btnASFVersion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnASFVersion.Enabled = false;
             this.btnASFVersion.Location = new System.Drawing.Point(235, 3);
             this.btnASFVersion.Name = "btnASFVersion";
@@ -646,6 +707,7 @@
             // 
             // btnAPI
             // 
+            this.btnAPI.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAPI.Enabled = false;
             this.btnAPI.Location = new System.Drawing.Point(351, 3);
             this.btnAPI.Name = "btnAPI";
@@ -704,6 +766,7 @@
             // 
             // btnASFuiSettings
             // 
+            this.btnASFuiSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnASFuiSettings.BackgroundImage = global::ASFui.Properties.Resources.settings;
             this.btnASFuiSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnASFuiSettings.Location = new System.Drawing.Point(477, 468);
@@ -715,6 +778,7 @@
             // 
             // btnASFuiHelp
             // 
+            this.btnASFuiHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnASFuiHelp.BackgroundImage = global::ASFui.Properties.Resources.help;
             this.btnASFuiHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnASFuiHelp.Location = new System.Drawing.Point(448, 468);
@@ -724,20 +788,36 @@
             this.btnASFuiHelp.UseVisualStyleBackColor = true;
             this.btnASFuiHelp.Click += new System.EventHandler(this.btnASFuiHelp_Click);
             // 
+            // tlpMainContent
+            // 
+            this.tlpMainContent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpMainContent.ColumnCount = 2;
+            this.tlpMainContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMainContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMainContent.Controls.Add(this.gbChat, 1, 1);
+            this.tlpMainContent.Controls.Add(this.gbCards, 0, 0);
+            this.tlpMainContent.Controls.Add(this.gbGames, 0, 1);
+            this.tlpMainContent.Controls.Add(this.gbKeys, 1, 0);
+            this.tlpMainContent.Location = new System.Drawing.Point(264, 12);
+            this.tlpMainContent.Name = "tlpMainContent";
+            this.tlpMainContent.RowCount = 2;
+            this.tlpMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMainContent.Size = new System.Drawing.Size(479, 122);
+            this.tlpMainContent.TabIndex = 34;
+            // 
             // ASFui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(754, 516);
+            this.Controls.Add(this.tlpMainContent);
             this.Controls.Add(this.btnASFuiHelp);
             this.Controls.Add(this.btnASFuiSettings);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.gbASF);
-            this.Controls.Add(this.gbChat);
-            this.Controls.Add(this.gbKeys);
-            this.Controls.Add(this.gbGames);
             this.Controls.Add(this.gb2FA);
-            this.Controls.Add(this.gbCards);
             this.Controls.Add(this.gbBots);
             this.Controls.Add(this.gbInput);
             this.Controls.Add(this.btnReloadBots);
@@ -747,9 +827,9 @@
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.rtbOutput);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = global::ASFui.Properties.Resources.ASFui;
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(770, 555);
             this.Name = "ASFui";
             this.Text = "ASFui";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ASFui_FormClosing);
@@ -773,6 +853,7 @@
             this.cmsTrayIcon.ResumeLayout(false);
             this.StatusStrip.ResumeLayout(false);
             this.StatusStrip.PerformLayout();
+            this.tlpMainContent.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -781,7 +862,6 @@
         #endregion
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
-        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Label lbCurrentBot;
         private System.Windows.Forms.Button btnReloadBots;
         private System.Windows.Forms.GroupBox gbKeys;
@@ -833,6 +913,8 @@
         private System.Windows.Forms.Button btnResumeBot;
         private System.Windows.Forms.Button btnPasswordBot;
         private System.Windows.Forms.Button btnASFuiHelp;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.TableLayoutPanel tlpMainContent;
     }
 }
 

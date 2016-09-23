@@ -63,19 +63,19 @@ namespace ASFui
 
             var status = Util.SendCommand("statusall");
             var matches = Regex.Matches(status, @"Bot (.*) is");
-            cbBotList.Invoke(new MethodInvoker(delegate
-            {
-                foreach (Match m in matches)
-                {
-                    cbBotList.Items.Add(m.Groups[1].Value);
-                }
-            }));
-            if (cbBotList.Items.Count <= 0) return;
-            cbBotList.Invoke(new MethodInvoker(delegate
-            {
-                cbBotList.SelectedIndex = 0;
-                EnableElements();
-            }));
+             cbBotList.Invoke(new MethodInvoker(delegate
+             {
+                 foreach (Match m in matches)
+                 {
+                     cbBotList.Items.Add(m.Groups[1].Value);
+                 }
+             }));
+             if (cbBotList.Items.Count <= 0) return;
+             cbBotList.Invoke(new MethodInvoker(delegate
+             {
+                 cbBotList.SelectedIndex = 0;
+                 EnableElements();
+             }));
         }
 
         #region Buttons Events
@@ -523,21 +523,6 @@ namespace ASFui
             else
             {
                 rtbOutput.AppendText(@"!2fa <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
-        }
-
-        private void btn2FAOff_Click(object sender, EventArgs e)
-        {
-            var result = Util.SendCommand(Util.GenerateCommand("2faoff", cbBotList.SelectedItem.ToString()));
-            if (_isLocal)
-            {
-                tsslCommandOutput.Text = @"!2faoff <" + cbBotList.SelectedItem + @">: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!2faoff <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
                 rtbOutput.SelectionStart = rtbOutput.Text.Length;
                 rtbOutput.ScrollToCaret();
             }
