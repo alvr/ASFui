@@ -2,7 +2,7 @@ ASFui is an user interface for [ArchiSteamFarm](https://github.com/JustArchi/Arc
 
 > ASF is a C# application that allows you to farm steam cards using multiple steam accounts simultaneously.
 
-[![ASFui screenshot](https://i.imgur.com/wWeywZum.png)](https://i.imgur.com/wWeywZu.png)
+[![ASFui screenshot](http://i.imgur.com/G821edg.png)](http://i.imgur.com/G821edg.png)
 
 ## Requirements
 1. .NET Framework 4.6.1 (like ASF)
