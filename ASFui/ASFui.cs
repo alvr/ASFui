@@ -16,6 +16,7 @@ namespace ASFui
 
         public ASFui()
         {
+            Util.CheckVersion();
             while (!Util.CheckBinary())
             {
                 var result = MessageBox.Show(@"ASF binary setting not configured. Configure now?",
@@ -39,7 +40,6 @@ namespace ASFui
                 Environment.Exit(-2);
             }
             InitializeComponent();
-            Util.CheckVersion();
             _isLocal = Properties.Settings.Default.IsLocal;
         }
 
