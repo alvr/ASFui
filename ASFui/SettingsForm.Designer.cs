@@ -41,8 +41,15 @@ namespace ASFui
             this.rbLocal = new System.Windows.Forms.RadioButton();
             this.btnSave = new System.Windows.Forms.Button();
             this.lbSaved = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbCooldown = new System.Windows.Forms.CheckBox();
+            this.cbOwned = new System.Windows.Forms.CheckBox();
+            this.cbInvalid = new System.Windows.Forms.CheckBox();
+            this.cbDuplicated = new System.Windows.Forms.CheckBox();
+            this.cbOK = new System.Windows.Forms.CheckBox();
             this.gbBinaryPath.SuspendLayout();
             this.gbLocalRemote.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ofdBinarySearch
@@ -127,7 +134,7 @@ namespace ASFui
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(368, 120);
+            this.btnSave.Location = new System.Drawing.Point(368, 216);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 4;
@@ -138,17 +145,86 @@ namespace ASFui
             // lbSaved
             // 
             this.lbSaved.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lbSaved.Location = new System.Drawing.Point(262, 120);
+            this.lbSaved.Location = new System.Drawing.Point(262, 216);
             this.lbSaved.Name = "lbSaved";
             this.lbSaved.Size = new System.Drawing.Size(100, 23);
             this.lbSaved.TabIndex = 5;
             this.lbSaved.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cbCooldown);
+            this.groupBox1.Controls.Add(this.cbOwned);
+            this.groupBox1.Controls.Add(this.cbInvalid);
+            this.groupBox1.Controls.Add(this.cbDuplicated);
+            this.groupBox1.Controls.Add(this.cbOK);
+            this.groupBox1.Location = new System.Drawing.Point(12, 120);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(425, 90);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Clear Keys Input";
+            // 
+            // cbCooldown
+            // 
+            this.cbCooldown.AutoSize = true;
+            this.cbCooldown.Location = new System.Drawing.Point(182, 44);
+            this.cbCooldown.Name = "cbCooldown";
+            this.cbCooldown.Size = new System.Drawing.Size(89, 17);
+            this.cbCooldown.TabIndex = 4;
+            this.cbCooldown.Text = "On cooldown";
+            this.cbCooldown.UseVisualStyleBackColor = true;
+            // 
+            // cbOwned
+            // 
+            this.cbOwned.AutoSize = true;
+            this.cbOwned.Location = new System.Drawing.Point(182, 20);
+            this.cbOwned.Name = "cbOwned";
+            this.cbOwned.Size = new System.Drawing.Size(184, 17);
+            this.cbOwned.TabIndex = 3;
+            this.cbOwned.Text = "When the game is already owned";
+            this.cbOwned.UseVisualStyleBackColor = true;
+            // 
+            // cbInvalid
+            // 
+            this.cbInvalid.AutoSize = true;
+            this.cbInvalid.Location = new System.Drawing.Point(6, 67);
+            this.cbInvalid.Name = "cbInvalid";
+            this.cbInvalid.Size = new System.Drawing.Size(136, 17);
+            this.cbInvalid.TabIndex = 2;
+            this.cbInvalid.Text = "When the key is invalid";
+            this.cbInvalid.UseVisualStyleBackColor = true;
+            // 
+            // cbDuplicated
+            // 
+            this.cbDuplicated.AutoSize = true;
+            this.cbDuplicated.Checked = true;
+            this.cbDuplicated.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbDuplicated.Location = new System.Drawing.Point(7, 44);
+            this.cbDuplicated.Name = "cbDuplicated";
+            this.cbDuplicated.Size = new System.Drawing.Size(155, 17);
+            this.cbDuplicated.TabIndex = 1;
+            this.cbDuplicated.Text = "When the key is duplicated";
+            this.cbDuplicated.UseVisualStyleBackColor = true;
+            // 
+            // cbOK
+            // 
+            this.cbOK.AutoSize = true;
+            this.cbOK.Checked = true;
+            this.cbOK.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbOK.Location = new System.Drawing.Point(7, 20);
+            this.cbOK.Name = "cbOK";
+            this.cbOK.Size = new System.Drawing.Size(153, 17);
+            this.cbOK.TabIndex = 0;
+            this.cbOK.Text = "When the key is redeemed";
+            this.cbOK.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(455, 155);
+            this.ClientSize = new System.Drawing.Size(455, 248);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lbSaved);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.gbLocalRemote);
@@ -163,6 +239,8 @@ namespace ASFui
             this.gbBinaryPath.PerformLayout();
             this.gbLocalRemote.ResumeLayout(false);
             this.gbLocalRemote.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -179,5 +257,11 @@ namespace ASFui
         private Button btnSave;
         private TextBox tbRemoteURL;
         private Label lbSaved;
+        private GroupBox groupBox1;
+        private CheckBox cbCooldown;
+        private CheckBox cbOwned;
+        private CheckBox cbInvalid;
+        private CheckBox cbDuplicated;
+        private CheckBox cbOK;
     }
 }

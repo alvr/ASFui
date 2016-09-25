@@ -14,6 +14,11 @@ namespace ASFui
             rbRemote.Checked = !Properties.Settings.Default.IsLocal;
             tbRemoteURL.Enabled = rbRemote.Checked;
             tbRemoteURL.Text = Properties.Settings.Default.RemoteURL;
+            cbOK.Checked = Properties.Settings.Default.ClearOk;
+            cbDuplicated.Checked = Properties.Settings.Default.ClearDuplicated;
+            cbInvalid.Checked = Properties.Settings.Default.ClearInvalid;
+            cbOwned.Checked = Properties.Settings.Default.ClearOwned;
+            cbCooldown.Checked = Properties.Settings.Default.ClearCooldown;
         }
 
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -37,6 +42,12 @@ namespace ASFui
         {
             Properties.Settings.Default.IsLocal = rbLocal.Checked;
             Properties.Settings.Default.RemoteURL = tbRemoteURL.Text;
+            Properties.Settings.Default.ClearOk = cbOK.Checked;
+            Properties.Settings.Default.ClearDuplicated = cbDuplicated.Checked;
+            Properties.Settings.Default.ClearInvalid = cbInvalid.Checked;
+            Properties.Settings.Default.ClearOwned = cbOwned.Checked;
+            Properties.Settings.Default.ClearCooldown = cbCooldown.Checked;
+
             if (rbRemote.Checked)
             {
                 if (CheckUrl())

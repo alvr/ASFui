@@ -106,5 +106,65 @@ namespace ASFui.Properties {
                 this["Minimized"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ClearOk {
+            get {
+                return ((bool)(this["ClearOk"]));
+            }
+            set {
+                this["ClearOk"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ClearDuplicated {
+            get {
+                return ((bool)(this["ClearDuplicated"]));
+            }
+            set {
+                this["ClearDuplicated"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ClearInvalid {
+            get {
+                return ((bool)(this["ClearInvalid"]));
+            }
+            set {
+                this["ClearInvalid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ClearOwned {
+            get {
+                return ((bool)(this["ClearOwned"]));
+            }
+            set {
+                this["ClearOwned"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ClearCooldown {
+            get {
+                return ((bool)(this["ClearCooldown"]));
+            }
+            set {
+                this["ClearCooldown"] = value;
+            }
+        }
     }
 }
