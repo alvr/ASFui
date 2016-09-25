@@ -827,12 +827,14 @@
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.rtbOutput);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::ASFui.Properties.Settings.Default, "Location", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Icon = global::ASFui.Properties.Resources.ASFui;
-            this.MaximizeBox = true;
+            this.Location = global::ASFui.Properties.Settings.Default.Location;
             this.MinimumSize = new System.Drawing.Size(770, 555);
             this.Name = "ASFui";
             this.Text = "ASFui";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ASFui_FormClosing);
+            this.Load += new System.EventHandler(this.ASFui_Load);
             this.Resize += new System.EventHandler(this.ASFui_Resize);
             this.gbKeys.ResumeLayout(false);
             this.tlpKeys.ResumeLayout(false);

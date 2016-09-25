@@ -50,8 +50,53 @@ namespace ASFui
             TrayIcon.Visible = true;
         }
 
+        private void ASFui_Load(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.Maximized)
+            {
+                WindowState = FormWindowState.Maximized;
+                Location = Properties.Settings.Default.Location;
+                Size = Properties.Settings.Default.Size;
+            }
+            else if (Properties.Settings.Default.Minimized)
+            {
+                WindowState = FormWindowState.Minimized;
+                Location = Properties.Settings.Default.Location;
+                Size = Properties.Settings.Default.Size;
+            }
+            else
+            {
+                Location = Properties.Settings.Default.Location;
+                Size = Properties.Settings.Default.Size;
+            }
+        }
+
         private void ASFui_FormClosing(object sender, FormClosingEventArgs e)
         {
+            switch (WindowState)
+            {
+                case FormWindowState.Maximized:
+                    Properties.Settings.Default.Location = RestoreBounds.Location;
+                    Properties.Settings.Default.Size = RestoreBounds.Size;
+                    Properties.Settings.Default.Maximized = true;
+                    Properties.Settings.Default.Minimized = false;
+                    break;
+                case FormWindowState.Normal:
+                    Properties.Settings.Default.Location = Location;
+                    Properties.Settings.Default.Size = Size;
+                    Properties.Settings.Default.Maximized = false;
+                    Properties.Settings.Default.Minimized = false;
+                    break;
+                case FormWindowState.Minimized:
+                    break;
+                default:
+                    Properties.Settings.Default.Location = RestoreBounds.Location;
+                    Properties.Settings.Default.Size = RestoreBounds.Size;
+                    Properties.Settings.Default.Maximized = false;
+                    Properties.Settings.Default.Minimized = true;
+                    break;
+            }
+            Properties.Settings.Default.Save();
             if (!_asfRunning || !Properties.Settings.Default.IsLocal) return;
             _asf.Stop();
             Logging.Info(@"Closing ASFui.");
