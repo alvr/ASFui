@@ -102,13 +102,13 @@ namespace ASFui
             Logging.Info(@"Closing ASFui.");
         }
 
-        private void GetBotList()
+        public void GetBotList()
         {
             cbBotList.Invoke(new MethodInvoker(delegate { cbBotList.Items.Clear(); }));
 
             var status = Util.SendCommand("statusall");
             var matches = Regex.Matches(status, @"Bot (.*) is");
-             cbBotList.Invoke(new MethodInvoker(delegate
+            cbBotList.Invoke(new MethodInvoker(delegate
              {
                  foreach (Match m in matches)
                  {
@@ -133,7 +133,7 @@ namespace ASFui
             rtbOutput.AppendText(@"Starting ASF..." + Environment.NewLine);
             if (Properties.Settings.Default.IsLocal)
             {
-                _asf = new ASFProcess(rtbOutput);
+                _asf = new ASFProcess(this, rtbOutput);
                 _asf.Start();
             }
             btnStop.Enabled = true;
@@ -143,7 +143,6 @@ namespace ASFui
             btnReloadBots.Enabled = true;
             _asfRunning = true;
             btnASFuiSettings.Enabled = false;
-            Task.Delay(2500).ContinueWith(b => GetBotList());
             tsslCommandOutput.Text = @"Started ASF server.";
             Logging.Info("Server started successfully.");
         }
@@ -257,7 +256,37 @@ namespace ASFui
                 }
                 else
                 {
-                    Logging.Error(@"Input required (!owns)");
+                    Logging.Error(@"Input required (!redeem)");
+                    MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            });
+        }
+
+        private void btnRedeemNF_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                if (!tbInput.Text.Equals(""))
+                {
+                    var result =
+                        Util.SendCommand(Util.GenerateCommand("redeem^", cbBotList.SelectedItem.ToString(),
+                            Util.MultiToOne(tbInput.Lines)));
+                    if (_isLocal)
+                    {
+                        tsslCommandOutput.Text = @"!redeem^ <" + cbBotList.SelectedItem + @">: " + result;
+                    }
+                    else
+                    {
+                        rtbOutput.AppendText(@"!redeem^ <" + cbBotList.SelectedItem + @">: " + result +
+                                             Environment.NewLine);
+                        rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                        rtbOutput.ScrollToCaret();
+                    }
+                }
+                else
+                {
+                    Logging.Error(@"Input required (!redeem^)");
                     MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
@@ -287,7 +316,7 @@ namespace ASFui
                 }
                 else
                 {
-                    Logging.Error(@"Input required (!owns)");
+                    Logging.Error(@"Input required (!addlicense)");
                     MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
@@ -309,11 +338,11 @@ namespace ASFui
                             Util.MultiToOne(tbInput.Lines)));
                     if (_isLocal)
                     {
-                        tsslCommandOutput.Text = @"!own <" + cbBotList.SelectedItem + @">: " + result;
+                        tsslCommandOutput.Text = @"!owns <" + cbBotList.SelectedItem + @">: " + result;
                     }
                     else
                     {
-                        rtbOutput.AppendText(@"!own <" + cbBotList.SelectedItem + @">: " + result +
+                        rtbOutput.AppendText(@"!owns <" + cbBotList.SelectedItem + @">: " + result +
                                              Environment.NewLine);
                         rtbOutput.SelectionStart = rtbOutput.Text.Length;
                         rtbOutput.ScrollToCaret();
@@ -322,6 +351,36 @@ namespace ASFui
                 else
                 {
                     Logging.Error(@"Input required (!owns)");
+                    MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            });
+        }
+
+        private void btnOwnAll_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                if (!tbInput.Text.Equals(""))
+                {
+                    var result =
+                        Util.SendCommand(Util.GenerateCommand("ownsall", cbBotList.SelectedItem.ToString(),
+                            Util.MultiToOne(tbInput.Lines)));
+                    if (_isLocal)
+                    {
+                        tsslCommandOutput.Text = @"!ownsall <" + cbBotList.SelectedItem + @">: " + result;
+                    }
+                    else
+                    {
+                        rtbOutput.AppendText(@"!ownsall <" + cbBotList.SelectedItem + @">: " + result +
+                                             Environment.NewLine);
+                        rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                        rtbOutput.ScrollToCaret();
+                    }
+                }
+                else
+                {
+                    Logging.Error(@"Input required (!ownsall)");
                     MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
@@ -622,8 +681,10 @@ namespace ASFui
             btnLoot.Enabled = true;
             btnLootAll.Enabled = true;
             btnRedeem.Enabled = true;
+            btnRedeemNF.Enabled = true;
             btnAddLicense.Enabled = true;
             btnOwns.Enabled = true;
+            btnOwnAll.Enabled = true;
             btnPlay.Enabled = true;
             btnLeave.Enabled = true;
             btnRejoin.Enabled = true;
@@ -646,12 +707,15 @@ namespace ASFui
         private void DisableElements()
         {
             tbInput.Enabled = false;
+            tbInput.Clear();
             btnFarm.Enabled = false;
             btnLoot.Enabled = false;
             btnLootAll.Enabled = false;
             btnRedeem.Enabled = false;
+            btnRedeemNF.Enabled = false;
             btnAddLicense.Enabled = false;
             btnOwns.Enabled = false;
+            btnOwnAll.Enabled = false;
             btnPlay.Enabled = false;
             btnLeave.Enabled = false;
             btnRejoin.Enabled = false;

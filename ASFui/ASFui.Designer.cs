@@ -40,6 +40,7 @@
             this.tlpKeys = new System.Windows.Forms.TableLayoutPanel();
             this.btnRedeem = new System.Windows.Forms.Button();
             this.btnAddLicense = new System.Windows.Forms.Button();
+            this.btnRedeemNF = new System.Windows.Forms.Button();
             this.gb2FA = new System.Windows.Forms.GroupBox();
             this.tlp2FA = new System.Windows.Forms.TableLayoutPanel();
             this.btn2FA = new System.Windows.Forms.Button();
@@ -69,6 +70,7 @@
             this.tlpGames = new System.Windows.Forms.TableLayoutPanel();
             this.btnOwns = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
+            this.btnOwnAll = new System.Windows.Forms.Button();
             this.gbASF = new System.Windows.Forms.GroupBox();
             this.tlpASF = new System.Windows.Forms.TableLayoutPanel();
             this.btnASFHelp = new System.Windows.Forms.Button();
@@ -207,15 +209,17 @@
             // 
             this.tlpKeys.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpKeys.ColumnCount = 2;
-            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpKeys.ColumnCount = 3;
+            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpKeys.Controls.Add(this.btnRedeem, 0, 0);
-            this.tlpKeys.Controls.Add(this.btnAddLicense, 1, 0);
+            this.tlpKeys.Controls.Add(this.btnAddLicense, 2, 0);
+            this.tlpKeys.Controls.Add(this.btnRedeemNF, 1, 0);
             this.tlpKeys.Location = new System.Drawing.Point(6, 19);
             this.tlpKeys.Name = "tlpKeys";
             this.tlpKeys.RowCount = 1;
-            this.tlpKeys.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpKeys.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpKeys.Size = new System.Drawing.Size(222, 33);
             this.tlpKeys.TabIndex = 1;
             // 
@@ -226,9 +230,9 @@
             this.btnRedeem.Enabled = false;
             this.btnRedeem.Location = new System.Drawing.Point(3, 3);
             this.btnRedeem.Name = "btnRedeem";
-            this.btnRedeem.Size = new System.Drawing.Size(105, 27);
+            this.btnRedeem.Size = new System.Drawing.Size(68, 27);
             this.btnRedeem.TabIndex = 0;
-            this.btnRedeem.Text = "Redeem Key";
+            this.btnRedeem.Text = "Redeem";
             this.btnRedeem.UseVisualStyleBackColor = true;
             this.btnRedeem.Click += new System.EventHandler(this.btnRedeem_Click);
             // 
@@ -237,13 +241,26 @@
             this.btnAddLicense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddLicense.Enabled = false;
-            this.btnAddLicense.Location = new System.Drawing.Point(114, 3);
+            this.btnAddLicense.Location = new System.Drawing.Point(151, 3);
             this.btnAddLicense.Name = "btnAddLicense";
-            this.btnAddLicense.Size = new System.Drawing.Size(105, 27);
+            this.btnAddLicense.Size = new System.Drawing.Size(68, 27);
             this.btnAddLicense.TabIndex = 1;
-            this.btnAddLicense.Text = "Add License";
+            this.btnAddLicense.Text = "License";
             this.btnAddLicense.UseVisualStyleBackColor = true;
             this.btnAddLicense.Click += new System.EventHandler(this.btnAddLicense_Click);
+            // 
+            // btnRedeemNF
+            // 
+            this.btnRedeemNF.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRedeemNF.Enabled = false;
+            this.btnRedeemNF.Location = new System.Drawing.Point(77, 3);
+            this.btnRedeemNF.Name = "btnRedeemNF";
+            this.btnRedeemNF.Size = new System.Drawing.Size(68, 27);
+            this.btnRedeemNF.TabIndex = 2;
+            this.btnRedeemNF.Text = "Redeem^";
+            this.btnRedeemNF.UseVisualStyleBackColor = true;
+            this.btnRedeemNF.Click += new System.EventHandler(this.btnRedeemNF_Click);
             // 
             // gb2FA
             // 
@@ -601,15 +618,17 @@
             // 
             this.tlpGames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpGames.ColumnCount = 2;
-            this.tlpGames.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpGames.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpGames.ColumnCount = 3;
+            this.tlpGames.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpGames.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpGames.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpGames.Controls.Add(this.btnOwns, 0, 0);
-            this.tlpGames.Controls.Add(this.btnPlay, 1, 0);
+            this.tlpGames.Controls.Add(this.btnPlay, 2, 0);
+            this.tlpGames.Controls.Add(this.btnOwnAll, 1, 0);
             this.tlpGames.Location = new System.Drawing.Point(6, 19);
             this.tlpGames.Name = "tlpGames";
             this.tlpGames.RowCount = 1;
-            this.tlpGames.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpGames.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpGames.Size = new System.Drawing.Size(224, 33);
             this.tlpGames.TabIndex = 0;
             // 
@@ -619,7 +638,7 @@
             this.btnOwns.Enabled = false;
             this.btnOwns.Location = new System.Drawing.Point(3, 3);
             this.btnOwns.Name = "btnOwns";
-            this.btnOwns.Size = new System.Drawing.Size(106, 27);
+            this.btnOwns.Size = new System.Drawing.Size(68, 27);
             this.btnOwns.TabIndex = 0;
             this.btnOwns.Text = "Own";
             this.btnOwns.UseVisualStyleBackColor = true;
@@ -629,13 +648,25 @@
             // 
             this.btnPlay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPlay.Enabled = false;
-            this.btnPlay.Location = new System.Drawing.Point(115, 3);
+            this.btnPlay.Location = new System.Drawing.Point(151, 3);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(106, 27);
-            this.btnPlay.TabIndex = 1;
+            this.btnPlay.Size = new System.Drawing.Size(70, 27);
+            this.btnPlay.TabIndex = 2;
             this.btnPlay.Text = "Play";
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
+            // 
+            // btnOwnAll
+            // 
+            this.btnOwnAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnOwnAll.Enabled = false;
+            this.btnOwnAll.Location = new System.Drawing.Point(77, 3);
+            this.btnOwnAll.Name = "btnOwnAll";
+            this.btnOwnAll.Size = new System.Drawing.Size(68, 27);
+            this.btnOwnAll.TabIndex = 3;
+            this.btnOwnAll.Text = "Own All";
+            this.btnOwnAll.UseVisualStyleBackColor = true;
+            this.btnOwnAll.Click += new System.EventHandler(this.btnOwnAll_Click);
             // 
             // gbASF
             // 
@@ -880,7 +911,6 @@
         private System.Windows.Forms.Button btnStatusAll;
         private System.Windows.Forms.Button btnStopBot;
         private System.Windows.Forms.GroupBox gbInput;
-        private System.Windows.Forms.TextBox tbInput;
         private System.Windows.Forms.Button btnRedeem;
         private System.Windows.Forms.Button btnAddLicense;
         private System.Windows.Forms.TableLayoutPanel tlp2FA;
@@ -894,7 +924,6 @@
         private System.Windows.Forms.GroupBox gbGames;
         private System.Windows.Forms.TableLayoutPanel tlpGames;
         private System.Windows.Forms.Button btnOwns;
-        private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Button btnPauseBot;
         private System.Windows.Forms.GroupBox gbASF;
         private System.Windows.Forms.TableLayoutPanel tlpASF;
@@ -917,6 +946,10 @@
         private System.Windows.Forms.Button btnASFuiHelp;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.TableLayoutPanel tlpMainContent;
+        private System.Windows.Forms.Button btnRedeemNF;
+        private System.Windows.Forms.Button btnPlay;
+        private System.Windows.Forms.Button btnOwnAll;
+        public System.Windows.Forms.TextBox tbInput;
     }
 }
 
