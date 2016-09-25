@@ -828,7 +828,7 @@
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.rtbOutput);
             this.Icon = global::ASFui.Properties.Resources.ASFui;
-            this.MaximizeBox = false;
+            this.MaximizeBox = true;
             this.MinimumSize = new System.Drawing.Size(770, 555);
             this.Name = "ASFui";
             this.Text = "ASFui";
