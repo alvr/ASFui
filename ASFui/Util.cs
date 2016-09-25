@@ -60,10 +60,6 @@ namespace ASFui
 
         public static void CheckVersion()
         {
-            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            var thisVersion = fvi.FileVersion;
-
             string currentVersion;
             using (var web = new WebClient())
             {
@@ -71,8 +67,9 @@ namespace ASFui
                     web.DownloadString("https://raw.githubusercontent.com/alvr/ASFui/master/version.txt");
             }
 
-            if (new Version(thisVersion).CompareTo(new Version(currentVersion)) >= 0) return;
-            var option = MessageBox.Show(@"A new version is available, download now?", @"New version", MessageBoxButtons.YesNo,
+            if (new Version(Application.ProductVersion).CompareTo(new Version(currentVersion)) >= 0) return;
+            var option = MessageBox.Show(@"A new version (" + currentVersion + @") is available, download now?",
+                @"New version", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Information);
             if (option == DialogResult.Yes)
             {
