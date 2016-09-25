@@ -10,7 +10,9 @@ namespace ASFui
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ASFui());
+            var asf = new ASFui();
+            asf.Text += @" - v" + Application.ProductVersion;
+            Application.Run(asf);
         }
     }
 }
