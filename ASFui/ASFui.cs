@@ -364,16 +364,15 @@ namespace ASFui
                 if (!tbInput.Text.Equals(""))
                 {
                     var result =
-                        Util.SendCommand(Util.GenerateCommand("ownsall", cbBotList.SelectedItem.ToString(),
+                        Util.SendCommand(Util.GenerateCommand("ownsall", string.Empty,
                             Util.MultiToOne(tbInput.Lines)));
                     if (_isLocal)
                     {
-                        tsslCommandOutput.Text = @"!ownsall <" + cbBotList.SelectedItem + @">: " + result;
+                        tsslCommandOutput.Text = @"!ownsall: " + result;
                     }
                     else
                     {
-                        rtbOutput.AppendText(@"!ownsall <" + cbBotList.SelectedItem + @">: " + result +
-                                             Environment.NewLine);
+                        rtbOutput.AppendText(@"!ownsall: " + result + Environment.NewLine);
                         rtbOutput.SelectionStart = rtbOutput.Text.Length;
                         rtbOutput.ScrollToCaret();
                     }
