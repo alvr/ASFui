@@ -7,3 +7,6 @@ before_build:
 build:
   project: ASFui.sln
   verbosity: minimal
+artifacts:
+- path: bin\Release\ASFui.exe
+  name: ASFui
