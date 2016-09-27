@@ -8,5 +8,5 @@ build:
   project: ASFui.sln
   verbosity: minimal
 artifacts:
-- path: bin\Release\ASFui.exe
+- path: ASFui\bin\Release\ASFui.exe
   name: ASFui
