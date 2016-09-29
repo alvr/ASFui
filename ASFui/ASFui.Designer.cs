@@ -893,8 +893,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Label lbCurrentBot;
         private System.Windows.Forms.Button btnReloadBots;
         private System.Windows.Forms.GroupBox gbKeys;
@@ -950,6 +948,8 @@
         private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Button btnOwnAll;
         public System.Windows.Forms.TextBox tbInput;
+        public System.Windows.Forms.Button btnStart;
+        public System.Windows.Forms.Button btnStop;
     }
 }
 

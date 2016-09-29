@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 
@@ -93,6 +94,12 @@ namespace ASFui
                 var Password = new Password(ASF, sb.ToString());
                 Password.ShowDialog();
                 sb.Clear();
+            }
+
+            if (sb.ToString().Contains("Update process finished!"))
+            {
+                _asf.btnStop.PerformClick();
+                Task.Delay(1500).ContinueWith(t => _asf.btnStart.PerformClick());
             }
 
             if (key != "")
