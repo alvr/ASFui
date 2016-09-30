@@ -76,6 +76,13 @@ namespace ASFui
                 Process.Start("https://github.com/alvr/ASFui/releases/latest");
             }
         }
-
+		
+		public static void UpgradeSettings()
+		{
+            if (!Settings.Default.UpdateSettings) return;
+            Settings.Default.Upgrade();
+            Settings.Default.UpdateSettings = false;
+            Settings.Default.Save();
+        }
     }
 }

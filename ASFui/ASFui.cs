@@ -17,6 +17,7 @@ namespace ASFui
         public ASFui()
         {
             Util.CheckVersion();
+            Util.UpgradeSettings();
             while (!Util.CheckBinary())
             {
                 var result = MessageBox.Show(@"ASF binary setting not configured. Configure now?",
