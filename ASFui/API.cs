@@ -61,7 +61,7 @@ namespace ASFui
                     result.Append(@"    ⟐ Current Farming: Nothing" + Environment.NewLine);
                 }
 
-                result.Append(@"    ⟐ Manual: " + _data.Bot[bot].CardsFarmer.ManualMode + Environment.NewLine);
+                result.Append(@"    ⟐ Paused: " + _data.Bot[bot].CardsFarmer.Paused + Environment.NewLine);
 
                 result.Append(Environment.NewLine);
             }
