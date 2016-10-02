@@ -70,32 +70,31 @@ namespace ASFui
                 {
                     output.Invoke(mi);
                 }
+
+                if (sb.ToString().EndsWith("\"android:\"):") || sb.ToString().EndsWith("login:") ||
+                    sb.ToString().EndsWith("+1234567890):") || sb.ToString().EndsWith("mobile:") ||
+                    sb.ToString().EndsWith("email:") || sb.ToString().EndsWith("PIN:") ||
+                    sb.ToString().EndsWith("app:") || sb.ToString().EndsWith("hostname:"))
+                {
+                    output.AppendText(sb + " ");
+                    var result = Interaction.InputBox(sb.ToString(), @"Enter necessary input");
+                    ASF.StandardInput.WriteLine(result);
+                    ASF.StandardInput.Flush();
+                    output.AppendText(result + Environment.NewLine + sb);
+                    sb.Clear();
+                }
+
+                else if ((!sb.ToString().StartsWith("[AES]") ^ sb.ToString().StartsWith("[ProtectedDataForCurrentUser]"))
+                    && sb.ToString().EndsWith("password:"))
+                {
+                    var Password = new Password(ASF, sb.ToString());
+                    Password.ShowDialog();
+                }
             }
         }
 
         private void Check()
         {
-            if (sb.ToString().EndsWith("\"android:\"):") || sb.ToString().EndsWith("login:") ||
-                    sb.ToString().EndsWith("+1234567890):") || sb.ToString().EndsWith("mobile:") ||
-                    sb.ToString().EndsWith("email:") || sb.ToString().EndsWith("PIN:") ||
-                    sb.ToString().EndsWith("app:") || sb.ToString().EndsWith("hostname:"))
-            {
-                output.AppendText(sb + " ");
-                var result = Interaction.InputBox(sb.ToString(), @"Enter necessary input");
-                ASF.StandardInput.WriteLine(result);
-                ASF.StandardInput.Flush();
-                output.AppendText(result + Environment.NewLine + sb);
-                sb.Clear();
-            }
-
-            else if ((!sb.ToString().StartsWith("[AES]") ^ sb.ToString().StartsWith("[ProtectedDataForCurrentUser]"))
-                && sb.ToString().EndsWith("password:"))
-            {
-                var Password = new Password(ASF, sb.ToString());
-                Password.ShowDialog();
-                sb.Clear();
-            }
-
             if (sb.ToString().Contains("Update process finished!"))
             {
                 _asf.btnStop.PerformClick();
