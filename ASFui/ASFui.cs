@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -56,19 +57,26 @@ namespace ASFui
             if (Properties.Settings.Default.Maximized)
             {
                 WindowState = FormWindowState.Maximized;
-                Location = Properties.Settings.Default.Location;
-                Size = Properties.Settings.Default.Size;
             }
-            else if (Properties.Settings.Default.Minimized)
+
+            Location = Properties.Settings.Default.Location;
+            var formRectangle = new Rectangle(Left, Top, Width, Height);
+            if (!Util.IsOnScreen(formRectangle))
             {
-                WindowState = FormWindowState.Minimized;
-                Location = Properties.Settings.Default.Location;
-                Size = Properties.Settings.Default.Size;
+                var settingsProperty = Properties.Settings.Default.Properties["Location"];
+                if (settingsProperty != null)
+                {
+                    var coords = settingsProperty.DefaultValue.ToString().Split(',');
+                    Location = new Point(int.Parse(coords[0]), int.Parse(coords[1]));
+                }
             }
-            else
+
+            Size = Properties.Settings.Default.Size;
+            if (Size.Height < MinimumSize.Height || Size.Width < MinimumSize.Width)
             {
-                Location = Properties.Settings.Default.Location;
-                Size = Properties.Settings.Default.Size;
+                var settingsProperty = Properties.Settings.Default.Properties["Size"];
+                if (settingsProperty != null)
+                    Size = (Size)settingsProperty.DefaultValue;
             }
         }
 
@@ -80,13 +88,11 @@ namespace ASFui
                     Properties.Settings.Default.Location = RestoreBounds.Location;
                     Properties.Settings.Default.Size = RestoreBounds.Size;
                     Properties.Settings.Default.Maximized = true;
-                    Properties.Settings.Default.Minimized = false;
                     break;
                 case FormWindowState.Normal:
                     Properties.Settings.Default.Location = Location;
                     Properties.Settings.Default.Size = Size;
                     Properties.Settings.Default.Maximized = false;
-                    Properties.Settings.Default.Minimized = false;
                     break;
                 case FormWindowState.Minimized:
                     break;
@@ -94,7 +100,6 @@ namespace ASFui
                     Properties.Settings.Default.Location = RestoreBounds.Location;
                     Properties.Settings.Default.Size = RestoreBounds.Size;
                     Properties.Settings.Default.Maximized = false;
-                    Properties.Settings.Default.Minimized = true;
                     break;
             }
             Properties.Settings.Default.Save();

@@ -2,6 +2,7 @@
 using ASFui.Properties;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -83,6 +84,15 @@ namespace ASFui
             Settings.Default.Upgrade();
             Settings.Default.UpdateSettings = false;
             Settings.Default.Save();
+        }
+
+        public static bool IsOnScreen(Rectangle rec, double minPercentOnScreen = 0.2)
+        {
+            var pixelsVisible = Screen.AllScreens.Select(scrn => Rectangle.Intersect(rec, scrn.WorkingArea))
+                .Where(r => r.Width != 0 & r.Height != 0)
+                .Aggregate<Rectangle, double>(0, (current, r) => current + (r.Width*r.Height));
+
+            return pixelsVisible >= (rec.Width * rec.Height) * minPercentOnScreen;
         }
     }
 }
