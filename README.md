@@ -15,3 +15,6 @@ If you have a GitHub account, you can [fork it](https://github.com/alvr/ASFui/),
 
 ## Download
 Here: https://github.com/alvr/ASFui/releases
+
+## Changelog
+Here: https://github.com/alvr/ASFui/wiki/Changelog
