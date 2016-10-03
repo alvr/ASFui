@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Windows.Forms;
 
 namespace ASFui
@@ -93,6 +94,21 @@ namespace ASFui
                 .Aggregate<Rectangle, double>(0, (current, r) => current + (r.Width*r.Height));
 
             return pixelsVisible >= (rec.Width * rec.Height) * minPercentOnScreen;
+        }
+
+        public static bool CheckUrl(string url)
+        {
+            try
+            {
+                var client = new MetadataExchangeClient(new Uri(url), MetadataExchangeClientMode.HttpGet);
+                client.GetMetadata();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logging.Exception(ex, "Invalid remote URL.");
+                return false;
+            }
         }
     }
 }
