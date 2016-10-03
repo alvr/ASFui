@@ -135,13 +135,23 @@ namespace ASFui
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
-            btnStart.Enabled = false;
-            rtbOutput.AppendText(@"Starting ASF..." + Environment.NewLine);
             if (Properties.Settings.Default.IsLocal)
             {
                 _asf = new ASFProcess(this, rtbOutput);
                 _asf.Start();
             }
+            else
+            {
+                if (!Util.CheckUrl(Properties.Settings.Default.RemoteURL))
+                {
+                    rtbOutput.AppendText(@"Cannot connect to remote URL " + Properties.Settings.Default.RemoteURL +
+                        @". Please check your config or run ASF in local." + Environment.NewLine);
+                    return;
+                }
+                GetBotList();
+            }
+            btnStart.Enabled = false;
+            rtbOutput.AppendText(@"Starting ASF..." + Environment.NewLine);
             btnStop.Enabled = true;
             btnClear.Enabled = true;
             cbBotList.Enabled = true;
