@@ -86,6 +86,7 @@
             this.btnASFuiSettings = new System.Windows.Forms.Button();
             this.btnASFuiHelp = new System.Windows.Forms.Button();
             this.tlpMainContent = new System.Windows.Forms.TableLayoutPanel();
+            this.ttDesc = new System.Windows.Forms.ToolTip(this.components);
             this.gbKeys.SuspendLayout();
             this.tlpKeys.SuspendLayout();
             this.gb2FA.SuspendLayout();
@@ -133,6 +134,7 @@
             this.btnStop.Size = new System.Drawing.Size(75, 23);
             this.btnStop.TabIndex = 1;
             this.btnStop.Text = "Stop";
+            this.ttDesc.SetToolTip(this.btnStop, "Stop ASF process.");
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.BtnStop_Click);
             // 
@@ -145,6 +147,7 @@
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 2;
             this.btnStart.Text = "Start";
+            this.ttDesc.SetToolTip(this.btnStart, "Start ASFui and ASF process.");
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
@@ -157,6 +160,7 @@
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 3;
             this.btnClear.Text = "Clear Log";
+            this.ttDesc.SetToolTip(this.btnClear, "Clear output log.");
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
@@ -170,6 +174,7 @@
             this.cbBotList.Name = "cbBotList";
             this.cbBotList.Size = new System.Drawing.Size(121, 21);
             this.cbBotList.TabIndex = 4;
+            this.ttDesc.SetToolTip(this.cbBotList, "Current bot.");
             // 
             // lbCurrentBot
             // 
@@ -191,6 +196,7 @@
             this.btnReloadBots.Name = "btnReloadBots";
             this.btnReloadBots.Size = new System.Drawing.Size(23, 23);
             this.btnReloadBots.TabIndex = 7;
+            this.ttDesc.SetToolTip(this.btnReloadBots, "Reload bot list.");
             this.btnReloadBots.UseVisualStyleBackColor = true;
             this.btnReloadBots.Click += new System.EventHandler(this.btnReloadBots_Click);
             // 
@@ -233,6 +239,7 @@
             this.btnRedeem.Size = new System.Drawing.Size(68, 27);
             this.btnRedeem.TabIndex = 0;
             this.btnRedeem.Text = "Redeem";
+            this.ttDesc.SetToolTip(this.btnRedeem, "Redeems given cd-keys on given bot instance.");
             this.btnRedeem.UseVisualStyleBackColor = true;
             this.btnRedeem.Click += new System.EventHandler(this.btnRedeem_Click);
             // 
@@ -246,6 +253,7 @@
             this.btnAddLicense.Size = new System.Drawing.Size(68, 27);
             this.btnAddLicense.TabIndex = 1;
             this.btnAddLicense.Text = "License";
+            this.ttDesc.SetToolTip(this.btnAddLicense, "Activates given appIDs on given bot instance (free games only).");
             this.btnAddLicense.UseVisualStyleBackColor = true;
             this.btnAddLicense.Click += new System.EventHandler(this.btnAddLicense_Click);
             // 
@@ -259,6 +267,8 @@
             this.btnRedeemNF.Size = new System.Drawing.Size(68, 27);
             this.btnRedeemNF.TabIndex = 2;
             this.btnRedeemNF.Text = "Redeem^";
+            this.ttDesc.SetToolTip(this.btnRedeemNF, "Redeems given cd-keys on given bot instance,\r\nnever forwards keys to other bots\r\n" +
+        "(like ForwardKeysToOtherBots and DistributeKeys of false)");
             this.btnRedeemNF.UseVisualStyleBackColor = true;
             this.btnRedeemNF.Click += new System.EventHandler(this.btnRedeemNF_Click);
             // 
@@ -302,6 +312,7 @@
             this.btn2FA.Size = new System.Drawing.Size(233, 25);
             this.btn2FA.TabIndex = 0;
             this.btn2FA.Text = "Generate Token";
+            this.ttDesc.SetToolTip(this.btn2FA, "Generates temporary 2FA token for given bot instance.");
             this.btn2FA.UseVisualStyleBackColor = true;
             this.btn2FA.Click += new System.EventHandler(this.btn2FA_Click);
             // 
@@ -314,6 +325,7 @@
             this.btn2FAOk.Size = new System.Drawing.Size(233, 25);
             this.btn2FAOk.TabIndex = 2;
             this.btn2FAOk.Text = "Accept Pending Confirmations";
+            this.ttDesc.SetToolTip(this.btn2FAOk, "Accepts all pending 2FA confirmations for given bot instance.");
             this.btn2FAOk.UseVisualStyleBackColor = true;
             this.btn2FAOk.Click += new System.EventHandler(this.btn2FAOk_Click);
             // 
@@ -326,6 +338,7 @@
             this.btn2FANo.Size = new System.Drawing.Size(234, 25);
             this.btn2FANo.TabIndex = 3;
             this.btn2FANo.Text = "Deny Pending Confirmations";
+            this.ttDesc.SetToolTip(this.btn2FANo, "Denies all pending 2FA confirmations for given bot instance.");
             this.btn2FANo.UseVisualStyleBackColor = true;
             this.btn2FANo.Click += new System.EventHandler(this.btn2FANo_Click);
             // 
@@ -367,6 +380,7 @@
             this.btnFarm.Size = new System.Drawing.Size(67, 27);
             this.btnFarm.TabIndex = 0;
             this.btnFarm.Text = "Farm";
+            this.ttDesc.SetToolTip(this.btnFarm, "Restarts cards farming module for given bot instance.");
             this.btnFarm.UseVisualStyleBackColor = true;
             this.btnFarm.Click += new System.EventHandler(this.btnFarm_Click);
             // 
@@ -379,6 +393,8 @@
             this.btnLoot.Size = new System.Drawing.Size(67, 27);
             this.btnLoot.TabIndex = 1;
             this.btnLoot.Text = "Loot";
+            this.ttDesc.SetToolTip(this.btnLoot, "Sends all booster packs and Steam trading cards\r\n(including foils if IsBotAccount" +
+        ") of given\r\nbot instance to SteamMasterID.");
             this.btnLoot.UseVisualStyleBackColor = true;
             this.btnLoot.Click += new System.EventHandler(this.btnLoot_Click);
             // 
@@ -391,6 +407,7 @@
             this.btnLootAll.Size = new System.Drawing.Size(69, 27);
             this.btnLootAll.TabIndex = 2;
             this.btnLootAll.Text = "Loot All";
+            this.ttDesc.SetToolTip(this.btnLootAll, "Issues !loot on all currently enabled ASF bots.");
             this.btnLootAll.UseVisualStyleBackColor = true;
             this.btnLootAll.Click += new System.EventHandler(this.btnLootAll_Click);
             // 
@@ -449,6 +466,7 @@
             this.btnStartBot.Size = new System.Drawing.Size(108, 25);
             this.btnStartBot.TabIndex = 0;
             this.btnStartBot.Text = "Start";
+            this.ttDesc.SetToolTip(this.btnStartBot, "Starts given bot instance.");
             this.btnStartBot.UseVisualStyleBackColor = true;
             this.btnStartBot.Click += new System.EventHandler(this.btnStartBot_Click);
             // 
@@ -462,6 +480,7 @@
             this.btnStatusBot.Size = new System.Drawing.Size(146, 26);
             this.btnStatusBot.TabIndex = 2;
             this.btnStatusBot.Text = "Status";
+            this.ttDesc.SetToolTip(this.btnStatusBot, "Prints status of given bot instance.");
             this.btnStatusBot.UseVisualStyleBackColor = true;
             this.btnStatusBot.Click += new System.EventHandler(this.btnStatusBot_Click);
             // 
@@ -475,6 +494,7 @@
             this.btnStopBot.Size = new System.Drawing.Size(108, 25);
             this.btnStopBot.TabIndex = 1;
             this.btnStopBot.Text = "Stop";
+            this.ttDesc.SetToolTip(this.btnStopBot, "Stops given bot instance.");
             this.btnStopBot.UseVisualStyleBackColor = true;
             this.btnStopBot.Click += new System.EventHandler(this.btnStopBot_Click);
             // 
@@ -488,6 +508,7 @@
             this.btnPauseBot.Size = new System.Drawing.Size(108, 25);
             this.btnPauseBot.TabIndex = 4;
             this.btnPauseBot.Text = "Pause";
+            this.ttDesc.SetToolTip(this.btnPauseBot, "Pauses automatic farming of given bot instance.");
             this.btnPauseBot.UseVisualStyleBackColor = true;
             this.btnPauseBot.Click += new System.EventHandler(this.btnPauseBot_Click);
             // 
@@ -501,6 +522,7 @@
             this.btnResumeBot.Size = new System.Drawing.Size(118, 25);
             this.btnResumeBot.TabIndex = 5;
             this.btnResumeBot.Text = "Resume";
+            this.ttDesc.SetToolTip(this.btnResumeBot, "Resumes automatic farming of given bot instance.");
             this.btnResumeBot.UseVisualStyleBackColor = true;
             this.btnResumeBot.Click += new System.EventHandler(this.btnResume_Click);
             // 
@@ -514,6 +536,7 @@
             this.btnPasswordBot.Size = new System.Drawing.Size(146, 26);
             this.btnPasswordBot.TabIndex = 6;
             this.btnPasswordBot.Text = "Password";
+            this.ttDesc.SetToolTip(this.btnPasswordBot, "Prints encrypted password of given\r\nbot instance (in use with PasswordFormat).");
             this.btnPasswordBot.UseVisualStyleBackColor = true;
             this.btnPasswordBot.Click += new System.EventHandler(this.btnPassword_Click);
             // 
@@ -527,6 +550,7 @@
             this.btnStatusAll.Size = new System.Drawing.Size(156, 26);
             this.btnStatusAll.TabIndex = 3;
             this.btnStatusAll.Text = "Status All";
+            this.ttDesc.SetToolTip(this.btnStatusAll, "Prints status of all bot instances and ASF itself.");
             this.btnStatusAll.UseVisualStyleBackColor = true;
             this.btnStatusAll.Click += new System.EventHandler(this.btnStatusAll_Click);
             // 
@@ -587,6 +611,8 @@
             this.btnLeave.Size = new System.Drawing.Size(105, 27);
             this.btnLeave.TabIndex = 0;
             this.btnLeave.Text = "Leave Chat";
+            this.ttDesc.SetToolTip(this.btnLeave, "Makes bot leave the current group chat.\r\nFor obvious reasons, this command works " +
+        "only in group chats.");
             this.btnLeave.UseVisualStyleBackColor = true;
             this.btnLeave.Click += new System.EventHandler(this.btnLeave_Click);
             // 
@@ -599,6 +625,7 @@
             this.btnRejoin.Size = new System.Drawing.Size(105, 27);
             this.btnRejoin.TabIndex = 1;
             this.btnRejoin.Text = "Rejoin Chat";
+            this.ttDesc.SetToolTip(this.btnRejoin, "Forces all bots with unlimited accounts to rejoin the groupchat.");
             this.btnRejoin.UseVisualStyleBackColor = true;
             this.btnRejoin.Click += new System.EventHandler(this.btnRejoin_Click);
             // 
@@ -641,6 +668,8 @@
             this.btnOwns.Size = new System.Drawing.Size(68, 27);
             this.btnOwns.TabIndex = 0;
             this.btnOwns.Text = "Own";
+            this.ttDesc.SetToolTip(this.btnOwns, "Checks if given bot instance already owns given appIDs\r\nand/or gameNames (can be " +
+        "part of the game\'s name).");
             this.btnOwns.UseVisualStyleBackColor = true;
             this.btnOwns.Click += new System.EventHandler(this.btnOwns_Click);
             // 
@@ -653,6 +682,8 @@
             this.btnPlay.Size = new System.Drawing.Size(70, 27);
             this.btnPlay.TabIndex = 2;
             this.btnPlay.Text = "Play";
+            this.ttDesc.SetToolTip(this.btnPlay, "Switches to manual farming - launches given\r\nappIDs on given bot instance. Use !r" +
+        "esume\r\nfor returning to automatic farming.");
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
@@ -665,6 +696,8 @@
             this.btnOwnAll.Size = new System.Drawing.Size(68, 27);
             this.btnOwnAll.TabIndex = 3;
             this.btnOwnAll.Text = "Own All";
+            this.ttDesc.SetToolTip(this.btnOwnAll, "Checks all currently enabled ASF bots for owning given\r\nappIDs and/or gameNames (" +
+        "can be part of the game\'s name).");
             this.btnOwnAll.UseVisualStyleBackColor = true;
             this.btnOwnAll.Click += new System.EventHandler(this.btnOwnAll_Click);
             // 
@@ -709,6 +742,7 @@
             this.btnASFHelp.Size = new System.Drawing.Size(110, 27);
             this.btnASFHelp.TabIndex = 0;
             this.btnASFHelp.Text = "Help";
+            this.ttDesc.SetToolTip(this.btnASFHelp, "Shows help.");
             this.btnASFHelp.UseVisualStyleBackColor = true;
             this.btnASFHelp.Click += new System.EventHandler(this.btnASFHelp_Click);
             // 
@@ -721,6 +755,8 @@
             this.btnASFUpdate.Size = new System.Drawing.Size(110, 27);
             this.btnASFUpdate.TabIndex = 1;
             this.btnASFUpdate.Text = "Update";
+            this.ttDesc.SetToolTip(this.btnASFUpdate, "Checks GitHub for ASF updates\r\n(this is done automatically every 24 hours if Auto" +
+        "Updates).");
             this.btnASFUpdate.UseVisualStyleBackColor = true;
             this.btnASFUpdate.Click += new System.EventHandler(this.btnASFUpdate_Click);
             // 
@@ -733,6 +769,7 @@
             this.btnASFVersion.Size = new System.Drawing.Size(110, 27);
             this.btnASFVersion.TabIndex = 2;
             this.btnASFVersion.Text = "Version";
+            this.ttDesc.SetToolTip(this.btnASFVersion, "Prints version of ASF.");
             this.btnASFVersion.UseVisualStyleBackColor = true;
             this.btnASFVersion.Click += new System.EventHandler(this.btnASFVersion_Click);
             // 
@@ -745,6 +782,7 @@
             this.btnAPI.Size = new System.Drawing.Size(112, 27);
             this.btnAPI.TabIndex = 3;
             this.btnAPI.Text = "API";
+            this.ttDesc.SetToolTip(this.btnAPI, "Returns ASF process status in JSON.");
             this.btnAPI.UseVisualStyleBackColor = true;
             this.btnAPI.Click += new System.EventHandler(this.btnAPI_Click);
             // 
@@ -804,6 +842,7 @@
             this.btnASFuiSettings.Name = "btnASFuiSettings";
             this.btnASFuiSettings.Size = new System.Drawing.Size(23, 23);
             this.btnASFuiSettings.TabIndex = 32;
+            this.ttDesc.SetToolTip(this.btnASFuiSettings, "ASFui settings.");
             this.btnASFuiSettings.UseVisualStyleBackColor = true;
             this.btnASFuiSettings.Click += new System.EventHandler(this.btnASFuiSettings_Click);
             // 
@@ -816,6 +855,7 @@
             this.btnASFuiHelp.Name = "btnASFuiHelp";
             this.btnASFuiHelp.Size = new System.Drawing.Size(23, 23);
             this.btnASFuiHelp.TabIndex = 33;
+            this.ttDesc.SetToolTip(this.btnASFuiHelp, "Open ASFui wiki.");
             this.btnASFuiHelp.UseVisualStyleBackColor = true;
             this.btnASFuiHelp.Click += new System.EventHandler(this.btnASFuiHelp_Click);
             // 
@@ -950,6 +990,7 @@
         public System.Windows.Forms.TextBox tbInput;
         public System.Windows.Forms.Button btnStart;
         public System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.ToolTip ttDesc;
     }
 }
 
