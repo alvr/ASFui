@@ -309,6 +309,36 @@ namespace ASFui
             });
         }
 
+        private void btnRedeemFF_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                if (!tbInput.Text.Equals(""))
+                {
+                    var result =
+                        Util.SendCommand(Util.GenerateCommand("redeem&", cbBotList.SelectedItem.ToString(),
+                            Util.MultiToOne(tbInput.Lines)));
+                    if (_isLocal)
+                    {
+                        tsslCommandOutput.Text = @"!redeem& <" + cbBotList.SelectedItem + @">: " + result;
+                    }
+                    else
+                    {
+                        rtbOutput.AppendText(@"!redeem& <" + cbBotList.SelectedItem + @">: " + result +
+                                             Environment.NewLine);
+                        rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                        rtbOutput.ScrollToCaret();
+                    }
+                }
+                else
+                {
+                    Logging.Error(@"Input required (!redeem&)");
+                    MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            });
+        }
+
         private void btnAddLicense_Click(object sender, EventArgs e)
         {
             Task.Run(() =>
@@ -437,7 +467,7 @@ namespace ASFui
 
         private void btnLeave_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("leave", cbBotList.SelectedItem.ToString()));
+            var result = Util.SendCommand("leave");
             if (_isLocal)
             {
                 tsslCommandOutput.Text = @"!leave <" + cbBotList.SelectedItem + @">: " + result;
@@ -452,7 +482,7 @@ namespace ASFui
 
         private void btnRejoin_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("rejoinchat", cbBotList.SelectedItem.ToString()));
+            var result = Util.SendCommand("rejoinchat");
             if (_isLocal)
             {
                 tsslCommandOutput.Text = @"!rejoinchat <" + cbBotList.SelectedItem + @">: " + result;
@@ -479,6 +509,21 @@ namespace ASFui
             else
             {
                 rtbOutput.AppendText(@"!start <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
+            }
+        }
+
+        private void btnStartAll_Click(object sender, EventArgs e)
+        {
+            var result = Util.SendCommand(Util.GenerateCommand("startall", string.Empty));
+            if (_isLocal)
+            {
+                tsslCommandOutput.Text = @"!startall <" + cbBotList.SelectedItem + @">: " + result;
+            }
+            else
+            {
+                rtbOutput.AppendText(@"!startall <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
                 rtbOutput.SelectionStart = rtbOutput.Text.Length;
                 rtbOutput.ScrollToCaret();
             }
@@ -695,8 +740,7 @@ namespace ASFui
             btnFarm.Enabled = true;
             btnLoot.Enabled = true;
             btnLootAll.Enabled = true;
-            btnRedeem.Enabled = true;
-            btnRedeemNF.Enabled = true;
+            btnRedeemMenu.Enabled = true;
             btnAddLicense.Enabled = true;
             btnOwns.Enabled = true;
             btnOwnAll.Enabled = true;
@@ -704,6 +748,7 @@ namespace ASFui
             btnLeave.Enabled = true;
             btnRejoin.Enabled = true;
             btnStartBot.Enabled = true;
+            btnStartAll.Enabled = true;
             btnStopBot.Enabled = true;
             btnPauseBot.Enabled = true;
             btnResumeBot.Enabled = true;
@@ -726,8 +771,7 @@ namespace ASFui
             btnFarm.Enabled = false;
             btnLoot.Enabled = false;
             btnLootAll.Enabled = false;
-            btnRedeem.Enabled = false;
-            btnRedeemNF.Enabled = false;
+            btnRedeemMenu.Enabled = false;
             btnAddLicense.Enabled = false;
             btnOwns.Enabled = false;
             btnOwnAll.Enabled = false;
@@ -735,6 +779,7 @@ namespace ASFui
             btnLeave.Enabled = false;
             btnRejoin.Enabled = false;
             btnStartBot.Enabled = false;
+            btnStartAll.Enabled = false;
             btnStopBot.Enabled = false;
             btnPauseBot.Enabled = false;
             btnResumeBot.Enabled = false;

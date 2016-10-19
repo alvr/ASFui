@@ -38,9 +38,12 @@
             this.btnReloadBots = new System.Windows.Forms.Button();
             this.gbKeys = new System.Windows.Forms.GroupBox();
             this.tlpKeys = new System.Windows.Forms.TableLayoutPanel();
-            this.btnRedeem = new System.Windows.Forms.Button();
+            this.btnRedeemMenu = new CustomDropdownButton();
+            this.cmsRedeem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnRedeem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRedeemNF = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRedeemFF = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAddLicense = new System.Windows.Forms.Button();
-            this.btnRedeemNF = new System.Windows.Forms.Button();
             this.gb2FA = new System.Windows.Forms.GroupBox();
             this.tlp2FA = new System.Windows.Forms.TableLayoutPanel();
             this.btn2FA = new System.Windows.Forms.Button();
@@ -54,12 +57,13 @@
             this.gbBots = new System.Windows.Forms.GroupBox();
             this.tlpBots = new System.Windows.Forms.TableLayoutPanel();
             this.btnStartBot = new System.Windows.Forms.Button();
-            this.btnStatusBot = new System.Windows.Forms.Button();
             this.btnStopBot = new System.Windows.Forms.Button();
             this.btnPauseBot = new System.Windows.Forms.Button();
-            this.btnResumeBot = new System.Windows.Forms.Button();
-            this.btnPasswordBot = new System.Windows.Forms.Button();
             this.btnStatusAll = new System.Windows.Forms.Button();
+            this.btnStatusBot = new System.Windows.Forms.Button();
+            this.btnPasswordBot = new System.Windows.Forms.Button();
+            this.btnResumeBot = new System.Windows.Forms.Button();
+            this.btnStartAll = new System.Windows.Forms.Button();
             this.gbInput = new System.Windows.Forms.GroupBox();
             this.tbInput = new System.Windows.Forms.TextBox();
             this.gbChat = new System.Windows.Forms.GroupBox();
@@ -89,6 +93,7 @@
             this.ttDesc = new System.Windows.Forms.ToolTip(this.components);
             this.gbKeys.SuspendLayout();
             this.tlpKeys.SuspendLayout();
+            this.cmsRedeem.SuspendLayout();
             this.gb2FA.SuspendLayout();
             this.tlp2FA.SuspendLayout();
             this.gbCards.SuspendLayout();
@@ -145,7 +150,7 @@
             this.btnStart.Location = new System.Drawing.Point(506, 468);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
-            this.btnStart.TabIndex = 2;
+            this.btnStart.TabIndex = 0;
             this.btnStart.Text = "Start";
             this.ttDesc.SetToolTip(this.btnStart, "Start ASFui and ASF process.");
             this.btnStart.UseVisualStyleBackColor = true;
@@ -158,7 +163,7 @@
             this.btnClear.Location = new System.Drawing.Point(668, 468);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
-            this.btnClear.TabIndex = 3;
+            this.btnClear.TabIndex = 2;
             this.btnClear.Text = "Clear Log";
             this.ttDesc.SetToolTip(this.btnClear, "Clear output log.");
             this.btnClear.UseVisualStyleBackColor = true;
@@ -173,7 +178,7 @@
             this.cbBotList.Location = new System.Drawing.Point(82, 468);
             this.cbBotList.Name = "cbBotList";
             this.cbBotList.Size = new System.Drawing.Size(121, 21);
-            this.cbBotList.TabIndex = 4;
+            this.cbBotList.TabIndex = 5;
             this.ttDesc.SetToolTip(this.cbBotList, "Current bot.");
             // 
             // lbCurrentBot
@@ -195,7 +200,7 @@
             this.btnReloadBots.Location = new System.Drawing.Point(209, 467);
             this.btnReloadBots.Name = "btnReloadBots";
             this.btnReloadBots.Size = new System.Drawing.Size(23, 23);
-            this.btnReloadBots.TabIndex = 7;
+            this.btnReloadBots.TabIndex = 6;
             this.ttDesc.SetToolTip(this.btnReloadBots, "Reload bot list.");
             this.btnReloadBots.UseVisualStyleBackColor = true;
             this.btnReloadBots.Click += new System.EventHandler(this.btnReloadBots_Click);
@@ -215,13 +220,12 @@
             // 
             this.tlpKeys.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpKeys.ColumnCount = 3;
-            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpKeys.Controls.Add(this.btnRedeem, 0, 0);
-            this.tlpKeys.Controls.Add(this.btnAddLicense, 2, 0);
-            this.tlpKeys.Controls.Add(this.btnRedeemNF, 1, 0);
+            this.tlpKeys.ColumnCount = 2;
+            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpKeys.Controls.Add(this.btnRedeemMenu, 0, 0);
+            this.tlpKeys.Controls.Add(this.btnAddLicense, 1, 0);
             this.tlpKeys.Location = new System.Drawing.Point(6, 19);
             this.tlpKeys.Name = "tlpKeys";
             this.tlpKeys.RowCount = 1;
@@ -229,48 +233,65 @@
             this.tlpKeys.Size = new System.Drawing.Size(222, 33);
             this.tlpKeys.TabIndex = 1;
             // 
+            // btnRedeemMenu
+            // 
+            this.btnRedeemMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRedeemMenu.Enabled = false;
+            this.btnRedeemMenu.Location = new System.Drawing.Point(3, 3);
+            this.btnRedeemMenu.Menu = this.cmsRedeem;
+            this.btnRedeemMenu.Name = "btnRedeemMenu";
+            this.btnRedeemMenu.Size = new System.Drawing.Size(105, 27);
+            this.btnRedeemMenu.TabIndex = 35;
+            this.btnRedeemMenu.Text = "Redeem";
+            this.ttDesc.SetToolTip(this.btnRedeemMenu, "Open the redeem menu.");
+            this.btnRedeemMenu.UseVisualStyleBackColor = true;
+            // 
+            // cmsRedeem
+            // 
+            this.cmsRedeem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnRedeem,
+            this.btnRedeemNF,
+            this.btnRedeemFF});
+            this.cmsRedeem.Name = "contextMenuStrip1";
+            this.cmsRedeem.Size = new System.Drawing.Size(165, 70);
+            // 
             // btnRedeem
             // 
-            this.btnRedeem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRedeem.Enabled = false;
-            this.btnRedeem.Location = new System.Drawing.Point(3, 3);
             this.btnRedeem.Name = "btnRedeem";
-            this.btnRedeem.Size = new System.Drawing.Size(68, 27);
-            this.btnRedeem.TabIndex = 0;
-            this.btnRedeem.Text = "Redeem";
-            this.ttDesc.SetToolTip(this.btnRedeem, "Redeems given cd-keys on given bot instance.");
-            this.btnRedeem.UseVisualStyleBackColor = true;
+            this.btnRedeem.Size = new System.Drawing.Size(164, 22);
+            this.btnRedeem.Text = "Normal";
+            this.btnRedeem.ToolTipText = "Redeems given cd-keys on given bot instance.";
             this.btnRedeem.Click += new System.EventHandler(this.btnRedeem_Click);
+            // 
+            // btnRedeemNF
+            // 
+            this.btnRedeemNF.Name = "btnRedeemNF";
+            this.btnRedeemNF.Size = new System.Drawing.Size(164, 22);
+            this.btnRedeemNF.Text = "No forwarding";
+            this.btnRedeemNF.ToolTipText = "Redeems given cd-keys on given bot instance,\r\nnever forwards keys to other bots.";
+            this.btnRedeemNF.Click += new System.EventHandler(this.btnRedeemNF_Click);
+            // 
+            // btnRedeemFF
+            // 
+            this.btnRedeemFF.Name = "btnRedeemFF";
+            this.btnRedeemFF.Size = new System.Drawing.Size(164, 22);
+            this.btnRedeemFF.Text = "Force forwarding";
+            this.btnRedeemFF.ToolTipText = "Redeems given cd-keys on any bot instance apart from given one.\r\nForce forwarding" +
+    ".";
+            this.btnRedeemFF.Click += new System.EventHandler(this.btnRedeemFF_Click);
             // 
             // btnAddLicense
             // 
-            this.btnAddLicense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddLicense.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddLicense.Enabled = false;
-            this.btnAddLicense.Location = new System.Drawing.Point(151, 3);
+            this.btnAddLicense.Location = new System.Drawing.Point(114, 3);
             this.btnAddLicense.Name = "btnAddLicense";
-            this.btnAddLicense.Size = new System.Drawing.Size(68, 27);
+            this.btnAddLicense.Size = new System.Drawing.Size(105, 27);
             this.btnAddLicense.TabIndex = 1;
             this.btnAddLicense.Text = "License";
             this.ttDesc.SetToolTip(this.btnAddLicense, "Activates given appIDs on given bot instance (free games only).");
             this.btnAddLicense.UseVisualStyleBackColor = true;
             this.btnAddLicense.Click += new System.EventHandler(this.btnAddLicense_Click);
-            // 
-            // btnRedeemNF
-            // 
-            this.btnRedeemNF.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRedeemNF.Enabled = false;
-            this.btnRedeemNF.Location = new System.Drawing.Point(77, 3);
-            this.btnRedeemNF.Name = "btnRedeemNF";
-            this.btnRedeemNF.Size = new System.Drawing.Size(68, 27);
-            this.btnRedeemNF.TabIndex = 2;
-            this.btnRedeemNF.Text = "Redeem^";
-            this.ttDesc.SetToolTip(this.btnRedeemNF, "Redeems given cd-keys on given bot instance,\r\nnever forwards keys to other bots\r\n" +
-        "(like ForwardKeysToOtherBots and DistributeKeys of false)");
-            this.btnRedeemNF.UseVisualStyleBackColor = true;
-            this.btnRedeemNF.Click += new System.EventHandler(this.btnRedeemNF_Click);
             // 
             // gb2FA
             // 
@@ -323,7 +344,7 @@
             this.btn2FAOk.Location = new System.Drawing.Point(242, 3);
             this.btn2FAOk.Name = "btn2FAOk";
             this.btn2FAOk.Size = new System.Drawing.Size(233, 25);
-            this.btn2FAOk.TabIndex = 2;
+            this.btn2FAOk.TabIndex = 1;
             this.btn2FAOk.Text = "Accept Pending Confirmations";
             this.ttDesc.SetToolTip(this.btn2FAOk, "Accepts all pending 2FA confirmations for given bot instance.");
             this.btn2FAOk.UseVisualStyleBackColor = true;
@@ -336,7 +357,7 @@
             this.btn2FANo.Location = new System.Drawing.Point(481, 3);
             this.btn2FANo.Name = "btn2FANo";
             this.btn2FANo.Size = new System.Drawing.Size(234, 25);
-            this.btn2FANo.TabIndex = 3;
+            this.btn2FANo.TabIndex = 2;
             this.btn2FANo.Text = "Deny Pending Confirmations";
             this.ttDesc.SetToolTip(this.btn2FANo, "Denies all pending 2FA confirmations for given bot instance.");
             this.btn2FANo.UseVisualStyleBackColor = true;
@@ -427,71 +448,55 @@
             // 
             this.tlpBots.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpBots.ColumnCount = 12;
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333332F));
+            this.tlpBots.ColumnCount = 4;
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpBots.Controls.Add(this.btnStartBot, 0, 0);
-            this.tlpBots.Controls.Add(this.btnStatusBot, 4, 1);
-            this.tlpBots.Controls.Add(this.btnStopBot, 3, 0);
-            this.tlpBots.Controls.Add(this.btnPauseBot, 6, 0);
-            this.tlpBots.Controls.Add(this.btnResumeBot, 9, 0);
-            this.tlpBots.Controls.Add(this.btnPasswordBot, 0, 1);
-            this.tlpBots.Controls.Add(this.btnStatusAll, 8, 1);
+            this.tlpBots.Controls.Add(this.btnStopBot, 1, 0);
+            this.tlpBots.Controls.Add(this.btnPauseBot, 2, 0);
+            this.tlpBots.Controls.Add(this.btnStatusAll, 3, 1);
+            this.tlpBots.Controls.Add(this.btnStatusBot, 2, 1);
+            this.tlpBots.Controls.Add(this.btnPasswordBot, 1, 1);
+            this.tlpBots.Controls.Add(this.btnResumeBot, 3, 0);
+            this.tlpBots.Controls.Add(this.btnStartAll, 0, 1);
             this.tlpBots.Location = new System.Drawing.Point(6, 19);
             this.tlpBots.Name = "tlpBots";
             this.tlpBots.RowCount = 2;
             this.tlpBots.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpBots.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpBots.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpBots.Size = new System.Drawing.Size(466, 63);
             this.tlpBots.TabIndex = 0;
             // 
             // btnStartBot
             // 
-            this.tlpBots.SetColumnSpan(this.btnStartBot, 3);
             this.btnStartBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStartBot.Enabled = false;
             this.btnStartBot.Location = new System.Drawing.Point(3, 3);
             this.btnStartBot.Name = "btnStartBot";
-            this.btnStartBot.Size = new System.Drawing.Size(108, 25);
+            this.btnStartBot.Size = new System.Drawing.Size(110, 25);
             this.btnStartBot.TabIndex = 0;
             this.btnStartBot.Text = "Start";
             this.ttDesc.SetToolTip(this.btnStartBot, "Starts given bot instance.");
             this.btnStartBot.UseVisualStyleBackColor = true;
             this.btnStartBot.Click += new System.EventHandler(this.btnStartBot_Click);
             // 
-            // btnStatusBot
-            // 
-            this.tlpBots.SetColumnSpan(this.btnStatusBot, 4);
-            this.btnStatusBot.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnStatusBot.Enabled = false;
-            this.btnStatusBot.Location = new System.Drawing.Point(155, 34);
-            this.btnStatusBot.Name = "btnStatusBot";
-            this.btnStatusBot.Size = new System.Drawing.Size(146, 26);
-            this.btnStatusBot.TabIndex = 2;
-            this.btnStatusBot.Text = "Status";
-            this.ttDesc.SetToolTip(this.btnStatusBot, "Prints status of given bot instance.");
-            this.btnStatusBot.UseVisualStyleBackColor = true;
-            this.btnStatusBot.Click += new System.EventHandler(this.btnStatusBot_Click);
-            // 
             // btnStopBot
             // 
-            this.tlpBots.SetColumnSpan(this.btnStopBot, 3);
             this.btnStopBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStopBot.Enabled = false;
-            this.btnStopBot.Location = new System.Drawing.Point(117, 3);
+            this.btnStopBot.Location = new System.Drawing.Point(119, 3);
             this.btnStopBot.Name = "btnStopBot";
-            this.btnStopBot.Size = new System.Drawing.Size(108, 25);
+            this.btnStopBot.Size = new System.Drawing.Size(110, 25);
             this.btnStopBot.TabIndex = 1;
             this.btnStopBot.Text = "Stop";
             this.ttDesc.SetToolTip(this.btnStopBot, "Stops given bot instance.");
@@ -500,59 +505,80 @@
             // 
             // btnPauseBot
             // 
-            this.tlpBots.SetColumnSpan(this.btnPauseBot, 3);
             this.btnPauseBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPauseBot.Enabled = false;
-            this.btnPauseBot.Location = new System.Drawing.Point(231, 3);
+            this.btnPauseBot.Location = new System.Drawing.Point(235, 3);
             this.btnPauseBot.Name = "btnPauseBot";
-            this.btnPauseBot.Size = new System.Drawing.Size(108, 25);
-            this.btnPauseBot.TabIndex = 4;
+            this.btnPauseBot.Size = new System.Drawing.Size(110, 25);
+            this.btnPauseBot.TabIndex = 2;
             this.btnPauseBot.Text = "Pause";
             this.ttDesc.SetToolTip(this.btnPauseBot, "Pauses automatic farming of given bot instance.");
             this.btnPauseBot.UseVisualStyleBackColor = true;
             this.btnPauseBot.Click += new System.EventHandler(this.btnPauseBot_Click);
             // 
-            // btnResumeBot
+            // btnStatusAll
             // 
-            this.tlpBots.SetColumnSpan(this.btnResumeBot, 3);
-            this.btnResumeBot.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnResumeBot.Enabled = false;
-            this.btnResumeBot.Location = new System.Drawing.Point(345, 3);
-            this.btnResumeBot.Name = "btnResumeBot";
-            this.btnResumeBot.Size = new System.Drawing.Size(118, 25);
-            this.btnResumeBot.TabIndex = 5;
-            this.btnResumeBot.Text = "Resume";
-            this.ttDesc.SetToolTip(this.btnResumeBot, "Resumes automatic farming of given bot instance.");
-            this.btnResumeBot.UseVisualStyleBackColor = true;
-            this.btnResumeBot.Click += new System.EventHandler(this.btnResume_Click);
+            this.btnStatusAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnStatusAll.Enabled = false;
+            this.btnStatusAll.Location = new System.Drawing.Point(351, 34);
+            this.btnStatusAll.Name = "btnStatusAll";
+            this.btnStatusAll.Size = new System.Drawing.Size(112, 26);
+            this.btnStatusAll.TabIndex = 7;
+            this.btnStatusAll.Text = "Status All";
+            this.ttDesc.SetToolTip(this.btnStatusAll, "Prints status of all bot instances and ASF itself.");
+            this.btnStatusAll.UseVisualStyleBackColor = true;
+            this.btnStatusAll.Click += new System.EventHandler(this.btnStatusAll_Click);
+            // 
+            // btnStatusBot
+            // 
+            this.btnStatusBot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnStatusBot.Enabled = false;
+            this.btnStatusBot.Location = new System.Drawing.Point(235, 34);
+            this.btnStatusBot.Name = "btnStatusBot";
+            this.btnStatusBot.Size = new System.Drawing.Size(110, 26);
+            this.btnStatusBot.TabIndex = 6;
+            this.btnStatusBot.Text = "Status";
+            this.ttDesc.SetToolTip(this.btnStatusBot, "Prints status of given bot instance.");
+            this.btnStatusBot.UseVisualStyleBackColor = true;
+            this.btnStatusBot.Click += new System.EventHandler(this.btnStatusBot_Click);
             // 
             // btnPasswordBot
             // 
-            this.tlpBots.SetColumnSpan(this.btnPasswordBot, 4);
             this.btnPasswordBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPasswordBot.Enabled = false;
-            this.btnPasswordBot.Location = new System.Drawing.Point(3, 34);
+            this.btnPasswordBot.Location = new System.Drawing.Point(119, 34);
             this.btnPasswordBot.Name = "btnPasswordBot";
-            this.btnPasswordBot.Size = new System.Drawing.Size(146, 26);
-            this.btnPasswordBot.TabIndex = 6;
+            this.btnPasswordBot.Size = new System.Drawing.Size(110, 26);
+            this.btnPasswordBot.TabIndex = 5;
             this.btnPasswordBot.Text = "Password";
             this.ttDesc.SetToolTip(this.btnPasswordBot, "Prints encrypted password of given\r\nbot instance (in use with PasswordFormat).");
             this.btnPasswordBot.UseVisualStyleBackColor = true;
             this.btnPasswordBot.Click += new System.EventHandler(this.btnPassword_Click);
             // 
-            // btnStatusAll
+            // btnResumeBot
             // 
-            this.tlpBots.SetColumnSpan(this.btnStatusAll, 4);
-            this.btnStatusAll.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnStatusAll.Enabled = false;
-            this.btnStatusAll.Location = new System.Drawing.Point(307, 34);
-            this.btnStatusAll.Name = "btnStatusAll";
-            this.btnStatusAll.Size = new System.Drawing.Size(156, 26);
-            this.btnStatusAll.TabIndex = 3;
-            this.btnStatusAll.Text = "Status All";
-            this.ttDesc.SetToolTip(this.btnStatusAll, "Prints status of all bot instances and ASF itself.");
-            this.btnStatusAll.UseVisualStyleBackColor = true;
-            this.btnStatusAll.Click += new System.EventHandler(this.btnStatusAll_Click);
+            this.btnResumeBot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnResumeBot.Enabled = false;
+            this.btnResumeBot.Location = new System.Drawing.Point(351, 3);
+            this.btnResumeBot.Name = "btnResumeBot";
+            this.btnResumeBot.Size = new System.Drawing.Size(112, 25);
+            this.btnResumeBot.TabIndex = 3;
+            this.btnResumeBot.Text = "Resume";
+            this.ttDesc.SetToolTip(this.btnResumeBot, "Resumes automatic farming of given bot instance.");
+            this.btnResumeBot.UseVisualStyleBackColor = true;
+            this.btnResumeBot.Click += new System.EventHandler(this.btnResume_Click);
+            // 
+            // btnStartAll
+            // 
+            this.btnStartAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnStartAll.Enabled = false;
+            this.btnStartAll.Location = new System.Drawing.Point(3, 34);
+            this.btnStartAll.Name = "btnStartAll";
+            this.btnStartAll.Size = new System.Drawing.Size(110, 26);
+            this.btnStartAll.TabIndex = 4;
+            this.btnStartAll.Text = "Start All";
+            this.btnStartAll.UseVisualStyleBackColor = true;
+            this.btnStartAll.Click += new System.EventHandler(this.btnStartAll_Click);
             // 
             // gbInput
             // 
@@ -694,7 +720,7 @@
             this.btnOwnAll.Location = new System.Drawing.Point(77, 3);
             this.btnOwnAll.Name = "btnOwnAll";
             this.btnOwnAll.Size = new System.Drawing.Size(68, 27);
-            this.btnOwnAll.TabIndex = 3;
+            this.btnOwnAll.TabIndex = 1;
             this.btnOwnAll.Text = "Own All";
             this.ttDesc.SetToolTip(this.btnOwnAll, "Checks all currently enabled ASF bots for owning given\r\nappIDs and/or gameNames (" +
         "can be part of the game\'s name).");
@@ -841,7 +867,7 @@
             this.btnASFuiSettings.Location = new System.Drawing.Point(477, 468);
             this.btnASFuiSettings.Name = "btnASFuiSettings";
             this.btnASFuiSettings.Size = new System.Drawing.Size(23, 23);
-            this.btnASFuiSettings.TabIndex = 32;
+            this.btnASFuiSettings.TabIndex = 3;
             this.ttDesc.SetToolTip(this.btnASFuiSettings, "ASFui settings.");
             this.btnASFuiSettings.UseVisualStyleBackColor = true;
             this.btnASFuiSettings.Click += new System.EventHandler(this.btnASFuiSettings_Click);
@@ -854,7 +880,7 @@
             this.btnASFuiHelp.Location = new System.Drawing.Point(448, 468);
             this.btnASFuiHelp.Name = "btnASFuiHelp";
             this.btnASFuiHelp.Size = new System.Drawing.Size(23, 23);
-            this.btnASFuiHelp.TabIndex = 33;
+            this.btnASFuiHelp.TabIndex = 4;
             this.ttDesc.SetToolTip(this.btnASFuiHelp, "Open ASFui wiki.");
             this.btnASFuiHelp.UseVisualStyleBackColor = true;
             this.btnASFuiHelp.Click += new System.EventHandler(this.btnASFuiHelp_Click);
@@ -909,6 +935,7 @@
             this.Resize += new System.EventHandler(this.ASFui_Resize);
             this.gbKeys.ResumeLayout(false);
             this.tlpKeys.ResumeLayout(false);
+            this.cmsRedeem.ResumeLayout(false);
             this.gb2FA.ResumeLayout(false);
             this.tlp2FA.ResumeLayout(false);
             this.gbCards.ResumeLayout(false);
@@ -945,12 +972,8 @@
         private System.Windows.Forms.GroupBox gbBots;
         private System.Windows.Forms.TableLayoutPanel tlpBots;
         private System.Windows.Forms.Button btnStartBot;
-        private System.Windows.Forms.Button btnStatusBot;
-        private System.Windows.Forms.Button btnStatusAll;
         private System.Windows.Forms.Button btnStopBot;
         private System.Windows.Forms.GroupBox gbInput;
-        private System.Windows.Forms.Button btnRedeem;
-        private System.Windows.Forms.Button btnAddLicense;
         private System.Windows.Forms.TableLayoutPanel tlp2FA;
         private System.Windows.Forms.Button btn2FA;
         private System.Windows.Forms.Button btn2FAOk;
@@ -962,7 +985,6 @@
         private System.Windows.Forms.GroupBox gbGames;
         private System.Windows.Forms.TableLayoutPanel tlpGames;
         private System.Windows.Forms.Button btnOwns;
-        private System.Windows.Forms.Button btnPauseBot;
         private System.Windows.Forms.GroupBox gbASF;
         private System.Windows.Forms.TableLayoutPanel tlpASF;
         private System.Windows.Forms.Button btnASFHelp;
@@ -979,18 +1001,27 @@
         private System.Windows.Forms.RichTextBox rtbOutput;
         private System.Windows.Forms.ComboBox cbBotList;
         private System.Windows.Forms.Button btnLootAll;
-        private System.Windows.Forms.Button btnResumeBot;
         private System.Windows.Forms.Button btnPasswordBot;
         private System.Windows.Forms.Button btnASFuiHelp;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.TableLayoutPanel tlpMainContent;
-        private System.Windows.Forms.Button btnRedeemNF;
         private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Button btnOwnAll;
         public System.Windows.Forms.TextBox tbInput;
         public System.Windows.Forms.Button btnStart;
         public System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.ToolTip ttDesc;
+        private System.Windows.Forms.Button btnPauseBot;
+        private System.Windows.Forms.Button btnStatusAll;
+        private System.Windows.Forms.Button btnStatusBot;
+        private System.Windows.Forms.Button btnResumeBot;
+        private System.Windows.Forms.Button btnStartAll;
+        private System.Windows.Forms.Button btnAddLicense;
+        private System.Windows.Forms.ContextMenuStrip cmsRedeem;
+        private System.Windows.Forms.ToolStripMenuItem btnRedeem;
+        private System.Windows.Forms.ToolStripMenuItem btnRedeemNF;
+        private System.Windows.Forms.ToolStripMenuItem btnRedeemFF;
+        private CustomDropdownButton btnRedeemMenu;
     }
 }
 
