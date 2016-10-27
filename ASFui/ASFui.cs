@@ -13,7 +13,6 @@ namespace ASFui
     {
         private bool _asfRunning;
         private ASFProcess _asf;
-        public static bool _isLocal;
 
         public ASFui()
         {
@@ -42,7 +41,6 @@ namespace ASFui
                 Environment.Exit(-2);
             }
             InitializeComponent();
-            _isLocal = Properties.Settings.Default.IsLocal;
         }
 
         private void ASFui_Resize(object sender, EventArgs e)
@@ -159,7 +157,6 @@ namespace ASFui
             btnReloadBots.Enabled = true;
             _asfRunning = true;
             btnASFuiSettings.Enabled = false;
-            tsslCommandOutput.Text = @"Started ASF server.";
             Logging.Info("Server started successfully.");
         }
 
@@ -172,20 +169,17 @@ namespace ASFui
                 _asf.Stop();
             }
             DisableElements();
-            tsslCommandOutput.Text = @"Stopped ASF server.";
             Logging.Info("Server stopped successfully.");
         }
 
         private void BtnClear_Click(object sender, EventArgs e)
         {
             rtbOutput.Clear();
-            tsslCommandOutput.Text = @"Cleared log.";
         }
 
         private void btnReloadBots_Click(object sender, EventArgs e)
         {
             GetBotList();
-            tsslCommandOutput.Text = @"Updated Bot list.";
         }
 
         private void btnASFuiSettings_Click(object sender, EventArgs e)
@@ -208,7 +202,6 @@ namespace ASFui
             Task.Run(() =>
             {
                 var result = Util.SendCommand(Util.GenerateCommand("farm", cbBotList.SelectedItem.ToString()));
-                tsslCommandOutput.Text = @"!farm <" + cbBotList.SelectedItem + @">";
                 rtbOutput.AppendText(@"!farm <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
                 rtbOutput.SelectionStart = rtbOutput.Text.Length;
                 rtbOutput.ScrollToCaret();
@@ -220,7 +213,6 @@ namespace ASFui
             Task.Run(() =>
             {
                 var result = Util.SendCommand(Util.GenerateCommand("loot", cbBotList.SelectedItem.ToString()));
-                tsslCommandOutput.Text = @"!loot <" + cbBotList.SelectedItem + @">";
                 rtbOutput.AppendText(@"!loot <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
                 rtbOutput.SelectionStart = rtbOutput.Text.Length;
                 rtbOutput.ScrollToCaret();
@@ -232,16 +224,9 @@ namespace ASFui
             Task.Run(() =>
             {
                 var result = Util.SendCommand("lootall");
-                if (_isLocal)
-                {
-                    tsslCommandOutput.Text = @"!lootall: " + result;
-                }
-                else
-                {
-                    rtbOutput.AppendText(@"!lootall: " + result + Environment.NewLine);
-                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                    rtbOutput.ScrollToCaret();
-                }
+                rtbOutput.AppendText(@"!lootall: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             });
         }
 
@@ -255,20 +240,12 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    var result =
-                        Util.SendCommand(Util.GenerateCommand("redeem", cbBotList.SelectedItem.ToString(),
-                            Util.MultiToOne(tbInput.Lines)));
-                    if (_isLocal)
-                    {
-                        tsslCommandOutput.Text = @"!redeem <" + cbBotList.SelectedItem + @">: " + result;
-                    }
-                    else
-                    {
-                        rtbOutput.AppendText(@"!redeem <" + cbBotList.SelectedItem + @">: " + result +
-                                             Environment.NewLine);
-                        rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                        rtbOutput.ScrollToCaret();
-                    }
+                    var result = Util.SendCommand(Util.GenerateCommand("redeem", cbBotList.SelectedItem.ToString(), 
+                        Util.MultiToOne(tbInput.Lines)));
+
+                    rtbOutput.AppendText(@"!redeem <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                    rtbOutput.ScrollToCaret();
                 }
                 else
                 {
@@ -285,20 +262,12 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    var result =
-                        Util.SendCommand(Util.GenerateCommand("redeem^", cbBotList.SelectedItem.ToString(),
-                            Util.MultiToOne(tbInput.Lines)));
-                    if (_isLocal)
-                    {
-                        tsslCommandOutput.Text = @"!redeem^ <" + cbBotList.SelectedItem + @">: " + result;
-                    }
-                    else
-                    {
-                        rtbOutput.AppendText(@"!redeem^ <" + cbBotList.SelectedItem + @">: " + result +
-                                             Environment.NewLine);
-                        rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                        rtbOutput.ScrollToCaret();
-                    }
+                    var result = Util.SendCommand(Util.GenerateCommand("redeem^", cbBotList.SelectedItem.ToString(),
+                        Util.MultiToOne(tbInput.Lines)));
+
+                    rtbOutput.AppendText(@"!redeem^ <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                    rtbOutput.ScrollToCaret();
                 }
                 else
                 {
@@ -315,20 +284,12 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    var result =
-                        Util.SendCommand(Util.GenerateCommand("redeem&", cbBotList.SelectedItem.ToString(),
-                            Util.MultiToOne(tbInput.Lines)));
-                    if (_isLocal)
-                    {
-                        tsslCommandOutput.Text = @"!redeem& <" + cbBotList.SelectedItem + @">: " + result;
-                    }
-                    else
-                    {
-                        rtbOutput.AppendText(@"!redeem& <" + cbBotList.SelectedItem + @">: " + result +
-                                             Environment.NewLine);
-                        rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                        rtbOutput.ScrollToCaret();
-                    }
+                    var result = Util.SendCommand(Util.GenerateCommand("redeem&", cbBotList.SelectedItem.ToString(),
+                        Util.MultiToOne(tbInput.Lines)));
+
+                    rtbOutput.AppendText(@"!redeem& <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                    rtbOutput.ScrollToCaret();
                 }
                 else
                 {
@@ -345,20 +306,12 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    var result =
-                        Util.SendCommand(Util.GenerateCommand("addlicense", cbBotList.SelectedItem.ToString(),
-                            Util.MultiToOne(tbInput.Lines)));
-                    if (_isLocal)
-                    {
-                        tsslCommandOutput.Text = @"!addlicense <" + cbBotList.SelectedItem + @">: " + result;
-                    }
-                    else
-                    {
-                        rtbOutput.AppendText(@"!addlicense <" + cbBotList.SelectedItem + @">: " + result +
-                                             Environment.NewLine);
-                        rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                        rtbOutput.ScrollToCaret();
-                    }
+                    var result = Util.SendCommand(Util.GenerateCommand("addlicense", cbBotList.SelectedItem.ToString(), 
+                        Util.MultiToOne(tbInput.Lines)));
+
+                    rtbOutput.AppendText(@"!addlicense <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                    rtbOutput.ScrollToCaret();
                 }
                 else
                 {
@@ -379,20 +332,12 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    var result =
-                        Util.SendCommand(Util.GenerateCommand("owns", cbBotList.SelectedItem.ToString(),
-                            Util.MultiToOne(tbInput.Lines)));
-                    if (_isLocal)
-                    {
-                        tsslCommandOutput.Text = @"!owns <" + cbBotList.SelectedItem + @">: " + result;
-                    }
-                    else
-                    {
-                        rtbOutput.AppendText(@"!owns <" + cbBotList.SelectedItem + @">: " + result +
-                                             Environment.NewLine);
-                        rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                        rtbOutput.ScrollToCaret();
-                    }
+                    var result = Util.SendCommand(Util.GenerateCommand("owns", cbBotList.SelectedItem.ToString(), 
+                        Util.MultiToOne(tbInput.Lines)));
+
+                    rtbOutput.AppendText(@"!owns <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                    rtbOutput.ScrollToCaret();
                 }
                 else
                 {
@@ -409,19 +354,12 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    var result =
-                        Util.SendCommand(Util.GenerateCommand("ownsall", string.Empty,
-                            Util.MultiToOne(tbInput.Lines)));
-                    if (_isLocal)
-                    {
-                        tsslCommandOutput.Text = @"!ownsall: " + result;
-                    }
-                    else
-                    {
-                        rtbOutput.AppendText(@"!ownsall: " + result + Environment.NewLine);
-                        rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                        rtbOutput.ScrollToCaret();
-                    }
+                    var result = Util.SendCommand(Util.GenerateCommand("ownsall", string.Empty, 
+                        Util.MultiToOne(tbInput.Lines)));
+                    
+                    rtbOutput.AppendText(@"!ownsall: " + result + Environment.NewLine);
+                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                    rtbOutput.ScrollToCaret();
                 }
                 else
                 {
@@ -438,19 +376,11 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    var result =
-                        Util.SendCommand(Util.GenerateCommand("play", cbBotList.SelectedItem.ToString(),
-                            Util.MultiToOne(tbInput.Lines)));
-                    if (_isLocal)
-                    {
-                        tsslCommandOutput.Text = @"!play <" + cbBotList.SelectedItem + @">: " + result;
-                    }
-                    else
-                    {
-                        rtbOutput.AppendText(@"!play <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                        rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                        rtbOutput.ScrollToCaret();
-                    }
+                    var result = Util.SendCommand(Util.GenerateCommand("play", cbBotList.SelectedItem.ToString(), 
+                        Util.MultiToOne(tbInput.Lines)));
+                    rtbOutput.AppendText(@"!play <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                    rtbOutput.ScrollToCaret();
                 }
                 else
                 {
@@ -468,31 +398,19 @@ namespace ASFui
         private void btnLeave_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand("leave");
-            if (_isLocal)
-            {
-                tsslCommandOutput.Text = @"!leave <" + cbBotList.SelectedItem + @">: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!leave <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
+
+            rtbOutput.AppendText(@"!leave <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
 
         private void btnRejoin_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand("rejoinchat");
-            if (_isLocal)
-            {
-                tsslCommandOutput.Text = @"!rejoinchat <" + cbBotList.SelectedItem + @">: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!rejoinchat <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
+
+            rtbOutput.AppendText(@"!rejoinchat <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
 
         #endregion
@@ -502,112 +420,70 @@ namespace ASFui
         private void btnStartBot_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("start", cbBotList.SelectedItem.ToString()));
-            if (_isLocal)
-            {
-                tsslCommandOutput.Text = @"!start <" + cbBotList.SelectedItem + @">: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!start <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
+
+            rtbOutput.AppendText(@"!start <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
 
         private void btnStartAll_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("startall", string.Empty));
-            if (_isLocal)
-            {
-                tsslCommandOutput.Text = @"!startall <" + cbBotList.SelectedItem + @">: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!startall <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
+
+            rtbOutput.AppendText(@"!startall <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
 
         private void btnStopBot_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("stop", cbBotList.SelectedItem.ToString()));
-            if (_isLocal)
-            {
-                tsslCommandOutput.Text = @"!stop <" + cbBotList.SelectedItem + @">: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!stop <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
+
+            rtbOutput.AppendText(@"!stop <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
 
         private void btnPauseBot_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("pause", cbBotList.SelectedItem.ToString()));
-            if (_isLocal)
-            {
-                tsslCommandOutput.Text = @"!pause <" + cbBotList.SelectedItem + @">: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!pause <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
+
+            rtbOutput.AppendText(@"!pause <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
 
         private void btnResume_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("resume", cbBotList.SelectedItem.ToString()));
-            if (_isLocal)
-            {
-                tsslCommandOutput.Text = @"!resume <" + cbBotList.SelectedItem + @">: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!resume <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
+
+            rtbOutput.AppendText(@"!resume <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
 
         private void btnPassword_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("password", cbBotList.SelectedItem.ToString()));
-            if (_isLocal)
-            {
-                tsslCommandOutput.Text = @"!password <" + cbBotList.SelectedItem + @">: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!password <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
+
+            rtbOutput.AppendText(@"!password <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
 
         private void btnStatusBot_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("status", cbBotList.SelectedItem.ToString()));
-            if (_isLocal)
-            {
-                tsslCommandOutput.Text = @"!status <" + cbBotList.SelectedItem + @">: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!status <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
+
+            rtbOutput.AppendText(@"!status <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
 
         private void btnStatusAll_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand("statusall");
-            if (_isLocal) return;
+
             rtbOutput.AppendText(@"!statusall: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
@@ -620,46 +496,28 @@ namespace ASFui
         private void btnASFHelp_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand("help");
-            if (_isLocal)
-            {
-                tsslCommandOutput.Text = @"!help: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!help: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
+
+            rtbOutput.AppendText(@"!help: " + result + Environment.NewLine);
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
 
         private void btnASFUpdate_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand("update");
-            if (_isLocal)
-            {
-                tsslCommandOutput.Text = @"!update: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!update: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
+
+            rtbOutput.AppendText(@"!update: " + result + Environment.NewLine);
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
 
         private void btnASFVersion_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand("version");
-            if (_isLocal)
-            {
-                tsslCommandOutput.Text = @"!version: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!version: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
+
+            rtbOutput.AppendText(@"!version: " + result + Environment.NewLine);
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
 
         private void btnAPI_Click(object sender, EventArgs e)
@@ -680,53 +538,33 @@ namespace ASFui
         private void btn2FA_Click(object sender, EventArgs e)
         {
             var result = Util.SendCommand(Util.GenerateCommand("2fa", cbBotList.SelectedItem.ToString()));
-            if (_isLocal)
-            {
-                tsslCommandOutput.Text = @"!2fa <" + cbBotList.SelectedItem + @">: " + result;
-            }
-            else
-            {
-                rtbOutput.AppendText(@"!2fa <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-            }
+
+            rtbOutput.AppendText(@"!2fa <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
 
         private void btn2FAOk_Click(object sender, EventArgs e)
         {
-            tsslCommandOutput.Text = @"!2faok <" + cbBotList.SelectedItem + @">: This could take a while.";
             Task.Run(() =>
             {
                 var result = Util.SendCommand(Util.GenerateCommand("2faok", cbBotList.SelectedItem.ToString()));
-                if (_isLocal)
-                {
-                    tsslCommandOutput.Text = @"!2faok <" + cbBotList.SelectedItem + @">: " + result;
-                }
-                else
-                {
-                    rtbOutput.AppendText(@"!2faok <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                    rtbOutput.ScrollToCaret();
-                }
+
+                rtbOutput.AppendText(@"!2faok <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             });
         }
 
         private void btn2FANo_Click(object sender, EventArgs e)
         {
-            tsslCommandOutput.Text = @"!2fano <" + cbBotList.SelectedItem + @">: This could take a while.";
             Task.Run(() =>
             {
                 var result = Util.SendCommand(Util.GenerateCommand("2fano", cbBotList.SelectedItem.ToString()));
-                if (_isLocal)
-                {
-                    tsslCommandOutput.Text = @"!2fano <" + cbBotList.SelectedItem + @">: " + result;
-                }
-                else
-                {
-                    rtbOutput.AppendText(@"!2fano <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
-                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                    rtbOutput.ScrollToCaret();
-                }
+
+                rtbOutput.AppendText(@"!2fano <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
             });
         }
 

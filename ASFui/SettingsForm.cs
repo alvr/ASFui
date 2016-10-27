@@ -52,7 +52,6 @@ namespace ASFui
                 {
                     Properties.Settings.Default.RemoteURL = tbRemoteURL.Text;
                     Properties.Settings.Default.Save();
-                    ASFui._isLocal = false;
                     lbSaved.Text = @"Settings saved.";
                 }
                 else
@@ -63,7 +62,6 @@ namespace ASFui
             else
             {
                 Properties.Settings.Default.Save();
-                ASFui._isLocal = true;
                 lbSaved.Text = @"Settings saved.";
             }
         }

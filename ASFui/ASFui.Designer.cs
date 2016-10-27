@@ -84,9 +84,6 @@
             this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsTrayIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiClose = new System.Windows.Forms.ToolStripMenuItem();
-            this.StatusStrip = new System.Windows.Forms.StatusStrip();
-            this.tsslLastCommand = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tsslCommandOutput = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnASFuiSettings = new System.Windows.Forms.Button();
             this.btnASFuiHelp = new System.Windows.Forms.Button();
             this.tlpMainContent = new System.Windows.Forms.TableLayoutPanel();
@@ -108,7 +105,6 @@
             this.gbASF.SuspendLayout();
             this.tlpASF.SuspendLayout();
             this.cmsTrayIcon.SuspendLayout();
-            this.StatusStrip.SuspendLayout();
             this.tlpMainContent.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,7 +121,7 @@
             this.rtbOutput.Location = new System.Drawing.Point(13, 362);
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(730, 100);
+            this.rtbOutput.Size = new System.Drawing.Size(730, 113);
             this.rtbOutput.TabIndex = 0;
             this.rtbOutput.Text = "";
             // 
@@ -134,7 +130,7 @@
             this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStop.Enabled = false;
             this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStop.Location = new System.Drawing.Point(587, 468);
+            this.btnStop.Location = new System.Drawing.Point(586, 481);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 23);
             this.btnStop.TabIndex = 1;
@@ -147,7 +143,7 @@
             // 
             this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(506, 468);
+            this.btnStart.Location = new System.Drawing.Point(505, 481);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 0;
@@ -160,7 +156,7 @@
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.Enabled = false;
-            this.btnClear.Location = new System.Drawing.Point(668, 468);
+            this.btnClear.Location = new System.Drawing.Point(667, 481);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 2;
@@ -175,7 +171,7 @@
             this.cbBotList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBotList.Enabled = false;
             this.cbBotList.FormattingEnabled = true;
-            this.cbBotList.Location = new System.Drawing.Point(82, 468);
+            this.cbBotList.Location = new System.Drawing.Point(81, 481);
             this.cbBotList.Name = "cbBotList";
             this.cbBotList.Size = new System.Drawing.Size(121, 21);
             this.cbBotList.TabIndex = 5;
@@ -185,7 +181,7 @@
             // 
             this.lbCurrentBot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbCurrentBot.AutoSize = true;
-            this.lbCurrentBot.Location = new System.Drawing.Point(13, 473);
+            this.lbCurrentBot.Location = new System.Drawing.Point(12, 486);
             this.lbCurrentBot.Name = "lbCurrentBot";
             this.lbCurrentBot.Size = new System.Drawing.Size(63, 13);
             this.lbCurrentBot.TabIndex = 6;
@@ -197,7 +193,7 @@
             this.btnReloadBots.BackgroundImage = global::ASFui.Properties.Resources.refresh;
             this.btnReloadBots.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnReloadBots.Enabled = false;
-            this.btnReloadBots.Location = new System.Drawing.Point(209, 467);
+            this.btnReloadBots.Location = new System.Drawing.Point(208, 480);
             this.btnReloadBots.Name = "btnReloadBots";
             this.btnReloadBots.Size = new System.Drawing.Size(23, 23);
             this.btnReloadBots.TabIndex = 6;
@@ -833,38 +829,12 @@
             this.tsmiClose.Text = "Close";
             this.tsmiClose.Click += new System.EventHandler(this.tsmiClose_Click);
             // 
-            // StatusStrip
-            // 
-            this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsslLastCommand,
-            this.tsslCommandOutput});
-            this.StatusStrip.Location = new System.Drawing.Point(0, 494);
-            this.StatusStrip.MaximumSize = new System.Drawing.Size(0, 22);
-            this.StatusStrip.Name = "StatusStrip";
-            this.StatusStrip.Size = new System.Drawing.Size(754, 22);
-            this.StatusStrip.SizingGrip = false;
-            this.StatusStrip.TabIndex = 31;
-            // 
-            // tsslLastCommand
-            // 
-            this.tsslLastCommand.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsslLastCommand.Name = "tsslLastCommand";
-            this.tsslLastCommand.Size = new System.Drawing.Size(98, 17);
-            this.tsslLastCommand.Text = "Last Command:";
-            // 
-            // tsslCommandOutput
-            // 
-            this.tsslCommandOutput.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsslCommandOutput.Name = "tsslCommandOutput";
-            this.tsslCommandOutput.Size = new System.Drawing.Size(42, 17);
-            this.tsslCommandOutput.Text = "None.";
-            // 
             // btnASFuiSettings
             // 
             this.btnASFuiSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnASFuiSettings.BackgroundImage = global::ASFui.Properties.Resources.settings;
             this.btnASFuiSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnASFuiSettings.Location = new System.Drawing.Point(477, 468);
+            this.btnASFuiSettings.Location = new System.Drawing.Point(476, 481);
             this.btnASFuiSettings.Name = "btnASFuiSettings";
             this.btnASFuiSettings.Size = new System.Drawing.Size(23, 23);
             this.btnASFuiSettings.TabIndex = 3;
@@ -877,7 +847,7 @@
             this.btnASFuiHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnASFuiHelp.BackgroundImage = global::ASFui.Properties.Resources.help;
             this.btnASFuiHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnASFuiHelp.Location = new System.Drawing.Point(448, 468);
+            this.btnASFuiHelp.Location = new System.Drawing.Point(447, 481);
             this.btnASFuiHelp.Name = "btnASFuiHelp";
             this.btnASFuiHelp.Size = new System.Drawing.Size(23, 23);
             this.btnASFuiHelp.TabIndex = 4;
@@ -912,7 +882,6 @@
             this.Controls.Add(this.tlpMainContent);
             this.Controls.Add(this.btnASFuiHelp);
             this.Controls.Add(this.btnASFuiSettings);
-            this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.gbASF);
             this.Controls.Add(this.gb2FA);
             this.Controls.Add(this.gbBots);
@@ -951,8 +920,6 @@
             this.gbASF.ResumeLayout(false);
             this.tlpASF.ResumeLayout(false);
             this.cmsTrayIcon.ResumeLayout(false);
-            this.StatusStrip.ResumeLayout(false);
-            this.StatusStrip.PerformLayout();
             this.tlpMainContent.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -993,9 +960,6 @@
         private System.Windows.Forms.NotifyIcon TrayIcon;
         private System.Windows.Forms.ContextMenuStrip cmsTrayIcon;
         private System.Windows.Forms.ToolStripMenuItem tsmiClose;
-        private System.Windows.Forms.StatusStrip StatusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel tsslLastCommand;
-        private System.Windows.Forms.ToolStripStatusLabel tsslCommandOutput;
         private System.Windows.Forms.Button btnASFuiSettings;
         private System.Windows.Forms.Button btnAPI;
         private System.Windows.Forms.RichTextBox rtbOutput;
