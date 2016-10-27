@@ -14,6 +14,8 @@ namespace ASFui
 {
     internal static class Util
     {
+        private static readonly BasicHttpBinding Binding = new BasicHttpBinding {SendTimeout = new TimeSpan(0, 30, 0)};
+
         public static bool CheckBinary()
         {
             return File.Exists(Settings.Default.ASFBinary) || !Settings.Default.IsLocal;
@@ -21,10 +23,10 @@ namespace ASFui
 
         public static string SendCommand(string command)
         {
-            var binding = new BasicHttpBinding {SendTimeout = new TimeSpan(0, 30, 0)};
-            var asfClient = new Client(binding, new EndpointAddress(GetEndpointAddress()));
-
-            return asfClient.HandleCommand(command);
+            using (var asfClient = new Client(Binding, new EndpointAddress(GetEndpointAddress())))
+            {
+                return asfClient.HandleCommand(command);
+            }
         }
 
         public static string GenerateCommand(string command, string user, string args = "")
