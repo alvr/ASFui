@@ -30,8 +30,8 @@ namespace ASFui
             [JsonProperty("CurrentGamesFarming")]
             public HashSet<Game> CurrentGamesFarming { get; set; }
 
-            [JsonProperty("ManualMode")]
-            public bool ManualMode { get; set; }
+            [JsonProperty("Paused")]
+            public bool Paused { get; set; }
         }
 
         public class Game
