@@ -1,3 +1,11 @@
+[![Build status](https://img.shields.io/appveyor/ci/alvr/ASFui.svg?label=Build)](https://ci.appveyor.com/project/alvr/asfui)
+[![GitHub Release](https://img.shields.io/github/release/alvr/ASFui.svg?label=Latest Stable)](https://github.com/alvr/ASFui/releases/latest)
+[![Beta Release](https://img.shields.io/badge/Latest%20Beta-Download-blue.svg)](https://ci.appveyor.com/project/alvr/asfui/build/artifacts)
+[![Donate Paypal](https://img.shields.io/badge/Donate-Paypal-lightgrey.svg)](https://paypal.me/alvaro)
+[![Donate Steam](https://img.shields.io/badge/Donate-Steam%20Cards-lightgrey.svg)](https://steamcommunity.com/tradeoffer/new/?partner=44691165&token=302Vfqdx)
+
+---
+
 ASFui is an user interface for [ArchiSteamFarm](https://github.com/JustArchi/ArchiSteamFarm/) program.
 
 > ASF is a C# application that allows you to farm steam cards using multiple steam accounts simultaneously.
