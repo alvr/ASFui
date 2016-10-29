@@ -201,8 +201,7 @@ namespace ASFui
         {
             Task.Run(() =>
             {
-                var result = Util.SendCommand(Util.GenerateCommand("farm", cbBotList.SelectedItem.ToString()));
-                rtbOutput.AppendText(@"!farm <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                Util.SendCommand(Util.GenerateCommand("farm", cbBotList.SelectedItem.ToString()));
                 rtbOutput.SelectionStart = rtbOutput.Text.Length;
                 rtbOutput.ScrollToCaret();
             });
@@ -212,8 +211,7 @@ namespace ASFui
         {
             Task.Run(() =>
             {
-                var result = Util.SendCommand(Util.GenerateCommand("loot", cbBotList.SelectedItem.ToString()));
-                rtbOutput.AppendText(@"!loot <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+                Util.SendCommand(Util.GenerateCommand("loot", cbBotList.SelectedItem.ToString()));
                 rtbOutput.SelectionStart = rtbOutput.Text.Length;
                 rtbOutput.ScrollToCaret();
             });
@@ -223,8 +221,7 @@ namespace ASFui
         {
             Task.Run(() =>
             {
-                var result = Util.SendCommand("lootall");
-                rtbOutput.AppendText(@"!lootall: " + result + Environment.NewLine);
+                Util.SendCommand("lootall");
                 rtbOutput.SelectionStart = rtbOutput.Text.Length;
                 rtbOutput.ScrollToCaret();
             });
@@ -240,10 +237,9 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    var result = Util.SendCommand(Util.GenerateCommand("redeem", cbBotList.SelectedItem.ToString(), 
+                    Util.SendCommand(Util.GenerateCommand("redeem", cbBotList.SelectedItem.ToString(),
                         Util.MultiToOne(tbInput.Lines)));
 
-                    rtbOutput.AppendText(@"!redeem <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
                     rtbOutput.SelectionStart = rtbOutput.Text.Length;
                     rtbOutput.ScrollToCaret();
                 }
@@ -262,10 +258,9 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    var result = Util.SendCommand(Util.GenerateCommand("redeem^", cbBotList.SelectedItem.ToString(),
+                    Util.SendCommand(Util.GenerateCommand("redeem^", cbBotList.SelectedItem.ToString(),
                         Util.MultiToOne(tbInput.Lines)));
 
-                    rtbOutput.AppendText(@"!redeem^ <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
                     rtbOutput.SelectionStart = rtbOutput.Text.Length;
                     rtbOutput.ScrollToCaret();
                 }
@@ -284,10 +279,9 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    var result = Util.SendCommand(Util.GenerateCommand("redeem&", cbBotList.SelectedItem.ToString(),
+                    Util.SendCommand(Util.GenerateCommand("redeem&", cbBotList.SelectedItem.ToString(),
                         Util.MultiToOne(tbInput.Lines)));
 
-                    rtbOutput.AppendText(@"!redeem& <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
                     rtbOutput.SelectionStart = rtbOutput.Text.Length;
                     rtbOutput.ScrollToCaret();
                 }
@@ -306,10 +300,9 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    var result = Util.SendCommand(Util.GenerateCommand("addlicense", cbBotList.SelectedItem.ToString(), 
+                    Util.SendCommand(Util.GenerateCommand("addlicense", cbBotList.SelectedItem.ToString(), 
                         Util.MultiToOne(tbInput.Lines)));
 
-                    rtbOutput.AppendText(@"!addlicense <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
                     rtbOutput.SelectionStart = rtbOutput.Text.Length;
                     rtbOutput.ScrollToCaret();
                 }
@@ -332,10 +325,9 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    var result = Util.SendCommand(Util.GenerateCommand("owns", cbBotList.SelectedItem.ToString(), 
+                    Util.SendCommand(Util.GenerateCommand("owns", cbBotList.SelectedItem.ToString(), 
                         Util.MultiToOne(tbInput.Lines)));
 
-                    rtbOutput.AppendText(@"!owns <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
                     rtbOutput.SelectionStart = rtbOutput.Text.Length;
                     rtbOutput.ScrollToCaret();
                 }
@@ -354,10 +346,8 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    var result = Util.SendCommand(Util.GenerateCommand("ownsall", string.Empty, 
-                        Util.MultiToOne(tbInput.Lines)));
+                    Util.SendCommand(Util.GenerateCommand("ownsall", string.Empty, Util.MultiToOne(tbInput.Lines)));
                     
-                    rtbOutput.AppendText(@"!ownsall: " + result + Environment.NewLine);
                     rtbOutput.SelectionStart = rtbOutput.Text.Length;
                     rtbOutput.ScrollToCaret();
                 }
@@ -376,9 +366,9 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    var result = Util.SendCommand(Util.GenerateCommand("play", cbBotList.SelectedItem.ToString(), 
+                    Util.SendCommand(Util.GenerateCommand("play", cbBotList.SelectedItem.ToString(), 
                         Util.MultiToOne(tbInput.Lines)));
-                    rtbOutput.AppendText(@"!play <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
+
                     rtbOutput.SelectionStart = rtbOutput.Text.Length;
                     rtbOutput.ScrollToCaret();
                 }
@@ -397,18 +387,16 @@ namespace ASFui
 
         private void btnLeave_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand("leave");
+            Util.SendCommand("leave");
 
-            rtbOutput.AppendText(@"!leave <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
         }
 
         private void btnRejoin_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand("rejoinchat");
+            Util.SendCommand("rejoinchat");
 
-            rtbOutput.AppendText(@"!rejoinchat <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
         }
@@ -419,72 +407,64 @@ namespace ASFui
 
         private void btnStartBot_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("start", cbBotList.SelectedItem.ToString()));
+            Util.SendCommand(Util.GenerateCommand("start", cbBotList.SelectedItem.ToString()));
 
-            rtbOutput.AppendText(@"!start <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
         }
 
         private void btnStartAll_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("startall", string.Empty));
+            Util.SendCommand(Util.GenerateCommand("startall", string.Empty));
 
-            rtbOutput.AppendText(@"!startall <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
         }
 
         private void btnStopBot_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("stop", cbBotList.SelectedItem.ToString()));
+            Util.SendCommand(Util.GenerateCommand("stop", cbBotList.SelectedItem.ToString()));
 
-            rtbOutput.AppendText(@"!stop <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
         }
 
         private void btnPauseBot_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("pause", cbBotList.SelectedItem.ToString()));
+            Util.SendCommand(Util.GenerateCommand("pause", cbBotList.SelectedItem.ToString()));
 
-            rtbOutput.AppendText(@"!pause <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
         }
 
         private void btnResume_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("resume", cbBotList.SelectedItem.ToString()));
+            Util.SendCommand(Util.GenerateCommand("resume", cbBotList.SelectedItem.ToString()));
 
-            rtbOutput.AppendText(@"!resume <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
         }
 
         private void btnPassword_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("password", cbBotList.SelectedItem.ToString()));
+            Util.SendCommand(Util.GenerateCommand("password", cbBotList.SelectedItem.ToString()));
 
-            rtbOutput.AppendText(@"!password <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
         }
 
         private void btnStatusBot_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("status", cbBotList.SelectedItem.ToString()));
+            Util.SendCommand(Util.GenerateCommand("status", cbBotList.SelectedItem.ToString()));
 
-            rtbOutput.AppendText(@"!status <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
         }
 
         private void btnStatusAll_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand("statusall");
+            Util.SendCommand("statusall");
 
-            rtbOutput.AppendText(@"!statusall: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
         }
@@ -495,27 +475,24 @@ namespace ASFui
 
         private void btnASFHelp_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand("help");
+            Util.SendCommand("help");
 
-            rtbOutput.AppendText(@"!help: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
         }
 
         private void btnASFUpdate_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand("update");
+            Util.SendCommand("update");
 
-            rtbOutput.AppendText(@"!update: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
         }
 
         private void btnASFVersion_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand("version");
+            Util.SendCommand("version");
 
-            rtbOutput.AppendText(@"!version: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
         }
@@ -537,9 +514,8 @@ namespace ASFui
 
         private void btn2FA_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand(Util.GenerateCommand("2fa", cbBotList.SelectedItem.ToString()));
+            Util.SendCommand(Util.GenerateCommand("2fa", cbBotList.SelectedItem.ToString()));
 
-            rtbOutput.AppendText(@"!2fa <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
         }
@@ -548,9 +524,8 @@ namespace ASFui
         {
             Task.Run(() =>
             {
-                var result = Util.SendCommand(Util.GenerateCommand("2faok", cbBotList.SelectedItem.ToString()));
+                Util.SendCommand(Util.GenerateCommand("2faok", cbBotList.SelectedItem.ToString()));
 
-                rtbOutput.AppendText(@"!2faok <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
                 rtbOutput.SelectionStart = rtbOutput.Text.Length;
                 rtbOutput.ScrollToCaret();
             });
@@ -560,9 +535,8 @@ namespace ASFui
         {
             Task.Run(() =>
             {
-                var result = Util.SendCommand(Util.GenerateCommand("2fano", cbBotList.SelectedItem.ToString()));
+                Util.SendCommand(Util.GenerateCommand("2fano", cbBotList.SelectedItem.ToString()));
 
-                rtbOutput.AppendText(@"!2fano <" + cbBotList.SelectedItem + @">: " + result + Environment.NewLine);
                 rtbOutput.SelectionStart = rtbOutput.Text.Length;
                 rtbOutput.ScrollToCaret();
             });
