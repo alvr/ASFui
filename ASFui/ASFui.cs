@@ -166,7 +166,7 @@ namespace ASFui
             rtbOutput.AppendText("Stopping ASF..." + Environment.NewLine);
             if (Properties.Settings.Default.IsLocal)
             {
-                Task.Delay(1500).ContinueWith(t => _asf.Stop());
+                _asf.Stop();
             }
             DisableElements();
             Logging.Info("Server stopped successfully.");

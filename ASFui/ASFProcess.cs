@@ -22,12 +22,14 @@ namespace ASFui
         private readonly StringBuilder sb = new StringBuilder();
         private bool loaded;
         private string key;
+        private volatile bool closeOutput;
 
         public ASFProcess(ASFui asf, RichTextBox rtb)
         {
             _asf = asf;
             ASF = new Process();
             output = rtb;
+            closeOutput = false;
 
             var ASFInfo = new ProcessStartInfo()
             {
@@ -51,50 +53,68 @@ namespace ASFui
 
         private void PrintOutput()
         {
-            int s;
-            while ((s = ASF.StandardOutput.Read()) != 0)
+            try
             {
-                MethodInvoker mi = delegate
+                int s;
+                while ((s = ASF.StandardOutput.Read()) != 0 || !closeOutput || ASF != null)
                 {
-                    key = Regex.Match(sb.ToString(), @"[0-9A-Z]{5}-[0-9A-Z]{5}-[0-9A-Z]{5}", RegexOptions.IgnoreCase).Value;
-                    output.AppendText(sb.ToString());
-                    Check();
-                    output.SelectionStart = output.Text.Length;
-                    output.ScrollToCaret();
-                    sb.Clear();
-                };
+                    MethodInvoker mi = delegate
+                    {
+                        key = Regex.Match(sb.ToString(), @"[0-9A-Z]{5}-[0-9A-Z]{5}-[0-9A-Z]{5}", RegexOptions.IgnoreCase).Value;
+                        output.AppendText(sb.ToString());
+                        Check();
+                        output.SelectionStart = output.Text.Length;
+                        output.ScrollToCaret();
+                        sb.Clear();
+                    };
 
-                sb.Append(Convert.ToChar(s));
+                    try
+                    {
+                        sb.Append(Convert.ToChar(s));
+                    }
+                    catch (OverflowException e)
+                    {
+                        Logging.Exception(e, "Output too long.");
+                        sb.Clear();
+                    }
 
-                if (s == '\n')
-                {
-                    output.Invoke(mi);
+                    if (s == '\n')
+                    {
+                        output.Invoke(mi);
+                    }
+
+                    if (sb.ToString().EndsWith("\"android:\"):") || sb.ToString().EndsWith("login:") ||
+                        sb.ToString().EndsWith("+1234567890):") || sb.ToString().EndsWith("mobile:") ||
+                        sb.ToString().EndsWith("email:") || sb.ToString().EndsWith("PIN:") ||
+                        sb.ToString().EndsWith("app:") || sb.ToString().EndsWith("hostname:"))
+                    {
+                        output.AppendText(sb + " ");
+                        var result = Interaction.InputBox(sb.ToString(), @"Enter necessary input");
+                        ASF.StandardInput.WriteLine(result);
+                        ASF.StandardInput.Flush();
+                        output.AppendText(result + Environment.NewLine + sb);
+                        sb.Clear();
+                    }
+
+                    else if ((!sb.ToString().StartsWith("[AES]") ^ sb.ToString().StartsWith("[ProtectedDataForCurrentUser]"))
+                        && sb.ToString().EndsWith("password:"))
+                    {
+                        var Password = new Password(ASF, sb.ToString());
+                        Password.ShowDialog();
+                    }
+
+                    else if (sb.ToString().EndsWith("running, exiting"))
+                    {
+                        sb.Clear();
+                        _asf.btnStop.Invoke(new MethodInvoker(delegate { _asf.btnStop.PerformClick(); }));
+                    }
                 }
-
-                if (sb.ToString().EndsWith("\"android:\"):") || sb.ToString().EndsWith("login:") ||
-                    sb.ToString().EndsWith("+1234567890):") || sb.ToString().EndsWith("mobile:") ||
-                    sb.ToString().EndsWith("email:") || sb.ToString().EndsWith("PIN:") ||
-                    sb.ToString().EndsWith("app:") || sb.ToString().EndsWith("hostname:"))
-                {
-                    output.AppendText(sb + " ");
-                    var result = Interaction.InputBox(sb.ToString(), @"Enter necessary input");
-                    ASF.StandardInput.WriteLine(result);
-                    ASF.StandardInput.Flush();
-                    output.AppendText(result + Environment.NewLine + sb);
-                    sb.Clear();
-                }
-
-                else if ((!sb.ToString().StartsWith("[AES]") ^ sb.ToString().StartsWith("[ProtectedDataForCurrentUser]"))
-                    && sb.ToString().EndsWith("password:"))
-                {
-                    var Password = new Password(ASF, sb.ToString());
-                    Password.ShowDialog();
-                }
-
-                else if (sb.ToString().Contains("No bots are running") && !ASF.HasExited)
-                {
-                    _asf.btnStop.PerformClick();
-                }
+            }
+            catch (NullReferenceException e)
+            {
+                Logging.Exception(e, "Error reading ASF output.");
+                sb.Clear();
+                _asf.btnStop.Invoke(new MethodInvoker(delegate { _asf.btnStop.PerformClick(); }));
             }
         }
 
@@ -162,7 +182,7 @@ namespace ASFui
                 ASF.Kill();
             }
 
-            outputThread.Abort();
+            closeOutput = true;
             ASF = null;
         }
 
