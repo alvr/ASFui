@@ -124,6 +124,7 @@
             this.rtbOutput.Size = new System.Drawing.Size(730, 113);
             this.rtbOutput.TabIndex = 0;
             this.rtbOutput.Text = "";
+            this.rtbOutput.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtbOutput_LinkClicked);
             // 
             // btnStop
             // 

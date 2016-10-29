@@ -614,6 +614,11 @@ namespace ASFui
             _asfRunning = false;
         }
 
+        private void rtbOutput_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            Process.Start(e.LinkText);
+        }
+
         private void TrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Show();
