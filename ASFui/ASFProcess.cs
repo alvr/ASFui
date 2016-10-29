@@ -90,6 +90,11 @@ namespace ASFui
                     var Password = new Password(ASF, sb.ToString());
                     Password.ShowDialog();
                 }
+
+                else if (sb.ToString().Contains("No bots are running") && !ASF.HasExited)
+                {
+                    _asf.btnStop.PerformClick();
+                }
             }
         }
 
