@@ -390,14 +390,6 @@ namespace ASFui
 
         #region Chat Buttons
 
-        private void btnLeave_Click(object sender, EventArgs e)
-        {
-            Util.SendCommand("leave");
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
-        }
-
         private void btnRejoin_Click(object sender, EventArgs e)
         {
             Util.SendCommand("rejoinchat");
@@ -558,12 +550,13 @@ namespace ASFui
             btnFarm.Enabled = true;
             btnLoot.Enabled = true;
             btnLootAll.Enabled = true;
-            btnRedeemMenu.Enabled = true;
+            btnRedeem.Enabled = true;
+            btnRedeemNF.Enabled = true;
+            btnRedeemFF.Enabled = true;
             btnAddLicense.Enabled = true;
             btnOwns.Enabled = true;
             btnOwnAll.Enabled = true;
             btnPlay.Enabled = true;
-            btnLeave.Enabled = true;
             btnRejoin.Enabled = true;
             btnStartBot.Enabled = true;
             btnStartAll.Enabled = true;
@@ -589,12 +582,13 @@ namespace ASFui
             btnFarm.Enabled = false;
             btnLoot.Enabled = false;
             btnLootAll.Enabled = false;
-            btnRedeemMenu.Enabled = false;
+            btnRedeem.Enabled = false;
+            btnRedeemNF.Enabled = false;
+            btnRedeemFF.Enabled = false;
             btnAddLicense.Enabled = false;
             btnOwns.Enabled = false;
             btnOwnAll.Enabled = false;
             btnPlay.Enabled = false;
-            btnLeave.Enabled = false;
             btnRejoin.Enabled = false;
             btnStartBot.Enabled = false;
             btnStartAll.Enabled = false;
@@ -611,7 +605,6 @@ namespace ASFui
             btn2FA.Enabled = false;
             btn2FAOk.Enabled = false;
             btn2FANo.Enabled = false;
-
             cbBotList.Enabled = false;
             cbBotList.Items.Clear();
             btnReloadBots.Enabled = false;

@@ -37,13 +37,6 @@
             this.lbCurrentBot = new System.Windows.Forms.Label();
             this.btnReloadBots = new System.Windows.Forms.Button();
             this.gbKeys = new System.Windows.Forms.GroupBox();
-            this.tlpKeys = new System.Windows.Forms.TableLayoutPanel();
-            this.btnRedeemMenu = new CustomDropdownButton();
-            this.cmsRedeem = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnRedeem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnRedeemNF = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnRedeemFF = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAddLicense = new System.Windows.Forms.Button();
             this.gb2FA = new System.Windows.Forms.GroupBox();
             this.tlp2FA = new System.Windows.Forms.TableLayoutPanel();
             this.btn2FA = new System.Windows.Forms.Button();
@@ -68,7 +61,6 @@
             this.tbInput = new System.Windows.Forms.TextBox();
             this.gbChat = new System.Windows.Forms.GroupBox();
             this.tlpChat = new System.Windows.Forms.TableLayoutPanel();
-            this.btnLeave = new System.Windows.Forms.Button();
             this.btnRejoin = new System.Windows.Forms.Button();
             this.gbGames = new System.Windows.Forms.GroupBox();
             this.tlpGames = new System.Windows.Forms.TableLayoutPanel();
@@ -88,9 +80,12 @@
             this.btnASFuiHelp = new System.Windows.Forms.Button();
             this.tlpMainContent = new System.Windows.Forms.TableLayoutPanel();
             this.ttDesc = new System.Windows.Forms.ToolTip(this.components);
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnRedeem = new System.Windows.Forms.Button();
+            this.btnRedeemNF = new System.Windows.Forms.Button();
+            this.btnRedeemFF = new System.Windows.Forms.Button();
+            this.btnAddLicense = new System.Windows.Forms.Button();
             this.gbKeys.SuspendLayout();
-            this.tlpKeys.SuspendLayout();
-            this.cmsRedeem.SuspendLayout();
             this.gb2FA.SuspendLayout();
             this.tlp2FA.SuspendLayout();
             this.gbCards.SuspendLayout();
@@ -106,6 +101,7 @@
             this.tlpASF.SuspendLayout();
             this.cmsTrayIcon.SuspendLayout();
             this.tlpMainContent.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtbOutput
@@ -204,91 +200,15 @@
             // 
             // gbKeys
             // 
-            this.gbKeys.Controls.Add(this.tlpKeys);
+            this.tlpMainContent.SetColumnSpan(this.gbKeys, 3);
+            this.gbKeys.Controls.Add(this.tableLayoutPanel1);
             this.gbKeys.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbKeys.Location = new System.Drawing.Point(242, 3);
+            this.gbKeys.Location = new System.Drawing.Point(3, 64);
             this.gbKeys.Name = "gbKeys";
-            this.gbKeys.Size = new System.Drawing.Size(234, 55);
+            this.gbKeys.Size = new System.Drawing.Size(351, 55);
             this.gbKeys.TabIndex = 27;
             this.gbKeys.TabStop = false;
             this.gbKeys.Text = "Keys";
-            // 
-            // tlpKeys
-            // 
-            this.tlpKeys.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpKeys.ColumnCount = 2;
-            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpKeys.Controls.Add(this.btnRedeemMenu, 0, 0);
-            this.tlpKeys.Controls.Add(this.btnAddLicense, 1, 0);
-            this.tlpKeys.Location = new System.Drawing.Point(6, 19);
-            this.tlpKeys.Name = "tlpKeys";
-            this.tlpKeys.RowCount = 1;
-            this.tlpKeys.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpKeys.Size = new System.Drawing.Size(222, 33);
-            this.tlpKeys.TabIndex = 1;
-            // 
-            // btnRedeemMenu
-            // 
-            this.btnRedeemMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnRedeemMenu.Enabled = false;
-            this.btnRedeemMenu.Location = new System.Drawing.Point(3, 3);
-            this.btnRedeemMenu.Menu = this.cmsRedeem;
-            this.btnRedeemMenu.Name = "btnRedeemMenu";
-            this.btnRedeemMenu.Size = new System.Drawing.Size(105, 27);
-            this.btnRedeemMenu.TabIndex = 35;
-            this.btnRedeemMenu.Text = "Redeem";
-            this.ttDesc.SetToolTip(this.btnRedeemMenu, "Open the redeem menu.");
-            this.btnRedeemMenu.UseVisualStyleBackColor = true;
-            // 
-            // cmsRedeem
-            // 
-            this.cmsRedeem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnRedeem,
-            this.btnRedeemNF,
-            this.btnRedeemFF});
-            this.cmsRedeem.Name = "contextMenuStrip1";
-            this.cmsRedeem.Size = new System.Drawing.Size(165, 70);
-            // 
-            // btnRedeem
-            // 
-            this.btnRedeem.Name = "btnRedeem";
-            this.btnRedeem.Size = new System.Drawing.Size(164, 22);
-            this.btnRedeem.Text = "Normal";
-            this.btnRedeem.ToolTipText = "Redeems given cd-keys on given bot instance.";
-            this.btnRedeem.Click += new System.EventHandler(this.btnRedeem_Click);
-            // 
-            // btnRedeemNF
-            // 
-            this.btnRedeemNF.Name = "btnRedeemNF";
-            this.btnRedeemNF.Size = new System.Drawing.Size(164, 22);
-            this.btnRedeemNF.Text = "No forwarding";
-            this.btnRedeemNF.ToolTipText = "Redeems given cd-keys on given bot instance,\r\nnever forwards keys to other bots.";
-            this.btnRedeemNF.Click += new System.EventHandler(this.btnRedeemNF_Click);
-            // 
-            // btnRedeemFF
-            // 
-            this.btnRedeemFF.Name = "btnRedeemFF";
-            this.btnRedeemFF.Size = new System.Drawing.Size(164, 22);
-            this.btnRedeemFF.Text = "Force forwarding";
-            this.btnRedeemFF.ToolTipText = "Redeems given cd-keys on any bot instance apart from given one.\r\nForce forwarding" +
-    ".";
-            this.btnRedeemFF.Click += new System.EventHandler(this.btnRedeemFF_Click);
-            // 
-            // btnAddLicense
-            // 
-            this.btnAddLicense.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddLicense.Enabled = false;
-            this.btnAddLicense.Location = new System.Drawing.Point(114, 3);
-            this.btnAddLicense.Name = "btnAddLicense";
-            this.btnAddLicense.Size = new System.Drawing.Size(105, 27);
-            this.btnAddLicense.TabIndex = 1;
-            this.btnAddLicense.Text = "License";
-            this.ttDesc.SetToolTip(this.btnAddLicense, "Activates given appIDs on given bot instance (free games only).");
-            this.btnAddLicense.UseVisualStyleBackColor = true;
-            this.btnAddLicense.Click += new System.EventHandler(this.btnAddLicense_Click);
             // 
             // gb2FA
             // 
@@ -304,8 +224,6 @@
             // 
             // tlp2FA
             // 
-            this.tlp2FA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlp2FA.ColumnCount = 3;
             this.tlp2FA.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlp2FA.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -314,11 +232,12 @@
             this.tlp2FA.Controls.Add(this.btn2FA, 0, 0);
             this.tlp2FA.Controls.Add(this.btn2FAOk, 1, 0);
             this.tlp2FA.Controls.Add(this.btn2FANo, 2, 0);
-            this.tlp2FA.Location = new System.Drawing.Point(6, 19);
+            this.tlp2FA.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp2FA.Location = new System.Drawing.Point(3, 16);
             this.tlp2FA.Name = "tlp2FA";
             this.tlp2FA.RowCount = 1;
             this.tlp2FA.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp2FA.Size = new System.Drawing.Size(718, 31);
+            this.tlp2FA.Size = new System.Drawing.Size(724, 39);
             this.tlp2FA.TabIndex = 1;
             // 
             // btn2FA
@@ -327,7 +246,7 @@
             this.btn2FA.Enabled = false;
             this.btn2FA.Location = new System.Drawing.Point(3, 3);
             this.btn2FA.Name = "btn2FA";
-            this.btn2FA.Size = new System.Drawing.Size(233, 25);
+            this.btn2FA.Size = new System.Drawing.Size(235, 33);
             this.btn2FA.TabIndex = 0;
             this.btn2FA.Text = "Generate Token";
             this.ttDesc.SetToolTip(this.btn2FA, "Generates temporary 2FA token for given bot instance.");
@@ -338,9 +257,9 @@
             // 
             this.btn2FAOk.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn2FAOk.Enabled = false;
-            this.btn2FAOk.Location = new System.Drawing.Point(242, 3);
+            this.btn2FAOk.Location = new System.Drawing.Point(244, 3);
             this.btn2FAOk.Name = "btn2FAOk";
-            this.btn2FAOk.Size = new System.Drawing.Size(233, 25);
+            this.btn2FAOk.Size = new System.Drawing.Size(235, 33);
             this.btn2FAOk.TabIndex = 1;
             this.btn2FAOk.Text = "Accept Pending Confirmations";
             this.ttDesc.SetToolTip(this.btn2FAOk, "Accepts all pending 2FA confirmations for given bot instance.");
@@ -351,9 +270,9 @@
             // 
             this.btn2FANo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn2FANo.Enabled = false;
-            this.btn2FANo.Location = new System.Drawing.Point(481, 3);
+            this.btn2FANo.Location = new System.Drawing.Point(485, 3);
             this.btn2FANo.Name = "btn2FANo";
-            this.btn2FANo.Size = new System.Drawing.Size(234, 25);
+            this.btn2FANo.Size = new System.Drawing.Size(236, 33);
             this.btn2FANo.TabIndex = 2;
             this.btn2FANo.Text = "Deny Pending Confirmations";
             this.ttDesc.SetToolTip(this.btn2FANo, "Denies all pending 2FA confirmations for given bot instance.");
@@ -362,19 +281,18 @@
             // 
             // gbCards
             // 
+            this.tlpMainContent.SetColumnSpan(this.gbCards, 2);
             this.gbCards.Controls.Add(this.tlpCards);
             this.gbCards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbCards.Location = new System.Drawing.Point(3, 3);
             this.gbCards.Name = "gbCards";
-            this.gbCards.Size = new System.Drawing.Size(233, 55);
+            this.gbCards.Size = new System.Drawing.Size(232, 55);
             this.gbCards.TabIndex = 24;
             this.gbCards.TabStop = false;
             this.gbCards.Text = "Cards";
             // 
             // tlpCards
             // 
-            this.tlpCards.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpCards.ColumnCount = 3;
             this.tlpCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.31332F));
             this.tlpCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.34334F));
@@ -382,11 +300,12 @@
             this.tlpCards.Controls.Add(this.btnFarm, 0, 0);
             this.tlpCards.Controls.Add(this.btnLoot, 1, 0);
             this.tlpCards.Controls.Add(this.btnLootAll, 2, 0);
-            this.tlpCards.Location = new System.Drawing.Point(6, 19);
+            this.tlpCards.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpCards.Location = new System.Drawing.Point(3, 16);
             this.tlpCards.Name = "tlpCards";
             this.tlpCards.RowCount = 1;
             this.tlpCards.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpCards.Size = new System.Drawing.Size(221, 33);
+            this.tlpCards.Size = new System.Drawing.Size(226, 36);
             this.tlpCards.TabIndex = 0;
             // 
             // btnFarm
@@ -395,7 +314,7 @@
             this.btnFarm.Enabled = false;
             this.btnFarm.Location = new System.Drawing.Point(3, 3);
             this.btnFarm.Name = "btnFarm";
-            this.btnFarm.Size = new System.Drawing.Size(67, 27);
+            this.btnFarm.Size = new System.Drawing.Size(69, 30);
             this.btnFarm.TabIndex = 0;
             this.btnFarm.Text = "Farm";
             this.ttDesc.SetToolTip(this.btnFarm, "Restarts cards farming module for given bot instance.");
@@ -406,9 +325,9 @@
             // 
             this.btnLoot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLoot.Enabled = false;
-            this.btnLoot.Location = new System.Drawing.Point(76, 3);
+            this.btnLoot.Location = new System.Drawing.Point(78, 3);
             this.btnLoot.Name = "btnLoot";
-            this.btnLoot.Size = new System.Drawing.Size(67, 27);
+            this.btnLoot.Size = new System.Drawing.Size(69, 30);
             this.btnLoot.TabIndex = 1;
             this.btnLoot.Text = "Loot";
             this.ttDesc.SetToolTip(this.btnLoot, "Sends all booster packs and Steam trading cards\r\n(including foils if IsBotAccount" +
@@ -420,9 +339,9 @@
             // 
             this.btnLootAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLootAll.Enabled = false;
-            this.btnLootAll.Location = new System.Drawing.Point(149, 3);
+            this.btnLootAll.Location = new System.Drawing.Point(153, 3);
             this.btnLootAll.Name = "btnLootAll";
-            this.btnLootAll.Size = new System.Drawing.Size(69, 27);
+            this.btnLootAll.Size = new System.Drawing.Size(70, 30);
             this.btnLootAll.TabIndex = 2;
             this.btnLootAll.Text = "Loot All";
             this.ttDesc.SetToolTip(this.btnLootAll, "Issues !loot on all currently enabled ASF bots.");
@@ -443,8 +362,6 @@
             // 
             // tlpBots
             // 
-            this.tlpBots.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpBots.ColumnCount = 4;
             this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -466,12 +383,13 @@
             this.tlpBots.Controls.Add(this.btnPasswordBot, 1, 1);
             this.tlpBots.Controls.Add(this.btnResumeBot, 3, 0);
             this.tlpBots.Controls.Add(this.btnStartAll, 0, 1);
-            this.tlpBots.Location = new System.Drawing.Point(6, 19);
+            this.tlpBots.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpBots.Location = new System.Drawing.Point(3, 16);
             this.tlpBots.Name = "tlpBots";
             this.tlpBots.RowCount = 2;
             this.tlpBots.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpBots.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpBots.Size = new System.Drawing.Size(466, 63);
+            this.tlpBots.Size = new System.Drawing.Size(472, 69);
             this.tlpBots.TabIndex = 0;
             // 
             // btnStartBot
@@ -480,7 +398,7 @@
             this.btnStartBot.Enabled = false;
             this.btnStartBot.Location = new System.Drawing.Point(3, 3);
             this.btnStartBot.Name = "btnStartBot";
-            this.btnStartBot.Size = new System.Drawing.Size(110, 25);
+            this.btnStartBot.Size = new System.Drawing.Size(112, 28);
             this.btnStartBot.TabIndex = 0;
             this.btnStartBot.Text = "Start";
             this.ttDesc.SetToolTip(this.btnStartBot, "Starts given bot instance.");
@@ -491,9 +409,9 @@
             // 
             this.btnStopBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStopBot.Enabled = false;
-            this.btnStopBot.Location = new System.Drawing.Point(119, 3);
+            this.btnStopBot.Location = new System.Drawing.Point(121, 3);
             this.btnStopBot.Name = "btnStopBot";
-            this.btnStopBot.Size = new System.Drawing.Size(110, 25);
+            this.btnStopBot.Size = new System.Drawing.Size(112, 28);
             this.btnStopBot.TabIndex = 1;
             this.btnStopBot.Text = "Stop";
             this.ttDesc.SetToolTip(this.btnStopBot, "Stops given bot instance.");
@@ -504,9 +422,9 @@
             // 
             this.btnPauseBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPauseBot.Enabled = false;
-            this.btnPauseBot.Location = new System.Drawing.Point(235, 3);
+            this.btnPauseBot.Location = new System.Drawing.Point(239, 3);
             this.btnPauseBot.Name = "btnPauseBot";
-            this.btnPauseBot.Size = new System.Drawing.Size(110, 25);
+            this.btnPauseBot.Size = new System.Drawing.Size(112, 28);
             this.btnPauseBot.TabIndex = 2;
             this.btnPauseBot.Text = "Pause";
             this.ttDesc.SetToolTip(this.btnPauseBot, "Pauses automatic farming of given bot instance.");
@@ -517,9 +435,9 @@
             // 
             this.btnStatusAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStatusAll.Enabled = false;
-            this.btnStatusAll.Location = new System.Drawing.Point(351, 34);
+            this.btnStatusAll.Location = new System.Drawing.Point(357, 37);
             this.btnStatusAll.Name = "btnStatusAll";
-            this.btnStatusAll.Size = new System.Drawing.Size(112, 26);
+            this.btnStatusAll.Size = new System.Drawing.Size(112, 29);
             this.btnStatusAll.TabIndex = 7;
             this.btnStatusAll.Text = "Status All";
             this.ttDesc.SetToolTip(this.btnStatusAll, "Prints status of all bot instances and ASF itself.");
@@ -530,9 +448,9 @@
             // 
             this.btnStatusBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStatusBot.Enabled = false;
-            this.btnStatusBot.Location = new System.Drawing.Point(235, 34);
+            this.btnStatusBot.Location = new System.Drawing.Point(239, 37);
             this.btnStatusBot.Name = "btnStatusBot";
-            this.btnStatusBot.Size = new System.Drawing.Size(110, 26);
+            this.btnStatusBot.Size = new System.Drawing.Size(112, 29);
             this.btnStatusBot.TabIndex = 6;
             this.btnStatusBot.Text = "Status";
             this.ttDesc.SetToolTip(this.btnStatusBot, "Prints status of given bot instance.");
@@ -543,9 +461,9 @@
             // 
             this.btnPasswordBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPasswordBot.Enabled = false;
-            this.btnPasswordBot.Location = new System.Drawing.Point(119, 34);
+            this.btnPasswordBot.Location = new System.Drawing.Point(121, 37);
             this.btnPasswordBot.Name = "btnPasswordBot";
-            this.btnPasswordBot.Size = new System.Drawing.Size(110, 26);
+            this.btnPasswordBot.Size = new System.Drawing.Size(112, 29);
             this.btnPasswordBot.TabIndex = 5;
             this.btnPasswordBot.Text = "Password";
             this.ttDesc.SetToolTip(this.btnPasswordBot, "Prints encrypted password of given\r\nbot instance (in use with PasswordFormat).");
@@ -556,9 +474,9 @@
             // 
             this.btnResumeBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnResumeBot.Enabled = false;
-            this.btnResumeBot.Location = new System.Drawing.Point(351, 3);
+            this.btnResumeBot.Location = new System.Drawing.Point(357, 3);
             this.btnResumeBot.Name = "btnResumeBot";
-            this.btnResumeBot.Size = new System.Drawing.Size(112, 25);
+            this.btnResumeBot.Size = new System.Drawing.Size(112, 28);
             this.btnResumeBot.TabIndex = 3;
             this.btnResumeBot.Text = "Resume";
             this.ttDesc.SetToolTip(this.btnResumeBot, "Resumes automatic farming of given bot instance.");
@@ -569,9 +487,9 @@
             // 
             this.btnStartAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStartAll.Enabled = false;
-            this.btnStartAll.Location = new System.Drawing.Point(3, 34);
+            this.btnStartAll.Location = new System.Drawing.Point(3, 37);
             this.btnStartAll.Name = "btnStartAll";
-            this.btnStartAll.Size = new System.Drawing.Size(110, 26);
+            this.btnStartAll.Size = new System.Drawing.Size(112, 29);
             this.btnStartAll.TabIndex = 4;
             this.btnStartAll.Text = "Start All";
             this.btnStartAll.UseVisualStyleBackColor = true;
@@ -602,50 +520,33 @@
             this.gbChat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbChat.Controls.Add(this.tlpChat);
-            this.gbChat.Location = new System.Drawing.Point(242, 64);
+            this.gbChat.Location = new System.Drawing.Point(360, 64);
             this.gbChat.Name = "gbChat";
-            this.gbChat.Size = new System.Drawing.Size(234, 55);
+            this.gbChat.Size = new System.Drawing.Size(116, 55);
             this.gbChat.TabIndex = 29;
             this.gbChat.TabStop = false;
             this.gbChat.Text = "Chat";
             // 
             // tlpChat
             // 
-            this.tlpChat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpChat.ColumnCount = 2;
+            this.tlpChat.ColumnCount = 1;
             this.tlpChat.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpChat.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpChat.Controls.Add(this.btnLeave, 0, 0);
-            this.tlpChat.Controls.Add(this.btnRejoin, 1, 0);
-            this.tlpChat.Location = new System.Drawing.Point(6, 19);
+            this.tlpChat.Controls.Add(this.btnRejoin, 0, 0);
+            this.tlpChat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpChat.Location = new System.Drawing.Point(3, 16);
             this.tlpChat.Name = "tlpChat";
             this.tlpChat.RowCount = 1;
             this.tlpChat.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpChat.Size = new System.Drawing.Size(222, 33);
+            this.tlpChat.Size = new System.Drawing.Size(110, 36);
             this.tlpChat.TabIndex = 1;
-            // 
-            // btnLeave
-            // 
-            this.btnLeave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLeave.Enabled = false;
-            this.btnLeave.Location = new System.Drawing.Point(3, 3);
-            this.btnLeave.Name = "btnLeave";
-            this.btnLeave.Size = new System.Drawing.Size(105, 27);
-            this.btnLeave.TabIndex = 0;
-            this.btnLeave.Text = "Leave Chat";
-            this.ttDesc.SetToolTip(this.btnLeave, "Makes bot leave the current group chat.\r\nFor obvious reasons, this command works " +
-        "only in group chats.");
-            this.btnLeave.UseVisualStyleBackColor = true;
-            this.btnLeave.Click += new System.EventHandler(this.btnLeave_Click);
             // 
             // btnRejoin
             // 
             this.btnRejoin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRejoin.Enabled = false;
-            this.btnRejoin.Location = new System.Drawing.Point(114, 3);
+            this.btnRejoin.Location = new System.Drawing.Point(3, 3);
             this.btnRejoin.Name = "btnRejoin";
-            this.btnRejoin.Size = new System.Drawing.Size(105, 27);
+            this.btnRejoin.Size = new System.Drawing.Size(104, 30);
             this.btnRejoin.TabIndex = 1;
             this.btnRejoin.Text = "Rejoin Chat";
             this.ttDesc.SetToolTip(this.btnRejoin, "Forces all bots with unlimited accounts to rejoin the groupchat.");
@@ -654,20 +555,18 @@
             // 
             // gbGames
             // 
-            this.gbGames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpMainContent.SetColumnSpan(this.gbGames, 2);
             this.gbGames.Controls.Add(this.tlpGames);
-            this.gbGames.Location = new System.Drawing.Point(3, 64);
+            this.gbGames.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbGames.Location = new System.Drawing.Point(241, 3);
             this.gbGames.Name = "gbGames";
-            this.gbGames.Size = new System.Drawing.Size(233, 55);
+            this.gbGames.Size = new System.Drawing.Size(235, 55);
             this.gbGames.TabIndex = 28;
             this.gbGames.TabStop = false;
             this.gbGames.Text = "Games";
             // 
             // tlpGames
             // 
-            this.tlpGames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpGames.ColumnCount = 3;
             this.tlpGames.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpGames.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -675,11 +574,12 @@
             this.tlpGames.Controls.Add(this.btnOwns, 0, 0);
             this.tlpGames.Controls.Add(this.btnPlay, 2, 0);
             this.tlpGames.Controls.Add(this.btnOwnAll, 1, 0);
-            this.tlpGames.Location = new System.Drawing.Point(6, 19);
+            this.tlpGames.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpGames.Location = new System.Drawing.Point(3, 16);
             this.tlpGames.Name = "tlpGames";
             this.tlpGames.RowCount = 1;
             this.tlpGames.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpGames.Size = new System.Drawing.Size(224, 33);
+            this.tlpGames.Size = new System.Drawing.Size(229, 36);
             this.tlpGames.TabIndex = 0;
             // 
             // btnOwns
@@ -688,7 +588,7 @@
             this.btnOwns.Enabled = false;
             this.btnOwns.Location = new System.Drawing.Point(3, 3);
             this.btnOwns.Name = "btnOwns";
-            this.btnOwns.Size = new System.Drawing.Size(68, 27);
+            this.btnOwns.Size = new System.Drawing.Size(70, 30);
             this.btnOwns.TabIndex = 0;
             this.btnOwns.Text = "Own";
             this.ttDesc.SetToolTip(this.btnOwns, "Checks if given bot instance already owns given appIDs\r\nand/or gameNames (can be " +
@@ -700,9 +600,9 @@
             // 
             this.btnPlay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPlay.Enabled = false;
-            this.btnPlay.Location = new System.Drawing.Point(151, 3);
+            this.btnPlay.Location = new System.Drawing.Point(155, 3);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(70, 27);
+            this.btnPlay.Size = new System.Drawing.Size(71, 30);
             this.btnPlay.TabIndex = 2;
             this.btnPlay.Text = "Play";
             this.ttDesc.SetToolTip(this.btnPlay, "Switches to manual farming - launches given\r\nappIDs on given bot instance. Use !r" +
@@ -714,9 +614,9 @@
             // 
             this.btnOwnAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOwnAll.Enabled = false;
-            this.btnOwnAll.Location = new System.Drawing.Point(77, 3);
+            this.btnOwnAll.Location = new System.Drawing.Point(79, 3);
             this.btnOwnAll.Name = "btnOwnAll";
-            this.btnOwnAll.Size = new System.Drawing.Size(68, 27);
+            this.btnOwnAll.Size = new System.Drawing.Size(70, 30);
             this.btnOwnAll.TabIndex = 1;
             this.btnOwnAll.Text = "Own All";
             this.ttDesc.SetToolTip(this.btnOwnAll, "Checks all currently enabled ASF bots for owning given\r\nappIDs and/or gameNames (" +
@@ -738,8 +638,6 @@
             // 
             // tlpASF
             // 
-            this.tlpASF.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpASF.ColumnCount = 4;
             this.tlpASF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpASF.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -749,11 +647,12 @@
             this.tlpASF.Controls.Add(this.btnASFUpdate, 1, 0);
             this.tlpASF.Controls.Add(this.btnASFVersion, 2, 0);
             this.tlpASF.Controls.Add(this.btnAPI, 3, 0);
-            this.tlpASF.Location = new System.Drawing.Point(6, 19);
+            this.tlpASF.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpASF.Location = new System.Drawing.Point(3, 16);
             this.tlpASF.Name = "tlpASF";
             this.tlpASF.RowCount = 1;
             this.tlpASF.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpASF.Size = new System.Drawing.Size(466, 33);
+            this.tlpASF.Size = new System.Drawing.Size(472, 39);
             this.tlpASF.TabIndex = 0;
             // 
             // btnASFHelp
@@ -762,7 +661,7 @@
             this.btnASFHelp.Enabled = false;
             this.btnASFHelp.Location = new System.Drawing.Point(3, 3);
             this.btnASFHelp.Name = "btnASFHelp";
-            this.btnASFHelp.Size = new System.Drawing.Size(110, 27);
+            this.btnASFHelp.Size = new System.Drawing.Size(112, 33);
             this.btnASFHelp.TabIndex = 0;
             this.btnASFHelp.Text = "Help";
             this.ttDesc.SetToolTip(this.btnASFHelp, "Shows help.");
@@ -773,9 +672,9 @@
             // 
             this.btnASFUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnASFUpdate.Enabled = false;
-            this.btnASFUpdate.Location = new System.Drawing.Point(119, 3);
+            this.btnASFUpdate.Location = new System.Drawing.Point(121, 3);
             this.btnASFUpdate.Name = "btnASFUpdate";
-            this.btnASFUpdate.Size = new System.Drawing.Size(110, 27);
+            this.btnASFUpdate.Size = new System.Drawing.Size(112, 33);
             this.btnASFUpdate.TabIndex = 1;
             this.btnASFUpdate.Text = "Update";
             this.ttDesc.SetToolTip(this.btnASFUpdate, "Checks GitHub for ASF updates\r\n(this is done automatically every 24 hours if Auto" +
@@ -787,9 +686,9 @@
             // 
             this.btnASFVersion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnASFVersion.Enabled = false;
-            this.btnASFVersion.Location = new System.Drawing.Point(235, 3);
+            this.btnASFVersion.Location = new System.Drawing.Point(239, 3);
             this.btnASFVersion.Name = "btnASFVersion";
-            this.btnASFVersion.Size = new System.Drawing.Size(110, 27);
+            this.btnASFVersion.Size = new System.Drawing.Size(112, 33);
             this.btnASFVersion.TabIndex = 2;
             this.btnASFVersion.Text = "Version";
             this.ttDesc.SetToolTip(this.btnASFVersion, "Prints version of ASF.");
@@ -800,9 +699,9 @@
             // 
             this.btnAPI.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAPI.Enabled = false;
-            this.btnAPI.Location = new System.Drawing.Point(351, 3);
+            this.btnAPI.Location = new System.Drawing.Point(357, 3);
             this.btnAPI.Name = "btnAPI";
-            this.btnAPI.Size = new System.Drawing.Size(112, 27);
+            this.btnAPI.Size = new System.Drawing.Size(112, 33);
             this.btnAPI.TabIndex = 3;
             this.btnAPI.Text = "API";
             this.ttDesc.SetToolTip(this.btnAPI, "Returns ASF process status in JSON.");
@@ -860,20 +759,94 @@
             // 
             this.tlpMainContent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpMainContent.ColumnCount = 2;
-            this.tlpMainContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpMainContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpMainContent.Controls.Add(this.gbChat, 1, 1);
+            this.tlpMainContent.ColumnCount = 4;
+            this.tlpMainContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpMainContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpMainContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpMainContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpMainContent.Controls.Add(this.gbCards, 0, 0);
-            this.tlpMainContent.Controls.Add(this.gbGames, 0, 1);
-            this.tlpMainContent.Controls.Add(this.gbKeys, 1, 0);
+            this.tlpMainContent.Controls.Add(this.gbKeys, 0, 1);
+            this.tlpMainContent.Controls.Add(this.gbChat, 3, 1);
+            this.tlpMainContent.Controls.Add(this.gbGames, 2, 0);
             this.tlpMainContent.Location = new System.Drawing.Point(264, 12);
             this.tlpMainContent.Name = "tlpMainContent";
             this.tlpMainContent.RowCount = 2;
             this.tlpMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpMainContent.Size = new System.Drawing.Size(479, 122);
             this.tlpMainContent.TabIndex = 34;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.Controls.Add(this.btnRedeem, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnRedeemNF, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnRedeemFF, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnAddLicense, 3, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(345, 36);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // btnRedeem
+            // 
+            this.btnRedeem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRedeem.Enabled = false;
+            this.btnRedeem.Location = new System.Drawing.Point(3, 3);
+            this.btnRedeem.Name = "btnRedeem";
+            this.btnRedeem.Size = new System.Drawing.Size(80, 30);
+            this.btnRedeem.TabIndex = 0;
+            this.btnRedeem.Text = "Redeem";
+            this.ttDesc.SetToolTip(this.btnRedeem, "Redeems given cd-keys on given bot instance.");
+            this.btnRedeem.UseVisualStyleBackColor = true;
+            this.btnRedeem.Click += new System.EventHandler(this.btnRedeem_Click);
+            // 
+            // btnRedeemNF
+            // 
+            this.btnRedeemNF.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRedeemNF.Enabled = false;
+            this.btnRedeemNF.Location = new System.Drawing.Point(89, 3);
+            this.btnRedeemNF.Name = "btnRedeemNF";
+            this.btnRedeemNF.Size = new System.Drawing.Size(80, 30);
+            this.btnRedeemNF.TabIndex = 1;
+            this.btnRedeemNF.Text = "Redeem^";
+            this.ttDesc.SetToolTip(this.btnRedeemNF, "Redeems given cd-keys on given bot instance,");
+            this.btnRedeemNF.UseVisualStyleBackColor = true;
+            this.btnRedeemNF.Click += new System.EventHandler(this.btnRedeemNF_Click);
+            // 
+            // btnRedeemFF
+            // 
+            this.btnRedeemFF.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRedeemFF.Enabled = false;
+            this.btnRedeemFF.Location = new System.Drawing.Point(175, 3);
+            this.btnRedeemFF.Name = "btnRedeemFF";
+            this.btnRedeemFF.Size = new System.Drawing.Size(80, 30);
+            this.btnRedeemFF.TabIndex = 2;
+            this.btnRedeemFF.Text = "Redeem&&";
+            this.ttDesc.SetToolTip(this.btnRedeemFF, "Redeems given cd-keys on any bot instance apart from given one.");
+            this.btnRedeemFF.UseVisualStyleBackColor = true;
+            this.btnRedeemFF.Click += new System.EventHandler(this.btnRedeemFF_Click);
+            // 
+            // btnAddLicense
+            // 
+            this.btnAddLicense.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAddLicense.Enabled = false;
+            this.btnAddLicense.Location = new System.Drawing.Point(261, 3);
+            this.btnAddLicense.Name = "btnAddLicense";
+            this.btnAddLicense.Size = new System.Drawing.Size(81, 30);
+            this.btnAddLicense.TabIndex = 3;
+            this.btnAddLicense.Text = "Add License";
+            this.ttDesc.SetToolTip(this.btnAddLicense, "Activates given appIDs on given bot instance (free games only).");
+            this.btnAddLicense.UseVisualStyleBackColor = true;
+            this.btnAddLicense.Click += new System.EventHandler(this.btnAddLicense_Click);
             // 
             // ASFui
             // 
@@ -904,8 +877,6 @@
             this.Load += new System.EventHandler(this.ASFui_Load);
             this.Resize += new System.EventHandler(this.ASFui_Resize);
             this.gbKeys.ResumeLayout(false);
-            this.tlpKeys.ResumeLayout(false);
-            this.cmsRedeem.ResumeLayout(false);
             this.gb2FA.ResumeLayout(false);
             this.tlp2FA.ResumeLayout(false);
             this.gbCards.ResumeLayout(false);
@@ -922,6 +893,7 @@
             this.tlpASF.ResumeLayout(false);
             this.cmsTrayIcon.ResumeLayout(false);
             this.tlpMainContent.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -931,7 +903,6 @@
         private System.Windows.Forms.Label lbCurrentBot;
         private System.Windows.Forms.Button btnReloadBots;
         private System.Windows.Forms.GroupBox gbKeys;
-        private System.Windows.Forms.TableLayoutPanel tlpKeys;
         private System.Windows.Forms.GroupBox gb2FA;
         private System.Windows.Forms.GroupBox gbCards;
         private System.Windows.Forms.TableLayoutPanel tlpCards;
@@ -948,7 +919,6 @@
         private System.Windows.Forms.Button btn2FANo;
         private System.Windows.Forms.GroupBox gbChat;
         private System.Windows.Forms.TableLayoutPanel tlpChat;
-        private System.Windows.Forms.Button btnLeave;
         private System.Windows.Forms.Button btnRejoin;
         private System.Windows.Forms.GroupBox gbGames;
         private System.Windows.Forms.TableLayoutPanel tlpGames;
@@ -981,12 +951,11 @@
         private System.Windows.Forms.Button btnStatusBot;
         private System.Windows.Forms.Button btnResumeBot;
         private System.Windows.Forms.Button btnStartAll;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button btnRedeem;
+        private System.Windows.Forms.Button btnRedeemNF;
+        private System.Windows.Forms.Button btnRedeemFF;
         private System.Windows.Forms.Button btnAddLicense;
-        private System.Windows.Forms.ContextMenuStrip cmsRedeem;
-        private System.Windows.Forms.ToolStripMenuItem btnRedeem;
-        private System.Windows.Forms.ToolStripMenuItem btnRedeemNF;
-        private System.Windows.Forms.ToolStripMenuItem btnRedeemFF;
-        private CustomDropdownButton btnRedeemMenu;
     }
 }
 
