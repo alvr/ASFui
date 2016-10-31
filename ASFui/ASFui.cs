@@ -76,6 +76,11 @@ namespace ASFui
                 if (settingsProperty != null)
                     Size = (Size)settingsProperty.DefaultValue;
             }
+
+            if (Properties.Settings.Default.Autostart)
+            {
+                Task.Delay(500).ContinueWith(t => btnStart.PerformClick());
+            }
         }
 
         private void ASFui_FormClosing(object sender, FormClosingEventArgs e)
@@ -415,7 +420,7 @@ namespace ASFui
 
         private void btnStartAll_Click(object sender, EventArgs e)
         {
-            Util.SendCommand(Util.GenerateCommand("startall", string.Empty));
+            Util.SendCommand("startall");
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();

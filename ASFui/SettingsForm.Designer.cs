@@ -47,9 +47,12 @@ namespace ASFui
             this.cbInvalid = new System.Windows.Forms.CheckBox();
             this.cbDuplicated = new System.Windows.Forms.CheckBox();
             this.cbOK = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbAutostart = new System.Windows.Forms.CheckBox();
             this.gbBinaryPath.SuspendLayout();
             this.gbLocalRemote.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // ofdBinarySearch
@@ -134,7 +137,7 @@ namespace ASFui
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(368, 216);
+            this.btnSave.Location = new System.Drawing.Point(368, 266);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 4;
@@ -145,7 +148,7 @@ namespace ASFui
             // lbSaved
             // 
             this.lbSaved.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lbSaved.Location = new System.Drawing.Point(262, 216);
+            this.lbSaved.Location = new System.Drawing.Point(262, 266);
             this.lbSaved.Name = "lbSaved";
             this.lbSaved.Size = new System.Drawing.Size(100, 23);
             this.lbSaved.TabIndex = 5;
@@ -160,7 +163,7 @@ namespace ASFui
             this.groupBox1.Controls.Add(this.cbOK);
             this.groupBox1.Location = new System.Drawing.Point(12, 120);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(425, 90);
+            this.groupBox1.Size = new System.Drawing.Size(431, 90);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Clear Keys Input";
@@ -219,11 +222,32 @@ namespace ASFui
             this.cbOK.Text = "When the key is redeemed";
             this.cbOK.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.cbAutostart);
+            this.groupBox2.Location = new System.Drawing.Point(12, 216);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(431, 44);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "AutoStart";
+            // 
+            // cbAutostart
+            // 
+            this.cbAutostart.AutoSize = true;
+            this.cbAutostart.Location = new System.Drawing.Point(9, 19);
+            this.cbAutostart.Name = "cbAutostart";
+            this.cbAutostart.Size = new System.Drawing.Size(142, 17);
+            this.cbAutostart.TabIndex = 0;
+            this.cbAutostart.Text = "Autostart when opened?";
+            this.cbAutostart.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(455, 248);
+            this.ClientSize = new System.Drawing.Size(455, 301);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lbSaved);
             this.Controls.Add(this.btnSave);
@@ -241,6 +265,8 @@ namespace ASFui
             this.gbLocalRemote.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -263,5 +289,7 @@ namespace ASFui
         private CheckBox cbInvalid;
         private CheckBox cbDuplicated;
         private CheckBox cbOK;
+        private GroupBox groupBox2;
+        private CheckBox cbAutostart;
     }
 }
