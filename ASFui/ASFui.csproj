@@ -110,9 +110,6 @@
       <DependentUpon>ASFui.cs</DependentUpon>
     </Compile>
     <Compile Include="Bot.cs" />
-    <Compile Include="CustomDropdownButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Client.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Password.cs">
