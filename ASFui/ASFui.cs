@@ -45,7 +45,7 @@ namespace ASFui
 
         private void ASFui_Resize(object sender, EventArgs e)
         {
-            if (WindowState != FormWindowState.Minimized) return;
+            if (WindowState != FormWindowState.Minimized || !Properties.Settings.Default.ToTray) return;
             Hide();
             TrayIcon.Visible = true;
         }

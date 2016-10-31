@@ -41,18 +41,19 @@ namespace ASFui
             this.rbLocal = new System.Windows.Forms.RadioButton();
             this.btnSave = new System.Windows.Forms.Button();
             this.lbSaved = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbKeys = new System.Windows.Forms.GroupBox();
             this.cbCooldown = new System.Windows.Forms.CheckBox();
             this.cbOwned = new System.Windows.Forms.CheckBox();
             this.cbInvalid = new System.Windows.Forms.CheckBox();
             this.cbDuplicated = new System.Windows.Forms.CheckBox();
             this.cbOK = new System.Windows.Forms.CheckBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbBehavior = new System.Windows.Forms.GroupBox();
             this.cbAutostart = new System.Windows.Forms.CheckBox();
+            this.cbTray = new System.Windows.Forms.CheckBox();
             this.gbBinaryPath.SuspendLayout();
             this.gbLocalRemote.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbKeys.SuspendLayout();
+            this.gbBehavior.SuspendLayout();
             this.SuspendLayout();
             // 
             // ofdBinarySearch
@@ -154,19 +155,19 @@ namespace ASFui
             this.lbSaved.TabIndex = 5;
             this.lbSaved.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // groupBox1
+            // gbKeys
             // 
-            this.groupBox1.Controls.Add(this.cbCooldown);
-            this.groupBox1.Controls.Add(this.cbOwned);
-            this.groupBox1.Controls.Add(this.cbInvalid);
-            this.groupBox1.Controls.Add(this.cbDuplicated);
-            this.groupBox1.Controls.Add(this.cbOK);
-            this.groupBox1.Location = new System.Drawing.Point(12, 120);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(431, 90);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Clear Keys Input";
+            this.gbKeys.Controls.Add(this.cbCooldown);
+            this.gbKeys.Controls.Add(this.cbOwned);
+            this.gbKeys.Controls.Add(this.cbInvalid);
+            this.gbKeys.Controls.Add(this.cbDuplicated);
+            this.gbKeys.Controls.Add(this.cbOK);
+            this.gbKeys.Location = new System.Drawing.Point(12, 120);
+            this.gbKeys.Name = "gbKeys";
+            this.gbKeys.Size = new System.Drawing.Size(431, 90);
+            this.gbKeys.TabIndex = 6;
+            this.gbKeys.TabStop = false;
+            this.gbKeys.Text = "Clear Keys Input";
             // 
             // cbCooldown
             // 
@@ -222,15 +223,16 @@ namespace ASFui
             this.cbOK.Text = "When the key is redeemed";
             this.cbOK.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // gbBehavior
             // 
-            this.groupBox2.Controls.Add(this.cbAutostart);
-            this.groupBox2.Location = new System.Drawing.Point(12, 216);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(431, 44);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "AutoStart";
+            this.gbBehavior.Controls.Add(this.cbTray);
+            this.gbBehavior.Controls.Add(this.cbAutostart);
+            this.gbBehavior.Location = new System.Drawing.Point(12, 216);
+            this.gbBehavior.Name = "gbBehavior";
+            this.gbBehavior.Size = new System.Drawing.Size(431, 44);
+            this.gbBehavior.TabIndex = 7;
+            this.gbBehavior.TabStop = false;
+            this.gbBehavior.Text = "ASFui behavior";
             // 
             // cbAutostart
             // 
@@ -242,13 +244,23 @@ namespace ASFui
             this.cbAutostart.Text = "Autostart when opened?";
             this.cbAutostart.UseVisualStyleBackColor = true;
             // 
+            // cbTray
+            // 
+            this.cbTray.AutoSize = true;
+            this.cbTray.Location = new System.Drawing.Point(158, 19);
+            this.cbTray.Name = "cbTray";
+            this.cbTray.Size = new System.Drawing.Size(104, 17);
+            this.cbTray.TabIndex = 1;
+            this.cbTray.Text = "Minimize to tray?";
+            this.cbTray.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 301);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbBehavior);
+            this.Controls.Add(this.gbKeys);
             this.Controls.Add(this.lbSaved);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.gbLocalRemote);
@@ -263,10 +275,10 @@ namespace ASFui
             this.gbBinaryPath.PerformLayout();
             this.gbLocalRemote.ResumeLayout(false);
             this.gbLocalRemote.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gbKeys.ResumeLayout(false);
+            this.gbKeys.PerformLayout();
+            this.gbBehavior.ResumeLayout(false);
+            this.gbBehavior.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -283,13 +295,14 @@ namespace ASFui
         private Button btnSave;
         private TextBox tbRemoteURL;
         private Label lbSaved;
-        private GroupBox groupBox1;
+        private GroupBox gbKeys;
         private CheckBox cbCooldown;
         private CheckBox cbOwned;
         private CheckBox cbInvalid;
         private CheckBox cbDuplicated;
         private CheckBox cbOK;
-        private GroupBox groupBox2;
+        private GroupBox gbBehavior;
         private CheckBox cbAutostart;
+        private CheckBox cbTray;
     }
 }

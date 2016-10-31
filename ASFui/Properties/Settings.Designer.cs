@@ -178,5 +178,17 @@ namespace ASFui.Properties {
                 this["Autostart"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ToTray {
+            get {
+                return ((bool)(this["ToTray"]));
+            }
+            set {
+                this["ToTray"] = value;
+            }
+        }
     }
 }

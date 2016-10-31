@@ -19,6 +19,7 @@ namespace ASFui
             cbOwned.Checked = Properties.Settings.Default.ClearOwned;
             cbCooldown.Checked = Properties.Settings.Default.ClearCooldown;
             cbAutostart.Checked = Properties.Settings.Default.Autostart;
+            cbTray.Checked = Properties.Settings.Default.ToTray;
         }
 
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -47,6 +48,7 @@ namespace ASFui
             Properties.Settings.Default.ClearOwned = cbOwned.Checked;
             Properties.Settings.Default.ClearCooldown = cbCooldown.Checked;
             Properties.Settings.Default.Autostart = cbAutostart.Checked;
+            Properties.Settings.Default.ToTray = cbTray.Checked;
 
             if (rbRemote.Checked)
             {

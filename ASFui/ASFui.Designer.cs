@@ -37,6 +37,11 @@
             this.lbCurrentBot = new System.Windows.Forms.Label();
             this.btnReloadBots = new System.Windows.Forms.Button();
             this.gbKeys = new System.Windows.Forms.GroupBox();
+            this.tlpKeys = new System.Windows.Forms.TableLayoutPanel();
+            this.btnRedeem = new System.Windows.Forms.Button();
+            this.btnRedeemNF = new System.Windows.Forms.Button();
+            this.btnRedeemFF = new System.Windows.Forms.Button();
+            this.btnAddLicense = new System.Windows.Forms.Button();
             this.gb2FA = new System.Windows.Forms.GroupBox();
             this.tlp2FA = new System.Windows.Forms.TableLayoutPanel();
             this.btn2FA = new System.Windows.Forms.Button();
@@ -80,12 +85,8 @@
             this.btnASFuiHelp = new System.Windows.Forms.Button();
             this.tlpMainContent = new System.Windows.Forms.TableLayoutPanel();
             this.ttDesc = new System.Windows.Forms.ToolTip(this.components);
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnRedeem = new System.Windows.Forms.Button();
-            this.btnRedeemNF = new System.Windows.Forms.Button();
-            this.btnRedeemFF = new System.Windows.Forms.Button();
-            this.btnAddLicense = new System.Windows.Forms.Button();
             this.gbKeys.SuspendLayout();
+            this.tlpKeys.SuspendLayout();
             this.gb2FA.SuspendLayout();
             this.tlp2FA.SuspendLayout();
             this.gbCards.SuspendLayout();
@@ -101,7 +102,6 @@
             this.tlpASF.SuspendLayout();
             this.cmsTrayIcon.SuspendLayout();
             this.tlpMainContent.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtbOutput
@@ -201,7 +201,7 @@
             // gbKeys
             // 
             this.tlpMainContent.SetColumnSpan(this.gbKeys, 3);
-            this.gbKeys.Controls.Add(this.tableLayoutPanel1);
+            this.gbKeys.Controls.Add(this.tlpKeys);
             this.gbKeys.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbKeys.Location = new System.Drawing.Point(3, 64);
             this.gbKeys.Name = "gbKeys";
@@ -209,6 +209,77 @@
             this.gbKeys.TabIndex = 27;
             this.gbKeys.TabStop = false;
             this.gbKeys.Text = "Keys";
+            // 
+            // tlpKeys
+            // 
+            this.tlpKeys.ColumnCount = 4;
+            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpKeys.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpKeys.Controls.Add(this.btnRedeem, 0, 0);
+            this.tlpKeys.Controls.Add(this.btnRedeemNF, 1, 0);
+            this.tlpKeys.Controls.Add(this.btnRedeemFF, 2, 0);
+            this.tlpKeys.Controls.Add(this.btnAddLicense, 3, 0);
+            this.tlpKeys.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpKeys.Location = new System.Drawing.Point(3, 16);
+            this.tlpKeys.Name = "tlpKeys";
+            this.tlpKeys.RowCount = 1;
+            this.tlpKeys.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpKeys.Size = new System.Drawing.Size(345, 36);
+            this.tlpKeys.TabIndex = 0;
+            // 
+            // btnRedeem
+            // 
+            this.btnRedeem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRedeem.Enabled = false;
+            this.btnRedeem.Location = new System.Drawing.Point(3, 3);
+            this.btnRedeem.Name = "btnRedeem";
+            this.btnRedeem.Size = new System.Drawing.Size(80, 30);
+            this.btnRedeem.TabIndex = 0;
+            this.btnRedeem.Text = "Redeem";
+            this.ttDesc.SetToolTip(this.btnRedeem, "Redeems given cd-keys on given bot instance.");
+            this.btnRedeem.UseVisualStyleBackColor = true;
+            this.btnRedeem.Click += new System.EventHandler(this.btnRedeem_Click);
+            // 
+            // btnRedeemNF
+            // 
+            this.btnRedeemNF.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRedeemNF.Enabled = false;
+            this.btnRedeemNF.Location = new System.Drawing.Point(89, 3);
+            this.btnRedeemNF.Name = "btnRedeemNF";
+            this.btnRedeemNF.Size = new System.Drawing.Size(80, 30);
+            this.btnRedeemNF.TabIndex = 1;
+            this.btnRedeemNF.Text = "Redeem^";
+            this.ttDesc.SetToolTip(this.btnRedeemNF, "Redeems given cd-keys on given bot instance,");
+            this.btnRedeemNF.UseVisualStyleBackColor = true;
+            this.btnRedeemNF.Click += new System.EventHandler(this.btnRedeemNF_Click);
+            // 
+            // btnRedeemFF
+            // 
+            this.btnRedeemFF.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRedeemFF.Enabled = false;
+            this.btnRedeemFF.Location = new System.Drawing.Point(175, 3);
+            this.btnRedeemFF.Name = "btnRedeemFF";
+            this.btnRedeemFF.Size = new System.Drawing.Size(80, 30);
+            this.btnRedeemFF.TabIndex = 2;
+            this.btnRedeemFF.Text = "Redeem&&";
+            this.ttDesc.SetToolTip(this.btnRedeemFF, "Redeems given cd-keys on any bot instance apart from given one.");
+            this.btnRedeemFF.UseVisualStyleBackColor = true;
+            this.btnRedeemFF.Click += new System.EventHandler(this.btnRedeemFF_Click);
+            // 
+            // btnAddLicense
+            // 
+            this.btnAddLicense.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAddLicense.Enabled = false;
+            this.btnAddLicense.Location = new System.Drawing.Point(261, 3);
+            this.btnAddLicense.Name = "btnAddLicense";
+            this.btnAddLicense.Size = new System.Drawing.Size(81, 30);
+            this.btnAddLicense.TabIndex = 3;
+            this.btnAddLicense.Text = "Add License";
+            this.ttDesc.SetToolTip(this.btnAddLicense, "Activates given appIDs on given bot instance (free games only).");
+            this.btnAddLicense.UseVisualStyleBackColor = true;
+            this.btnAddLicense.Click += new System.EventHandler(this.btnAddLicense_Click);
             // 
             // gb2FA
             // 
@@ -777,77 +848,6 @@
             this.tlpMainContent.Size = new System.Drawing.Size(479, 122);
             this.tlpMainContent.TabIndex = 34;
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.btnRedeem, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnRedeemNF, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnRedeemFF, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnAddLicense, 3, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(345, 36);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // btnRedeem
-            // 
-            this.btnRedeem.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnRedeem.Enabled = false;
-            this.btnRedeem.Location = new System.Drawing.Point(3, 3);
-            this.btnRedeem.Name = "btnRedeem";
-            this.btnRedeem.Size = new System.Drawing.Size(80, 30);
-            this.btnRedeem.TabIndex = 0;
-            this.btnRedeem.Text = "Redeem";
-            this.ttDesc.SetToolTip(this.btnRedeem, "Redeems given cd-keys on given bot instance.");
-            this.btnRedeem.UseVisualStyleBackColor = true;
-            this.btnRedeem.Click += new System.EventHandler(this.btnRedeem_Click);
-            // 
-            // btnRedeemNF
-            // 
-            this.btnRedeemNF.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnRedeemNF.Enabled = false;
-            this.btnRedeemNF.Location = new System.Drawing.Point(89, 3);
-            this.btnRedeemNF.Name = "btnRedeemNF";
-            this.btnRedeemNF.Size = new System.Drawing.Size(80, 30);
-            this.btnRedeemNF.TabIndex = 1;
-            this.btnRedeemNF.Text = "Redeem^";
-            this.ttDesc.SetToolTip(this.btnRedeemNF, "Redeems given cd-keys on given bot instance,");
-            this.btnRedeemNF.UseVisualStyleBackColor = true;
-            this.btnRedeemNF.Click += new System.EventHandler(this.btnRedeemNF_Click);
-            // 
-            // btnRedeemFF
-            // 
-            this.btnRedeemFF.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnRedeemFF.Enabled = false;
-            this.btnRedeemFF.Location = new System.Drawing.Point(175, 3);
-            this.btnRedeemFF.Name = "btnRedeemFF";
-            this.btnRedeemFF.Size = new System.Drawing.Size(80, 30);
-            this.btnRedeemFF.TabIndex = 2;
-            this.btnRedeemFF.Text = "Redeem&&";
-            this.ttDesc.SetToolTip(this.btnRedeemFF, "Redeems given cd-keys on any bot instance apart from given one.");
-            this.btnRedeemFF.UseVisualStyleBackColor = true;
-            this.btnRedeemFF.Click += new System.EventHandler(this.btnRedeemFF_Click);
-            // 
-            // btnAddLicense
-            // 
-            this.btnAddLicense.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddLicense.Enabled = false;
-            this.btnAddLicense.Location = new System.Drawing.Point(261, 3);
-            this.btnAddLicense.Name = "btnAddLicense";
-            this.btnAddLicense.Size = new System.Drawing.Size(81, 30);
-            this.btnAddLicense.TabIndex = 3;
-            this.btnAddLicense.Text = "Add License";
-            this.ttDesc.SetToolTip(this.btnAddLicense, "Activates given appIDs on given bot instance (free games only).");
-            this.btnAddLicense.UseVisualStyleBackColor = true;
-            this.btnAddLicense.Click += new System.EventHandler(this.btnAddLicense_Click);
-            // 
             // ASFui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -877,6 +877,7 @@
             this.Load += new System.EventHandler(this.ASFui_Load);
             this.Resize += new System.EventHandler(this.ASFui_Resize);
             this.gbKeys.ResumeLayout(false);
+            this.tlpKeys.ResumeLayout(false);
             this.gb2FA.ResumeLayout(false);
             this.tlp2FA.ResumeLayout(false);
             this.gbCards.ResumeLayout(false);
@@ -893,7 +894,6 @@
             this.tlpASF.ResumeLayout(false);
             this.cmsTrayIcon.ResumeLayout(false);
             this.tlpMainContent.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -951,7 +951,7 @@
         private System.Windows.Forms.Button btnStatusBot;
         private System.Windows.Forms.Button btnResumeBot;
         private System.Windows.Forms.Button btnStartAll;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tlpKeys;
         private System.Windows.Forms.Button btnRedeem;
         private System.Windows.Forms.Button btnRedeemNF;
         private System.Windows.Forms.Button btnRedeemFF;
