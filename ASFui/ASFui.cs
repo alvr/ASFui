@@ -421,6 +421,7 @@ namespace ASFui
         private void btnStartAll_Click(object sender, EventArgs e)
         {
             Util.SendCommand("startall");
+            GetBotList();
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
