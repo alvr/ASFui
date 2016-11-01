@@ -18,9 +18,7 @@ namespace ASFui
         private readonly ASFui _asf;
         private Process ASF;
         private readonly RichTextBox output;
-        private Thread outputThread;
         private readonly StringBuilder sb = new StringBuilder();
-        private bool loaded;
         private string key;
         private volatile bool closeOutput;
 
@@ -53,68 +51,46 @@ namespace ASFui
 
         private void PrintOutput()
         {
-            try
+            int s;
+            while ((ASF != null && (s = ASF.StandardOutput.Read()) != 0) && !closeOutput)
             {
-                int s;
-                while ((s = ASF.StandardOutput.Read()) != 0 || !closeOutput || ASF != null)
+                MethodInvoker mi = delegate
                 {
-                    MethodInvoker mi = delegate
-                    {
-                        key = Regex.Match(sb.ToString(), @"[0-9A-Z]{5}-[0-9A-Z]{5}-[0-9A-Z]{5}", RegexOptions.IgnoreCase).Value;
-                        output.AppendText(sb.ToString());
-                        Check();
-                        output.SelectionStart = output.Text.Length;
-                        output.ScrollToCaret();
-                        sb.Clear();
-                    };
+                    key = Regex.Match(sb.ToString(), @"[0-9A-Z]{5}-[0-9A-Z]{5}-[0-9A-Z]{5}", RegexOptions.IgnoreCase).Value;
+                    output.AppendText(sb.ToString());
+                    Check();
+                    output.SelectionStart = output.Text.Length;
+                    output.ScrollToCaret();
+                    sb.Clear();
+                };
 
-                    try
-                    {
-                        sb.Append(Convert.ToChar(s));
-                    }
-                    catch (OverflowException e)
-                    {
-                        Logging.Exception(e, "Output too long.");
-                        sb.Clear();
-                    }
+                sb.Append(Convert.ToChar(s));
 
-                    if (s == '\n')
-                    {
-                        output.Invoke(mi);
-                    }
-
-                    if (sb.ToString().EndsWith("\"android:\"):") || sb.ToString().EndsWith("login:") ||
-                        sb.ToString().EndsWith("+1234567890):") || sb.ToString().EndsWith("mobile:") ||
-                        sb.ToString().EndsWith("email:") || sb.ToString().EndsWith("PIN:") ||
-                        sb.ToString().EndsWith("app:") || sb.ToString().EndsWith("hostname:"))
-                    {
-                        output.AppendText(sb + " ");
-                        var result = Interaction.InputBox(sb.ToString(), @"Enter necessary input");
-                        ASF.StandardInput.WriteLine(result);
-                        ASF.StandardInput.Flush();
-                        output.AppendText(result + Environment.NewLine + sb);
-                        sb.Clear();
-                    }
-
-                    else if ((!sb.ToString().StartsWith("[AES]") ^ sb.ToString().StartsWith("[ProtectedDataForCurrentUser]"))
-                        && sb.ToString().EndsWith("password:"))
-                    {
-                        var Password = new Password(ASF, sb.ToString());
-                        Password.ShowDialog();
-                    }
-
-                    else if (sb.ToString().EndsWith("running, exiting"))
-                    {
-                        sb.Clear();
-                        _asf.btnStop.Invoke(new MethodInvoker(delegate { _asf.btnStop.PerformClick(); }));
-                    }
+                if (s == '\n')
+                {
+                    output.Invoke(mi);
                 }
-            }
-            catch (NullReferenceException e)
-            {
-                Logging.Exception(e, "Error reading ASF output.");
-                sb.Clear();
-                _asf.btnStop.Invoke(new MethodInvoker(delegate { _asf.btnStop.PerformClick(); }));
+
+                if (sb.ToString().EndsWith("\"android:\"):") || sb.ToString().EndsWith("login:") ||
+                    sb.ToString().EndsWith("+1234567890):") || sb.ToString().EndsWith("mobile:") ||
+                    sb.ToString().EndsWith("email:") || sb.ToString().EndsWith("PIN:") ||
+                    sb.ToString().EndsWith("app:") || sb.ToString().EndsWith("hostname:"))
+                {
+                    output.AppendText(sb + " ");
+                    var result = Interaction.InputBox(sb.ToString(), @"Enter necessary input");
+                    ASF.StandardInput.WriteLine(result);
+                    ASF.StandardInput.Flush();
+                    output.AppendText(result + Environment.NewLine + sb);
+                    sb.Clear();
+                }
+
+                else if ((!sb.ToString().StartsWith("[AES]") ^ sb.ToString().StartsWith("[ProtectedDataForCurrentUser]"))
+                    && sb.ToString().EndsWith("password:"))
+                {
+                    var Password = new Password(ASF, sb.ToString());
+                    Password.ShowDialog();
+                }
+
             }
         }
 
@@ -122,8 +98,8 @@ namespace ASFui
         {
             if (sb.ToString().Contains("Update process finished!"))
             {
-                _asf.btnStop.PerformClick();
-                Task.Delay(1500).ContinueWith(t => _asf.btnStart.PerformClick());
+                _asf.btnStop.Invoke(new MethodInvoker(delegate { _asf.btnStop.PerformClick(); }));
+                Task.Delay(1500).ContinueWith(t => _asf.btnStart.Invoke(new MethodInvoker(delegate { _asf.btnStart.PerformClick(); })));
             }
 
             if (key != "")
@@ -154,20 +130,25 @@ namespace ASFui
                 }
             }
 
-            if (!sb.ToString().Contains("Init() Success!") || loaded) return;
+            if (sb.ToString().Contains("Disconnected from Steam!"))
+            {
+                _asf.GetBotList();
+            }
+
+            if (!sb.ToString().Contains("Init() Success!")) return;
             _asf.GetBotList();
-            loaded = true;
         }
 
         public void Start()
         {
             ASF.Start();
-            outputThread = new Thread(PrintOutput);
-            outputThread.Start();
+            new Thread(PrintOutput).Start();
         }
 
         public void Stop()
         {
+            closeOutput = true;
+
             if (ASF == null)
             {
                 return;
@@ -182,7 +163,6 @@ namespace ASFui
                 ASF.Kill();
             }
 
-            closeOutput = true;
             ASF = null;
         }
 

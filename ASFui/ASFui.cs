@@ -124,11 +124,18 @@ namespace ASFui
                      cbBotList.Items.Add(m.Groups[1].Value);
                  }
              }));
-             if (cbBotList.Items.Count <= 0) return;
+
              cbBotList.Invoke(new MethodInvoker(delegate
              {
-                 cbBotList.SelectedIndex = 0;
-                 EnableElements();
+                 if (cbBotList.Items.Count <= 0)
+                 {
+                     btnStop.PerformClick();
+                 }
+                 else
+                 {
+                     cbBotList.SelectedIndex = 0;
+                     EnableElements();
+                 }
              }));
         }
 
