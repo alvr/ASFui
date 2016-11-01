@@ -145,7 +145,7 @@
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "Start";
-            this.ttDesc.SetToolTip(this.btnStart, "Start ASFui and ASF process.");
+            this.ttDesc.SetToolTip(this.btnStart, "Start ASF process.");
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
@@ -251,7 +251,7 @@
             this.btnRedeemNF.Size = new System.Drawing.Size(80, 30);
             this.btnRedeemNF.TabIndex = 1;
             this.btnRedeemNF.Text = "Redeem^";
-            this.ttDesc.SetToolTip(this.btnRedeemNF, "Redeems given cd-keys on given bot instance,");
+            this.ttDesc.SetToolTip(this.btnRedeemNF, "Redeems given cd-keys on given bot instance, without forwarding.");
             this.btnRedeemNF.UseVisualStyleBackColor = true;
             this.btnRedeemNF.Click += new System.EventHandler(this.btnRedeemNF_Click);
             // 
