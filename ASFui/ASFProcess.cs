@@ -130,11 +130,6 @@ namespace ASFui
                 }
             }
 
-            if (sb.ToString().Contains("Disconnected from Steam!"))
-            {
-                _asf.GetBotList();
-            }
-
             if (!sb.ToString().Contains("Init() Success!")) return;
             _asf.GetBotList();
         }

@@ -87,6 +87,7 @@ namespace ASFui
             Settings.Default.Upgrade();
             Settings.Default.UpdateSettings = false;
             Settings.Default.Save();
+            Logging.Info("ASFui updated to " + new Version(Application.ProductVersion));
         }
 
         public static bool IsOnScreen(Rectangle rec, double minPercentOnScreen = 0.2)

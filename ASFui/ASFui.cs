@@ -118,25 +118,19 @@ namespace ASFui
             var status = Util.SendCommand("statusall");
             var matches = Regex.Matches(status, @"Bot (.*) is");
             cbBotList.Invoke(new MethodInvoker(delegate
-             {
-                 foreach (Match m in matches)
-                 {
-                     cbBotList.Items.Add(m.Groups[1].Value);
-                 }
-             }));
+            {
+                foreach (Match m in matches)
+                    cbBotList.Items.Add(m.Groups[1].Value);
+            }));
 
-             cbBotList.Invoke(new MethodInvoker(delegate
-             {
-                 if (cbBotList.Items.Count <= 0)
-                 {
-                     btnStop.PerformClick();
-                 }
-                 else
-                 {
-                     cbBotList.SelectedIndex = 0;
-                     EnableElements();
-                 }
-             }));
+            Logging.Info("Bot list refreshed. Detected " + matches.Count + " bots.");
+
+            if (matches.Count <= 0) return;
+            cbBotList.Invoke(new MethodInvoker(delegate
+            {
+                cbBotList.SelectedIndex = 0;
+                EnableElements();
+            }));
         }
 
         #region Buttons Events
