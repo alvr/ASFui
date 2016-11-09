@@ -194,6 +194,17 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.29.4\build\dotnet\Fody.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent Condition=" '$(OS)' != 'Unix' AND '$(ConfigurationName)' == 'Release' ">
+      "$(SolutionDir)..\ArchiSteamFarm\tools\ILRepack\ILRepack.exe" /ndebug /internalize /parallel /targetplatform:v4 /wildcards /out:"$(SolutionDir)../ArchiSteamFarm/out/ASFui.exe" "$(TargetDir)$(TargetName).exe" "$(TargetDir)*.dll"
+      del "$(SolutionDir)\..\ArchiSteamFarm\out\ASFui.exe.config"
+	  copy "$(TargetDir)$(TargetName).exe" "$(SolutionDir)\..\ArchiSteamFarm\out\$(TargetName).exe"
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
