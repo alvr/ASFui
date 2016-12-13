@@ -14,7 +14,7 @@ namespace ASFui
 {
     internal static class Util
     {
-        private static readonly BasicHttpBinding Binding = new BasicHttpBinding {SendTimeout = new TimeSpan(0, 30, 0)};
+        private static readonly NetTcpBinding Binding = new NetTcpBinding { SendTimeout = new TimeSpan(0, 30, 0)};
 
         public static bool CheckBinary()
         {
@@ -49,10 +49,10 @@ namespace ASFui
             var json =
                 JObject.Parse(
                     File.ReadAllText(Path.GetDirectoryName(Settings.Default.ASFBinary) + @"/config/ASF.json"));
-            var hostname = json["WCFHostname"].ToString();
+            var hostname = json["WCFHost"].ToString();
             var port = json["WCFPort"].ToString();
 
-            return "http://" + hostname + ":" + port + "/ASF";
+            return "net.tcp://" + hostname + ":" + port + "/ASF";
         }
 
         public static bool CheckIfAsfIsRunning()
