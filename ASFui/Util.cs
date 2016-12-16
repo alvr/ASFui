@@ -14,7 +14,7 @@ namespace ASFui
 {
     internal static class Util
     {
-        private static readonly NetTcpBinding Binding = new NetTcpBinding { SendTimeout = new TimeSpan(0, 30, 0)};
+        private static readonly NetTcpBinding Binding = new NetTcpBinding { SendTimeout = new TimeSpan(0, 30, 0), Security = { Mode = SecurityMode.None } };
 
         public static bool CheckBinary()
         {
