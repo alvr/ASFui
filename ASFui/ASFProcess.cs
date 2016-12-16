@@ -4,8 +4,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
@@ -18,16 +16,13 @@ namespace ASFui
         private readonly ASFui _asf;
         private Process ASF;
         private readonly RichTextBox output;
-        private readonly StringBuilder sb = new StringBuilder();
         private string key;
-        private volatile bool closeOutput;
-
+ 
         public ASFProcess(ASFui asf, RichTextBox rtb)
         {
             _asf = asf;
             ASF = new Process();
             output = rtb;
-            closeOutput = false;
 
             var ASFInfo = new ProcessStartInfo()
             {
@@ -47,102 +42,87 @@ namespace ASFui
             };
 
             ASF.StartInfo = ASFInfo;
+            ASF.OutputDataReceived += OutputHandler;
         }
 
-        private void PrintOutput()
+        private void OutputHandler(object sender, DataReceivedEventArgs e)
         {
-            int s;
-            while ((ASF != null && (s = ASF.StandardOutput.Read()) != 0) && !closeOutput)
+            if (e.Data.EndsWith("\"android:\"):") || e.Data.EndsWith("login:") ||
+                e.Data.EndsWith("+1234567890):") || e.Data.EndsWith("mobile:") ||
+                e.Data.EndsWith("email:") || e.Data.EndsWith("PIN:") ||
+                e.Data.EndsWith("app:") || e.Data.EndsWith("hostname:"))
             {
-                MethodInvoker mi = delegate
-                {
-                    key = Regex.Match(sb.ToString(), @"[0-9A-Z]{5}-[0-9A-Z]{5}-[0-9A-Z]{5}", RegexOptions.IgnoreCase).Value;
-                    output.AppendText(sb.ToString());
-                    Check();
-                    output.SelectionStart = output.Text.Length;
-                    output.ScrollToCaret();
-                    sb.Clear();
-                };
-
-                sb.Append(Convert.ToChar(s));
-
-                if (s == '\n')
-                {
-                    output.Invoke(mi);
-                }
-
-                if (sb.ToString().EndsWith("\"android:\"):") || sb.ToString().EndsWith("login:") ||
-                    sb.ToString().EndsWith("+1234567890):") || sb.ToString().EndsWith("mobile:") ||
-                    sb.ToString().EndsWith("email:") || sb.ToString().EndsWith("PIN:") ||
-                    sb.ToString().EndsWith("app:") || sb.ToString().EndsWith("hostname:"))
-                {
-                    output.AppendText(sb + " ");
-                    var result = Interaction.InputBox(sb.ToString(), @"Enter necessary input");
-                    ASF.StandardInput.WriteLine(result);
-                    ASF.StandardInput.Flush();
-                    output.AppendText(result + Environment.NewLine + sb);
-                    sb.Clear();
-                }
-
-                else if ((!sb.ToString().StartsWith("[AES]") ^ sb.ToString().StartsWith("[ProtectedDataForCurrentUser]"))
-                    && sb.ToString().EndsWith("password:"))
-                {
-                    var Password = new Password(ASF, sb.ToString());
-                    Password.ShowDialog();
-                }
-
-            }
-        }
-
-        private void Check()
-        {
-            if (sb.ToString().Contains("Update process finished!"))
-            {
-                _asf.btnStop.Invoke(new MethodInvoker(delegate { _asf.btnStop.PerformClick(); }));
-                Task.Delay(1500).ContinueWith(t => _asf.btnStart.Invoke(new MethodInvoker(delegate { _asf.btnStart.PerformClick(); })));
+                var result = Interaction.InputBox(e.Data, @"Enter necessary input");
+                ASF.StandardInput.WriteLine(result);
+                ASF.StandardInput.Flush();
             }
 
-            if (key != "")
+            if ((!e.Data.StartsWith("[AES]") ^ e.Data.StartsWith("[ProtectedDataForCurrentUser]")) && e.Data.EndsWith("password:"))
             {
-                if (sb.ToString().Contains("OK") && Properties.Settings.Default.ClearOk)
+                var Password = new Password(ASF, e.Data);
+                Password.ShowDialog();
+            }
+
+            if (e.Data.Contains("Update process finished!"))
+            {
+                _asf.btnStop.Invoke(new MethodInvoker(() => _asf.btnStop.PerformClick()));
+                Task.Delay(1500).ContinueWith(t => _asf.btnStart.Invoke(new MethodInvoker(() => _asf.btnStart.PerformClick())));
+            }
+
+            if (key != string.Empty)
+            {
+                if (e.Data.Contains("OK") && Properties.Settings.Default.ClearOk)
                 {
                     _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
                 }
 
-                else if (sb.ToString().Contains("DuplicatedKey") && Properties.Settings.Default.ClearDuplicated)
+                else if (e.Data.Contains("DuplicatedKey") && Properties.Settings.Default.ClearDuplicated)
                 {
                     _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
                 }
 
-                else if (sb.ToString().Contains("InvalidKey") && Properties.Settings.Default.ClearInvalid)
+                else if (e.Data.Contains("InvalidKey") && Properties.Settings.Default.ClearInvalid)
                 {
                     _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
                 }
 
-                else if (sb.ToString().Contains("AlreadyOwned") && Properties.Settings.Default.ClearOwned)
+                else if (e.Data.Contains("AlreadyOwned") && Properties.Settings.Default.ClearOwned)
                 {
                     _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
                 }
 
-                else if (sb.ToString().Contains("OnCooldown") && Properties.Settings.Default.ClearCooldown)
+                else if (e.Data.Contains("OnCooldown") && Properties.Settings.Default.ClearCooldown)
                 {
                     _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
                 }
             }
 
-            if (!sb.ToString().Contains("Init() Success!")) return;
-            _asf.GetBotList();
+            if (e.Data.Contains("Init() Success!"))
+            {
+                _asf.GetBotList();
+            }
+
+            if (e.Data.Contains("OnDisconnected() Disconnected from Steam!"))
+            {
+                _asf.GetBotList();
+            }
+
+            output.Invoke(new MethodInvoker(() =>
+            {
+                output.AppendText(e.Data + Environment.NewLine);
+                output.ScrollToCaret();
+            }));
         }
 
         public void Start()
         {
             ASF.Start();
-            new Thread(PrintOutput).Start();
+            ASF.BeginOutputReadLine();
         }
 
         public void Stop()
         {
-            closeOutput = true;
+            ASF.CancelOutputRead();
 
             if (ASF == null)
             {
