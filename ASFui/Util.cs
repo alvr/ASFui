@@ -49,7 +49,16 @@ namespace ASFui
             var json =
                 JObject.Parse(
                     File.ReadAllText(Path.GetDirectoryName(Settings.Default.ASFBinary) + @"/config/ASF.json"));
-            var hostname = json["WCFHost"].ToString();
+
+            string hostname;
+            try
+            {
+                hostname = json["WCFHost"].ToString();
+            }
+            catch
+            {
+                hostname = json["WCFHostname"].ToString();
+            }
             var port = json["WCFPort"].ToString();
 
             return "net.tcp://" + hostname + ":" + port + "/ASF";
