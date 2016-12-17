@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
+using System.Text.RegularExpressions;
 
 namespace ASFui
 {
@@ -109,6 +110,7 @@ namespace ASFui
 
             output.Invoke(new MethodInvoker(() =>
             {
+                key = Regex.Match(e.Data.ToString(), @"[0-9A-Z]{5}-[0-9A-Z]{5}-[0-9A-Z]{5}", RegexOptions.IgnoreCase).Value;
                 output.AppendText(e.Data + Environment.NewLine);
                 output.ScrollToCaret();
             }));
