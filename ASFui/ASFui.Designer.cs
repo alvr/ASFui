@@ -85,6 +85,7 @@
             this.btnASFuiHelp = new System.Windows.Forms.Button();
             this.tlpMainContent = new System.Windows.Forms.TableLayoutPanel();
             this.ttDesc = new System.Windows.Forms.ToolTip(this.components);
+            this.btnPauseBotPerma = new System.Windows.Forms.Button();
             this.gbKeys.SuspendLayout();
             this.tlpKeys.SuspendLayout();
             this.gb2FA.SuspendLayout();
@@ -433,27 +434,36 @@
             // 
             // tlpBots
             // 
-            this.tlpBots.ColumnCount = 4;
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpBots.ColumnCount = 20;
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tlpBots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tlpBots.Controls.Add(this.btnStartBot, 0, 0);
-            this.tlpBots.Controls.Add(this.btnStopBot, 1, 0);
-            this.tlpBots.Controls.Add(this.btnPauseBot, 2, 0);
-            this.tlpBots.Controls.Add(this.btnStatusAll, 3, 1);
-            this.tlpBots.Controls.Add(this.btnStatusBot, 2, 1);
-            this.tlpBots.Controls.Add(this.btnPasswordBot, 1, 1);
-            this.tlpBots.Controls.Add(this.btnResumeBot, 3, 0);
             this.tlpBots.Controls.Add(this.btnStartAll, 0, 1);
+            this.tlpBots.Controls.Add(this.btnStopBot, 4, 0);
+            this.tlpBots.Controls.Add(this.btnPauseBot, 8, 0);
+            this.tlpBots.Controls.Add(this.btnPauseBotPerma, 12, 0);
+            this.tlpBots.Controls.Add(this.btnResumeBot, 16, 0);
+            this.tlpBots.Controls.Add(this.btnPasswordBot, 5, 1);
+            this.tlpBots.Controls.Add(this.btnStatusBot, 10, 1);
+            this.tlpBots.Controls.Add(this.btnStatusAll, 15, 1);
             this.tlpBots.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpBots.Location = new System.Drawing.Point(3, 16);
             this.tlpBots.Name = "tlpBots";
@@ -465,11 +475,12 @@
             // 
             // btnStartBot
             // 
+            this.tlpBots.SetColumnSpan(this.btnStartBot, 4);
             this.btnStartBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStartBot.Enabled = false;
             this.btnStartBot.Location = new System.Drawing.Point(3, 3);
             this.btnStartBot.Name = "btnStartBot";
-            this.btnStartBot.Size = new System.Drawing.Size(112, 28);
+            this.btnStartBot.Size = new System.Drawing.Size(86, 28);
             this.btnStartBot.TabIndex = 0;
             this.btnStartBot.Text = "Start";
             this.ttDesc.SetToolTip(this.btnStartBot, "Starts given bot instance.");
@@ -478,11 +489,12 @@
             // 
             // btnStopBot
             // 
+            this.tlpBots.SetColumnSpan(this.btnStopBot, 4);
             this.btnStopBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStopBot.Enabled = false;
-            this.btnStopBot.Location = new System.Drawing.Point(121, 3);
+            this.btnStopBot.Location = new System.Drawing.Point(95, 3);
             this.btnStopBot.Name = "btnStopBot";
-            this.btnStopBot.Size = new System.Drawing.Size(112, 28);
+            this.btnStopBot.Size = new System.Drawing.Size(86, 28);
             this.btnStopBot.TabIndex = 1;
             this.btnStopBot.Text = "Stop";
             this.ttDesc.SetToolTip(this.btnStopBot, "Stops given bot instance.");
@@ -491,24 +503,26 @@
             // 
             // btnPauseBot
             // 
+            this.tlpBots.SetColumnSpan(this.btnPauseBot, 4);
             this.btnPauseBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPauseBot.Enabled = false;
-            this.btnPauseBot.Location = new System.Drawing.Point(239, 3);
+            this.btnPauseBot.Location = new System.Drawing.Point(187, 3);
             this.btnPauseBot.Name = "btnPauseBot";
-            this.btnPauseBot.Size = new System.Drawing.Size(112, 28);
+            this.btnPauseBot.Size = new System.Drawing.Size(86, 28);
             this.btnPauseBot.TabIndex = 2;
             this.btnPauseBot.Text = "Pause";
-            this.ttDesc.SetToolTip(this.btnPauseBot, "Pauses automatic farming of given bot instance.");
+            this.ttDesc.SetToolTip(this.btnPauseBot, "Temporarily pauses automatic farming of given bot instance.");
             this.btnPauseBot.UseVisualStyleBackColor = true;
             this.btnPauseBot.Click += new System.EventHandler(this.btnPauseBot_Click);
             // 
             // btnStatusAll
             // 
+            this.tlpBots.SetColumnSpan(this.btnStatusAll, 5);
             this.btnStatusAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStatusAll.Enabled = false;
-            this.btnStatusAll.Location = new System.Drawing.Point(357, 37);
+            this.btnStatusAll.Location = new System.Drawing.Point(348, 37);
             this.btnStatusAll.Name = "btnStatusAll";
-            this.btnStatusAll.Size = new System.Drawing.Size(112, 29);
+            this.btnStatusAll.Size = new System.Drawing.Size(121, 29);
             this.btnStatusAll.TabIndex = 7;
             this.btnStatusAll.Text = "Status All";
             this.ttDesc.SetToolTip(this.btnStatusAll, "Prints status of all bot instances and ASF itself.");
@@ -517,11 +531,12 @@
             // 
             // btnStatusBot
             // 
+            this.tlpBots.SetColumnSpan(this.btnStatusBot, 5);
             this.btnStatusBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStatusBot.Enabled = false;
-            this.btnStatusBot.Location = new System.Drawing.Point(239, 37);
+            this.btnStatusBot.Location = new System.Drawing.Point(233, 37);
             this.btnStatusBot.Name = "btnStatusBot";
-            this.btnStatusBot.Size = new System.Drawing.Size(112, 29);
+            this.btnStatusBot.Size = new System.Drawing.Size(109, 29);
             this.btnStatusBot.TabIndex = 6;
             this.btnStatusBot.Text = "Status";
             this.ttDesc.SetToolTip(this.btnStatusBot, "Prints status of given bot instance.");
@@ -530,11 +545,12 @@
             // 
             // btnPasswordBot
             // 
+            this.tlpBots.SetColumnSpan(this.btnPasswordBot, 5);
             this.btnPasswordBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPasswordBot.Enabled = false;
-            this.btnPasswordBot.Location = new System.Drawing.Point(121, 37);
+            this.btnPasswordBot.Location = new System.Drawing.Point(118, 37);
             this.btnPasswordBot.Name = "btnPasswordBot";
-            this.btnPasswordBot.Size = new System.Drawing.Size(112, 29);
+            this.btnPasswordBot.Size = new System.Drawing.Size(109, 29);
             this.btnPasswordBot.TabIndex = 5;
             this.btnPasswordBot.Text = "Password";
             this.ttDesc.SetToolTip(this.btnPasswordBot, "Prints encrypted password of given\r\nbot instance (in use with PasswordFormat).");
@@ -543,11 +559,12 @@
             // 
             // btnResumeBot
             // 
+            this.tlpBots.SetColumnSpan(this.btnResumeBot, 4);
             this.btnResumeBot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnResumeBot.Enabled = false;
-            this.btnResumeBot.Location = new System.Drawing.Point(357, 3);
+            this.btnResumeBot.Location = new System.Drawing.Point(371, 3);
             this.btnResumeBot.Name = "btnResumeBot";
-            this.btnResumeBot.Size = new System.Drawing.Size(112, 28);
+            this.btnResumeBot.Size = new System.Drawing.Size(98, 28);
             this.btnResumeBot.TabIndex = 3;
             this.btnResumeBot.Text = "Resume";
             this.ttDesc.SetToolTip(this.btnResumeBot, "Resumes automatic farming of given bot instance.");
@@ -556,11 +573,12 @@
             // 
             // btnStartAll
             // 
+            this.tlpBots.SetColumnSpan(this.btnStartAll, 5);
             this.btnStartAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStartAll.Enabled = false;
             this.btnStartAll.Location = new System.Drawing.Point(3, 37);
             this.btnStartAll.Name = "btnStartAll";
-            this.btnStartAll.Size = new System.Drawing.Size(112, 29);
+            this.btnStartAll.Size = new System.Drawing.Size(109, 29);
             this.btnStartAll.TabIndex = 4;
             this.btnStartAll.Text = "Start All";
             this.btnStartAll.UseVisualStyleBackColor = true;
@@ -848,6 +866,20 @@
             this.tlpMainContent.Size = new System.Drawing.Size(479, 122);
             this.tlpMainContent.TabIndex = 34;
             // 
+            // btnPauseBotPerma
+            // 
+            this.tlpBots.SetColumnSpan(this.btnPauseBotPerma, 4);
+            this.btnPauseBotPerma.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnPauseBotPerma.Enabled = false;
+            this.btnPauseBotPerma.Location = new System.Drawing.Point(279, 3);
+            this.btnPauseBotPerma.Name = "btnPauseBotPerma";
+            this.btnPauseBotPerma.Size = new System.Drawing.Size(86, 28);
+            this.btnPauseBotPerma.TabIndex = 8;
+            this.btnPauseBotPerma.Text = "Pause^";
+            this.ttDesc.SetToolTip(this.btnPauseBotPerma, "Permanently pauses automatic farming of given bot instance.");
+            this.btnPauseBotPerma.UseVisualStyleBackColor = true;
+            this.btnPauseBotPerma.Click += new System.EventHandler(this.btnPauseBotPerma_Click);
+            // 
             // ASFui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -956,6 +988,7 @@
         private System.Windows.Forms.Button btnRedeemNF;
         private System.Windows.Forms.Button btnRedeemFF;
         private System.Windows.Forms.Button btnAddLicense;
+        private System.Windows.Forms.Button btnPauseBotPerma;
     }
 }
 

@@ -113,11 +113,11 @@ namespace ASFui
 
         public void GetBotList()
         {
-            cbBotList.Invoke(new MethodInvoker(delegate { cbBotList.Items.Clear(); }));
+            cbBotList.Invoke(new MethodInvoker(() => cbBotList.Items.Clear()));
 
             var status = Util.SendCommand("statusall");
             var matches = Regex.Matches(status, @"Bot (.*) is");
-            cbBotList.Invoke(new MethodInvoker(delegate
+            cbBotList.Invoke(new MethodInvoker(() =>
             {
                 foreach (Match m in matches)
                     cbBotList.Items.Add(m.Groups[1].Value);
@@ -126,7 +126,7 @@ namespace ASFui
             Logging.Info("Bot list refreshed. Detected " + matches.Count + " bots.");
 
             if (matches.Count <= 0) return;
-            cbBotList.Invoke(new MethodInvoker(delegate
+            cbBotList.Invoke(new MethodInvoker(() =>
             {
                 cbBotList.SelectedIndex = 0;
                 EnableElements();
@@ -436,6 +436,14 @@ namespace ASFui
             rtbOutput.ScrollToCaret();
         }
 
+        private void btnPauseBotPerma_Click(object sender, EventArgs e)
+        {
+            Util.SendCommand(Util.GenerateCommand("pause^", cbBotList.SelectedItem.ToString()));
+
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
+        }
+
         private void btnResume_Click(object sender, EventArgs e)
         {
             Util.SendCommand(Util.GenerateCommand("resume", cbBotList.SelectedItem.ToString()));
@@ -563,6 +571,7 @@ namespace ASFui
             btnStartAll.Enabled = true;
             btnStopBot.Enabled = true;
             btnPauseBot.Enabled = true;
+            btnPauseBotPerma.Enabled = true;
             btnResumeBot.Enabled = true;
             btnPasswordBot.Enabled = true;
             btnStatusBot.Enabled = true;
@@ -595,6 +604,7 @@ namespace ASFui
             btnStartAll.Enabled = false;
             btnStopBot.Enabled = false;
             btnPauseBot.Enabled = false;
+            btnPauseBotPerma.Enabled = false;
             btnResumeBot.Enabled = false;
             btnPasswordBot.Enabled = false;
             btnStatusBot.Enabled = false;
