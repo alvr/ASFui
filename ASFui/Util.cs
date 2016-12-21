@@ -43,23 +43,28 @@ namespace ASFui
             return command;
         }
 
-        private static string GetEndpointAddress()
+        public static string GetEndpointAddress()
         {
             if (!Settings.Default.IsLocal) return Settings.Default.RemoteURL;
             var json =
                 JObject.Parse(
                     File.ReadAllText(Path.GetDirectoryName(Settings.Default.ASFBinary) + @"/config/ASF.json"));
 
-            string hostname;
+            string hostname= "127.0.0.1";
+            string port = "1242";
             try
             {
                 hostname = json["WCFHost"].ToString();
             }
             catch
             {
-                hostname = json["WCFHostname"].ToString();
+                try {
+                    hostname = json["WCFHostname"].ToString();
+                } catch { }
             }
-            var port = json["WCFPort"].ToString();
+            try {
+                port = json["WCFPort"].ToString();
+            }catch { }
 
             return "net.tcp://" + hostname + ":" + port + "/ASF";
         }
@@ -110,9 +115,12 @@ namespace ASFui
 
         public static bool CheckUrl(string url)
         {
+
+            return url.ToLower().StartsWith("net.tcp://");
+            /* Do an advanced check here if the URL fits or something is currently listening.
             try
             {
-                var client = new MetadataExchangeClient(new Uri(url), MetadataExchangeClientMode.HttpGet);
+                var client = new MetadataExchangeClient(Binding);
                 client.GetMetadata();
                 return true;
             }
@@ -121,6 +129,7 @@ namespace ASFui
                 Logging.Exception(ex, "Invalid remote URL.");
                 return false;
             }
+            */
         }
     }
 }

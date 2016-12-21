@@ -1,4 +1,5 @@
 ﻿using System;
+using ASFui.Properties;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
@@ -36,9 +37,14 @@ namespace ASFui
 
             if (Util.CheckIfAsfIsRunning())
             {
-                MessageBox.Show(@"An instance of ASF is already running. Close it.",
-                    @"ASF already running.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Environment.Exit(-2);
+                var result= MessageBox.Show(@"An instance of ASF is already running. Switching to remote mode.",
+                    @"ASF already running.", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                if (result == System.Windows.Forms.DialogResult.OK) {
+                    Settings.Default.IsLocal = false;
+                    Settings.Default.RemoteURL = Util.GetEndpointAddress();
+                } else {
+                    Environment.Exit(-2);
+                }
             }
             InitializeComponent();
         }
@@ -207,7 +213,7 @@ namespace ASFui
         {
             Task.Run(() =>
             {
-                Util.SendCommand(Util.GenerateCommand("farm", cbBotList.SelectedItem.ToString()));
+                sendCommand(Util.GenerateCommand("farm", cbBotList.SelectedItem.ToString()));
                 rtbOutput.SelectionStart = rtbOutput.Text.Length;
                 rtbOutput.ScrollToCaret();
             });
@@ -217,7 +223,7 @@ namespace ASFui
         {
             Task.Run(() =>
             {
-                Util.SendCommand(Util.GenerateCommand("loot", cbBotList.SelectedItem.ToString()));
+                sendCommand(Util.GenerateCommand("loot", cbBotList.SelectedItem.ToString()));
                 rtbOutput.SelectionStart = rtbOutput.Text.Length;
                 rtbOutput.ScrollToCaret();
             });
@@ -227,7 +233,7 @@ namespace ASFui
         {
             Task.Run(() =>
             {
-                Util.SendCommand("lootall");
+                sendCommand("lootall");
                 rtbOutput.SelectionStart = rtbOutput.Text.Length;
                 rtbOutput.ScrollToCaret();
             });
@@ -243,7 +249,7 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    Util.SendCommand(Util.GenerateCommand("redeem", cbBotList.SelectedItem.ToString(),
+                    sendCommand(Util.GenerateCommand("redeem", cbBotList.SelectedItem.ToString(),
                         Util.MultiToOne(tbInput.Lines)));
 
                     rtbOutput.SelectionStart = rtbOutput.Text.Length;
@@ -264,7 +270,7 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    Util.SendCommand(Util.GenerateCommand("redeem^", cbBotList.SelectedItem.ToString(),
+                    sendCommand(Util.GenerateCommand("redeem^", cbBotList.SelectedItem.ToString(),
                         Util.MultiToOne(tbInput.Lines)));
 
                     rtbOutput.SelectionStart = rtbOutput.Text.Length;
@@ -285,7 +291,7 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    Util.SendCommand(Util.GenerateCommand("redeem&", cbBotList.SelectedItem.ToString(),
+                    sendCommand(Util.GenerateCommand("redeem&", cbBotList.SelectedItem.ToString(),
                         Util.MultiToOne(tbInput.Lines)));
 
                     rtbOutput.SelectionStart = rtbOutput.Text.Length;
@@ -306,7 +312,7 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    Util.SendCommand(Util.GenerateCommand("addlicense", cbBotList.SelectedItem.ToString(), 
+                    sendCommand(Util.GenerateCommand("addlicense", cbBotList.SelectedItem.ToString(), 
                         Util.MultiToOne(tbInput.Lines)));
 
                     rtbOutput.SelectionStart = rtbOutput.Text.Length;
@@ -331,7 +337,7 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    Util.SendCommand(Util.GenerateCommand("owns", cbBotList.SelectedItem.ToString(), 
+                    sendCommand(Util.GenerateCommand("owns", cbBotList.SelectedItem.ToString(), 
                         Util.MultiToOne(tbInput.Lines)));
 
                     rtbOutput.SelectionStart = rtbOutput.Text.Length;
@@ -352,7 +358,7 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    Util.SendCommand(Util.GenerateCommand("ownsall", string.Empty, Util.MultiToOne(tbInput.Lines)));
+                    sendCommand(Util.GenerateCommand("ownsall", string.Empty, Util.MultiToOne(tbInput.Lines)));
                     
                     rtbOutput.SelectionStart = rtbOutput.Text.Length;
                     rtbOutput.ScrollToCaret();
@@ -372,7 +378,7 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    Util.SendCommand(Util.GenerateCommand("play", cbBotList.SelectedItem.ToString(), 
+                    sendCommand(Util.GenerateCommand("play", cbBotList.SelectedItem.ToString(), 
                         Util.MultiToOne(tbInput.Lines)));
 
                     rtbOutput.SelectionStart = rtbOutput.Text.Length;
@@ -393,7 +399,7 @@ namespace ASFui
 
         private void btnRejoin_Click(object sender, EventArgs e)
         {
-            Util.SendCommand("rejoinchat");
+            sendCommand("rejoinchat");
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
@@ -405,7 +411,7 @@ namespace ASFui
 
         private void btnStartBot_Click(object sender, EventArgs e)
         {
-            Util.SendCommand(Util.GenerateCommand("start", cbBotList.SelectedItem.ToString()));
+            sendCommand(Util.GenerateCommand("start", cbBotList.SelectedItem.ToString()));
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
@@ -413,7 +419,7 @@ namespace ASFui
 
         private void btnStartAll_Click(object sender, EventArgs e)
         {
-            Util.SendCommand("startall");
+            sendCommand("startall");
             GetBotList();
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
@@ -422,7 +428,7 @@ namespace ASFui
 
         private void btnStopBot_Click(object sender, EventArgs e)
         {
-            Util.SendCommand(Util.GenerateCommand("stop", cbBotList.SelectedItem.ToString()));
+            sendCommand(Util.GenerateCommand("stop", cbBotList.SelectedItem.ToString()));
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
@@ -430,7 +436,7 @@ namespace ASFui
 
         private void btnPauseBot_Click(object sender, EventArgs e)
         {
-            Util.SendCommand(Util.GenerateCommand("pause", cbBotList.SelectedItem.ToString()));
+            sendCommand(Util.GenerateCommand("pause", cbBotList.SelectedItem.ToString()));
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
@@ -438,7 +444,7 @@ namespace ASFui
 
         private void btnPauseBotPerma_Click(object sender, EventArgs e)
         {
-            Util.SendCommand(Util.GenerateCommand("pause^", cbBotList.SelectedItem.ToString()));
+            sendCommand(Util.GenerateCommand("pause^", cbBotList.SelectedItem.ToString()));
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
@@ -446,7 +452,7 @@ namespace ASFui
 
         private void btnResume_Click(object sender, EventArgs e)
         {
-            Util.SendCommand(Util.GenerateCommand("resume", cbBotList.SelectedItem.ToString()));
+            sendCommand(Util.GenerateCommand("resume", cbBotList.SelectedItem.ToString()));
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
@@ -454,7 +460,7 @@ namespace ASFui
 
         private void btnPassword_Click(object sender, EventArgs e)
         {
-            Util.SendCommand(Util.GenerateCommand("password", cbBotList.SelectedItem.ToString()));
+            sendCommand(Util.GenerateCommand("password", cbBotList.SelectedItem.ToString()));
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
@@ -462,7 +468,7 @@ namespace ASFui
 
         private void btnStatusBot_Click(object sender, EventArgs e)
         {
-            Util.SendCommand(Util.GenerateCommand("status", cbBotList.SelectedItem.ToString()));
+            sendCommand(Util.GenerateCommand("status", cbBotList.SelectedItem.ToString()));
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
@@ -470,7 +476,7 @@ namespace ASFui
 
         private void btnStatusAll_Click(object sender, EventArgs e)
         {
-            Util.SendCommand("statusall");
+            sendCommand("statusall");
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
@@ -482,7 +488,7 @@ namespace ASFui
 
         private void btnASFHelp_Click(object sender, EventArgs e)
         {
-            Util.SendCommand("help");
+            sendCommand("help");
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
@@ -490,7 +496,7 @@ namespace ASFui
 
         private void btnASFUpdate_Click(object sender, EventArgs e)
         {
-            Util.SendCommand("update");
+            sendCommand("update");
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
@@ -498,7 +504,7 @@ namespace ASFui
 
         private void btnASFVersion_Click(object sender, EventArgs e)
         {
-            Util.SendCommand("version");
+            sendCommand("version");
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
@@ -506,7 +512,7 @@ namespace ASFui
 
         private void btnAPI_Click(object sender, EventArgs e)
         {
-            var result = Util.SendCommand("api");
+            var result = sendCommand("api");
             Task.Run(() =>
             {
                 var api = new Api(result);
@@ -519,9 +525,22 @@ namespace ASFui
 
         #region 2FA Buttons
 
+        private string sendCommand(string str) {
+            if (!Settings.Default.IsLocal) {
+                string ret= Util.SendCommand(str);
+                rtbOutput.AppendText(ret +"\n");
+                rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                rtbOutput.ScrollToCaret();
+                return ret;
+            } else {
+                return Util.SendCommand(str);
+            }
+            
+        }
+
         private void btn2FA_Click(object sender, EventArgs e)
         {
-            Util.SendCommand(Util.GenerateCommand("2fa", cbBotList.SelectedItem.ToString()));
+            sendCommand(Util.GenerateCommand("2fa", cbBotList.SelectedItem.ToString()));
 
             rtbOutput.SelectionStart = rtbOutput.Text.Length;
             rtbOutput.ScrollToCaret();
@@ -531,7 +550,7 @@ namespace ASFui
         {
             Task.Run(() =>
             {
-                Util.SendCommand(Util.GenerateCommand("2faok", cbBotList.SelectedItem.ToString()));
+                sendCommand(Util.GenerateCommand("2faok", cbBotList.SelectedItem.ToString()));
 
                 rtbOutput.SelectionStart = rtbOutput.Text.Length;
                 rtbOutput.ScrollToCaret();
@@ -542,7 +561,7 @@ namespace ASFui
         {
             Task.Run(() =>
             {
-                Util.SendCommand(Util.GenerateCommand("2fano", cbBotList.SelectedItem.ToString()));
+                sendCommand(Util.GenerateCommand("2fano", cbBotList.SelectedItem.ToString()));
 
                 rtbOutput.SelectionStart = rtbOutput.Text.Length;
                 rtbOutput.ScrollToCaret();
