@@ -98,14 +98,16 @@ namespace ASFui
                 }
             }
 
-            if (e.Data.Contains("Init() Success!"))
+            if (e.Data.Contains("Init() ASF"))
             {
+                // changed to once in the beginning. Might be to early, but works for me.
                 _asf.GetBotList();
             }
 
             if (e.Data.Contains("OnDisconnected() Disconnected from Steam!"))
             {
-                _asf.GetBotList();
+                // removed since this is causing trouble.
+                // _asf.GetBotList();
             }
 
             output.Invoke(new MethodInvoker(() =>
