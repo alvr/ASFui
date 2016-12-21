@@ -43,7 +43,7 @@ namespace ASFui
             return command;
         }
 
-        private static string GetEndpointAddress()
+        public static string GetEndpointAddress()
         {
             if (!Settings.Default.IsLocal) return Settings.Default.RemoteURL;
             var json =
