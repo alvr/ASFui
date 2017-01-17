@@ -98,10 +98,14 @@ namespace ASFui
                 }
             }
 
-            if (e.Data.Contains("Init() ASF"))
+            if (e.Data.Contains("InitializeCMs() Success!"))
             {
                 // changed to once in the beginning. Might be to early, but works for me.
+                try{
                 _asf.GetBotList();
+                }catch {
+
+                }
             }
 
             if (e.Data.Contains("OnDisconnected() Disconnected from Steam!"))
