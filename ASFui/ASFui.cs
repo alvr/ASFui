@@ -7,6 +7,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ASFui
 {
@@ -85,7 +87,7 @@ namespace ASFui
             }
             if (Properties.Settings.Default.Autostart)
             {
-                Task.Delay(500).ContinueWith(t => btnStart.PerformClick());
+                Task.Delay(500).ContinueWith(t => cbBotList.Invoke(new MethodInvoker(() => btnStart.PerformClick())));
             }
         }
 
@@ -148,7 +150,7 @@ namespace ASFui
             if (index == -1) {
                 return false;
             }
-
+            // not sure about if I should use \\ or /
             string folder = binary.Substring(0, index) + "\\config";
             string[] files = Directory.GetFiles(folder, "*.json");
             if (files.Length <= 1) return false;
@@ -183,6 +185,51 @@ namespace ASFui
         {
             if (Properties.Settings.Default.IsLocal)
             {
+                string binary = Settings.Default.ASFBinary;
+                int index = binary.LastIndexOf('/');
+                if (index == -1) {
+                    index = binary.LastIndexOf('\\');
+                }
+                if (index != -1) {
+                    string message = "The following Parameter will be changed automatically. Abort to change them manually." + Environment.NewLine;
+                    // not sure about if I should use \\ or /
+                    string asfJson = binary.Substring(0, index) + "\\config\\ASF.json";
+                    dynamic asfConfig= JsonConvert.DeserializeObject(File.ReadAllText(asfJson));
+                    string culture = asfConfig.CurrentCulture;
+                    bool msg = false;
+                    if (!"en".Equals(culture)) {
+                        message=message+ "Language (CurrentCulture): is: "+ asfConfig.CurrentCulture +", will be: \"en\""+ Environment.NewLine;
+                        asfConfig.CurrentCulture = "en";
+                        msg = true;
+                    }
+                    if (asfConfig.AutoRestart.Value) {
+                        message = message + "AutoRestart (ASFui always restart ASF): is: " + asfConfig.AutoRestart + ", will be: false" + Environment.NewLine;
+                        asfConfig.AutoRestart.Value = false;
+                        msg = true;
+                    }
+                    if (0 == asfConfig.SteamOwnerID.Value) {
+                        // this is not yet confirmed by archi to be allowed, otherwise message here "change manually" and exit.
+                        message = message + "SteamOwnerID (CHANGE THIS TO YOUR MAIN ACCOUNT ASAP!): is: " + asfConfig.SteamOwnerID + ", will be: " + ulong.MaxValue + Environment.NewLine;
+                        asfConfig.SteamOwnerID.Value = ulong.MaxValue;
+                        msg = true;
+                    }
+                    if (msg) {
+                        var result = MessageBox.Show(message, @"Config needs to be changed.", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                        if (result == System.Windows.Forms.DialogResult.OK) {
+                            try {
+                                File.WriteAllText(asfJson, JsonConvert.SerializeObject(asfConfig, Formatting.Indented));
+                            } catch (Exception ex) {
+                                MessageBox.Show("Error writing changes. Change manually and restart." + Environment.NewLine + "Exiting....");
+                                Application.Exit();
+                                return;
+                            }
+                        } else {
+                            Application.Exit();
+                            return;
+                        }
+                    }
+                }
+
                 _asf = new ASFProcess(this, rtbOutput);
                 _asf.Start();
             }
