@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace ASFui
 {
@@ -82,7 +83,6 @@ namespace ASFui
                 if (settingsProperty != null)
                     Size = (Size)settingsProperty.DefaultValue;
             }
-
             if (Properties.Settings.Default.Autostart)
             {
                 Task.Delay(500).ContinueWith(t => btnStart.PerformClick());
@@ -139,6 +139,42 @@ namespace ASFui
             }));
         }
 
+        public bool GetFileBotList() {
+            string binary = Settings.Default.ASFBinary;
+            int index = binary.LastIndexOf('/');
+            if (index == -1) { 
+                index = binary.LastIndexOf('\\');
+            }
+            if (index == -1) {
+                return false;
+            }
+
+            string folder = binary.Substring(0, index) + "\\config";
+            string[] files = Directory.GetFiles(folder, "*.json");
+            if (files.Length <= 1) return false;
+
+            cbBotList.Invoke(new MethodInvoker(() => cbBotList.Items.Clear()));
+            foreach (string file in files) {
+                index = file.LastIndexOf('/');
+                if (index == -1) {
+                    index = file.LastIndexOf('\\');
+                }
+                string name = file.Substring(index+1).Replace(".json", "");
+                if (!"ASF".Equals(name) && !"minimal".Equals(name) && !"example".Equals(name)) {
+                    cbBotList.Items.Add(name);
+                }
+            }
+            Logging.Info("Bot list refreshed. Detected " + (files.Length-1) + " bots.");
+
+            
+            cbBotList.Invoke(new MethodInvoker(() => {
+                cbBotList.SelectedIndex = 0;
+                EnableElements();
+            }));
+
+            return true;
+        }
+
         #region Buttons Events
 
         #region Start/Stop Buttons
@@ -160,6 +196,7 @@ namespace ASFui
                 }
                 GetBotList();
             }
+            GetFileBotList();
             btnStart.Enabled = false;
             rtbOutput.AppendText(@"Starting ASF..." + Environment.NewLine);
             btnStop.Enabled = true;
