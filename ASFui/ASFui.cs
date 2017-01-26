@@ -298,8 +298,6 @@ namespace ASFui
             Task.Run(() =>
             {
                 sendCommand(Util.GenerateCommand("farm", cbBotList.SelectedItem.ToString()));
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
             });
         }
 
@@ -308,8 +306,6 @@ namespace ASFui
             Task.Run(() =>
             {
                 sendCommand(Util.GenerateCommand("loot", cbBotList.SelectedItem.ToString()));
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
             });
         }
 
@@ -318,8 +314,6 @@ namespace ASFui
             Task.Run(() =>
             {
                 sendCommand("lootall");
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
             });
         }
 
@@ -327,88 +321,41 @@ namespace ASFui
 
         #region Keys Buttons
 
-        private void btnRedeem_Click(object sender, EventArgs e)
-        {
-            Task.Run(() =>
-            {
-                if (!tbInput.Text.Equals(""))
-                {
-                    sendCommand(Util.GenerateCommand("redeem", cbBotList.SelectedItem.ToString(),
-                        Util.MultiToOne(tbInput.Lines)));
-
-                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                    rtbOutput.ScrollToCaret();
-                }
-                else
-                {
-                    Logging.Error(@"Input required (!redeem)");
+        private void sendMultiCommand(object sender, EventArgs e, string command) {
+            Task.Run(() => {
+                if (!tbInput.Text.Equals("")) {
+                    tbInput.Invoke(new MethodInvoker(() => {
+                        tbInput.Text = Regex.Replace(tbInput.Text, @"(,+|\s+)+", Environment.NewLine); // cleaning up the list
+                    }));
+                    sendCommand(Util.GenerateCommand(command, (string) cbBotList.Invoke((Func<string>) delegate {
+                        return cbBotList.SelectedItem.ToString();
+                    }), Util.MultiToOne(tbInput.Lines)));
+                } else {
+                    Logging.Error("Input required (!" + command +")");
                     MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
             });
+        }
+
+        private void btnRedeem_Click(object sender, EventArgs e)
+        {
+            sendMultiCommand(sender, e, "redeem");
         }
 
         private void btnRedeemNF_Click(object sender, EventArgs e)
         {
-            Task.Run(() =>
-            {
-                if (!tbInput.Text.Equals(""))
-                {
-                    sendCommand(Util.GenerateCommand("redeem^", cbBotList.SelectedItem.ToString(),
-                        Util.MultiToOne(tbInput.Lines)));
-
-                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                    rtbOutput.ScrollToCaret();
-                }
-                else
-                {
-                    Logging.Error(@"Input required (!redeem^)");
-                    MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-            });
+            sendMultiCommand(sender, e, "redeem^");
         }
 
         private void btnRedeemFF_Click(object sender, EventArgs e)
         {
-            Task.Run(() =>
-            {
-                if (!tbInput.Text.Equals(""))
-                {
-                    sendCommand(Util.GenerateCommand("redeem&", cbBotList.SelectedItem.ToString(),
-                        Util.MultiToOne(tbInput.Lines)));
-
-                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                    rtbOutput.ScrollToCaret();
-                }
-                else
-                {
-                    Logging.Error(@"Input required (!redeem&)");
-                    MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-            });
+            sendMultiCommand(sender, e, "redeem&");
         }
 
         private void btnAddLicense_Click(object sender, EventArgs e)
         {
-            Task.Run(() =>
-            {
-                if (!tbInput.Text.Equals(""))
-                {
-                    sendCommand(Util.GenerateCommand("addlicense", cbBotList.SelectedItem.ToString(), 
-                        Util.MultiToOne(tbInput.Lines)));
-
-                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                    rtbOutput.ScrollToCaret();
-                }
-                else
-                {
-                    Logging.Error(@"Input required (!addlicense)");
-                    MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-            });
+            sendMultiCommand(sender, e, "addlicense");
         }
 
         #endregion
@@ -417,23 +364,7 @@ namespace ASFui
 
         private void btnOwns_Click(object sender, EventArgs e)
         {
-            Task.Run(() =>
-            {
-                if (!tbInput.Text.Equals(""))
-                {
-                    sendCommand(Util.GenerateCommand("owns", cbBotList.SelectedItem.ToString(), 
-                        Util.MultiToOne(tbInput.Lines)));
-
-                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                    rtbOutput.ScrollToCaret();
-                }
-                else
-                {
-                    Logging.Error(@"Input required (!owns)");
-                    MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-            });
+            sendMultiCommand(sender, e, "owns");
         }
 
         private void btnOwnAll_Click(object sender, EventArgs e)
@@ -443,9 +374,6 @@ namespace ASFui
                 if (!tbInput.Text.Equals(""))
                 {
                     sendCommand(Util.GenerateCommand("ownsall", string.Empty, Util.MultiToOne(tbInput.Lines)));
-                    
-                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                    rtbOutput.ScrollToCaret();
                 }
                 else
                 {
@@ -458,23 +386,7 @@ namespace ASFui
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            Task.Run(() =>
-            {
-                if (!tbInput.Text.Equals(""))
-                {
-                    sendCommand(Util.GenerateCommand("play", cbBotList.SelectedItem.ToString(), 
-                        Util.MultiToOne(tbInput.Lines)));
-
-                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                    rtbOutput.ScrollToCaret();
-                }
-                else
-                {
-                    Logging.Error(@"Input required (!play)");
-                    MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-            });
+            sendMultiCommand(sender, e, "play");
         }
 
         #endregion
@@ -484,9 +396,6 @@ namespace ASFui
         private void btnRejoin_Click(object sender, EventArgs e)
         {
             sendCommand("rejoinchat");
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
         }
 
         #endregion
@@ -496,74 +405,47 @@ namespace ASFui
         private void btnStartBot_Click(object sender, EventArgs e)
         {
             sendCommand(Util.GenerateCommand("start", cbBotList.SelectedItem.ToString()));
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
         }
 
         private void btnStartAll_Click(object sender, EventArgs e)
         {
             sendCommand("startall");
             GetBotList();
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
         }
 
         private void btnStopBot_Click(object sender, EventArgs e)
         {
             sendCommand(Util.GenerateCommand("stop", cbBotList.SelectedItem.ToString()));
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
         }
 
         private void btnPauseBot_Click(object sender, EventArgs e)
         {
             sendCommand(Util.GenerateCommand("pause", cbBotList.SelectedItem.ToString()));
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
         }
 
         private void btnPauseBotPerma_Click(object sender, EventArgs e)
         {
             sendCommand(Util.GenerateCommand("pause^", cbBotList.SelectedItem.ToString()));
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
         }
 
         private void btnResume_Click(object sender, EventArgs e)
         {
             sendCommand(Util.GenerateCommand("resume", cbBotList.SelectedItem.ToString()));
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
         }
 
         private void btnPassword_Click(object sender, EventArgs e)
         {
             sendCommand(Util.GenerateCommand("password", cbBotList.SelectedItem.ToString()));
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
         }
 
         private void btnStatusBot_Click(object sender, EventArgs e)
         {
             sendCommand(Util.GenerateCommand("status", cbBotList.SelectedItem.ToString()));
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
         }
 
         private void btnStatusAll_Click(object sender, EventArgs e)
         {
             sendCommand("statusall");
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
         }
 
         #endregion
@@ -573,25 +455,16 @@ namespace ASFui
         private void btnASFHelp_Click(object sender, EventArgs e)
         {
             sendCommand("help");
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
         }
 
         private void btnASFUpdate_Click(object sender, EventArgs e)
         {
             sendCommand("update");
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
         }
 
         private void btnASFVersion_Click(object sender, EventArgs e)
         {
             sendCommand("version");
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
         }
 
         private void btnAPI_Click(object sender, EventArgs e)
@@ -610,24 +483,22 @@ namespace ASFui
         #region 2FA Buttons
 
         private string sendCommand(string str) {
+            string ret = Util.SendCommand(str);
             if (!Settings.Default.IsLocal) {
-                string ret= Util.SendCommand(str);
-                rtbOutput.AppendText(ret +"\n");
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
-                return ret;
-            } else {
-                return Util.SendCommand(str);
+                rtbOutput.AppendText(ret + "\n");
             }
-            
+            if (!"api".Equals(str)) { // don't know, why you did not had that here, but just to be sure.
+                rtbOutput.Invoke(new MethodInvoker(() => {// In debug mode I get errors here, if I do not use invoke...
+                    rtbOutput.SelectionStart = rtbOutput.Text.Length;
+                    rtbOutput.ScrollToCaret();
+                }));
+            }
+            return ret;
         }
 
         private void btn2FA_Click(object sender, EventArgs e)
         {
             sendCommand(Util.GenerateCommand("2fa", cbBotList.SelectedItem.ToString()));
-
-            rtbOutput.SelectionStart = rtbOutput.Text.Length;
-            rtbOutput.ScrollToCaret();
         }
 
         private void btn2FAOk_Click(object sender, EventArgs e)
@@ -635,9 +506,6 @@ namespace ASFui
             Task.Run(() =>
             {
                 sendCommand(Util.GenerateCommand("2faok", cbBotList.SelectedItem.ToString()));
-
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
             });
         }
 
@@ -646,9 +514,6 @@ namespace ASFui
             Task.Run(() =>
             {
                 sendCommand(Util.GenerateCommand("2fano", cbBotList.SelectedItem.ToString()));
-
-                rtbOutput.SelectionStart = rtbOutput.Text.Length;
-                rtbOutput.ScrollToCaret();
             });
         }
 

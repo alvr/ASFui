@@ -17,7 +17,6 @@ namespace ASFui
         private readonly ASFui _asf;
         private Process ASF;
         private readonly RichTextBox output;
-        private string key;
         private bool ASF_ended;
  
         public ASFProcess(ASFui asf, RichTextBox rtb)
@@ -88,38 +87,26 @@ namespace ASFui
                 var Password = new Password(ASF, e.Data);
                 Password.ShowDialog();
             }
-
-            if (key != string.Empty)
+            Match match = Regex.Match(e.Data, @".*Key: (.*) \| Status: (OK|DuplicatedKey|InvalidKey|AlreadyOwned|OnCooldown)");
+            if (match.Success)
             {
-                if (e.Data.Contains("OK") && Properties.Settings.Default.ClearOk)
-                {
-                    _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
-                }
-
-                else if (e.Data.Contains("DuplicatedKey") && Properties.Settings.Default.ClearDuplicated)
-                {
-                    _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
-                }
-
-                else if (e.Data.Contains("InvalidKey") && Properties.Settings.Default.ClearInvalid)
-                {
-                    _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
-                }
-
-                else if (e.Data.Contains("AlreadyOwned") && Properties.Settings.Default.ClearOwned)
-                {
-                    _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
-                }
-
-                else if (e.Data.Contains("OnCooldown") && Properties.Settings.Default.ClearCooldown)
-                {
-                    _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
+                string key = match.Groups[1].ToString();
+                string type = match.Groups[2].ToString();
+                if (("OK".Equals(type) && Properties.Settings.Default.ClearOk) ||
+                    ("DuplicatedKey".Equals(type) && Properties.Settings.Default.ClearDuplicated) ||
+                    ("InvalidKey".Equals(type) && Properties.Settings.Default.ClearInvalid) ||
+                    ("AlreadyOwned".Equals(type) && Properties.Settings.Default.ClearOwned) ||
+                    ("OnCooldown".Equals(type) && Properties.Settings.Default.ClearCooldown)) {
+                    _asf.tbInput.Invoke(new MethodInvoker(() => {
+                        _asf.tbInput.Text = Regex.Replace(_asf.tbInput.Text.Replace(key, ""), @"\s+", Environment.NewLine);
+                        if (_asf.tbInput.Text.Length < 2) // remove the last newline, if we removed all keys.
+                            _asf.tbInput.Text = "";
+                    }));
                 }
             }
 
             output.Invoke(new MethodInvoker(() =>
             {
-                key = Regex.Match(e.Data.ToString(), @"[0-9A-Z]{5}-[0-9A-Z]{5}-[0-9A-Z]{5}", RegexOptions.IgnoreCase).Value;
                 output.AppendText(e.Data + Environment.NewLine);
                 output.ScrollToCaret();
             }));
