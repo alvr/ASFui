@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.ServiceModel;
-using System.ServiceModel.Description;
 using System.Windows.Forms;
 
 namespace ASFui
@@ -50,8 +49,8 @@ namespace ASFui
                 JObject.Parse(
                     File.ReadAllText(Path.GetDirectoryName(Settings.Default.ASFBinary) + @"/config/ASF.json"));
 
-            string hostname= "127.0.0.1";
-            string port = "1242";
+            var hostname= "127.0.0.1";
+            var port = "1242";
             try
             {
                 hostname = json["WCFHost"].ToString();
@@ -60,11 +59,11 @@ namespace ASFui
             {
                 try {
                     hostname = json["WCFHostname"].ToString();
-                } catch { }
+                } catch { /* Ignore */ }
             }
             try {
                 port = json["WCFPort"].ToString();
-            }catch { }
+            } catch { /* Ignore */ }
 
             return "net.tcp://" + hostname + ":" + port + "/ASF";
         }
