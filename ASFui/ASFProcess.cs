@@ -17,7 +17,7 @@ namespace ASFui
         private readonly ASFui _asf;
         private Process ASF;
         private readonly RichTextBox output;
-        private string key;
+        private bool ASF_ended;
  
         public ASFProcess(ASFui asf, RichTextBox rtb)
         {
@@ -25,8 +25,11 @@ namespace ASFui
             ASF = new Process();
             output = rtb;
 
-            var ASFInfo = new ProcessStartInfo()
-            {
+            init();
+        }
+
+        private void init() {
+            var ASFInfo = new ProcessStartInfo() {
                 Arguments = "--server",
                 CreateNoWindow = true,
                 Domain = "",
@@ -44,10 +47,31 @@ namespace ASFui
 
             ASF.StartInfo = ASFInfo;
             ASF.OutputDataReceived += OutputHandler;
+
+            ASF.EnableRaisingEvents = true;
+
+            ASF.Exited += new EventHandler(ASFExit);
+        }
+
+        private void ASFExit(object sender, System.EventArgs e) {
+            if (ASF_ended) {
+                return;
+            }
+            ASF_ended = true;
+            output.Invoke(new MethodInvoker(() => {
+                output.Clear();
+                output.AppendText("Restarted." + Environment.NewLine);
+            }));
+            ASF = new Process();
+            init();
+            Start();
         }
 
         private void OutputHandler(object sender, DataReceivedEventArgs e)
         {
+            if (ASF_ended || e== null || sender ==null || e.Data ==null) {
+                return;
+            }
             if (e.Data.EndsWith("\"android:\"):") || e.Data.EndsWith("login:") ||
                 e.Data.EndsWith("+1234567890):") || e.Data.EndsWith("mobile:") ||
                 e.Data.EndsWith("email:") || e.Data.EndsWith("PIN:") ||
@@ -63,56 +87,26 @@ namespace ASFui
                 var Password = new Password(ASF, e.Data);
                 Password.ShowDialog();
             }
-
-            if (e.Data.Contains("Update process finished!"))
+            Match match = Regex.Match(e.Data, @".*Key: (.*) \| Status: (OK|DuplicatedKey|InvalidKey|AlreadyOwned|OnCooldown)");
+            if (match.Success)
             {
-                _asf.btnStop.Invoke(new MethodInvoker(() => _asf.btnStop.PerformClick()));
-                Task.Delay(1500).ContinueWith(t => _asf.btnStart.Invoke(new MethodInvoker(() => _asf.btnStart.PerformClick())));
-            }
-
-            if (key != string.Empty)
-            {
-                if (e.Data.Contains("OK") && Properties.Settings.Default.ClearOk)
-                {
-                    _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
+                string key = match.Groups[1].ToString();
+                string type = match.Groups[2].ToString();
+                if (("OK".Equals(type) && Properties.Settings.Default.ClearOk) ||
+                    ("DuplicatedKey".Equals(type) && Properties.Settings.Default.ClearDuplicated) ||
+                    ("InvalidKey".Equals(type) && Properties.Settings.Default.ClearInvalid) ||
+                    ("AlreadyOwned".Equals(type) && Properties.Settings.Default.ClearOwned) ||
+                    ("OnCooldown".Equals(type) && Properties.Settings.Default.ClearCooldown)) {
+                    _asf.tbInput.Invoke(new MethodInvoker(() => {
+                        _asf.tbInput.Text = Regex.Replace(_asf.tbInput.Text.Replace(key, ""), @"\s+", Environment.NewLine);
+                        if (_asf.tbInput.Text.Length < 2) // remove the last newline, if we removed all keys.
+                            _asf.tbInput.Text = "";
+                    }));
                 }
-
-                else if (e.Data.Contains("DuplicatedKey") && Properties.Settings.Default.ClearDuplicated)
-                {
-                    _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
-                }
-
-                else if (e.Data.Contains("InvalidKey") && Properties.Settings.Default.ClearInvalid)
-                {
-                    _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
-                }
-
-                else if (e.Data.Contains("AlreadyOwned") && Properties.Settings.Default.ClearOwned)
-                {
-                    _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
-                }
-
-                else if (e.Data.Contains("OnCooldown") && Properties.Settings.Default.ClearCooldown)
-                {
-                    _asf.tbInput.Lines = _asf.tbInput.Lines.ToList().Except(new List<string> { key }).ToArray();
-                }
-            }
-
-            if (e.Data.Contains("Init() ASF"))
-            {
-                // changed to once in the beginning. Might be to early, but works for me.
-                _asf.GetBotList();
-            }
-
-            if (e.Data.Contains("OnDisconnected() Disconnected from Steam!"))
-            {
-                // removed since this is causing trouble.
-                // _asf.GetBotList();
             }
 
             output.Invoke(new MethodInvoker(() =>
             {
-                key = Regex.Match(e.Data.ToString(), @"[0-9A-Z]{5}-[0-9A-Z]{5}-[0-9A-Z]{5}", RegexOptions.IgnoreCase).Value;
                 output.AppendText(e.Data + Environment.NewLine);
                 output.ScrollToCaret();
             }));
@@ -120,19 +114,18 @@ namespace ASFui
 
         public void Start()
         {
+            ASF_ended = false;
             ASF.Start();
             ASF.BeginOutputReadLine();
         }
 
         public void Stop()
         {
-            ASF.CancelOutputRead();
-
+            ASF_ended = true;
             if (ASF == null)
             {
                 return;
             }
-
             if (ASF.HasExited)
             {
                 ASF.Close();
