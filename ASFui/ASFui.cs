@@ -203,15 +203,15 @@ namespace ASFui
                             asfConfig.CurrentCulture = "en";
                             msg = true;
                         }
-                        if (asfConfig.AutoRestart.Value) {
+                        if (asfConfig.AutoRestart==null || asfConfig.AutoRestart.Value) {
                             message = message + "AutoRestart (ASFui always restart ASF): is: " + asfConfig.AutoRestart + ", will be: false" + Environment.NewLine;
-                            asfConfig.AutoRestart.Value = false;
+                            asfConfig.AutoRestart = false;
                             msg = true;
                         }
-                        if (0 == asfConfig.SteamOwnerID.Value) {
+                        if (asfConfig.SteamOwnerID ==null|| 0 == asfConfig.SteamOwnerID.Value) {
                             // this is not yet confirmed by archi to be allowed, otherwise message here "change manually" and exit.
                             message = message + "SteamOwnerID (CHANGE THIS TO YOUR MAIN ACCOUNT ASAP!): is: " + asfConfig.SteamOwnerID + ", will be: " + ulong.MaxValue + Environment.NewLine;
-                            asfConfig.SteamOwnerID.Value = ulong.MaxValue;
+                            asfConfig.SteamOwnerID = ulong.MaxValue;
                             msg = true;
                         }
                         if (msg) {
