@@ -123,7 +123,10 @@ namespace ASFui
         {
             cbBotList.Invoke(new MethodInvoker(() => cbBotList.Items.Clear()));
 
-            var status = Util.SendCommand("statusall");
+            var status = Util.SendCommand("status ASF");
+            if ("Couldn't find any bot named ASF!".Equals(status))
+                status = Util.SendCommand("statusall"); // keep backwardscompatibility
+
             var matches = Regex.Matches(status, @"Bot (.*) is");
             cbBotList.Invoke(new MethodInvoker(() =>
             {
@@ -315,7 +318,9 @@ namespace ASFui
         {
             Task.Run(() =>
             {
-                sendCommand("lootall");
+                var status = sendCommand("loot ASF");
+                if ("Couldn't find any bot named ASF!".Equals(status))
+                    status = sendCommand("lootall"); // keep backwardscompatibility
             });
         }
 
@@ -375,11 +380,13 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    sendCommand(Util.GenerateCommand("ownsall", string.Empty, Util.MultiToOne(tbInput.Lines)));
+                    var status = sendCommand(Util.GenerateCommand("owns ASF", string.Empty, Util.MultiToOne(tbInput.Lines)));
+                    if ("Couldn't find any bot named ASF!".Equals(status))
+                        status = sendCommand(Util.GenerateCommand("ownsall", string.Empty, Util.MultiToOne(tbInput.Lines))); // keep backwardscompatibility
                 }
                 else
                 {
-                    Logging.Error(@"Input required (!ownsall)");
+                    Logging.Error(@"Input required (!owns ASF)");
                     MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
@@ -411,8 +418,10 @@ namespace ASFui
 
         private void btnStartAll_Click(object sender, EventArgs e)
         {
-            sendCommand("startall");
-            GetBotList();
+            var status = sendCommand("start ASF");
+            if ("Couldn't find any bot named ASF!".Equals(status))
+                status = sendCommand("startall"); // keep backwardscompatibility
+            //GetBotList();
         }
 
         private void btnStopBot_Click(object sender, EventArgs e)
@@ -447,7 +456,9 @@ namespace ASFui
 
         private void btnStatusAll_Click(object sender, EventArgs e)
         {
-            sendCommand("statusall");
+            var status = sendCommand("status ASF");
+            if ("Couldn't find any bot named ASF!".Equals(status))
+                status = sendCommand("statusall"); // keep backwardscompatibility
         }
 
         #endregion
