@@ -87,16 +87,16 @@ namespace ASFui
                 var Password = new Password(ASF, e.Data);
                 Password.ShowDialog();
             }
-            Match match = Regex.Match(e.Data, @".*Key: (.*) \| Status: (OK|DuplicatedKey|InvalidKey|AlreadyOwned|OnCooldown)");
+            Match match = Regex.Match(e.Data, @".*Key: (.*) \| Status: (OK|DuplicatedKey|InvalidKey|AlreadyOwned|OnCooldown|NoDetail|DuplicateActivationCode|BadActivationCode|AlreadyPurchased|RateLimited)");
             if (match.Success)
             {
                 string key = match.Groups[1].ToString();
                 string type = match.Groups[2].ToString();
-                if (("OK".Equals(type) && Properties.Settings.Default.ClearOk) ||
-                    ("DuplicatedKey".Equals(type) && Properties.Settings.Default.ClearDuplicated) ||
-                    ("InvalidKey".Equals(type) && Properties.Settings.Default.ClearInvalid) ||
-                    ("AlreadyOwned".Equals(type) && Properties.Settings.Default.ClearOwned) ||
-                    ("OnCooldown".Equals(type) && Properties.Settings.Default.ClearCooldown)) {
+                if ((("OK".Equals(type) || "NoDetail".Equals(type)) && Properties.Settings.Default.ClearOk) ||
+                    (("DuplicatedKey".Equals(type) || "DuplicateActivationCode".Equals(type)) && Properties.Settings.Default.ClearDuplicated) ||
+                    (("InvalidKey".Equals(type) || "BadActivationCode".Equals(type)) && Properties.Settings.Default.ClearInvalid) ||
+                    (("AlreadyOwned".Equals(type) || "AlreadyPurchased".Equals(type)) && Properties.Settings.Default.ClearOwned) ||
+                    (("OnCooldown".Equals(type) || "RateLimited".Equals(type)) && Properties.Settings.Default.ClearCooldown)) {
                     _asf.tbInput.Invoke(new MethodInvoker(() => {
                         _asf.tbInput.Text = Regex.Replace(_asf.tbInput.Text.Replace(key, ""), @"\s+", Environment.NewLine);
                         if (_asf.tbInput.Text.Length < 2) // remove the last newline, if we removed all keys.
