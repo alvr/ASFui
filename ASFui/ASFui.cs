@@ -127,7 +127,10 @@ namespace ASFui
             if ("Couldn't find any bot named ASF!".Equals(status))
                 status = Util.SendCommand("statusall"); // keep backwardscompatibility
 
-            var matches = Regex.Matches(status, @"Bot (.*) is");
+            var matches = Regex.Matches(status, @"<(.*)> Bot is");
+            if(matches.Count==0)
+                matches = Regex.Matches(status, @"Bot (.*) is");
+
             cbBotList.Invoke(new MethodInvoker(() =>
             {
                 foreach (Match m in matches)
