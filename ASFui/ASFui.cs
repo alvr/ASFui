@@ -123,7 +123,7 @@ namespace ASFui
         {
             cbBotList.Invoke(new MethodInvoker(() => cbBotList.Items.Clear()));
 
-            var status = Util.SendCommand("statusall");
+            var status = Util.SendCommand("status ASF");
             var matches = Regex.Matches(status, @"Bot (.*) is");
             cbBotList.Invoke(new MethodInvoker(() =>
             {
@@ -313,7 +313,7 @@ namespace ASFui
         {
             Task.Run(() =>
             {
-                sendCommand("lootall");
+                sendCommand("loot ASF");
             });
         }
 
@@ -373,11 +373,11 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    sendCommand(Util.GenerateCommand("ownsall", string.Empty, Util.MultiToOne(tbInput.Lines)));
+                    sendCommand(Util.GenerateCommand("owns", "ASF", Util.MultiToOne(tbInput.Lines)));
                 }
                 else
                 {
-                    Logging.Error(@"Input required (!ownsall)");
+                    Logging.Error(@"Input required (!owns ASF)");
                     MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
@@ -409,7 +409,7 @@ namespace ASFui
 
         private void btnStartAll_Click(object sender, EventArgs e)
         {
-            sendCommand("startall");
+            sendCommand("start ASF");
             GetBotList();
         }
 
@@ -445,7 +445,7 @@ namespace ASFui
 
         private void btnStatusAll_Click(object sender, EventArgs e)
         {
-            sendCommand("statusall");
+            sendCommand("status ASF");
         }
 
         #endregion
