@@ -124,7 +124,7 @@ namespace ASFui
             cbBotList.Invoke(new MethodInvoker(() => cbBotList.Items.Clear()));
 
             var status = Util.SendCommand("status ASF");
-            var matches = Regex.Matches(status, @"Bot (.*) is");
+            var matches = Regex.Matches(status, @"<(.+?)> Bot is");
             cbBotList.Invoke(new MethodInvoker(() =>
             {
                 foreach (Match m in matches)
