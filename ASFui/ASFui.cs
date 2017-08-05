@@ -321,15 +321,13 @@ namespace ASFui
 
         #region Keys Buttons
 
-        private void sendMultiCommand(object sender, EventArgs e, string command) {
+        private void sendMultiCommand(object sender, EventArgs e, string command, string commandPrepend = "") {
             Task.Run(() => {
                 if (!tbInput.Text.Equals("")) {
                     tbInput.Invoke(new MethodInvoker(() => {
                         tbInput.Text = Regex.Replace(tbInput.Text, @"(,+|\s+)+", Environment.NewLine); // cleaning up the list
                     }));
-                    sendCommand(Util.GenerateCommand(command, (string) cbBotList.Invoke((Func<string>) delegate {
-                        return cbBotList.SelectedItem.ToString();
-                    }), Util.MultiToOne(tbInput.Lines)));
+                    sendCommand(Util.GenerateCommand(command, (string) cbBotList.Invoke((Func<string>) (() => cbBotList.SelectedItem.ToString())), commandPrepend +  Util.MultiToOne(tbInput.Lines)));
                 } else {
                     Logging.Error("Input required (!" + command +")");
                     MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
@@ -345,12 +343,17 @@ namespace ASFui
 
         private void btnRedeemNF_Click(object sender, EventArgs e)
         {
-            sendMultiCommand(sender, e, "redeem^");
+            sendMultiCommand(sender, e, "redeem^", " sf,sd ");
         }
 
         private void btnRedeemFF_Click(object sender, EventArgs e)
         {
-            sendMultiCommand(sender, e, "redeem&");
+            sendMultiCommand(sender, e, "redeem^", " ff,si ");
+        }
+
+        private void btnDistribute_Click(object sender, EventArgs e)
+        {
+            sendMultiCommand(sender, e, "redeem^", " fd ");
         }
 
         private void btnAddLicense_Click(object sender, EventArgs e)
@@ -433,6 +436,11 @@ namespace ASFui
         private void btnStartBot_Click(object sender, EventArgs e)
         {
             sendCommand(Util.GenerateCommand("start", cbBotList.SelectedItem.ToString()));
+        }
+
+        private void btnUnpack_Click(object sender, EventArgs e)
+        {
+            sendCommand(Util.GenerateCommand("unpack", cbBotList.SelectedItem.ToString()));
         }
 
         private void btnStartAll_Click(object sender, EventArgs e)
@@ -567,6 +575,7 @@ namespace ASFui
             btnStartBot.Enabled = true;
             btnStartAll.Enabled = true;
             btnStopBot.Enabled = true;
+            btnDistribute.Enabled = true;
             btnPauseBot.Enabled = true;
             btnPauseBotPerma.Enabled = true;
             btnResumeBot.Enabled = true;
@@ -577,6 +586,7 @@ namespace ASFui
             btnASFUpdate.Enabled = true;
             btnASFVersion.Enabled = true;
             btnAPI.Enabled = true;
+            btnUnpack.Enabled = true;
             btn2FA.Enabled = true;
             btn2FAOk.Enabled = true;
             btn2FANo.Enabled = true;
@@ -591,6 +601,7 @@ namespace ASFui
             btnLootAll.Enabled = false;
             btnAddLicenseAll.Enabled = false;
             btnRedeem.Enabled = false;
+            btnDistribute.Enabled = false;
             btnRedeemNF.Enabled = false;
             btnRedeemFF.Enabled = false;
             btnAddLicense.Enabled = false;
@@ -610,6 +621,7 @@ namespace ASFui
             btnASFHelp.Enabled = false;
             btnASFUpdate.Enabled = false;
             btnASFVersion.Enabled = false;
+            btnUnpack.Enabled = false;
             btnAPI.Enabled = false;
             btn2FA.Enabled = false;
             btn2FAOk.Enabled = false;

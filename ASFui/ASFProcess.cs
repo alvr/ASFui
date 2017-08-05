@@ -70,22 +70,24 @@ namespace ASFui
             if (ASF_ended || e== null || sender ==null || e.Data ==null) {
                 return;
             }
-            if (e.Data.EndsWith("\"android:\"):") || e.Data.EndsWith("login:") ||
-                e.Data.EndsWith("+1234567890):") || e.Data.EndsWith("mobile:") ||
-                e.Data.EndsWith("email:") || e.Data.EndsWith("PIN:") ||
-                e.Data.EndsWith("app:") || e.Data.EndsWith("hostname:"))
+
+            var inputData = e.Data.Trim();
+            if (inputData.EndsWith("\"android:\"):", StringComparison.OrdinalIgnoreCase) || inputData.EndsWith("login:", StringComparison.OrdinalIgnoreCase) ||
+                inputData.EndsWith("+1234567890):", StringComparison.OrdinalIgnoreCase) || inputData.EndsWith("mobile:", StringComparison.OrdinalIgnoreCase) ||
+                inputData.EndsWith("email:", StringComparison.OrdinalIgnoreCase) || inputData.EndsWith("PIN:", StringComparison.OrdinalIgnoreCase) ||
+                inputData.EndsWith("app:", StringComparison.OrdinalIgnoreCase) || inputData.EndsWith("hostname:", StringComparison.OrdinalIgnoreCase))
             {
                 var result = Interaction.InputBox(e.Data, @"Enter necessary input");
                 ASF.StandardInput.WriteLine(result);
                 ASF.StandardInput.Flush();
             }
 
-            if ((!e.Data.StartsWith("[AES]") ^ e.Data.StartsWith("[ProtectedDataForCurrentUser]")) && e.Data.EndsWith("password:"))
+            if ((!e.Data.StartsWith("[AES]") ^ e.Data.StartsWith("[ProtectedDataForCurrentUser]")) && inputData.EndsWith("password:", StringComparison.OrdinalIgnoreCase))
             {
                 var Password = new Password(ASF, e.Data);
                 Password.ShowDialog();
             }
-            Match match = Regex.Match(e.Data, @".*Key: (.*) \| Status: (NoDetail|DuplicateActivationCode|BadActivationCode|AlreadyPurchased|RateLimited)");
+            Match match = Regex.Match(e.Data, @".*Key: (.*) \| Status: .*(NoDetail|DuplicateActivationCode|BadActivationCode|AlreadyPurchased|RateLimited)");
             if (match.Success)
             {
                 string key = match.Groups[1].ToString();
