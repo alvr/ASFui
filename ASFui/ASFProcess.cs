@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using System.Text.RegularExpressions;
@@ -29,7 +26,8 @@ namespace ASFui
         }
 
         private void init() {
-            var ASFInfo = new ProcessStartInfo() {
+            var ASFInfo = new ProcessStartInfo
+            {
                 Arguments = "--server",
                 CreateNoWindow = true,
                 Domain = "",
@@ -50,10 +48,10 @@ namespace ASFui
 
             ASF.EnableRaisingEvents = true;
 
-            ASF.Exited += new EventHandler(ASFExit);
+            ASF.Exited += ASFExit;
         }
 
-        private void ASFExit(object sender, System.EventArgs e) {
+        private void ASFExit(object sender, EventArgs e) {
             if (ASF_ended) {
                 return;
             }
@@ -87,16 +85,17 @@ namespace ASFui
                 var Password = new Password(ASF, e.Data);
                 Password.ShowDialog();
             }
-            Match match = Regex.Match(e.Data, @".*Key: (.*) \| Status: (OK|DuplicatedKey|InvalidKey|AlreadyOwned|OnCooldown)");
+            Match match = Regex.Match(e.Data, @".*Key: (.*) \| Status: (NoDetail|DuplicateActivationCode|BadActivationCode|AlreadyPurchased|RateLimited)");
             if (match.Success)
             {
                 string key = match.Groups[1].ToString();
                 string type = match.Groups[2].ToString();
-                if (("OK".Equals(type) && Properties.Settings.Default.ClearOk) ||
-                    ("DuplicatedKey".Equals(type) && Properties.Settings.Default.ClearDuplicated) ||
-                    ("InvalidKey".Equals(type) && Properties.Settings.Default.ClearInvalid) ||
-                    ("AlreadyOwned".Equals(type) && Properties.Settings.Default.ClearOwned) ||
-                    ("OnCooldown".Equals(type) && Properties.Settings.Default.ClearCooldown)) {
+                if (("NoDetail".Equals(type) && Properties.Settings.Default.ClearOk) ||
+                    ("DuplicateActivationCode".Equals(type) && Properties.Settings.Default.ClearDuplicated) ||
+                    ("BadActivationCode".Equals(type) && Properties.Settings.Default.ClearInvalid) ||
+                    ("AlreadyPurchased".Equals(type) && Properties.Settings.Default.ClearOwned) ||
+                    ("RateLimited".Equals(type) && Properties.Settings.Default.ClearCooldown))
+                {
                     _asf.tbInput.Invoke(new MethodInvoker(() => {
                         _asf.tbInput.Text = Regex.Replace(_asf.tbInput.Text.Replace(key, ""), @"\s+", Environment.NewLine);
                         if (_asf.tbInput.Text.Length < 2) // remove the last newline, if we removed all keys.

@@ -7,8 +7,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace ASFui
 {
@@ -28,7 +28,7 @@ namespace ASFui
                     @"ASF binary not found.", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                 if (result == DialogResult.Yes)
                 {
-                    Properties.Settings.Default.ASFBinary = "Setting not configured.";
+                    Settings.Default.ASFBinary = "Setting not configured.";
                     var settings = new SettingsForm();
                     settings.ShowDialog();
                 }
@@ -42,7 +42,7 @@ namespace ASFui
             {
                 var result= MessageBox.Show(@"An instance of ASF is already running. Switching to remote mode.",
                     @"ASF already running.", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                if (result == System.Windows.Forms.DialogResult.OK) {
+                if (result == DialogResult.OK) {
                     Settings.Default.IsLocal = false;
                     Settings.Default.RemoteURL = Util.GetEndpointAddress();
                 } else {
@@ -54,23 +54,23 @@ namespace ASFui
 
         private void ASFui_Resize(object sender, EventArgs e)
         {
-            if (WindowState != FormWindowState.Minimized || !Properties.Settings.Default.ToTray) return;
+            if (WindowState != FormWindowState.Minimized || !Settings.Default.ToTray) return;
             Hide();
             TrayIcon.Visible = true;
         }
 
         private void ASFui_Load(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.Maximized)
+            if (Settings.Default.Maximized)
             {
                 WindowState = FormWindowState.Maximized;
             }
 
-            Location = Properties.Settings.Default.Location;
+            Location = Settings.Default.Location;
             var formRectangle = new Rectangle(Left, Top, Width, Height);
             if (!Util.IsOnScreen(formRectangle))
             {
-                var settingsProperty = Properties.Settings.Default.Properties["Location"];
+                var settingsProperty = Settings.Default.Properties["Location"];
                 if (settingsProperty != null)
                 {
                     var coords = settingsProperty.DefaultValue.ToString().Split(',');
@@ -78,14 +78,14 @@ namespace ASFui
                 }
             }
 
-            Size = Properties.Settings.Default.Size;
+            Size = Settings.Default.Size;
             if (Size.Height < MinimumSize.Height || Size.Width < MinimumSize.Width)
             {
-                var settingsProperty = Properties.Settings.Default.Properties["Size"];
+                var settingsProperty = Settings.Default.Properties["Size"];
                 if (settingsProperty != null)
                     Size = (Size)settingsProperty.DefaultValue;
             }
-            if (Properties.Settings.Default.Autostart)
+            if (Settings.Default.Autostart)
             {
                 Task.Delay(500).ContinueWith(t => cbBotList.Invoke(new MethodInvoker(() => btnStart.PerformClick())));
             }
@@ -96,25 +96,25 @@ namespace ASFui
             switch (WindowState)
             {
                 case FormWindowState.Maximized:
-                    Properties.Settings.Default.Location = RestoreBounds.Location;
-                    Properties.Settings.Default.Size = RestoreBounds.Size;
-                    Properties.Settings.Default.Maximized = true;
+                    Settings.Default.Location = RestoreBounds.Location;
+                    Settings.Default.Size = RestoreBounds.Size;
+                    Settings.Default.Maximized = true;
                     break;
                 case FormWindowState.Normal:
-                    Properties.Settings.Default.Location = Location;
-                    Properties.Settings.Default.Size = Size;
-                    Properties.Settings.Default.Maximized = false;
+                    Settings.Default.Location = Location;
+                    Settings.Default.Size = Size;
+                    Settings.Default.Maximized = false;
                     break;
                 case FormWindowState.Minimized:
                     break;
                 default:
-                    Properties.Settings.Default.Location = RestoreBounds.Location;
-                    Properties.Settings.Default.Size = RestoreBounds.Size;
-                    Properties.Settings.Default.Maximized = false;
+                    Settings.Default.Location = RestoreBounds.Location;
+                    Settings.Default.Size = RestoreBounds.Size;
+                    Settings.Default.Maximized = false;
                     break;
             }
-            Properties.Settings.Default.Save();
-            if (!_asfRunning || !Properties.Settings.Default.IsLocal) return;
+            Settings.Default.Save();
+            if (!_asfRunning || !Settings.Default.IsLocal) return;
             _asf.Stop();
             Logging.Info(@"Closing ASFui.");
         }
@@ -123,8 +123,8 @@ namespace ASFui
         {
             cbBotList.Invoke(new MethodInvoker(() => cbBotList.Items.Clear()));
 
-            var status = Util.SendCommand("statusall");
-            var matches = Regex.Matches(status, @"Bot (.*) is");
+            var status = Util.SendCommand("status ASF");
+            var matches = Regex.Matches(status, @"<(.+?)> Bot is");
             cbBotList.Invoke(new MethodInvoker(() =>
             {
                 foreach (Match m in matches)
@@ -183,7 +183,7 @@ namespace ASFui
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.IsLocal)
+            if (Settings.Default.IsLocal)
             {
                 string binary = Settings.Default.ASFBinary;
                 int index = binary.LastIndexOf('/');
@@ -215,7 +215,7 @@ namespace ASFui
                     }
                     if (msg) {
                         var result = MessageBox.Show(message, @"Config needs to be changed.", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                        if (result == System.Windows.Forms.DialogResult.OK) {
+                        if (result == DialogResult.OK) {
                             try {
                                 File.WriteAllText(asfJson, JsonConvert.SerializeObject(asfConfig, Formatting.Indented));
                             } catch (Exception ex) {
@@ -235,9 +235,9 @@ namespace ASFui
             }
             else
             {
-                if (!Util.CheckUrl(Properties.Settings.Default.RemoteURL))
+                if (!Util.CheckUrl(Settings.Default.RemoteURL))
                 {
-                    rtbOutput.AppendText(@"Cannot connect to remote URL " + Properties.Settings.Default.RemoteURL +
+                    rtbOutput.AppendText(@"Cannot connect to remote URL " + Settings.Default.RemoteURL +
                         @". Please check your config or run ASF in local." + Environment.NewLine);
                     return;
                 }
@@ -260,7 +260,7 @@ namespace ASFui
         {
             btnStop.Enabled = false;
             rtbOutput.AppendText("Stopping ASF..." + Environment.NewLine);
-            if (Properties.Settings.Default.IsLocal)
+            if (Settings.Default.IsLocal)
             {
                 _asf.Stop();
             }
@@ -313,7 +313,7 @@ namespace ASFui
         {
             Task.Run(() =>
             {
-                sendCommand("lootall");
+                sendCommand("loot ASF");
             });
         }
 
@@ -358,6 +358,34 @@ namespace ASFui
             sendMultiCommand(sender, e, "addlicense");
         }
 
+        private void btnAddLicenseAllClick(object sender, EventArgs e)
+        {
+            Task.Run(() => {
+                if (!tbInput.Text.Equals(""))
+                {
+                    var objs = (ComboBox.ObjectCollection) cbBotList.Invoke((Func<ComboBox.ObjectCollection>) delegate
+                    {
+                        return cbBotList.Items;
+                    });
+                    var bots = objs.Cast<string>().ToArray();
+                    foreach (var bot in bots)
+                    {
+                        tbInput.Invoke(new MethodInvoker(() => {
+                            tbInput.Text = Regex.Replace(tbInput.Text, @"(,+|\s+)+", Environment.NewLine); // cleaning up the list
+                        }));
+                        sendCommand(Util.GenerateCommand("addlicense", bot, Util.MultiToOne(tbInput.Lines)));
+                    }
+                    
+                }
+                else
+                {
+                    Logging.Error("Input required (!addlicense)");
+                    MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                }
+            });
+        }
+
         #endregion
 
         #region Games Buttons
@@ -373,11 +401,11 @@ namespace ASFui
             {
                 if (!tbInput.Text.Equals(""))
                 {
-                    sendCommand(Util.GenerateCommand("ownsall", string.Empty, Util.MultiToOne(tbInput.Lines)));
+                    sendCommand(Util.GenerateCommand("owns", "ASF", Util.MultiToOne(tbInput.Lines)));
                 }
                 else
                 {
-                    Logging.Error(@"Input required (!ownsall)");
+                    Logging.Error(@"Input required (!owns ASF)");
                     MessageBox.Show(@"An input is required.", @"Input required", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
@@ -409,7 +437,7 @@ namespace ASFui
 
         private void btnStartAll_Click(object sender, EventArgs e)
         {
-            sendCommand("startall");
+            sendCommand("start ASF");
             GetBotList();
         }
 
@@ -445,7 +473,7 @@ namespace ASFui
 
         private void btnStatusAll_Click(object sender, EventArgs e)
         {
-            sendCommand("statusall");
+            sendCommand("status ASF");
         }
 
         #endregion
@@ -531,6 +559,7 @@ namespace ASFui
             btnRedeemNF.Enabled = true;
             btnRedeemFF.Enabled = true;
             btnAddLicense.Enabled = true;
+            btnAddLicenseAll.Enabled = true;
             btnOwns.Enabled = true;
             btnOwnAll.Enabled = true;
             btnPlay.Enabled = true;
@@ -560,6 +589,7 @@ namespace ASFui
             btnFarm.Enabled = false;
             btnLoot.Enabled = false;
             btnLootAll.Enabled = false;
+            btnAddLicenseAll.Enabled = false;
             btnRedeem.Enabled = false;
             btnRedeemNF.Enabled = false;
             btnRedeemFF.Enabled = false;
