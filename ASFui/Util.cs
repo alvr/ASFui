@@ -134,8 +134,21 @@ namespace ASFui
 
         public static bool CheckUrl(string url)
         {
+            try
+            {
+                var request = WebRequest.Create(url);
+                return ((HttpWebResponse) request.GetResponse()).StatusCode == HttpStatusCode.MethodNotAllowed;
+            }
+            catch (WebException we)
+            {
+                if (((HttpWebResponse) we.Response).StatusCode == HttpStatusCode.MethodNotAllowed && url.EndsWith("/IPC?command="))
+                {
+                    return true;
+                }
 
-            return url.ToLower().StartsWith("http://");
+                MessageBox.Show(@"The remote URL should end with ""/IPC?command=""");
+                return false;
+            }
         }
     }
 }
