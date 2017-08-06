@@ -43,8 +43,11 @@ namespace ASFui
             var httpClient = new HttpClient();
             var response = httpClient.GetAsync(GetEndpointAddress() + command).Result;
             var result = response.Content.ReadAsStringAsync().Result;
-            // This is still wrapped in html.
-            return result.After("</head><body><p>", StringComparison.OrdinalIgnoreCase).BeforeLast("</p></body></html>", StringComparison.OrdinalIgnoreCase).Trim();
+            // Old V3 builds have it wrapped in html.
+            if (result.IndexOf("</head><body><p>", StringComparison.OrdinalIgnoreCase) != -1)
+                return result.After("</head><body><p>", StringComparison.OrdinalIgnoreCase).BeforeLast("</p></body></html>", StringComparison.OrdinalIgnoreCase).Trim();
+
+            return result.Trim();
         }
 
         public static string GenerateCommand(string command, string user, string args = "")
