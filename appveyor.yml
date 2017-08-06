@@ -1,5 +1,5 @@
 version: 1.0.{build}
-image: Visual Studio 2015
+image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
 before_build:
@@ -8,5 +8,5 @@ build:
   project: ASFui.sln
   verbosity: minimal
 artifacts:
-- path: ASFui\bin\Release\ASFui.exe
+- path: out\ASFui.exe
   name: ASFui
