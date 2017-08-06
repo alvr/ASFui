@@ -6,26 +6,48 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.ServiceModel;
+using System.Net.Http;
 using System.Windows.Forms;
 
 namespace ASFui
 {
     internal static class Util
     {
-        private static readonly NetTcpBinding Binding = new NetTcpBinding { SendTimeout = new TimeSpan(0, 30, 0), Security = { Mode = SecurityMode.None } };
-
         public static bool CheckBinary()
         {
             return File.Exists(Settings.Default.ASFBinary) || !Settings.Default.IsLocal;
         }
 
+        public static string After(this string source, string find, StringComparison comparisonType = StringComparison.Ordinal)
+        {
+            var index = source.IndexOf(find, comparisonType);
+            if (index < 0 || index + find.Length >= source.Length)
+                return String.Empty;
+
+            return source.Substring(index + find.Length);
+        }
+
+
+        public static string BeforeLast(this string source, string find, StringComparison comparisonType = StringComparison.Ordinal)
+        {
+            var index = source.LastIndexOf(find, comparisonType);
+            if (index >= 0)
+                return source.Substring(0, index);
+
+            return String.Empty;
+        }
+
+
         public static string SendCommand(string command)
         {
-            using (var asfClient = new Client(Binding, new EndpointAddress(GetEndpointAddress())))
-            {
-                return asfClient.HandleCommand(command);
-            }
+            var httpClient = new HttpClient();
+            var response = httpClient.GetAsync(GetEndpointAddress() + command).Result;
+            var result = response.Content.ReadAsStringAsync().Result;
+            // Old V3 builds have it wrapped in html.
+            if (result.IndexOf("</head><body><p>", StringComparison.OrdinalIgnoreCase) != -1)
+                return result.After("</head><body><p>", StringComparison.OrdinalIgnoreCase).BeforeLast("</p></body></html>", StringComparison.OrdinalIgnoreCase).Trim();
+
+            return result.Trim();
         }
 
         public static string GenerateCommand(string command, string user, string args = "")
@@ -53,19 +75,17 @@ namespace ASFui
             var port = "1242";
             try
             {
-                hostname = json["WCFHost"].ToString();
+                hostname = json["IPCHost"].ToString();
             }
             catch
             {
-                try {
-                    hostname = json["WCFHostname"].ToString();
-                } catch { /* Ignore */ }
+                /* Ignore */
             }
             try {
-                port = json["WCFPort"].ToString();
+                port = json["IPCPort"].ToString();
             } catch { /* Ignore */ }
 
-            return "net.tcp://" + hostname + ":" + port + "/ASF";
+            return "http://" + hostname + ":" + port + "/IPC?command=";
         }
 
         public static bool CheckIfAsfIsRunning()
@@ -115,20 +135,7 @@ namespace ASFui
         public static bool CheckUrl(string url)
         {
 
-            return url.ToLower().StartsWith("net.tcp://");
-            /* Do an advanced check here if the URL fits or something is currently listening.
-            try
-            {
-                var client = new MetadataExchangeClient(Binding);
-                client.GetMetadata();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Logging.Exception(ex, "Invalid remote URL.");
-                return false;
-            }
-            */
+            return url.ToLower().StartsWith("http://");
         }
     }
 }
