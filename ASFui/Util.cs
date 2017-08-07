@@ -137,9 +137,16 @@ namespace ASFui
             }
             catch (WebException we)
             {
-                if (((HttpWebResponse) we.Response).StatusCode == HttpStatusCode.MethodNotAllowed && url.EndsWith("/IPC?command="))
+                try
                 {
-                    return true;
+                    if (((HttpWebResponse)we.Response).StatusCode == HttpStatusCode.MethodNotAllowed && url.EndsWith("/IPC?command="))
+                    {
+                        return true;
+                    }
+                }
+                catch (Exception)
+                {
+                    return false;
                 }
 
                 MessageBox.Show(@"The remote URL should end with ""/IPC?command=""");
