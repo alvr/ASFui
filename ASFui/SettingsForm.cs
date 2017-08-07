@@ -22,10 +22,7 @@ namespace ASFui
             cbTray.Checked = Properties.Settings.Default.ToTray;
         }
 
-        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Dispose();
-        }
+        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e) => Dispose();
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -34,10 +31,7 @@ namespace ASFui
             lbPath.Text = Properties.Settings.Default.ASFBinary;
         }
 
-        private void rbRemote_CheckedChanged(object sender, EventArgs e)
-        {
-            tbRemoteURL.Enabled = rbRemote.Checked;
-        }
+        private void rbRemote_CheckedChanged(object sender, EventArgs e) => tbRemoteURL.Enabled = rbRemote.Checked;
 
         private void btnSave_Click(object sender, EventArgs e)
         {

@@ -22,7 +22,7 @@ namespace ASFui
         {
             var index = source.IndexOf(find, comparisonType);
             if (index < 0 || index + find.Length >= source.Length)
-                return String.Empty;
+                return string.Empty;
 
             return source.Substring(index + find.Length);
         }
@@ -31,10 +31,7 @@ namespace ASFui
         public static string BeforeLast(this string source, string find, StringComparison comparisonType = StringComparison.Ordinal)
         {
             var index = source.LastIndexOf(find, comparisonType);
-            if (index >= 0)
-                return source.Substring(0, index);
-
-            return String.Empty;
+            return index >= 0 ? source.Substring(0, index) : string.Empty;
         }
 
 
@@ -100,8 +97,7 @@ namespace ASFui
             string currentVersion;
             using (var web = new WebClient())
             {
-                currentVersion =
-                    web.DownloadString("https://raw.githubusercontent.com/alvr/ASFui/master/version.txt");
+                currentVersion = web.DownloadString("https://raw.githubusercontent.com/alvr/ASFui/master/version.txt");
             }
 
             if (new Version(Application.ProductVersion).CompareTo(new Version(currentVersion)) >= 0) return;
@@ -127,9 +123,9 @@ namespace ASFui
         {
             var pixelsVisible = Screen.AllScreens.Select(scrn => Rectangle.Intersect(rec, scrn.WorkingArea))
                 .Where(r => r.Width != 0 & r.Height != 0)
-                .Aggregate<Rectangle, double>(0, (current, r) => current + (r.Width*r.Height));
+                .Aggregate<Rectangle, double>(0, (current, r) => current + r.Width * r.Height);
 
-            return pixelsVisible >= (rec.Width * rec.Height) * minPercentOnScreen;
+            return pixelsVisible >= rec.Width * rec.Height * minPercentOnScreen;
         }
 
         public static bool CheckUrl(string url)

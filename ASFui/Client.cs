@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
 namespace ASFui
 {
-    // Copied from:
-    // https://github.com/JustArchi/ArchiSteamFarm/blob/master/ArchiSteamFarm/WCF.cs
-
     [ServiceContract]
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
-    internal interface IWCF
+    internal interface IClient
     {
         [OperationContract]
         string HandleCommand(string input);
     }
 
-    internal sealed class Client : ClientBase<IWCF>, IWCF
+    internal sealed class Client : ClientBase<IClient>, IClient
     {
         internal Client(Binding binding, EndpointAddress address) : base(binding, address) { }
 

@@ -1,6 +1,6 @@
 ﻿namespace ASFui
 {
-    partial class ASFui
+    sealed partial class ASFui
     {
         /// <summary>
         /// Variable del diseñador necesaria.

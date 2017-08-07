@@ -7,13 +7,13 @@ namespace ASFui
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class Bot
     {
-        public class Root
+        internal sealed class Root
         {
             [JsonProperty("Bots")]
             public Dictionary<string, Bots> Bot { get; set; }
         }
 
-        public class Bots
+        internal sealed class Bots
         {
             [JsonProperty("CardsFarmer")]
             public CardsFarmer CardsFarmer { get; set; }
@@ -22,7 +22,7 @@ namespace ASFui
             public bool KeepRunning { get; set; }
         }
 
-        public class CardsFarmer
+        internal sealed class CardsFarmer
         {
             [JsonProperty("GamesToFarm")]
             public HashSet<Game> GamesToFarm { get; set; }
@@ -34,7 +34,7 @@ namespace ASFui
             public bool Paused { get; set; }
         }
 
-        public class Game
+        internal sealed class Game
         {
             [JsonProperty("AppID")]
             public uint AppID { get; set; }
@@ -48,6 +48,5 @@ namespace ASFui
             [JsonProperty("CardsRemaining")]
             public ushort CardsRemaining { get; set; }
         }
-
     }
 }
