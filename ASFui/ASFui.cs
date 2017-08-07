@@ -493,7 +493,16 @@ namespace ASFui
 
         private void btnASFHelp_Click(object sender, EventArgs e) => SendCommand("help");
 
-        private void btnASFUpdate_Click(object sender, EventArgs e) => SendCommand("update");
+        private void btnASFUpdate_Click(object sender, EventArgs e) => Task.Run(() =>
+        {
+            DisableElements();
+            btnASFuiSettings.Enabled = false;
+            btnStart.Enabled = false;
+            btnStop.Enabled = false;
+            btnClear.Enabled = false;
+            SendCommand("update");
+            InvokeOnClick(btnStop, EventArgs.Empty);
+        }).ContinueWith(t => InvokeOnClick(btnStart, EventArgs.Empty));
 
         private void btnASFVersion_Click(object sender, EventArgs e) => SendCommand("version");
 
