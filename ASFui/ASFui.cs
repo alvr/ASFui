@@ -508,7 +508,7 @@ namespace ASFui
 
         private void btnAPI_Click(object sender, EventArgs e)
         {
-            var result = SendCommand("api");
+            var result = SendCommand("api ASF");
             Task.Run(() =>
             {
                 var api = new Api(result);
