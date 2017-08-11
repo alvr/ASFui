@@ -13,7 +13,7 @@ namespace ASFui
 {
     internal static class Util
     {
-        private static readonly NetTcpBinding Binding = new NetTcpBinding { SendTimeout = new TimeSpan(0, 30, 0), Security = { Mode = SecurityMode.None } };
+		private static readonly NetTcpBinding Binding = new NetTcpBinding { SendTimeout = new TimeSpan(0, 30, 0), Security = { Mode = SecurityMode.None } };
 
         public static bool CheckBinary()
         {
@@ -22,11 +22,17 @@ namespace ASFui
 
         public static string SendCommand(string command)
         {
-            using (var asfClient = new Client(Binding, new EndpointAddress(GetEndpointAddress())))
-            {
-                return asfClient.HandleCommand(command);
-            }
-        }
+			string adress;
+			if ((adress = GetEndpointAddress()).StartsWith("net")){
+				using (var asfClient = new Client(Binding, new EndpointAddress(adress))) {
+					return asfClient.HandleCommand(command);
+				}
+			}
+
+			using (WebClient webclient = new WebClient()) {
+				return webclient.DownloadString(adress +"?command="+command);
+			}
+		}
 
         public static string GenerateCommand(string command, string user, string args = "")
         {
@@ -49,21 +55,22 @@ namespace ASFui
                 JObject.Parse(
                     File.ReadAllText(Path.GetDirectoryName(Settings.Default.ASFBinary) + @"/config/ASF.json"));
 
-            var hostname= "127.0.0.1";
-            var port = "1242";
-            try
-            {
-                hostname = json["WCFHost"].ToString();
-            }
-            catch
-            {
-                try {
-                    hostname = json["WCFHostname"].ToString();
-                } catch { /* Ignore */ }
-            }
-            try {
-                port = json["WCFPort"].ToString();
-            } catch { /* Ignore */ }
+			var hostname = "127.0.0.1";
+			var port = "1242";
+			//newversion:
+			if (null==json["WCFHost"] && json["WCFPort"]==null && json["WCFHostname"] == null) {
+				if (null != json["IPCHostname"])
+					hostname = json["IPCHostname"].ToString();
+				if (null != json["IPCPort"])
+					port = json["IPCPort"].ToString();
+				return "http://" + hostname + ":" + port + "/IPC";
+			}
+			if (null != json["WCFHost"])
+				hostname = json["WCFHost"].ToString();
+			if (null != json["WCFHostname"])
+				hostname = json["WCFHostname"].ToString();
+			if (null != json["WCFPort"])
+				port = json["WCFPort"].ToString();
 
             return "net.tcp://" + hostname + ":" + port + "/ASF";
         }

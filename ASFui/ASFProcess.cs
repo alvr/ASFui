@@ -29,21 +29,25 @@ namespace ASFui
         }
 
         private void init() {
-            var ASFInfo = new ProcessStartInfo() {
-                Arguments = "--server",
-                CreateNoWindow = true,
-                Domain = "",
-                FileName = Properties.Settings.Default.ASFBinary,
-                LoadUserProfile = false,
-                Password = null,
-                RedirectStandardError = true,
-                RedirectStandardInput = true,
-                RedirectStandardOutput = true,
-                StandardErrorEncoding = Encoding.UTF8,
-                StandardOutputEncoding = Encoding.UTF8,
-                UseShellExecute = false,
-                WindowStyle = ProcessWindowStyle.Hidden
-            };
+			var ASFInfo = new ProcessStartInfo() {
+				Arguments = "--server",
+				CreateNoWindow = true,
+				Domain = "",
+				FileName = Properties.Settings.Default.ASFBinary,
+				LoadUserProfile = false,
+				Password = null,
+				RedirectStandardError = true,
+				RedirectStandardInput = true,
+				RedirectStandardOutput = true,
+				StandardErrorEncoding = Encoding.UTF8,
+				StandardOutputEncoding = Encoding.UTF8,
+				UseShellExecute = false,
+				WindowStyle = ProcessWindowStyle.Hidden
+			};
+			if (Properties.Settings.Default.ASFBinary.EndsWith("dll")) {
+				ASFInfo.Arguments = Properties.Settings.Default.ASFBinary + " --server";
+				ASFInfo.FileName = "dotnet";
+			}
 
             ASF.StartInfo = ASFInfo;
             ASF.OutputDataReceived += OutputHandler;
