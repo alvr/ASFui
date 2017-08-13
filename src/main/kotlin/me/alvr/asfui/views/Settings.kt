@@ -39,26 +39,45 @@ class Settings : View("Settings") {
         }
 
         save.action {
-            Configuration.setProperty(Configuration.BINARY, pathBinary.text)
-            Configuration.setProperty(Configuration.IS_LOCAL, isLocal.isSelected)
-            Configuration.setProperty(Configuration.IS_REMOTE, isRemote.isSelected)
-            Configuration.setProperty(Configuration.HOST, host.text)
-            Configuration.setProperty(Configuration.REDEEMED, redeemed.isSelected)
-            Configuration.setProperty(Configuration.DUPLICATED, duplicated.isSelected)
-            Configuration.setProperty(Configuration.INVALID, invalid.isSelected)
-            Configuration.setProperty(Configuration.OWNED, owned.isSelected)
-            Configuration.setProperty(Configuration.COOLDOWN, cooldown.isSelected)
-            status.fade(Duration.seconds(1.0), 1.0).setOnFinished {
-                val pause = PauseTransition(Duration.seconds(1.25))
-                pause.setOnFinished {
-                    status.fade(Duration.seconds(1.0), 0.0)
+            if (isRemote.isSelected && !checkRemote()) {
+                status.text = "Invalid remote endpoint."
+                status.textFill = c(255, 0, 0)
+                status.fade(Duration.seconds(1.0), 1.0).setOnFinished {
+                    val pause = PauseTransition(Duration.seconds(2.0))
+                    pause.setOnFinished {
+                        status.fade(Duration.seconds(1.0), 0.0)
+                    }
+                    pause.play()
                 }
-                pause.play()
+               return@action
+            } else {
+                Configuration.setProperty(Configuration.BINARY, pathBinary.text)
+                Configuration.setProperty(Configuration.IS_LOCAL, isLocal.isSelected)
+                Configuration.setProperty(Configuration.IS_REMOTE, isRemote.isSelected)
+                Configuration.setProperty(Configuration.HOST, host.text)
+                Configuration.setProperty(Configuration.REDEEMED, redeemed.isSelected)
+                Configuration.setProperty(Configuration.DUPLICATED, duplicated.isSelected)
+                Configuration.setProperty(Configuration.INVALID, invalid.isSelected)
+                Configuration.setProperty(Configuration.OWNED, owned.isSelected)
+                Configuration.setProperty(Configuration.COOLDOWN, cooldown.isSelected)
+                status.text = "Settings saved."
+                status.textFill = c(0, 0, 0)
+                status.fade(Duration.seconds(1.0), 1.0).setOnFinished {
+                    val pause = PauseTransition(Duration.seconds(1.25))
+                    pause.setOnFinished {
+                        status.fade(Duration.seconds(1.0), 0.0)
+                    }
+                    pause.play()
+                }
             }
+        }
+
+        isRemote.selectedProperty().onChange {
+            host.isDisable = !isRemote.isSelected
         }
     }
 
-    fun loadSettings() {
+    private fun loadSettings() {
         pathBinary.text = Configuration.getPropertyString(Configuration.BINARY, Configuration.BINARY_DEFAULT)
         isLocal.isSelected = Configuration.getPropertyBoolean(Configuration.IS_LOCAL, Configuration.IS_LOCAL_DEFAULT)
         isRemote.isSelected = Configuration.getPropertyBoolean(Configuration.IS_REMOTE, Configuration.IS_REMOTE_DEFAULT)
@@ -68,5 +87,14 @@ class Settings : View("Settings") {
         invalid.isSelected = Configuration.getPropertyBoolean(Configuration.INVALID, Configuration.INVALID_DEFAULT)
         owned.isSelected = Configuration.getPropertyBoolean(Configuration.OWNED, Configuration.OWNED_DEFAULT)
         cooldown.isSelected = Configuration.getPropertyBoolean(Configuration.COOLDOWN, Configuration.COOLDOWN_DEFAULT)
+    }
+
+    private fun checkRemote(): Boolean {
+        try {
+            val check = khttp.get(host.text)
+            return check.statusCode == 405
+        } catch (e: Exception) {
+            return false
+        }
     }
 }
