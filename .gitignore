@@ -1,0 +1,11 @@
+# Gradle files
+.gradle/
+build/
+out/
+
+# IntelliJ IDEA
+*.iml
+.idea/
+
+# Debug
+/asfui.properties

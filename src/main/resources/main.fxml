@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0"
+            stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111">
+    <TitledPane collapsible="false" text="Input" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="570.0"
+                AnchorPane.topAnchor="5.0">
+        <TextArea fx:id="input" prefHeight="200.0" prefWidth="200.0" wrapText="true"/>
+    </TitledPane>
+    <Button fx:id="clear" layoutX="725.0" layoutY="529.0" mnemonicParsing="false" styleClass="menu-button"
+            text="Clear log" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+        <tooltip>
+            <Tooltip text="Clear output log."/>
+        </tooltip>
+    </Button>
+    <Button fx:id="stop" layoutX="660.0" layoutY="525.0" mnemonicParsing="false" styleClass="menu-button" text="Stop"
+            AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="74.0">
+        <font>
+            <Font name="System Bold" size="12.0"/>
+        </font>
+        <tooltip>
+            <Tooltip text="Stop ASF process."/>
+        </tooltip>
+    </Button>
+    <Button fx:id="start" layoutX="568.0" layoutY="525.0" mnemonicParsing="false" styleClass="menu-button" text="Start"
+            AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="144.0">
+        <font>
+            <Font name="System Bold" size="12.0"/>
+        </font>
+        <tooltip>
+            <Tooltip text="Start ASF process."/>
+        </tooltip>
+    </Button>
+    <TextArea fx:id="output" editable="false" layoutY="289.0" prefHeight="236.0" prefWidth="777.0" wrapText="true"
+              AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+        <font>
+            <Font name="FiraCode-Regular" size="10.0"/>
+        </font>
+    </TextArea>
+    <ComboBox fx:id="list_bot" layoutY="529.0" prefWidth="150.0" AnchorPane.bottomAnchor="5.0"
+              AnchorPane.leftAnchor="5.0"/>
+    <TitledPane collapsible="false" layoutX="222.0" layoutY="5.0" prefHeight="71.0" prefWidth="277.0" text="Redeem"
+                AnchorPane.leftAnchor="222.0" AnchorPane.topAnchor="5.0">
+        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="496.0">
+            <Button fx:id="redeem_normal" mnemonicParsing="false" styleClass="normal-button" text="Normal">
+                <HBox.margin>
+                    <Insets left="3.0" right="3.0"/>
+                </HBox.margin>
+                <tooltip>
+                    <Tooltip text="Redeems given cd-keys on given bot instance."/>
+                </tooltip>
+            </Button>
+            <SplitMenuButton fx:id="redeem_mode" mnemonicParsing="false" text="Mode Redeem">
+                <items>
+                    <CheckMenuItem fx:id="redeem_fd" mnemonicParsing="false" text="Force Distributing"/>
+                    <CheckMenuItem fx:id="redeem_ff" mnemonicParsing="false" text="Force Forwarding"/>
+                    <CheckMenuItem fx:id="redeem_fkmg" mnemonicParsing="false" text="Force Keep Missing Games"/>
+                    <CheckMenuItem fx:id="redeem_sd" mnemonicParsing="false" text="Skip Distributing"/>
+                    <CheckMenuItem fx:id="redeem_sf" mnemonicParsing="false" text="Skip Forwarding"/>
+                    <CheckMenuItem fx:id="redeem_si" mnemonicParsing="false" text="Skip Initial"/>
+                    <CheckMenuItem fx:id="redeem_skmg" mnemonicParsing="false" text="Skip Keep Missing Games"/>
+                </items>
+                <tooltip>
+                    <Tooltip
+                            text="Force Distributing: Forces Distributing redeeming preference to be enabled.&#13;Force Forwarding: Forces Forwarding redeeming preference to be enabled.&#13;Force Keep Missing Games: Forces KeepMissingGames redeeming preference to be enabled.&#13;Skip Distributing: Forces Distributing redeeming preference to be disabled.&#13;Skip Forwarding: Forces Forwarding redeeming preference to be disabled&#13;Skip Initial: Skips key redemption on initial bot.&#13;Skip Keep Missing Games: Forces KeepMissingGames redeeming preference to be disabled."
+                            wrapText="true"/>
+                </tooltip>
+            </SplitMenuButton>
+        </HBox>
+    </TitledPane>
+    <TitledPane collapsible="false" layoutX="590.0" layoutY="5.0" prefHeight="71.0" prefWidth="277.0" text="License"
+                AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="387.0">
+            <Button fx:id="license_add" mnemonicParsing="false" styleClass="normal-button" text="Add">
+                <HBox.margin>
+                    <Insets left="3.0" right="3.0"/>
+                </HBox.margin>
+                <tooltip>
+                    <Tooltip text="Empty Tooltip"/>
+                </tooltip>
+            </Button>
+            <Button fx:id="license_addall" mnemonicParsing="false" styleClass="normal-button" text="Add All">
+                <HBox.margin>
+                    <Insets left="3.0" right="3.0"/>
+                </HBox.margin>
+                <tooltip>
+                    <Tooltip text="Empty Tooltip"/>
+                </tooltip>
+            </Button>
+        </HBox>
+    </TitledPane>
+    <TitledPane collapsible="false" layoutX="222.0" layoutY="83.0" prefHeight="71.0" prefWidth="360.0" text="Cards"
+                AnchorPane.leftAnchor="222.0" AnchorPane.rightAnchor="5.0">
+        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="387.0">
+            <Button fx:id="cards_farm" mnemonicParsing="false" styleClass="normal-button" text="Farm">
+                <HBox.margin>
+                    <Insets left="3.0" right="3.0"/>
+                </HBox.margin>
+                <tooltip>
+                    <Tooltip text="Restarts cards farming module for given bot instance."/>
+                </tooltip>
+            </Button>
+            <Button fx:id="cards_loot" mnemonicParsing="false" styleClass="normal-button" text="Loot">
+                <HBox.margin>
+                    <Insets left="3.0" right="3.0"/>
+                </HBox.margin>
+                <tooltip>
+                    <Tooltip
+                            text="Sends all booster packs and Steam trading cards (including foils if IsBotAccount) of given bot instance to SteamMasterID."
+                            wrapText="true"/>
+                </tooltip>
+            </Button>
+            <Button fx:id="cards_lootall" mnemonicParsing="false" styleClass="normal-button" text="Loot All">
+                <HBox.margin>
+                    <Insets left="3.0" right="3.0"/>
+                </HBox.margin>
+                <tooltip>
+                    <Tooltip text="Empty Tooltip"/>
+                </tooltip>
+            </Button>
+            <Button fx:id="cards_unpack" mnemonicParsing="false" styleClass="normal-button" text="Unpack">
+                <HBox.margin>
+                    <Insets left="3.0" right="3.0"/>
+                </HBox.margin>
+                <tooltip>
+                    <Tooltip text="Empty Tooltip"/>
+                </tooltip>
+            </Button>
+        </HBox>
+    </TitledPane>
+    <Button fx:id="reload_bots" layoutX="155.0" layoutY="670.0" mnemonicParsing="false" textAlignment="CENTER"
+            AnchorPane.leftAnchor="160.0">
+        <styleClass>
+            <String fx:value="mini-button"/>
+            <String fx:value="reload-button"/>
+        </styleClass>
+    </Button>
+    <Button fx:id="settings" layoutX="526.0" layoutY="670.0" mnemonicParsing="false" AnchorPane.rightAnchor="214.0"
+            AnchorPane.topAnchor="670.0">
+        <styleClass>
+            <String fx:value="mini-button"/>
+            <String fx:value="settings-button"/>
+        </styleClass>
+    </Button>
+    <Button fx:id="help" layoutX="509.0" layoutY="670.0" mnemonicParsing="false" AnchorPane.rightAnchor="251.0">
+        <styleClass>
+            <String fx:value="mini-button"/>
+            <String fx:value="help-button"/>
+        </styleClass>
+    </Button>
+</AnchorPane>
