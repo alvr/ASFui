@@ -72,6 +72,7 @@ class Settings : View("Settings") {
             }
         }
 
+        host.isDisable = !isRemote.isSelected
         isRemote.selectedProperty().onChange {
             host.isDisable = !isRemote.isSelected
         }
