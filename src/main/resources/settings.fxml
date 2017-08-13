@@ -1,96 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111">
-    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-          AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+
+<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
         <TitledPane collapsible="false" prefHeight="65.0" prefWidth="600.0" text="Binary">
             <VBox.margin>
-                <Insets/>
+                <Insets />
             </VBox.margin>
-            <HBox>
-                <Label fx:id="path_binary" contentDisplay="RIGHT" prefHeight="25.0" prefWidth="500.0">
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints minWidth="10.0"/>
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" vgrow="ALWAYS"/>
+                </rowConstraints>
+                <Label fx:id="path_binary" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="497.0"
+                       GridPane.hgrow="SOMETIMES">
                     <padding>
                         <Insets left="5.0"/>
                     </padding>
-                    <HBox.margin>
-                        <Insets right="5.0"/>
-                    </HBox.margin>
                 </Label>
-                <Button fx:id="search_binary" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0"
-                        text="Search..."/>
-            </HBox>
+                <Button fx:id="search_binary" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0"
+                        styleClass="normal-button" text="Search..." GridPane.columnIndex="1"/>
+            </GridPane>
         </TitledPane>
         <TitledPane collapsible="false" prefHeight="65.0" prefWidth="600.0" text="Local or Remote">
             <VBox.margin>
-                <Insets top="5.0"/>
+                <Insets top="5.0" />
             </VBox.margin>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                 <RadioButton fx:id="local" mnemonicParsing="false" selected="true" text="Local">
                     <toggleGroup>
-                        <ToggleGroup fx:id="local_remote"/>
+                        <ToggleGroup fx:id="local_remote" />
                     </toggleGroup>
                 </RadioButton>
                 <RadioButton fx:id="remote" mnemonicParsing="false" text="Remote" toggleGroup="$local_remote">
                     <HBox.margin>
-                        <Insets left="5.0"/>
+                        <Insets left="5.0" />
                     </HBox.margin>
                 </RadioButton>
                 <TextField fx:id="host" HBox.hgrow="ALWAYS">
                     <HBox.margin>
-                        <Insets left="5.0"/>
+                        <Insets left="5.0" />
                     </HBox.margin>
                 </TextField>
             </HBox>
         </TitledPane>
         <TitledPane collapsible="false" prefHeight="65.0" prefWidth="600.0" text="Clear Keys">
             <VBox.margin>
-                <Insets top="5.0"/>
+                <Insets top="5.0" />
             </VBox.margin>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                <CheckBox fx:id="redeemed" mnemonicParsing="false" selected="true" text="Redeemed"/>
+                <CheckBox fx:id="redeemed" mnemonicParsing="false" selected="true" text="Redeemed" />
                 <CheckBox fx:id="duplicated" mnemonicParsing="false" selected="true" text="Duplicated">
                     <HBox.margin>
-                        <Insets left="5.0"/>
+                        <Insets left="5.0" />
                     </HBox.margin>
                 </CheckBox>
                 <CheckBox fx:id="invalid" mnemonicParsing="false" text="Invalid">
                     <HBox.margin>
-                        <Insets left="5.0"/>
+                        <Insets left="5.0" />
                     </HBox.margin>
                 </CheckBox>
                 <CheckBox fx:id="owned" mnemonicParsing="false" text="Owned">
                     <HBox.margin>
-                        <Insets left="5.0"/>
+                        <Insets left="5.0" />
                     </HBox.margin>
                 </CheckBox>
                 <CheckBox fx:id="cooldown" mnemonicParsing="false" text="Cooldown">
                     <HBox.margin>
-                        <Insets left="5.0"/>
+                        <Insets left="5.0" />
                     </HBox.margin>
                 </CheckBox>
             </HBox>
         </TitledPane>
     </VBox>
-    <HBox alignment="CENTER" layoutX="471.0" layoutY="222.0">
+    <HBox alignment="CENTER" layoutX="471.0" layoutY="222.0" AnchorPane.rightAnchor="0.0">
         <padding>
-            <Insets bottom="10.0" right="10.0"/>
+            <Insets bottom="10.0" right="5.0" />
         </padding>
         <Label fx:id="status" opacity="0.0" text="Settings saved." textAlignment="RIGHT">
             <padding>
-                <Insets right="5.0"/>
+                <Insets right="5.0" />
             </padding>
         </Label>
-        <Button fx:id="save" alignment="CENTER" defaultButton="true" mnemonicParsing="false" styleClass="menu-button"
-                text="Save">
+        <Button fx:id="save" alignment="CENTER" defaultButton="true" mnemonicParsing="false" styleClass="menu-button" text="Save">
             <font>
-                <Font name="System Bold" size="12.0"/>
+                <Font name="System Bold" size="12.0" />
             </font>
             <HBox.margin>
-                <Insets bottom="5.0" right="5.0" top="5.0"/>
+                <Insets bottom="5.0" top="5.0" />
             </HBox.margin>
         </Button>
     </HBox>
