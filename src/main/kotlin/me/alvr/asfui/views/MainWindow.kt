@@ -87,6 +87,8 @@ class MainWindow : View("ASFui") {
 
     private fun loadBots() = runLater {
         bots.apply {
+            items.clear()
+            
             val configDir = File(File(Configuration.getPropertyString(Configuration.BINARY, Configuration.BINARY_DEFAULT)).parent + File.separator + "config" + File.separator)
             val botList = FileUtils.listFiles(configDir, WildcardFileFilter("*.json"), null)
 
