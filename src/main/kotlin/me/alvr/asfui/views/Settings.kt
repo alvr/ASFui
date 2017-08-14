@@ -10,7 +10,13 @@ import javafx.scene.layout.AnchorPane
 import javafx.stage.FileChooser
 import javafx.util.Duration
 import me.alvr.asfui.Configuration
-import tornadofx.*
+import tornadofx.FileChooserMode.Single
+import tornadofx.action
+import tornadofx.c
+import tornadofx.fade
+import tornadofx.onChange
+import tornadofx.View
+import tornadofx.chooseFile
 
 class Settings : View("Settings") {
     override val root: AnchorPane by fxml("/settings.fxml")
@@ -31,8 +37,7 @@ class Settings : View("Settings") {
         loadSettings()
 
         searchBinary.action {
-            val chooser = FileChooser()
-            val binary = chooser.showOpenDialog(this@Settings.currentWindow)
+            val binary = chooseFile("Select ASF binary", emptyArray()).firstOrNull()
             binary?.let {
                 pathBinary.text = binary.path
             }
@@ -49,7 +54,7 @@ class Settings : View("Settings") {
                     }
                     pause.play()
                 }
-               return@action
+                return@action
             } else {
                 Configuration.setProperty(Configuration.BINARY, pathBinary.text)
                 Configuration.setProperty(Configuration.IS_LOCAL, isLocal.isSelected)
