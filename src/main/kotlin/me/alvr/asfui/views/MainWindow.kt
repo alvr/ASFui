@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane
 import javafx.stage.StageStyle.UTILITY
 import me.alvr.asfui.ASFProcess
 import me.alvr.asfui.Configuration
+import me.alvr.asfui.util.OpenBrowser
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
 import org.apache.commons.io.filefilter.WildcardFileFilter
@@ -16,6 +17,7 @@ import java.io.File
 
 class MainWindow : View("ASFui") {
     override val root: AnchorPane by fxml("/main.fxml")
+    val openBrowser: OpenBrowser by inject()
 
     // Main
     val startButton: Button by fxid("start")
@@ -81,6 +83,8 @@ class MainWindow : View("ASFui") {
         }
 
         help.action {
+            openBrowser.openUrl("https://github.com/alvr/ASFui/wiki")
+        }
 
         }
     }
