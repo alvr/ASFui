@@ -1,7 +1,13 @@
 apply plugin: 'kotlin'
 
 group 'me.alvr'
-version '2.0.0-alpha1'
+
+def props = new Properties()
+new File("src/main/resources/version.properties").withInputStream {
+    stream -> props.load(stream)
+}
+
+version props["version"]
 
 buildscript {
     ext.kotlin_version = '1.1.3-2'
