@@ -1,5 +1,6 @@
 package me.alvr.asfui.views
 
+import java.nio.file.Path
 import javafx.animation.PauseTransition
 import javafx.scene.control.Button
 import javafx.scene.control.CheckBox
@@ -7,19 +8,19 @@ import javafx.scene.control.Label
 import javafx.scene.control.TextField
 import javafx.scene.control.ToggleButton
 import javafx.scene.layout.AnchorPane
-import javafx.stage.FileChooser
 import javafx.util.Duration
-import me.alvr.asfui.Configuration
-import tornadofx.FileChooserMode.Single
+import me.alvr.asfui.util.ConfigValues
 import tornadofx.action
 import tornadofx.c
+import tornadofx.chooseFile
 import tornadofx.fade
 import tornadofx.onChange
 import tornadofx.View
-import tornadofx.chooseFile
 
 class Settings : View("Settings") {
     override val root: AnchorPane by fxml("/settings.fxml")
+    override val configPath: Path = app.configBasePath.resolve("asfui.properties")
+
     val searchBinary: Button by fxid("search_binary")
     val pathBinary: Label by fxid("path_binary")
     val isLocal: ToggleButton by fxid("local")
@@ -45,34 +46,41 @@ class Settings : View("Settings") {
 
         save.action {
             if (isRemote.isSelected && !checkRemote()) {
-                status.text = "Invalid remote endpoint."
-                status.textFill = c(255, 0, 0)
-                status.fade(Duration.seconds(1.0), 1.0).setOnFinished {
-                    val pause = PauseTransition(Duration.seconds(2.0))
-                    pause.setOnFinished {
-                        status.fade(Duration.seconds(1.0), 0.0)
+                status.apply {
+                    text = "Invalid remote endpoint."
+                    textFill = c(255, 0, 0)
+                    fade(Duration.seconds(1.0), 1.0).setOnFinished {
+                        val pause = PauseTransition(Duration.seconds(2.0))
+                        pause.setOnFinished {
+                            fade(Duration.seconds(1.0), 0.0)
+                        }
+                        pause.play()
                     }
-                    pause.play()
                 }
                 return@action
             } else {
-                Configuration.setProperty(Configuration.BINARY, pathBinary.text)
-                Configuration.setProperty(Configuration.IS_LOCAL, isLocal.isSelected)
-                Configuration.setProperty(Configuration.IS_REMOTE, isRemote.isSelected)
-                Configuration.setProperty(Configuration.HOST, host.text)
-                Configuration.setProperty(Configuration.REDEEMED, redeemed.isSelected)
-                Configuration.setProperty(Configuration.DUPLICATED, duplicated.isSelected)
-                Configuration.setProperty(Configuration.INVALID, invalid.isSelected)
-                Configuration.setProperty(Configuration.OWNED, owned.isSelected)
-                Configuration.setProperty(Configuration.COOLDOWN, cooldown.isSelected)
-                status.text = "Settings saved."
-                status.textFill = c(0, 0, 0)
-                status.fade(Duration.seconds(1.0), 1.0).setOnFinished {
-                    val pause = PauseTransition(Duration.seconds(1.25))
-                    pause.setOnFinished {
-                        status.fade(Duration.seconds(1.0), 0.0)
+                with(config) {
+                    set(ConfigValues.BINARY to pathBinary.text)
+                    set(ConfigValues.IS_LOCAL to isLocal.isSelected)
+                    set(ConfigValues.IS_REMOTE to isRemote.isSelected)
+                    set(ConfigValues.HOST to host.text)
+                    set(ConfigValues.REDEEMED to redeemed.isSelected)
+                    set(ConfigValues.DUPLICATED to duplicated.isSelected)
+                    set(ConfigValues.INVALID to invalid.isSelected)
+                    set(ConfigValues.OWNED to owned.isSelected)
+                    set(ConfigValues.COOLDOWN to cooldown.isSelected)
+                    save()
+                }
+                status.apply {
+                    text = "Settings saved."
+                    textFill = c(0, 0, 0)
+                    fade(Duration.seconds(1.0), 1.0).setOnFinished {
+                        val pause = PauseTransition(Duration.seconds(1.25))
+                        pause.setOnFinished {
+                            fade(Duration.seconds(1.0), 0.0)
+                        }
+                        pause.play()
                     }
-                    pause.play()
                 }
             }
         }
@@ -84,15 +92,17 @@ class Settings : View("Settings") {
     }
 
     private fun loadSettings() {
-        pathBinary.text = Configuration.getPropertyString(Configuration.BINARY, Configuration.BINARY_DEFAULT)
-        isLocal.isSelected = Configuration.getPropertyBoolean(Configuration.IS_LOCAL, Configuration.IS_LOCAL_DEFAULT)
-        isRemote.isSelected = Configuration.getPropertyBoolean(Configuration.IS_REMOTE, Configuration.IS_REMOTE_DEFAULT)
-        host.text = Configuration.getPropertyString(Configuration.HOST, Configuration.HOST_DEFAULT)
-        redeemed.isSelected = Configuration.getPropertyBoolean(Configuration.REDEEMED, Configuration.REDEEMED_DEFAULT)
-        duplicated.isSelected = Configuration.getPropertyBoolean(Configuration.REDEEMED, Configuration.DUPLICATED_DEFAULT)
-        invalid.isSelected = Configuration.getPropertyBoolean(Configuration.INVALID, Configuration.INVALID_DEFAULT)
-        owned.isSelected = Configuration.getPropertyBoolean(Configuration.OWNED, Configuration.OWNED_DEFAULT)
-        cooldown.isSelected = Configuration.getPropertyBoolean(Configuration.COOLDOWN, Configuration.COOLDOWN_DEFAULT)
+        with(config) {
+            pathBinary.text = string(ConfigValues.BINARY)
+            isLocal.isSelected = boolean(ConfigValues.IS_LOCAL)
+            isRemote.isSelected = boolean(ConfigValues.IS_REMOTE)
+            host.text = string(ConfigValues.HOST, ConfigValues.HOST_DEFAULT)
+            redeemed.isSelected = boolean(ConfigValues.REDEEMED)
+            duplicated.isSelected = boolean(ConfigValues.REDEEMED)
+            invalid.isSelected = boolean(ConfigValues.INVALID)
+            owned.isSelected = boolean(ConfigValues.OWNED)
+            cooldown.isSelected = boolean(ConfigValues.COOLDOWN)
+        }
     }
 
     private fun checkRemote(): Boolean {
