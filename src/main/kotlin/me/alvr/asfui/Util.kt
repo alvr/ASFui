@@ -1,6 +1,5 @@
 package me.alvr.asfui
 
-import java.io.File
 import java.util.Properties
 
 fun String.multiToOne(): String = this
@@ -18,12 +17,13 @@ fun updateAvailable(): Boolean {
     try {
         val gitVersion = khttp.get("https://raw.githubusercontent.com/alvr/ASFui/master/version.txt", timeout = 10.0).text
 
-        val props = Properties()
-        File("src/main/resources/version.properties").inputStream().use { f ->
-            props.load(f)
+        val props = Properties().apply {
+            ClassLoader.getSystemResource("version.properties").openStream().use { f ->
+                load(f)
+            }
         }
 
-        return props.getProperty("version") >= gitVersion
+        return gitVersion > props.getProperty("version")
     } catch (e: Exception) {
         return false
     }
