@@ -21,18 +21,18 @@ class Settings : View("Settings") {
     override val root: AnchorPane by fxml("/settings.fxml")
     override val configPath: Path = app.configBasePath.resolve("asfui.properties")
 
-    val searchBinary: Button by fxid("search_binary")
-    val pathBinary: Label by fxid("path_binary")
-    val isLocal: ToggleButton by fxid("local")
-    val isRemote: ToggleButton by fxid("remote")
-    val host: TextField by fxid("host")
-    val redeemed: CheckBox by fxid("redeemed")
-    val duplicated: CheckBox by fxid("duplicated")
-    val invalid: CheckBox by fxid("invalid")
-    val owned: CheckBox by fxid("owned")
-    val cooldown: CheckBox by fxid("cooldown")
-    val save: Button by fxid("save")
-    val status: Label by fxid("status")
+    private val searchBinary: Button by fxid("search_binary")
+    private val pathBinary: Label by fxid("path_binary")
+    private val isLocal: ToggleButton by fxid("local")
+    private val isRemote: ToggleButton by fxid("remote")
+    private val host: TextField by fxid("host")
+    private val redeemed: CheckBox by fxid("redeemed")
+    private val duplicated: CheckBox by fxid("duplicated")
+    private val invalid: CheckBox by fxid("invalid")
+    private val owned: CheckBox by fxid("owned")
+    private val cooldown: CheckBox by fxid("cooldown")
+    private val save: Button by fxid("save")
+    private val status: Label by fxid("status")
 
     init {
         loadSettings()
@@ -105,12 +105,10 @@ class Settings : View("Settings") {
         }
     }
 
-    private fun checkRemote(): Boolean {
-        try {
-            val check = khttp.get(host.text)
-            return check.statusCode == 405
-        } catch (e: Exception) {
-            return false
-        }
+    private fun checkRemote(): Boolean = try {
+        val check = khttp.get(host.text)
+        check.statusCode == 405
+    } catch (e: Exception) {
+        false
     }
 }
