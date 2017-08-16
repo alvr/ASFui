@@ -1,21 +1,39 @@
 package me.alvr.asfui
 
-object Command {
-    private val basePath = Configuration.getPropertyString(Configuration.HOST, Configuration.HOST_DEFAULT)
+import me.alvr.asfui.util.ConfigValues
+import tornadofx.Controller
 
-    val REDEEM = "r"
-    val REDEEM_MODE = "r^"
-    val STATUS_ALL = "sa"
-    val OWNS_ALL = "oa"
+object Command : Controller() {
+    private val basePath = config.getProperty(ConfigValues.HOST, ConfigValues.HOST_DEFAULT)
+
+    // Redeem
+    const val REDEEM = "r"
+    const val REDEEM_MODE = "r^"
+
+    // License
+    const val LICENSE = "addlicense"
+
+    // Cards
+    const val FARM = "farm"
+    const val LOOT = "loot"
+    const val LOOT_ALL = "loot ASF"
+    const val UNPACK = "unpack"
+
+    // Games
+    const val OWN = "owns"
+    const val PLAY = "play"
+
+    // Bots
+    const val START = "start"
+    const val STOP = "stop"
 
     fun sendCommand(command: String): String {
         val parameters = mapOf("command" to command)
-        var response: String
 
-        try {
-            response = khttp.get("$basePath/IPC", params = parameters).text
+        val response = try {
+            khttp.get("$basePath/IPC", params = parameters).text
         } catch (e: Exception) {
-            response = "Error sending command. ArchiSteamFarm may be not running."
+            "Error sending command. ArchiSteamFarm may be not running."
         }
 
         if (response.indexOf("</head><body><p>") != -1)
@@ -24,7 +42,7 @@ object Command {
         return response.trim()
     }
 
-    fun generateCommand(command: String, user: String, args: String = "") = "$command $user $args"
+    fun generateCommand(command: String, user: String, args: String = "", pre: String = "") = "$command $user $pre $args"
 
     private fun String.after(find: String): String {
         val index = this.indexOf(find)
