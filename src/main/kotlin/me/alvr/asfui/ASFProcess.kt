@@ -12,9 +12,7 @@ import tornadofx.property
 
 object ASFProcess : Controller() {
     override val configPath: Path = app.configBasePath.resolve("asfui.properties")
-
     private lateinit var process: StartedProcess
-
     private val startedProperty = SimpleBooleanProperty(this, "process", false)
     var started by property(startedProperty)
 
@@ -39,3 +37,4 @@ object ASFProcess : Controller() {
             process.process.destroy()
         }
     }
+}
