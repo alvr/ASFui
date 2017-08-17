@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.VBox?>
+
+<TitledPane collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" text="Games" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Button fx:id="games_own" mnemonicParsing="false" styleClass="normal-button" text="Own">
+               <tooltip>
+                  <Tooltip text="Restarts cards farming module for given bot instance." />
+               </tooltip>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="games_ownall" mnemonicParsing="false" styleClass="normal-button" text="Own All">
+               <tooltip>
+                  <Tooltip text="Sends all booster packs and Steam trading cards (including foils if IsBotAccount) of given bot instance to SteamMasterID." wrapText="true" />
+               </tooltip>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="games_play" mnemonicParsing="false" styleClass="normal-button" text="Play">
+               <tooltip>
+                  <Tooltip text="Empty Tooltip" />
+               </tooltip>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </content>
+</TitledPane>

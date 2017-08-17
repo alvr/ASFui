@@ -1,218 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-    <TitledPane collapsible="false" text="Input" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="570.0" AnchorPane.topAnchor="5.0">
-        <TextArea fx:id="input" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
-    </TitledPane>
-    <TitledPane collapsible="false" layoutX="222.0" layoutY="5.0" prefHeight="71.0" prefWidth="277.0" text="Redeem" AnchorPane.leftAnchor="222.0" AnchorPane.topAnchor="5.0">
-        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="496.0">
-            <Button fx:id="redeem_normal" mnemonicParsing="false" styleClass="normal-button" text="Normal">
-                <HBox.margin>
-                    <Insets left="3.0" right="3.0" />
-                </HBox.margin>
-                <tooltip>
-                    <Tooltip text="Redeems given cd-keys on given bot instance." />
-                </tooltip>
-            </Button>
-            <SplitMenuButton fx:id="redeem_mode" mnemonicParsing="false" text="Mode Redeem">
-                <items>
-                    <CheckMenuItem fx:id="redeem_fd" mnemonicParsing="false" text="Force Distributing" userData="fd" />
-                    <CheckMenuItem fx:id="redeem_ff" mnemonicParsing="false" text="Force Forwarding" userData="ff" />
-                    <CheckMenuItem fx:id="redeem_fkmg" mnemonicParsing="false" text="Force Keep Missing Games" userData="fkmg" />
-                    <CheckMenuItem fx:id="redeem_sd" mnemonicParsing="false" text="Skip Distributing" userData="sd" />
-                    <CheckMenuItem fx:id="redeem_sf" mnemonicParsing="false" text="Skip Forwarding" userData="sf" />
-                    <CheckMenuItem fx:id="redeem_si" mnemonicParsing="false" text="Skip Initial" userData="si" />
-                    <CheckMenuItem fx:id="redeem_skmg" mnemonicParsing="false" text="Skip Keep Missing Games" userData="skmg" />
-                    <CheckMenuItem fx:id="redeem_v" mnemonicParsing="false" text="Validate" userData="v" />
-                </items>
-                <tooltip>
-                    <Tooltip text="Force Distributing: Forces Distributing redeeming preference to be enabled.&#13;Force Forwarding: Forces Forwarding redeeming preference to be enabled.&#13;Force Keep Missing Games: Forces KeepMissingGames redeeming preference to be enabled.&#13;Skip Distributing: Forces Distributing redeeming preference to be disabled.&#13;Skip Forwarding: Forces Forwarding redeeming preference to be disabled&#13;Skip Initial: Skips key redemption on initial bot.&#13;Skip Keep Missing Games: Forces KeepMissingGames redeeming preference to be disabled." wrapText="true" />
-                </tooltip>
-            </SplitMenuButton>
-        </HBox>
-    </TitledPane>
-    <TitledPane collapsible="false" layoutX="590.0" layoutY="5.0" prefHeight="71.0" prefWidth="277.0" text="License" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="387.0">
-            <Button fx:id="license_add" mnemonicParsing="false" styleClass="normal-button" text="Add">
-                <HBox.margin>
-                    <Insets left="3.0" right="3.0" />
-                </HBox.margin>
-                <tooltip>
-                    <Tooltip text="Empty Tooltip" />
-                </tooltip>
-            </Button>
-            <Button fx:id="license_addall" mnemonicParsing="false" styleClass="normal-button" text="Add All">
-                <HBox.margin>
-                    <Insets left="3.0" right="3.0" />
-                </HBox.margin>
-                <tooltip>
-                    <Tooltip text="Empty Tooltip" />
-                </tooltip>
-            </Button>
-        </HBox>
-    </TitledPane>
-    <TitledPane collapsible="false" layoutX="222.0" layoutY="83.0" prefHeight="71.0" text="Cards" AnchorPane.leftAnchor="222.0" AnchorPane.rightAnchor="5.0">
-        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="387.0">
-            <Button fx:id="cards_farm" mnemonicParsing="false" styleClass="normal-button" text="Farm">
-                <HBox.margin>
-                    <Insets left="3.0" right="3.0" />
-                </HBox.margin>
-                <tooltip>
-                    <Tooltip text="Restarts cards farming module for given bot instance." />
-                </tooltip>
-            </Button>
-            <Button fx:id="cards_loot" mnemonicParsing="false" styleClass="normal-button" text="Loot">
-                <HBox.margin>
-                    <Insets left="3.0" right="3.0" />
-                </HBox.margin>
-                <tooltip>
-                    <Tooltip text="Sends all booster packs and Steam trading cards (including foils if IsBotAccount) of given bot instance to SteamMasterID." wrapText="true" />
-                </tooltip>
-            </Button>
-            <Button fx:id="cards_lootall" mnemonicParsing="false" styleClass="normal-button" text="Loot All">
-                <HBox.margin>
-                    <Insets left="3.0" right="3.0" />
-                </HBox.margin>
-                <tooltip>
-                    <Tooltip text="Empty Tooltip" />
-                </tooltip>
-            </Button>
-            <Button fx:id="cards_unpack" mnemonicParsing="false" styleClass="normal-button" text="Unpack">
-                <HBox.margin>
-                    <Insets left="3.0" right="3.0" />
-                </HBox.margin>
-                <tooltip>
-                    <Tooltip text="Empty Tooltip" />
-                </tooltip>
-            </Button>
-        </HBox>
-    </TitledPane>
-   <TitledPane collapsible="false" layoutX="222.0" layoutY="160.0" prefHeight="71.0" prefWidth="560.0" text="Games">
-      <content>
-         <HBox alignment="CENTER" prefHeight="0.0" prefWidth="387.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="806.0" prefHeight="700.0" prefWidth="806.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane alignment="CENTER" hgap="5.0" layoutX="5.0" minHeight="400.0" minWidth="796.0" prefHeight="400.0" prefWidth="796.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="262.0" prefWidth="262.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="262.0" prefWidth="262.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="262.0" prefWidth="262.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="400.0" prefHeight="400.0" />
+        </rowConstraints>
+        <children>
+            <TitledPane animated="false" collapsible="false" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" text="Input">
+                <TextArea fx:id="input" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+            </TitledPane>
+            <TitledPane animated="false" collapsible="false" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" text="Control" GridPane.columnIndex="1">
+                <content>
+                    <VBox alignment="CENTER" spacing="10.0">
+                        <children>
+                            <Button fx:id="bots" mnemonicParsing="false" styleClass="normal-button" text="Manage Bots">
+                                <font>
+                                    <Font name="System Bold" size="12.0" />
+                                </font>
+                            </Button>
+                            <Button fx:id="redeem" mnemonicParsing="false" styleClass="normal-button" text="Redeem" />
+                            <Button fx:id="licenses" mnemonicParsing="false" styleClass="normal-button" text="Licenses" />
+                            <Button fx:id="cards" mnemonicParsing="false" styleClass="normal-button" text="Cards" />
+                            <Button fx:id="games" mnemonicParsing="false" styleClass="normal-button" text="Games" />
+                        </children>
+                    </VBox>
+                </content>
+            </TitledPane>
+         <AnchorPane fx:id="container" GridPane.columnIndex="2">
             <children>
-               <Button fx:id="games_own" mnemonicParsing="false" styleClass="normal-button" text="Own">
-                  <HBox.margin>
-                     <Insets left="3.0" right="3.0" />
-                  </HBox.margin>
-                  <tooltip>
-                     <Tooltip text="Restarts cards farming module for given bot instance." />
-                  </tooltip>
-               </Button>
-               <Button fx:id="games_ownall" mnemonicParsing="false" styleClass="normal-button" text="Own All">
-                  <HBox.margin>
-                     <Insets left="3.0" right="3.0" />
-                  </HBox.margin>
-                  <tooltip>
-                     <Tooltip text="Sends all booster packs and Steam trading cards (including foils if IsBotAccount) of given bot instance to SteamMasterID." wrapText="true" />
-                  </tooltip>
-               </Button>
-               <Button fx:id="games_play" mnemonicParsing="false" styleClass="normal-button" text="Play">
-                  <HBox.margin>
-                     <Insets left="3.0" right="3.0" />
-                  </HBox.margin>
-                  <tooltip>
-                     <Tooltip text="Empty Tooltip" />
-                  </tooltip>
-               </Button>
+                    <VBox alignment="CENTER" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0">
+                        <children>
+                            <Label alignment="CENTER" contentDisplay="CENTER" text="← Select to display available options" textAlignment="CENTER" wrapText="true">
+                                <font>
+                                    <Font size="22.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </VBox>
             </children>
-         </HBox>
-      </content>
-   </TitledPane>
-   <TitledPane collapsible="false" layoutX="5.0" layoutY="236.0" prefWidth="777.0" text="Bots">
-      <content>
-         <VBox alignment="CENTER">
-            <children>
-               <HBox alignment="CENTER">
-                  <children>
-                     <Button fx:id="bots_start" mnemonicParsing="false" styleClass="normal-button" text="Start">
-                        <HBox.margin>
-                           <Insets bottom="3.0" right="3.0" />
-                        </HBox.margin>
-                     </Button>
-                     <Button fx:id="bots_stop" mnemonicParsing="false" styleClass="normal-button" text="Stop">
-                        <HBox.margin>
-                           <Insets bottom="3.0" left="3.0" right="3.0" />
-                        </HBox.margin>
-                     </Button>
-                     <Button mnemonicParsing="false" styleClass="normal-button" text="Pause">
-                        <HBox.margin>
-                           <Insets bottom="3.0" left="3.0" right="3.0" />
-                        </HBox.margin>
-                     </Button>
-                     <Button mnemonicParsing="false" styleClass="normal-button" text="Pause Infinite">
-                        <HBox.margin>
-                           <Insets bottom="3.0" left="3.0" right="3.0" />
-                        </HBox.margin>
-                     </Button>
-                     <Button mnemonicParsing="false" styleClass="normal-button" text="Resume">
-                        <HBox.margin>
-                           <Insets bottom="3.0" left="3.0" />
-                        </HBox.margin>
-                     </Button>
-                  </children>
-               </HBox>
-               <HBox alignment="CENTER">
-                  <children>
-                     <Button mnemonicParsing="false" styleClass="normal-button" text="Start All">
-                        <HBox.margin>
-                           <Insets right="3.0" top="3.0" />
-                        </HBox.margin>
-                     </Button>
-                     <Button mnemonicParsing="false" styleClass="normal-button" text="Password">
-                        <HBox.margin>
-                           <Insets left="3.0" right="3.0" top="3.0" />
-                        </HBox.margin>
-                     </Button>
-                     <Button mnemonicParsing="false" styleClass="normal-button" text="Status">
-                        <HBox.margin>
-                           <Insets left="3.0" right="3.0" top="3.0" />
-                        </HBox.margin>
-                     </Button>
-                     <Button mnemonicParsing="false" styleClass="normal-button" text="Status All">
-                        <HBox.margin>
-                           <Insets left="3.0" top="3.0" />
-                        </HBox.margin>
-                     </Button>
-                  </children>
-               </HBox>
-            </children>
-         </VBox>
-      </content>
-   </TitledPane>
+         </AnchorPane>
+        </children>
+    </GridPane>
     <TextArea fx:id="output" editable="false" layoutY="289.0" prefHeight="236.0" prefWidth="777.0" wrapText="true" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
         <font>
             <Font name="Monospaced Regular" size="11.0" />
         </font>
     </TextArea>
     <ComboBox fx:id="list_bot" layoutY="529.0" prefWidth="150.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" />
-    <Button fx:id="reload_bots" layoutX="155.0" layoutY="670.0" mnemonicParsing="false" textAlignment="CENTER" AnchorPane.leftAnchor="160.0">
+    <Button fx:id="reload_bots" layoutX="155.0" layoutY="670.0" mnemonicParsing="false" textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="160.0">
         <styleClass>
             <String fx:value="mini-button" />
             <String fx:value="reload-button" />
         </styleClass>
     </Button>
-    <Button fx:id="help" layoutX="509.0" layoutY="670.0" mnemonicParsing="false" AnchorPane.rightAnchor="251.0">
+    <Button fx:id="help" layoutX="509.0" layoutY="670.0" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="251.0">
         <styleClass>
             <String fx:value="mini-button" />
             <String fx:value="help-button" />
         </styleClass>
     </Button>
-    <Button fx:id="settings" layoutX="526.0" layoutY="670.0" mnemonicParsing="false" AnchorPane.rightAnchor="214.0" AnchorPane.topAnchor="670.0">
+    <Button fx:id="settings" layoutX="526.0" layoutY="670.0" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="214.0">
         <styleClass>
             <String fx:value="mini-button" />
             <String fx:value="settings-button" />
@@ -239,43 +105,4 @@
             <Tooltip text="Clear output log." />
         </tooltip>
     </Button>
-   <TitledPane collapsible="false" layoutX="5.0" layoutY="343.0" prefHeight="71.0" prefWidth="777.0" text="ArchiSteamFarm">
-      <content>
-         <HBox alignment="CENTER" prefHeight="45.0" prefWidth="338.0">
-            <children>
-               <Button fx:id="license_add1" mnemonicParsing="false" styleClass="normal-button" text="Help">
-                  <HBox.margin>
-                     <Insets left="3.0" right="3.0" />
-                  </HBox.margin>
-                  <tooltip>
-                     <Tooltip text="Empty Tooltip" />
-                  </tooltip>
-               </Button>
-               <Button fx:id="license_addall1" mnemonicParsing="false" styleClass="normal-button" text="Rejoin Chat">
-                  <HBox.margin>
-                     <Insets left="3.0" right="3.0" />
-                  </HBox.margin>
-                  <tooltip>
-                     <Tooltip text="Empty Tooltip" />
-                  </tooltip>
-               </Button>
-               <Button fx:id="license_addall11" layoutX="401.0" layoutY="20.0" mnemonicParsing="false" styleClass="normal-button" text="Update">
-                  <tooltip>
-                     <Tooltip text="Empty Tooltip" />
-                  </tooltip>
-               </Button>
-               <Button fx:id="license_addall111" layoutX="454.0" layoutY="20.0" mnemonicParsing="false" styleClass="normal-button" text="Version">
-                  <tooltip>
-                     <Tooltip text="Empty Tooltip" />
-                  </tooltip>
-               </Button>
-               <Button fx:id="license_addall1111" layoutX="504.0" layoutY="20.0" mnemonicParsing="false" styleClass="normal-button" text="API">
-                  <tooltip>
-                     <Tooltip text="Empty Tooltip" />
-                  </tooltip>
-               </Button>
-            </children>
-         </HBox>
-      </content>
-   </TitledPane>
 </AnchorPane>

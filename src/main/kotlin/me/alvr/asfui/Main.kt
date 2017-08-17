@@ -16,6 +16,7 @@ class ASFui : App(MainWindow::class) {
     override fun start(stage: Stage) {
         super.start(stage)
         stage.icons += Image("/icons/logo.png")
+        stage.isResizable = false
     }
 
     init {
