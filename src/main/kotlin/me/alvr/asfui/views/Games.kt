@@ -35,7 +35,7 @@ class Games : Fragment() {
         gamesOwnAllButton.apply {
             action {
                 runLater {
-                    val command = Command.generateCommand(Command.OWN, "ASF", input.text.multiToOne())
+                    val command = Command.generateCommand(Command.OWN_ALL, "", input.text.multiToOne())
                     Command.sendCommand(command)
                 }
             }

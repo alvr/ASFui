@@ -1,60 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.VBox?>
 
 <TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" text="Bots" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <content>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-         <children>
-            <Button fx:id="bots_start" mnemonicParsing="false" styleClass="normal-button" text="Start">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="5.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="bots_stop" mnemonicParsing="false" styleClass="normal-button" text="Stop">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="5.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" styleClass="normal-button" text="Pause">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="5.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" styleClass="normal-button" text="Pause Infinite">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="5.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" styleClass="normal-button" text="Resume">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="5.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" styleClass="normal-button" text="Start All">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="5.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" styleClass="normal-button" text="Password">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="5.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" styleClass="normal-button" text="Status">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="5.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" styleClass="normal-button" text="Status All">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="5.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
-   </content>
+    <content>
+        <VBox alignment="CENTER" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" spacing="10.0">
+            <children>
+                <Button fx:id="bots_start" mnemonicParsing="false" styleClass="normal-button" text="Start" />
+                <Button fx:id="bots_startall" mnemonicParsing="false" styleClass="normal-button" text="Start All" />
+                <Button fx:id="bots_stop" mnemonicParsing="false" styleClass="normal-button" text="Stop" />
+                <Button fx:id="bots_pause" mnemonicParsing="false" styleClass="normal-button" text="Pause" />
+                <Button fx:id="bots_resume" mnemonicParsing="false" styleClass="normal-button" text="Resume" />
+                <Button fx:id="bots_password" mnemonicParsing="false" styleClass="normal-button" text="Password" />
+                <Button fx:id="bots_status" mnemonicParsing="false" styleClass="normal-button" text="Status" />
+                <Button fx:id="bots_statusall" mnemonicParsing="false" styleClass="normal-button" text="Status All" />
+            </children>
+        </VBox>
+    </content>
 </TitledPane>

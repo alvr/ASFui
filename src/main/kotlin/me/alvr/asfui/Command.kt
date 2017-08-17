@@ -21,11 +21,18 @@ object Command : Controller() {
 
     // Games
     const val OWN = "owns"
+    const val OWN_ALL = "oa"
     const val PLAY = "play"
 
     // Bots
     const val START = "start"
+    const val START_ALL = "start ASF"
     const val STOP = "stop"
+    const val PAUSE = "pause"
+    const val RESUME = "resume"
+    const val PASSWORD = "password"
+    const val STATUS = "status"
+    const val STATUS_ALL = "sa"
 
     fun sendCommand(command: String): String {
         val parameters = mapOf("command" to command)
