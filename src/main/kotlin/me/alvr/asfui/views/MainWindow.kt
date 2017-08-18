@@ -27,7 +27,7 @@ import tornadofx.getLong
 import tornadofx.loadJsonObject
 import tornadofx.replaceChildren
 import tornadofx.runLater
-import tornadofx.save
+import tornadofx.toPrettyString
 import tornadofx.toProperty
 import java.io.File
 import java.nio.file.Path
@@ -222,9 +222,7 @@ class MainWindow : View("ASFui") {
             if (showMessage) {
                 alert(CONFIRMATION, "Config needs to be changed.", message, ButtonType.OK, ButtonType.CANCEL) {
                     when (it) {
-                        ButtonType.OK -> {
-                            json.save(config)
-                        }
+                        ButtonType.OK -> FileUtils.writeStringToFile(config.toFile(), json.toPrettyString())
                         ButtonType.CANCEL -> Platform.exit()
                     }
                 }
