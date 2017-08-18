@@ -1,8 +1,12 @@
 package me.alvr.asfui.views
 
+import javafx.application.Platform
+import javafx.scene.control.Alert.AlertType.CONFIRMATION
 import javafx.scene.control.Button
+import javafx.scene.control.ButtonType
 import javafx.scene.control.ComboBox
 import javafx.scene.control.TextArea
+import javafx.scene.control.TextInputDialog
 import javafx.scene.effect.DropShadow
 import javafx.scene.layout.AnchorPane
 import javafx.stage.StageStyle.UTILITY
@@ -15,14 +19,22 @@ import org.apache.commons.io.FilenameUtils
 import org.apache.commons.io.filefilter.WildcardFileFilter
 import tornadofx.View
 import tornadofx.action
+import tornadofx.alert
 import tornadofx.c
 import tornadofx.confirm
 import tornadofx.enableWhen
+import tornadofx.getLong
+import tornadofx.loadJsonObject
 import tornadofx.replaceChildren
 import tornadofx.runLater
+import tornadofx.save
 import tornadofx.toProperty
 import java.io.File
 import java.nio.file.Path
+import java.nio.file.Paths
+import javax.json.Json
+import javax.json.JsonObject
+import javax.json.JsonObjectBuilder
 
 class MainWindow : View("ASFui") {
     override val root: AnchorPane by fxml("/main.fxml")
@@ -59,6 +71,7 @@ class MainWindow : View("ASFui") {
         // Main
         startButton.apply {
             action {
+                checkValidConfig()
                 output.appendText("Starting ASF...\n")
                 runAsync {
                     ASFProcess.start(output)
@@ -165,6 +178,63 @@ class MainWindow : View("ASFui") {
 
             selectionModel.selectFirst()
         }
+    }
+
+    private fun checkValidConfig() {
+        if (config.boolean("islocal")) {
+            val configDir = File(File(config.string(ConfigValues.BINARY)).parent + File.separator + "config" + File.separator)
+            val config = Paths.get(configDir.absolutePath + File.separator + "ASF.json")
+            var json = loadJsonObject(config)
+
+            var showMessage = false
+            var message = "The following arameter will be changed automatically. Abort to change them manually.\n\n"
+            if (json.getString("CurrentCulture") != "en") {
+                json = updateJson(json).add("CurrentCulture", "en").build()
+                message += "• CurrentCulture is: ${json.getString("CurrentCulture")}, will be: en\n"
+                showMessage = true
+            }
+
+            if (json.getBoolean("AutoRestart")) {
+                json = updateJson(json).add("AutoRestart", false).build()
+                message += "• AutoRestart is: ${json.getBoolean("AutoRestart")}, will be: false\n"
+                showMessage = true
+            }
+
+            if (json.getLong("SteamOwnerID") == 0L) {
+                val dialog = TextInputDialog()
+                dialog.title = "Enter necessary input."
+                dialog.headerText = "SteamOwnerID is set to ${json.getLong("SteamOwnerID")}.\n" +
+                        "It should be the Steam64ID of your primary account.\n" +
+                        "Go to http://steamid.co if you don't know yours."
+                val result = dialog.showAndWait()
+                if (result.isPresent) {
+                    try {
+                        json = updateJson(json).add("SteamOwnerID", result.get().toLong()).build()
+                        message += "• SteamOwnerID is 0, will be ${result.get()}\n"
+                        showMessage = true
+                    } catch (e: Exception) {
+                        tornadofx.error("Error", e.message)
+                    }
+                }
+            }
+
+            if (showMessage) {
+                alert(CONFIRMATION, "Config needs to be changed.", message, ButtonType.OK, ButtonType.CANCEL) {
+                    when (it) {
+                        ButtonType.OK -> {
+                            json.save(config)
+                        }
+                        ButtonType.CANCEL -> Platform.exit()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun updateJson(json: JsonObject): JsonObjectBuilder {
+        val job = Json.createObjectBuilder()
+        json.forEach { key, value -> job.add(key, value) }
+        return job
     }
 
     private val selectedBot get() = bots.selectionModel.selectedItem
