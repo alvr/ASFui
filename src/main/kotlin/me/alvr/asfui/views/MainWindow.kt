@@ -187,16 +187,17 @@ class MainWindow : View("ASFui") {
             var json = loadJsonObject(config)
 
             var showMessage = false
-            var message = "The following arameter will be changed automatically. Abort to change them manually.\n\n"
-            if (json.getString("CurrentCulture") != "en") {
+            var message = "The following parameter(s) will be changed automatically. Abort to change them manually.\n\n"
+            if (json.isNull("CurrentCulture") || json.getString("CurrentCulture") != "en") {
+                val cc = if (json.isNull("CurrentCulture")) "null" else json.getString("CurrentCulture")
+                message += "• CurrentCulture is: $cc, will be: en\n"
                 json = updateJson(json).add("CurrentCulture", "en").build()
-                message += "• CurrentCulture is: ${json.getString("CurrentCulture")}, will be: en\n"
                 showMessage = true
             }
 
             if (json.getBoolean("AutoRestart")) {
-                json = updateJson(json).add("AutoRestart", false).build()
                 message += "• AutoRestart is: ${json.getBoolean("AutoRestart")}, will be: false\n"
+                json = updateJson(json).add("AutoRestart", false).build()
                 showMessage = true
             }
 
@@ -209,8 +210,8 @@ class MainWindow : View("ASFui") {
                 val result = dialog.showAndWait()
                 if (result.isPresent) {
                     try {
-                        json = updateJson(json).add("SteamOwnerID", result.get().toLong()).build()
                         message += "• SteamOwnerID is 0, will be ${result.get()}\n"
+                        json = updateJson(json).add("SteamOwnerID", result.get().toLong()).build()
                         showMessage = true
                     } catch (e: Exception) {
                         tornadofx.error("Error", e.message)
