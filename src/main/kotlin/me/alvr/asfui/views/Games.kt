@@ -9,7 +9,6 @@ import me.alvr.asfui.multiToOne
 import tornadofx.Fragment
 import tornadofx.action
 import tornadofx.enableWhen
-import tornadofx.runLater
 
 class Games : Fragment() {
     override val root: Parent by fxml("/games.fxml")
@@ -24,7 +23,7 @@ class Games : Fragment() {
     init {
         gamesOwnButton.apply {
             action {
-                runLater {
+                runAsync {
                     val command = Command.generateCommand(Command.OWN, bot, input.text.multiToOne())
                     Command.sendCommand(command)
                 }
@@ -34,7 +33,7 @@ class Games : Fragment() {
 
         gamesOwnAllButton.apply {
             action {
-                runLater {
+                runAsync {
                     val command = Command.generateCommand(Command.OWN_ALL, "", input.text.multiToOne())
                     Command.sendCommand(command)
                 }
@@ -44,7 +43,7 @@ class Games : Fragment() {
 
         gamesPlayButton.apply {
             action {
-                runLater {
+                runAsync {
                     val command = Command.generateCommand(Command.PLAY, bot, input.text.multiToOne())
                     Command.sendCommand(command)
                 }

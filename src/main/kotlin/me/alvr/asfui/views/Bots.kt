@@ -7,7 +7,6 @@ import me.alvr.asfui.Command
 import tornadofx.Fragment
 import tornadofx.action
 import tornadofx.enableWhen
-import tornadofx.runLater
 
 class Bots : Fragment() {
     override val root: Parent by fxml("/bots.fxml")
@@ -26,8 +25,8 @@ class Bots : Fragment() {
     init {
         botsStart.apply {
             action {
-                runLater {
-                    Command.sendCommand(Command.generateCommand(Command.START, bot))
+                runAsync {
+                    Command.sendCommand(Command.generateCommand(Command.START, bot.botName.value))
                 }
             }
             enableWhen(ASFProcess.started)
@@ -35,7 +34,7 @@ class Bots : Fragment() {
 
         botsStartAll.apply {
             action {
-                runLater {
+                runAsync {
                     Command.sendCommand(Command.START_ALL)
                 }
             }
@@ -44,8 +43,8 @@ class Bots : Fragment() {
 
         botsStop.apply {
             action {
-                runLater {
-                    Command.sendCommand(Command.generateCommand(Command.STOP, bot))
+                runAsync {
+                    Command.sendCommand(Command.generateCommand(Command.STOP, bot.botName.value))
                 }
             }
             enableWhen(ASFProcess.started)
@@ -53,8 +52,8 @@ class Bots : Fragment() {
 
         botsPause.apply {
             action {
-                runLater {
-                    Command.sendCommand(Command.generateCommand(Command.PAUSE, bot))
+                runAsync {
+                    Command.sendCommand(Command.generateCommand(Command.PAUSE, bot.botName.value))
                 }
             }
             enableWhen(ASFProcess.started)
@@ -62,8 +61,8 @@ class Bots : Fragment() {
 
         botsResume.apply {
             action {
-                runLater {
-                    Command.sendCommand(Command.generateCommand(Command.RESUME, bot))
+                runAsync {
+                    Command.sendCommand(Command.generateCommand(Command.RESUME, bot.botName.value))
                 }
             }
             enableWhen(ASFProcess.started)
@@ -71,8 +70,8 @@ class Bots : Fragment() {
 
         botsPassword.apply {
             action {
-                runLater {
-                    Command.sendCommand(Command.generateCommand(Command.PASSWORD, bot))
+                runAsync {
+                    Command.sendCommand(Command.generateCommand(Command.PASSWORD, bot.botName.value))
                 }
             }
             enableWhen(ASFProcess.started)
@@ -80,8 +79,8 @@ class Bots : Fragment() {
 
         botsStatus.apply {
             action {
-                runLater {
-                    Command.sendCommand(Command.generateCommand(Command.STATUS, bot))
+                runAsync {
+                    Command.sendCommand(Command.generateCommand(Command.STATUS, bot.botName.value))
                 }
             }
             enableWhen(ASFProcess.started)
@@ -89,7 +88,7 @@ class Bots : Fragment() {
 
         botsStatusAll.apply {
             action {
-                runLater {
+                runAsync {
                     Command.sendCommand(Command.STATUS_ALL)
                 }
             }

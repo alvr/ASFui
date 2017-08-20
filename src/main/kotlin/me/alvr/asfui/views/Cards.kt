@@ -7,7 +7,6 @@ import me.alvr.asfui.Command
 import tornadofx.Fragment
 import tornadofx.action
 import tornadofx.enableWhen
-import tornadofx.runLater
 
 class Cards : Fragment() {
     override val root: Parent by fxml("/cards.fxml")
@@ -22,7 +21,7 @@ class Cards : Fragment() {
     init {
         cardsFarmButton.apply {
             action {
-                runLater {
+                runAsync {
                     Command.sendCommand(Command.generateCommand(Command.FARM, bot))
                 }
             }
@@ -31,7 +30,7 @@ class Cards : Fragment() {
 
         cardsLootButton.apply {
             action {
-                runLater {
+                runAsync {
                     Command.sendCommand(Command.generateCommand(Command.LOOT, bot))
                 }
             }
@@ -40,7 +39,7 @@ class Cards : Fragment() {
 
         cardsLootAllButton.apply {
             action {
-                runLater {
+                runAsync {
                     Command.sendCommand(Command.generateCommand(Command.LOOT_ALL, bot))
                 }
             }
@@ -49,7 +48,7 @@ class Cards : Fragment() {
 
         cardsUnpackButton.apply {
             action {
-                runLater {
+                runAsync {
                     Command.sendCommand(Command.generateCommand(Command.UNPACK, bot))
                 }
             }

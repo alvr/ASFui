@@ -10,7 +10,6 @@ import me.alvr.asfui.multiToOne
 import tornadofx.Fragment
 import tornadofx.action
 import tornadofx.enableWhen
-import tornadofx.runLater
 
 class License : Fragment() {
     override val root: Parent by fxml("/license.fxml")
@@ -25,7 +24,7 @@ class License : Fragment() {
     init {
         licenseAddButton.apply {
             action {
-                runLater {
+                runAsync {
                     val command = Command.generateCommand(Command.LICENSE, bot, input.text.multiToOne())
                     Command.sendCommand(command)
                 }
@@ -35,7 +34,7 @@ class License : Fragment() {
 
         licenseAddAllButton.apply {
             action {
-                runLater {
+                runAsync {
                     bots.items.forEach {
                         val command = Command.generateCommand(Command.LICENSE, it as String, input.text.multiToOne())
                         Command.sendCommand(command)

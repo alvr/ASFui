@@ -11,7 +11,6 @@ import me.alvr.asfui.multiToOne
 import tornadofx.Fragment
 import tornadofx.action
 import tornadofx.enableWhen
-import tornadofx.runLater
 
 class Redeem : Fragment() {
     override val root: Parent by fxml("/redeem.fxml")
@@ -25,7 +24,7 @@ class Redeem : Fragment() {
     init {
         redeemButton.apply {
             action {
-                runLater {
+                runAsync {
                     val command = Command.generateCommand(Command.REDEEM, bot, input.text.multiToOne())
                     Command.sendCommand(command)
                 }
