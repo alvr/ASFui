@@ -10,7 +10,7 @@ new File("src/main/resources/version.properties").withInputStream {
 version props["version"]
 
 buildscript {
-    ext.kotlin_version = '1.1.4'
+    ext.kotlin_version = '1.1.4-2'
 
     repositories {
         mavenCentral()
