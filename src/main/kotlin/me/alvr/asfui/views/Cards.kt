@@ -2,11 +2,13 @@ package me.alvr.asfui.views
 
 import javafx.scene.Parent
 import javafx.scene.control.Button
+import javafx.scene.control.ComboBox
 import me.alvr.asfui.ASFProcess
 import me.alvr.asfui.Command
 import tornadofx.Fragment
 import tornadofx.action
 import tornadofx.enableWhen
+import tornadofx.selectedItem
 
 class Cards : Fragment() {
     override val root: Parent by fxml("/cards.fxml")
@@ -16,9 +18,14 @@ class Cards : Fragment() {
     private val cardsLootAllButton: Button by fxid("cards_lootall")
     private val cardsUnpackButton: Button by fxid("cards_unpack")
 
-    private val bot = params["bot"] as String
-    
+    private val bots: ComboBox<String> by param()
+    private var bot = bots.selectedItem!!
+
     init {
+        bots.valueProperty().addListener { _, _, newBot ->
+            bot = newBot
+        }
+
         cardsFarmButton.apply {
             action {
                 runAsync {

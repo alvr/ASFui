@@ -2,6 +2,7 @@ package me.alvr.asfui.views
 
 import javafx.scene.Parent
 import javafx.scene.control.Button
+import javafx.scene.control.ComboBox
 import javafx.scene.control.TextArea
 import me.alvr.asfui.ASFProcess
 import me.alvr.asfui.Command
@@ -9,6 +10,7 @@ import me.alvr.asfui.multiToOne
 import tornadofx.Fragment
 import tornadofx.action
 import tornadofx.enableWhen
+import tornadofx.selectedItem
 
 class Games : Fragment() {
     override val root: Parent by fxml("/games.fxml")
@@ -17,10 +19,15 @@ class Games : Fragment() {
     private val gamesOwnAllButton: Button by fxid("games_ownall")
     private val gamesPlayButton: Button by fxid("games_play")
 
-    private val input = params["input"] as TextArea
-    private val bot = params["bot"] as String
-    
+    private val input: TextArea by param()
+    private val bots: ComboBox<String> by param()
+    private var bot = bots.selectedItem!!
+
     init {
+        bots.valueProperty().addListener { _, _, newBot ->
+            bot = newBot
+        }
+
         gamesOwnButton.apply {
             action {
                 runAsync {

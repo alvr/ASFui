@@ -2,11 +2,13 @@ package me.alvr.asfui.views
 
 import javafx.scene.Parent
 import javafx.scene.control.Button
+import javafx.scene.control.ComboBox
 import me.alvr.asfui.ASFProcess
 import me.alvr.asfui.Command
 import tornadofx.Fragment
 import tornadofx.action
 import tornadofx.enableWhen
+import tornadofx.selectedItem
 
 class Bots : Fragment() {
     override val root: Parent by fxml("/bots.fxml")
@@ -20,13 +22,18 @@ class Bots : Fragment() {
     private val botsStatus: Button by fxid("bots_status")
     private val botsStatusAll: Button by fxid("bots_statusall")
 
-    private val bot = params["bot"] as String
-    
+    private val bots: ComboBox<String> by param()
+    private var bot = bots.selectedItem!!
+
     init {
+        bots.valueProperty().addListener { _, _, newBot ->
+            bot = newBot
+        }
+
         botsStart.apply {
             action {
                 runAsync {
-                    Command.sendCommand(Command.generateCommand(Command.START, bot.botName.value))
+                    Command.sendCommand(Command.generateCommand(Command.START, bot))
                 }
             }
             enableWhen(ASFProcess.started)
@@ -44,7 +51,7 @@ class Bots : Fragment() {
         botsStop.apply {
             action {
                 runAsync {
-                    Command.sendCommand(Command.generateCommand(Command.STOP, bot.botName.value))
+                    Command.sendCommand(Command.generateCommand(Command.STOP, bot))
                 }
             }
             enableWhen(ASFProcess.started)
@@ -53,7 +60,7 @@ class Bots : Fragment() {
         botsPause.apply {
             action {
                 runAsync {
-                    Command.sendCommand(Command.generateCommand(Command.PAUSE, bot.botName.value))
+                    Command.sendCommand(Command.generateCommand(Command.PAUSE, bot))
                 }
             }
             enableWhen(ASFProcess.started)
@@ -62,7 +69,7 @@ class Bots : Fragment() {
         botsResume.apply {
             action {
                 runAsync {
-                    Command.sendCommand(Command.generateCommand(Command.RESUME, bot.botName.value))
+                    Command.sendCommand(Command.generateCommand(Command.RESUME, bot))
                 }
             }
             enableWhen(ASFProcess.started)
@@ -71,7 +78,7 @@ class Bots : Fragment() {
         botsPassword.apply {
             action {
                 runAsync {
-                    Command.sendCommand(Command.generateCommand(Command.PASSWORD, bot.botName.value))
+                    Command.sendCommand(Command.generateCommand(Command.PASSWORD, bot))
                 }
             }
             enableWhen(ASFProcess.started)
@@ -80,7 +87,7 @@ class Bots : Fragment() {
         botsStatus.apply {
             action {
                 runAsync {
-                    Command.sendCommand(Command.generateCommand(Command.STATUS, bot.botName.value))
+                    Command.sendCommand(Command.generateCommand(Command.STATUS, bot))
                 }
             }
             enableWhen(ASFProcess.started)

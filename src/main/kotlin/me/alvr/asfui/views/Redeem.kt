@@ -3,6 +3,7 @@ package me.alvr.asfui.views
 import javafx.scene.Parent
 import javafx.scene.control.Button
 import javafx.scene.control.CheckMenuItem
+import javafx.scene.control.ComboBox
 import javafx.scene.control.SplitMenuButton
 import javafx.scene.control.TextArea
 import me.alvr.asfui.ASFProcess
@@ -11,6 +12,7 @@ import me.alvr.asfui.multiToOne
 import tornadofx.Fragment
 import tornadofx.action
 import tornadofx.enableWhen
+import tornadofx.selectedItem
 
 class Redeem : Fragment() {
     override val root: Parent by fxml("/redeem.fxml")
@@ -18,10 +20,15 @@ class Redeem : Fragment() {
     private val redeemButton: Button by fxid("redeem_normal")
     private val redeemModeButton: SplitMenuButton by fxid("redeem_mode")
 
-    private val input = params["input"] as TextArea
-    private val bot = params["bot"] as String
+    private val input: TextArea by param()
+    private val bots: ComboBox<String> by param()
+    private var bot = bots.selectedItem!!
 
     init {
+        bots.valueProperty().addListener { _, _, newBot ->
+            bot = newBot
+        }
+
         redeemButton.apply {
             action {
                 runAsync {
