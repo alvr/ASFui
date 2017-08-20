@@ -11,4 +11,5 @@ object ConfigValues {
     const val INVALID = "invalid"
     const val OWNED = "owned"
     const val COOLDOWN = "cooldown"
+    const val AUTO_START = "autostart"
 }

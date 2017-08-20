@@ -10,6 +10,7 @@ import javafx.scene.control.TextInputDialog
 import javafx.scene.effect.DropShadow
 import javafx.scene.layout.AnchorPane
 import javafx.stage.StageStyle.UTILITY
+import javafx.util.Duration
 import me.alvr.asfui.ASFProcess
 import me.alvr.asfui.updateAvailable
 import me.alvr.asfui.util.ConfigValues
@@ -66,6 +67,13 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
             confirm("Update found", "A new version is available, download now?", actionFn = {
                 openBrowser.openUrl("https://github.com/alvr/ASFui/releases/latest")
             })
+        }
+
+        if (config.boolean(ConfigValues.AUTO_START)) {
+            runLater(Duration(1000.0)) {
+                ASFProcess.start(output)
+                loadBots()
+            }
         }
 
         // Main

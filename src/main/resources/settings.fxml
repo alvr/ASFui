@@ -17,32 +17,27 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+    <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
         <TitledPane collapsible="false" prefHeight="65.0" prefWidth="600.0" text="Binary">
-            <VBox.margin>
-                <Insets />
-            </VBox.margin>
             <GridPane>
                 <columnConstraints>
-                    <ColumnConstraints minWidth="10.0"/>
-                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"/>
+                    <ColumnConstraints minWidth="10.0" />
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
                 </columnConstraints>
                 <rowConstraints>
-                    <RowConstraints minHeight="10.0" vgrow="ALWAYS"/>
+                    <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
                 </rowConstraints>
-                <Label fx:id="path_binary" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="497.0"
-                       GridPane.hgrow="SOMETIMES">
+                <Label fx:id="path_binary" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="497.0" GridPane.hgrow="SOMETIMES">
                     <padding>
-                        <Insets left="5.0"/>
+                        <Insets left="5.0" />
                     </padding>
                 </Label>
-                <Button fx:id="search_binary" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0"
-                        styleClass="normal-button" text="Search..." GridPane.columnIndex="1"/>
+                <Button fx:id="search_binary" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" styleClass="normal-button" text="Search..." GridPane.columnIndex="1" />
             </GridPane>
         </TitledPane>
         <TitledPane collapsible="false" prefHeight="65.0" prefWidth="600.0" text="Local or Remote">
             <VBox.margin>
-                <Insets top="5.0" />
+                <Insets />
             </VBox.margin>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                 <RadioButton fx:id="local" mnemonicParsing="false" selected="true" text="Local">
@@ -64,7 +59,7 @@
         </TitledPane>
         <TitledPane collapsible="false" prefHeight="65.0" prefWidth="600.0" text="Clear Keys">
             <VBox.margin>
-                <Insets top="5.0" />
+                <Insets />
             </VBox.margin>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                 <CheckBox fx:id="redeemed" mnemonicParsing="false" selected="true" text="Redeemed" />
@@ -90,23 +85,35 @@
                 </CheckBox>
             </HBox>
         </TitledPane>
+      <TitledPane collapsible="false" prefHeight="65.0" prefWidth="600.0" text="General">
+         <content>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <CheckBox fx:id="autostart" mnemonicParsing="false" text="Auto Start" />
+               </children>
+            </HBox>
+         </content>
+      </TitledPane>
+       <HBox alignment="CENTER_RIGHT">
+           <padding>
+               <Insets bottom="10.0" right="5.0" />
+           </padding>
+           <Label fx:id="status" alignment="CENTER" opacity="0.0" prefHeight="25.0" text="Settings saved." textAlignment="RIGHT">
+               <padding>
+                   <Insets right="5.0" />
+               </padding>
+           </Label>
+           <Button fx:id="save" defaultButton="true" mnemonicParsing="false" styleClass="menu-button" text="Save">
+               <font>
+                   <Font name="System Bold" size="12.0" />
+               </font>
+               <HBox.margin>
+                   <Insets bottom="5.0" />
+               </HBox.margin>
+           </Button>
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+       </HBox>
     </VBox>
-    <HBox alignment="CENTER" layoutX="471.0" layoutY="222.0" AnchorPane.rightAnchor="0.0">
-        <padding>
-            <Insets bottom="10.0" right="5.0" />
-        </padding>
-        <Label fx:id="status" opacity="0.0" text="Settings saved." textAlignment="RIGHT">
-            <padding>
-                <Insets right="5.0" />
-            </padding>
-        </Label>
-        <Button fx:id="save" alignment="CENTER" defaultButton="true" mnemonicParsing="false" styleClass="menu-button" text="Save">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font>
-            <HBox.margin>
-                <Insets bottom="5.0" top="5.0" />
-            </HBox.margin>
-        </Button>
-    </HBox>
 </AnchorPane>

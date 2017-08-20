@@ -1,6 +1,5 @@
 package me.alvr.asfui.views
 
-import java.nio.file.Path
 import javafx.animation.PauseTransition
 import javafx.scene.control.Button
 import javafx.scene.control.CheckBox
@@ -9,13 +8,15 @@ import javafx.scene.control.TextField
 import javafx.scene.control.ToggleButton
 import javafx.scene.layout.AnchorPane
 import javafx.util.Duration
+import me.alvr.asfui.checkRemote
 import me.alvr.asfui.util.ConfigValues
+import tornadofx.View
 import tornadofx.action
 import tornadofx.c
 import tornadofx.chooseFile
 import tornadofx.fade
 import tornadofx.onChange
-import tornadofx.View
+import java.nio.file.Path
 
 class Settings : View("Settings") {
     override val root: AnchorPane by fxml("/settings.fxml")
@@ -31,6 +32,7 @@ class Settings : View("Settings") {
     private val invalid: CheckBox by fxid("invalid")
     private val owned: CheckBox by fxid("owned")
     private val cooldown: CheckBox by fxid("cooldown")
+    private val autostart: CheckBox by fxid("autostart")
     private val save: Button by fxid("save")
     private val status: Label by fxid("status")
 
@@ -45,7 +47,7 @@ class Settings : View("Settings") {
         }
 
         save.action {
-            if (isRemote.isSelected && !checkRemote()) {
+            if (isRemote.isSelected && !checkRemote(host.text)) {
                 status.apply {
                     text = "Invalid remote endpoint."
                     textFill = c(255, 0, 0)
@@ -69,6 +71,7 @@ class Settings : View("Settings") {
                     set(ConfigValues.INVALID to invalid.isSelected)
                     set(ConfigValues.OWNED to owned.isSelected)
                     set(ConfigValues.COOLDOWN to cooldown.isSelected)
+                    set(ConfigValues.AUTO_START to autostart.isSelected)
                     save()
                 }
                 status.apply {
@@ -102,13 +105,7 @@ class Settings : View("Settings") {
             invalid.isSelected = boolean(ConfigValues.INVALID)
             owned.isSelected = boolean(ConfigValues.OWNED)
             cooldown.isSelected = boolean(ConfigValues.COOLDOWN)
+            autostart.isSelected = boolean(ConfigValues.AUTO_START)
         }
-    }
-
-    private fun checkRemote(): Boolean = try {
-        val check = khttp.get(host.text)
-        check.statusCode == 405
-    } catch (e: Exception) {
-        false
     }
 }
