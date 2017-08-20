@@ -21,17 +21,23 @@ script:
 after_success:
   - mkdir ./out/artifacts
   - mv ./out/asfui-*.jar ./out/artifacts/
-  - cp ./out/artifacts/asfui-*.jar ./out/artifacts/asfui-latest.jar
+  - cp ./out/artifacts/asfui-*.jar ./out/artifacts/asfui.jar
 
 deploy:
-  on:
-    branch: master
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: alvr
-  skip_cleanup: true
-  region: eu-west-1  
-  local_dir: ./out/artifacts
-  upload-dir: asfui
-  acl: public_read
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY_ID
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
+    bucket: alvr
+    region: eu-west-1
+    local_dir: ./out/artifacts
+    upload-dir: asfui
+    acl: public_read
+    skip_cleanup: true
+    on:
+      branch: master
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    file: ./out/artifacts/asfui.jar
+    skip_cleanup: true
+    on:
+      tags: true
