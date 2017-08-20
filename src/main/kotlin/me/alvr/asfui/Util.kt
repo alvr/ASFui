@@ -13,16 +13,24 @@ fun String.multiToOne(): String = this
             it == ""
         }.joinToString(",")
 
-fun updateAvailable(): Boolean = try {
+fun updateAvailable(): Boolean {
     val gitVersion = khttp.get("https://raw.githubusercontent.com/alvr/ASFui/master/version.txt", timeout = 10.0).text
+    return gitVersion > getCurrentVersion()
+}
 
+fun getCurrentVersion(): String {
     val props = Properties().apply {
         ClassLoader.getSystemResource("version.properties").openStream().use { f ->
             load(f)
         }
     }
 
-    gitVersion > props.getProperty("version")
+    return props.getProperty("version")
+}
+
+fun checkRemote(url: String): Boolean = try {
+    val check = khttp.get(url)
+    check.statusCode == 405
 } catch (e: Exception) {
     false
 }

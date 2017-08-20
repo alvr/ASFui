@@ -36,7 +36,7 @@ import javax.json.Json
 import javax.json.JsonObject
 import javax.json.JsonObjectBuilder
 
-class MainWindow : View("ASFui") {
+class MainWindow : View("ASFui v${getCurrentVersion()}") {
     override val root: AnchorPane by fxml("/main.fxml")
     override val configPath: Path = app.configBasePath.resolve("asfui.properties")
     private val openBrowser: OpenBrowser by inject()
