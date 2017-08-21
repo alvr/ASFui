@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox
 import javafx.scene.control.TextArea
 import javafx.scene.control.TextInputDialog
 import javafx.scene.layout.AnchorPane
+import javafx.scene.layout.Pane
 import javafx.stage.StageStyle.UTILITY
 import javafx.util.Duration
 import me.alvr.asfui.ASFProcess
@@ -60,8 +61,9 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
     private val licensesButton: Button by fxid("licenses")
     private val cardsButton: Button by fxid("cards")
     private val gamesButton: Button by fxid("games")
+    private val asfButton: Button by fxid("asf")
 
-    private val container: AnchorPane by fxid("container")
+    private val container: Pane by fxid("container")
 
     companion object {
         private val isBinarySelectedProperty = SimpleBooleanProperty(!ConfigManager.string(ConfigValues.BINARY).isEmpty())
@@ -158,6 +160,13 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
         gamesButton.apply {
             action {
                 container.replaceChildren(find(Games::class, mapOf("input" to input, "bots" to bots)))
+            }
+            enableWhen(ASFProcess.started)
+        }
+
+        asfButton.apply {
+            action {
+                container.replaceChildren(find(ASF::class, mapOf("input" to input, "bots" to bots)))
             }
             enableWhen(ASFProcess.started)
         }

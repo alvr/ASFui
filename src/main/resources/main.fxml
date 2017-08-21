@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -41,11 +42,12 @@
                             <Button fx:id="licenses" mnemonicParsing="false" styleClass="normal-button" text="Licenses" />
                             <Button fx:id="cards" mnemonicParsing="false" styleClass="normal-button" text="Cards" />
                             <Button fx:id="games" mnemonicParsing="false" styleClass="normal-button" text="Games" />
+                     <Button fx:id="asf" layoutX="65.0" layoutY="255.0" mnemonicParsing="false" styleClass="normal-button" text="ArchiSteamFarm" />
                         </children>
                     </VBox>
                 </content>
             </TitledPane>
-         <AnchorPane fx:id="container" GridPane.columnIndex="2">
+         <Pane fx:id="container" GridPane.columnIndex="2">
             <children>
                     <VBox alignment="CENTER" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0">
                         <children>
@@ -57,7 +59,7 @@
                         </children>
                     </VBox>
             </children>
-         </AnchorPane>
+         </Pane>
         </children>
     </GridPane>
     <TextArea fx:id="output" editable="false" layoutY="289.0" prefHeight="236.0" prefWidth="777.0" wrapText="true" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">

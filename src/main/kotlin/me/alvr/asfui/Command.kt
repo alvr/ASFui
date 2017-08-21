@@ -34,6 +34,12 @@ object Command : Controller() {
     const val STATUS = "status"
     const val STATUS_ALL = "sa"
 
+    // ArchiSteamFarm
+    const val REJOIN_CHAT = "rejoinchat"
+    const val UPDATE = "update"
+    const val VERSION = "version"
+    const val API = "api"
+
     fun sendCommand(command: String): String {
         val parameters = mapOf("command" to command)
 

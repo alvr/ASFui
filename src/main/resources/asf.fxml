@@ -9,27 +9,27 @@
    <content>
       <VBox alignment="CENTER" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" spacing="10.0">
          <children>
-            <Button fx:id="license_add1" mnemonicParsing="false" styleClass="normal-button" text="Help">
+            <Button fx:id="asf_help" mnemonicParsing="false" styleClass="normal-button" text="Help">
                <tooltip>
                   <Tooltip text="Empty Tooltip" />
                </tooltip>
             </Button>
-            <Button fx:id="license_addall1" mnemonicParsing="false" styleClass="normal-button" text="Rejoin Chat">
+            <Button fx:id="asf_rejoin" mnemonicParsing="false" styleClass="normal-button" text="Rejoin Chat">
                <tooltip>
                   <Tooltip text="Empty Tooltip" />
                </tooltip>
             </Button>
-            <Button fx:id="license_addall11" mnemonicParsing="false" styleClass="normal-button" text="Update">
+            <Button fx:id="asf_update" mnemonicParsing="false" styleClass="normal-button" text="Update">
                <tooltip>
                   <Tooltip text="Empty Tooltip" />
                </tooltip>
             </Button>
-            <Button fx:id="license_addall111" mnemonicParsing="false" styleClass="normal-button" text="Version">
+            <Button fx:id="asf_version" mnemonicParsing="false" styleClass="normal-button" text="Version">
                <tooltip>
                   <Tooltip text="Empty Tooltip" />
                </tooltip>
             </Button>
-            <Button fx:id="license_addall1111" mnemonicParsing="false" styleClass="normal-button" text="API">
+            <Button fx:id="asf_api" mnemonicParsing="false" styleClass="normal-button" text="API">
                <tooltip>
                   <Tooltip text="Empty Tooltip" />
                </tooltip>
