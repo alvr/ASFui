@@ -9,6 +9,7 @@ import javafx.scene.control.ToggleButton
 import javafx.scene.layout.AnchorPane
 import javafx.util.Duration
 import me.alvr.asfui.checkRemote
+import me.alvr.asfui.util.ConfigManager
 import me.alvr.asfui.util.ConfigValues
 import tornadofx.View
 import tornadofx.action
@@ -16,11 +17,9 @@ import tornadofx.c
 import tornadofx.chooseFile
 import tornadofx.fade
 import tornadofx.onChange
-import java.nio.file.Path
 
 class Settings : View("Settings") {
     override val root: AnchorPane by fxml("/settings.fxml")
-    override val configPath: Path = app.configBasePath.resolve("asfui.properties")
 
     private val searchBinary: Button by fxid("search_binary")
     private val pathBinary: Label by fxid("path_binary")
@@ -61,19 +60,17 @@ class Settings : View("Settings") {
                 }
                 return@action
             } else {
-                with(config) {
-                    set(ConfigValues.BINARY to pathBinary.text)
-                    set(ConfigValues.IS_LOCAL to isLocal.isSelected)
-                    set(ConfigValues.IS_REMOTE to isRemote.isSelected)
-                    set(ConfigValues.HOST to host.text)
-                    set(ConfigValues.REDEEMED to redeemed.isSelected)
-                    set(ConfigValues.DUPLICATED to duplicated.isSelected)
-                    set(ConfigValues.INVALID to invalid.isSelected)
-                    set(ConfigValues.OWNED to owned.isSelected)
-                    set(ConfigValues.COOLDOWN to cooldown.isSelected)
-                    set(ConfigValues.AUTO_START to autostart.isSelected)
-                    save()
-                }
+                ConfigManager.set(ConfigValues.BINARY, pathBinary.text)
+                ConfigManager.set(ConfigValues.IS_LOCAL, isLocal.isSelected)
+                ConfigManager.set(ConfigValues.IS_REMOTE, isRemote.isSelected)
+                ConfigManager.set(ConfigValues.HOST, host.text)
+                ConfigManager.set(ConfigValues.REDEEMED, redeemed.isSelected)
+                ConfigManager.set(ConfigValues.DUPLICATED, duplicated.isSelected)
+                ConfigManager.set(ConfigValues.INVALID, invalid.isSelected)
+                ConfigManager.set(ConfigValues.OWNED, owned.isSelected)
+                ConfigManager.set(ConfigValues.COOLDOWN, cooldown.isSelected)
+                ConfigManager.set(ConfigValues.AUTO_START, autostart.isSelected)
+                MainWindow.isBinarySelected.value = !ConfigManager.string(ConfigValues.BINARY).isEmpty()
                 status.apply {
                     text = "Settings saved."
                     textFill = c(0, 0, 0)
@@ -95,17 +92,15 @@ class Settings : View("Settings") {
     }
 
     private fun loadSettings() {
-        with(config) {
-            pathBinary.text = string(ConfigValues.BINARY)
-            isLocal.isSelected = boolean(ConfigValues.IS_LOCAL)
-            isRemote.isSelected = boolean(ConfigValues.IS_REMOTE)
-            host.text = string(ConfigValues.HOST, ConfigValues.HOST_DEFAULT)
-            redeemed.isSelected = boolean(ConfigValues.REDEEMED)
-            duplicated.isSelected = boolean(ConfigValues.REDEEMED)
-            invalid.isSelected = boolean(ConfigValues.INVALID)
-            owned.isSelected = boolean(ConfigValues.OWNED)
-            cooldown.isSelected = boolean(ConfigValues.COOLDOWN)
-            autostart.isSelected = boolean(ConfigValues.AUTO_START)
-        }
+        pathBinary.text = ConfigManager.string(ConfigValues.BINARY)
+        isLocal.isSelected = ConfigManager.boolean(ConfigValues.IS_LOCAL)
+        isRemote.isSelected = ConfigManager.boolean(ConfigValues.IS_REMOTE)
+        host.text = ConfigManager.string(ConfigValues.HOST, ConfigValues.HOST_DEFAULT)
+        redeemed.isSelected = ConfigManager.boolean(ConfigValues.REDEEMED)
+        duplicated.isSelected = ConfigManager.boolean(ConfigValues.REDEEMED)
+        invalid.isSelected = ConfigManager.boolean(ConfigValues.INVALID)
+        owned.isSelected = ConfigManager.boolean(ConfigValues.OWNED)
+        cooldown.isSelected = ConfigManager.boolean(ConfigValues.COOLDOWN)
+        autostart.isSelected = ConfigManager.boolean(ConfigValues.AUTO_START)
     }
 }

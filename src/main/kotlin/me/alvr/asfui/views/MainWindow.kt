@@ -1,18 +1,21 @@
 package me.alvr.asfui.views
 
 import javafx.application.Platform
+import javafx.beans.property.SimpleBooleanProperty
 import javafx.scene.control.Alert.AlertType.CONFIRMATION
 import javafx.scene.control.Button
 import javafx.scene.control.ButtonType
 import javafx.scene.control.ComboBox
 import javafx.scene.control.TextArea
 import javafx.scene.control.TextInputDialog
-import javafx.scene.effect.DropShadow
 import javafx.scene.layout.AnchorPane
 import javafx.stage.StageStyle.UTILITY
 import javafx.util.Duration
 import me.alvr.asfui.ASFProcess
+import me.alvr.asfui.checkRemote
+import me.alvr.asfui.getCurrentVersion
 import me.alvr.asfui.updateAvailable
+import me.alvr.asfui.util.ConfigManager
 import me.alvr.asfui.util.ConfigValues
 import me.alvr.asfui.util.OpenBrowser
 import org.apache.commons.io.FileUtils
@@ -21,17 +24,16 @@ import org.apache.commons.io.filefilter.WildcardFileFilter
 import tornadofx.View
 import tornadofx.action
 import tornadofx.alert
-import tornadofx.c
 import tornadofx.confirm
 import tornadofx.enableWhen
+import tornadofx.error
 import tornadofx.getLong
 import tornadofx.loadJsonObject
+import tornadofx.property
 import tornadofx.replaceChildren
 import tornadofx.runLater
 import tornadofx.toPrettyString
-import tornadofx.toProperty
 import java.io.File
-import java.nio.file.Path
 import java.nio.file.Paths
 import javax.json.Json
 import javax.json.JsonObject
@@ -39,7 +41,6 @@ import javax.json.JsonObjectBuilder
 
 class MainWindow : View("ASFui v${getCurrentVersion()}") {
     override val root: AnchorPane by fxml("/main.fxml")
-    override val configPath: Path = app.configBasePath.resolve("asfui.properties")
     private val openBrowser: OpenBrowser by inject()
 
     // Main
@@ -62,6 +63,11 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
 
     private val container: AnchorPane by fxid("container")
 
+    companion object {
+        private val isBinarySelectedProperty = SimpleBooleanProperty(!ConfigManager.string(ConfigValues.BINARY).isEmpty())
+        var isBinarySelected by property(isBinarySelectedProperty)
+    }
+
     init {
         if (updateAvailable()) {
             confirm("Update found", "A new version is available, download now?", actionFn = {
@@ -69,7 +75,7 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
             })
         }
 
-        if (config.boolean(ConfigValues.AUTO_START)) {
+        if (ConfigManager.boolean(ConfigValues.AUTO_START)) {
             runLater(Duration(1000.0)) {
                 ASFProcess.start(output)
                 loadBots()
@@ -81,12 +87,12 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
             action {
                 checkValidConfig()
                 output.appendText("Starting ASF...\n")
-                runAsync {
+                runLater {
                     ASFProcess.start(output)
                     loadBots()
                 }
             }
-            enableWhen(!ASFProcess.started.and(config.string(ConfigValues.BINARY).toProperty().isNotEmpty))
+            enableWhen(ASFProcess.started.not().and(isBinarySelected))
         }
 
         stopButton.apply {
@@ -112,19 +118,8 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
             enableWhen(ASFProcess.started)
         }
 
-        settings.apply {
-            action {
-                find(Settings::class).openModal(block = true, stageStyle = UTILITY)
-            }
-
-            if (config.string(ConfigValues.BINARY).isNullOrEmpty()) {
-                effect = DropShadow().apply {
-                    color = c(255, 0, 0)
-                    spread = 0.8
-                    height = 7.5
-                    width = 7.5
-                }
-            }
+        settings.action {
+            find(Settings::class).openModal(block = true, stageStyle = UTILITY)
         }
 
         help.action {
@@ -133,35 +128,35 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
 
         botsButton.apply {
             action {
-                container.replaceChildren(find(Bots::class, mapOf("bot" to selectedBot)))
+                container.replaceChildren(find(Bots::class, mapOf("bots" to bots)))
             }
             enableWhen(ASFProcess.started)
         }
 
         redeemButton.apply {
             action {
-                container.replaceChildren(find(Redeem::class, mapOf("input" to input, "bot" to selectedBot)))
+                container.replaceChildren(find(Redeem::class, mapOf("input" to input, "bots" to bots)))
             }
             enableWhen(ASFProcess.started)
         }
 
         licensesButton.apply {
             action {
-                container.replaceChildren(find(License::class, mapOf("input" to input, "bot" to selectedBot, "bots" to bots)))
+                container.replaceChildren(find(License::class, mapOf("input" to input, "bots" to bots)))
             }
             enableWhen(ASFProcess.started)
         }
 
         cardsButton.apply {
             action {
-                container.replaceChildren(find(Cards::class, mapOf("bot" to selectedBot)))
+                container.replaceChildren(find(Cards::class, mapOf("bots" to bots)))
             }
             enableWhen(ASFProcess.started)
         }
 
         gamesButton.apply {
             action {
-                container.replaceChildren(find(Games::class, mapOf("input" to input, "bot" to selectedBot)))
+                container.replaceChildren(find(Games::class, mapOf("input" to input, "bots" to bots)))
             }
             enableWhen(ASFProcess.started)
         }
@@ -171,7 +166,7 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
         bots.apply {
             items.clear()
 
-            val configDir = File(File(config.string(ConfigValues.BINARY)).parent + File.separator + "config" + File.separator)
+            val configDir = File(File(ConfigManager.string(ConfigValues.BINARY)).parent + File.separator + "config" + File.separator)
             val botList = FileUtils.listFiles(configDir, WildcardFileFilter("*.json"), null)
 
             botList.filterNot {
@@ -189,8 +184,8 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
     }
 
     private fun checkValidConfig() {
-        if (config.boolean("islocal")) {
-            val configDir = File(File(config.string(ConfigValues.BINARY)).parent + File.separator + "config" + File.separator)
+        if (ConfigManager.boolean("islocal")) {
+            val configDir = File(File(ConfigManager.string(ConfigValues.BINARY)).parent + File.separator + "config" + File.separator)
             val config = Paths.get(configDir.absolutePath + File.separator + "ASF.json")
             var json = loadJsonObject(config)
 
@@ -222,7 +217,7 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
                         json = updateJson(json).add("SteamOwnerID", result.get().toLong()).build()
                         showMessage = true
                     } catch (e: Exception) {
-                        tornadofx.error("Error", e.message)
+                        error("Error", e.message)
                     }
                 }
             }
@@ -235,6 +230,11 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
                     }
                 }
             }
+        } else {
+            if (!checkRemote(ConfigManager.string("host"))) {
+                error("Cannot connect to remote")
+                return
+            }
         }
     }
 
@@ -243,6 +243,4 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
         json.forEach { key, value -> job.add(key, value) }
         return job
     }
-
-    private val selectedBot get() = bots.selectionModel.selectedItem
 }
