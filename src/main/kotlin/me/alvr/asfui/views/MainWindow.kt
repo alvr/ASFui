@@ -62,6 +62,7 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
     private val cardsButton: Button by fxid("cards")
     private val gamesButton: Button by fxid("games")
     private val asfButton: Button by fxid("asf")
+    private val twoFAButton: Button by fxid("twofa")
 
     private val container: Pane by fxid("container")
 
@@ -167,6 +168,13 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
         asfButton.apply {
             action {
                 container.replaceChildren(find(ASF::class, mapOf("input" to input, "bots" to bots)))
+            }
+            enableWhen(ASFProcess.started)
+        }
+
+        twoFAButton.apply {
+            action {
+                container.replaceChildren(find(TwoFA::class, mapOf("bots" to bots)))
             }
             enableWhen(ASFProcess.started)
         }

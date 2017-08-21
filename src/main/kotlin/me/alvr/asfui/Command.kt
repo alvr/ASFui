@@ -40,6 +40,11 @@ object Command : Controller() {
     const val VERSION = "version"
     const val API = "api"
 
+    // 2FA
+    const val TWOFA = "2fa"
+    const val TWOFA_ACCEPT = "2faok"
+    const val TWOFA_DENY = "2fano"
+
     fun sendCommand(command: String): String {
         val parameters = mapOf("command" to command)
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.VBox?>
+
+<TitledPane collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" text="2FA" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <VBox alignment="CENTER" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" spacing="10.0">
+         <children>
+            <Button fx:id="twofa_generate" mnemonicParsing="false" styleClass="normal-button" text="Generate Token">
+               <tooltip>
+                  <Tooltip text="Empty Tooltip" />
+               </tooltip>
+            </Button>
+            <Button fx:id="twofa_accept" mnemonicParsing="false" styleClass="normal-button" text="Accept Pending">
+               <tooltip>
+                  <Tooltip text="Empty Tooltip" />
+               </tooltip>
+            </Button>
+            <Button fx:id="twofa_deny" mnemonicParsing="false" styleClass="normal-button" text="Deny Pending">
+               <tooltip>
+                  <Tooltip text="Empty Tooltip" />
+               </tooltip>
+            </Button>
+         </children>
+      </VBox>
+   </content>
+</TitledPane>
