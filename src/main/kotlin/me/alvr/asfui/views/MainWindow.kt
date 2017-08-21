@@ -76,6 +76,7 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
         }
 
         if (ConfigManager.boolean(ConfigValues.AUTO_START)) {
+            checkValidConfig()
             runLater(Duration(1000.0)) {
                 ASFProcess.start(output)
                 loadBots()
