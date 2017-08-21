@@ -49,7 +49,7 @@ object Command : Controller() {
         return response.trim()
     }
 
-    fun generateCommand(command: String, user: String, args: String = "", pre: String = "") = "$command $user $pre $args"
+    fun generateCommand(command: String, user: String?, args: String = "", pre: String = "") = "$command $user $pre $args"
 
     private fun String.after(find: String): String {
         val index = this.indexOf(find)

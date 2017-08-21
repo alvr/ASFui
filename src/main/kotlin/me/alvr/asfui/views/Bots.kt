@@ -23,7 +23,7 @@ class Bots : Fragment() {
     private val botsStatusAll: Button by fxid("bots_statusall")
 
     private val bots: ComboBox<String> by param()
-    private var bot = bots.selectedItem!!
+    private var bot = bots.selectedItem
 
     init {
         bots.valueProperty().addListener { _, _, newBot ->

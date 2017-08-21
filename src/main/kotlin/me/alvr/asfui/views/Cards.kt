@@ -19,7 +19,7 @@ class Cards : Fragment() {
     private val cardsUnpackButton: Button by fxid("cards_unpack")
 
     private val bots: ComboBox<String> by param()
-    private var bot = bots.selectedItem!!
+    private var bot = bots.selectedItem
 
     init {
         bots.valueProperty().addListener { _, _, newBot ->
