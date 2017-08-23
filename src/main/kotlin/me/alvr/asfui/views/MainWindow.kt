@@ -13,12 +13,12 @@ import javafx.scene.layout.Pane
 import javafx.stage.StageStyle.UTILITY
 import javafx.util.Duration
 import me.alvr.asfui.ASFProcess
-import me.alvr.asfui.checkRemote
-import me.alvr.asfui.getCurrentVersion
-import me.alvr.asfui.updateAvailable
 import me.alvr.asfui.util.ConfigManager
 import me.alvr.asfui.util.ConfigValues
 import me.alvr.asfui.util.OpenBrowser
+import me.alvr.asfui.util.checkRemote
+import me.alvr.asfui.util.getCurrentVersion
+import me.alvr.asfui.util.updateAvailable
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
 import org.apache.commons.io.filefilter.WildcardFileFilter

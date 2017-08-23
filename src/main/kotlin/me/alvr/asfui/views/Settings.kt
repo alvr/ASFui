@@ -8,7 +8,7 @@ import javafx.scene.control.TextField
 import javafx.scene.control.ToggleButton
 import javafx.scene.layout.AnchorPane
 import javafx.util.Duration
-import me.alvr.asfui.checkRemote
+import me.alvr.asfui.util.checkRemote
 import me.alvr.asfui.util.ConfigManager
 import me.alvr.asfui.util.ConfigValues
 import tornadofx.View

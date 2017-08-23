@@ -1,6 +1,5 @@
-package me.alvr.asfui
+package me.alvr.asfui.util
 
-import me.alvr.asfui.util.ConfigValues
 import tornadofx.Controller
 
 object Command : Controller() {

@@ -1,4 +1,4 @@
-package me.alvr.asfui
+package me.alvr.asfui.util
 
 import java.util.Properties
 

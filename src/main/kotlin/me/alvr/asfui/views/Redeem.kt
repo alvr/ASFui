@@ -7,8 +7,8 @@ import javafx.scene.control.ComboBox
 import javafx.scene.control.SplitMenuButton
 import javafx.scene.control.TextArea
 import me.alvr.asfui.ASFProcess
-import me.alvr.asfui.Command
-import me.alvr.asfui.multiToOne
+import me.alvr.asfui.util.Command
+import me.alvr.asfui.util.multiToOne
 import tornadofx.Fragment
 import tornadofx.action
 import tornadofx.enableWhen

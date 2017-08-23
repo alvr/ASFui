@@ -4,7 +4,7 @@ import javafx.scene.Parent
 import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
 import me.alvr.asfui.ASFProcess
-import me.alvr.asfui.Command
+import me.alvr.asfui.util.Command
 import tornadofx.Fragment
 import tornadofx.action
 import tornadofx.enableWhen
