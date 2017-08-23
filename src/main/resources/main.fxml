@@ -44,6 +44,7 @@
                             <Button fx:id="games" mnemonicParsing="false" styleClass="normal-button" text="Games" />
                      <Button fx:id="asf" layoutX="65.0" layoutY="255.0" mnemonicParsing="false" styleClass="normal-button" text="ArchiSteamFarm" />
                      <Button fx:id="twofa" layoutX="65.0" layoutY="272.0" mnemonicParsing="false" styleClass="normal-button" text="2FA" />
+                     <Button fx:id="blacklist" layoutX="65.0" layoutY="290.0" mnemonicParsing="false" styleClass="normal-button" text="Blacklist" />
                         </children>
                     </VBox>
                 </content>
