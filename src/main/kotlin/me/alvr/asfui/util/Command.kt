@@ -44,6 +44,16 @@ object Command : Controller() {
     const val TWOFA_ACCEPT = "2faok"
     const val TWOFA_DENY = "2fano"
 
+    // Blacklist
+    const val BLACKLIST = "bl"
+    const val BLACKLIST_ADD = "bladd"
+    const val BLACKLIST_REMOVE = "blrm"
+
+    // Priority Idling
+    const val IDLING = "iq"
+    const val IDLING_ADD = "iqadd"
+    const val IDLING_REMOVE = "iqrm"
+
     fun sendCommand(command: String): String {
         val parameters = mapOf("command" to command)
 
