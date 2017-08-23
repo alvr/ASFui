@@ -64,6 +64,7 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
     private val asfButton: Button by fxid("asf")
     private val twoFAButton: Button by fxid("twofa")
     private val blacklistButton: Button by fxid("blacklist")
+    private val idlingButton: Button by fxid("idling")
 
     private val container: Pane by fxid("container")
 
@@ -183,6 +184,13 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
         blacklistButton.apply {
             action {
                 container.replaceChildren(find(Blacklist::class, mapOf("input" to input, "bots" to bots)))
+            }
+            enableWhen(ASFProcess.started)
+        }
+
+        idlingButton.apply {
+            action {
+                container.replaceChildren(find(Idling::class, mapOf("input" to input, "bots" to bots)))
             }
             enableWhen(ASFProcess.started)
         }
