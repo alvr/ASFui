@@ -21,6 +21,10 @@ class TwoFA : Fragment() {
     private var bot = bots.selectedItem
 
     init {
+        bots.valueProperty().addListener { _, _, newBot ->
+            bot = newBot
+        }
+
         twoFAGenerateButton.apply {
             action {
                 runAsync {
