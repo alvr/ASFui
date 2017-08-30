@@ -85,15 +85,11 @@
                 </CheckBox>
             </HBox>
         </TitledPane>
-      <TitledPane collapsible="false" prefHeight="65.0" prefWidth="600.0" text="General">
-         <content>
+        <TitledPane collapsible="false" prefHeight="65.0" prefWidth="600.0" text="General">
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <CheckBox fx:id="autostart" mnemonicParsing="false" text="Auto Start" />
-               </children>
+                <CheckBox fx:id="autostart" mnemonicParsing="false" text="Auto Start"/>
             </HBox>
-         </content>
-      </TitledPane>
+        </TitledPane>
        <HBox alignment="CENTER_RIGHT">
            <padding>
                <Insets bottom="10.0" right="5.0" />

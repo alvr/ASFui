@@ -5,36 +5,34 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.VBox?>
 
-<TitledPane collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" text="Archi Steam Farm" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <content>
-      <VBox alignment="CENTER" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" spacing="10.0">
-         <children>
-            <Button fx:id="asf_help" mnemonicParsing="false" styleClass="normal-button" text="Help">
-               <tooltip>
-                  <Tooltip text="Empty Tooltip" />
-               </tooltip>
-            </Button>
-            <Button fx:id="asf_rejoin" mnemonicParsing="false" styleClass="normal-button" text="Rejoin Chat">
-               <tooltip>
-                  <Tooltip text="Empty Tooltip" />
-               </tooltip>
-            </Button>
-            <Button fx:id="asf_update" mnemonicParsing="false" styleClass="normal-button" text="Update">
-               <tooltip>
-                  <Tooltip text="Empty Tooltip" />
-               </tooltip>
-            </Button>
-            <Button fx:id="asf_version" mnemonicParsing="false" styleClass="normal-button" text="Version">
-               <tooltip>
-                  <Tooltip text="Empty Tooltip" />
-               </tooltip>
-            </Button>
-            <Button fx:id="asf_api" mnemonicParsing="false" styleClass="normal-button" text="API">
-               <tooltip>
-                  <Tooltip text="Empty Tooltip" />
-               </tooltip>
-            </Button>
-         </children>
-      </VBox>
-   </content>
+<TitledPane collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="262.0"
+            prefHeight="400.0" prefWidth="262.0" text="Archi Steam Farm" xmlns="http://javafx.com/javafx/8.0.111"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <VBox alignment="CENTER" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" spacing="10.0">
+        <Button fx:id="asf_help" mnemonicParsing="false" styleClass="normal-button" text="Help">
+            <tooltip>
+                <Tooltip text="Empty Tooltip"/>
+            </tooltip>
+        </Button>
+        <Button fx:id="asf_rejoin" mnemonicParsing="false" styleClass="normal-button" text="Rejoin Chat">
+            <tooltip>
+                <Tooltip text="Empty Tooltip"/>
+            </tooltip>
+        </Button>
+        <Button fx:id="asf_update" mnemonicParsing="false" styleClass="normal-button" text="Update">
+            <tooltip>
+                <Tooltip text="Empty Tooltip"/>
+            </tooltip>
+        </Button>
+        <Button fx:id="asf_version" mnemonicParsing="false" styleClass="normal-button" text="Version">
+            <tooltip>
+                <Tooltip text="Empty Tooltip"/>
+            </tooltip>
+        </Button>
+        <Button fx:id="asf_api" mnemonicParsing="false" styleClass="normal-button" text="API">
+            <tooltip>
+                <Tooltip text="Empty Tooltip"/>
+            </tooltip>
+        </Button>
+    </VBox>
 </TitledPane>

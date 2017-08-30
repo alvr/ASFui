@@ -4,19 +4,17 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.VBox?>
 
-<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" text="Bots" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-    <content>
-        <VBox alignment="CENTER" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" spacing="10.0">
-            <children>
-                <Button fx:id="bots_start" mnemonicParsing="false" styleClass="normal-button" text="Start" />
-                <Button fx:id="bots_startall" mnemonicParsing="false" styleClass="normal-button" text="Start All" />
-                <Button fx:id="bots_stop" mnemonicParsing="false" styleClass="normal-button" text="Stop" />
-                <Button fx:id="bots_pause" mnemonicParsing="false" styleClass="normal-button" text="Pause" />
-                <Button fx:id="bots_resume" mnemonicParsing="false" styleClass="normal-button" text="Resume" />
-                <Button fx:id="bots_password" mnemonicParsing="false" styleClass="normal-button" text="Password" />
-                <Button fx:id="bots_status" mnemonicParsing="false" styleClass="normal-button" text="Status" />
-                <Button fx:id="bots_statusall" mnemonicParsing="false" styleClass="normal-button" text="Status All" />
-            </children>
-        </VBox>
-    </content>
+<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0"
+            minWidth="262.0" prefHeight="400.0" prefWidth="262.0" text="Bots" xmlns="http://javafx.com/javafx/8.0.111"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <VBox alignment="CENTER" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" spacing="10.0">
+        <Button fx:id="bots_start" mnemonicParsing="false" styleClass="normal-button" text="Start"/>
+        <Button fx:id="bots_startall" mnemonicParsing="false" styleClass="normal-button" text="Start All"/>
+        <Button fx:id="bots_stop" mnemonicParsing="false" styleClass="normal-button" text="Stop"/>
+        <Button fx:id="bots_pause" mnemonicParsing="false" styleClass="normal-button" text="Pause"/>
+        <Button fx:id="bots_resume" mnemonicParsing="false" styleClass="normal-button" text="Resume"/>
+        <Button fx:id="bots_password" mnemonicParsing="false" styleClass="normal-button" text="Password"/>
+        <Button fx:id="bots_status" mnemonicParsing="false" styleClass="normal-button" text="Status"/>
+        <Button fx:id="bots_statusall" mnemonicParsing="false" styleClass="normal-button" text="Status All"/>
+    </VBox>
 </TitledPane>
