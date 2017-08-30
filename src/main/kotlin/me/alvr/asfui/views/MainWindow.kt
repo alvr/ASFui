@@ -10,6 +10,7 @@ import javafx.scene.control.TextArea
 import javafx.scene.control.TextInputDialog
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.Pane
+import javafx.stage.FileChooser
 import javafx.stage.StageStyle.UTILITY
 import javafx.util.Duration
 import me.alvr.asfui.ASFProcess
@@ -25,6 +26,7 @@ import org.apache.commons.io.filefilter.WildcardFileFilter
 import tornadofx.View
 import tornadofx.action
 import tornadofx.alert
+import tornadofx.chooseFile
 import tornadofx.confirm
 import tornadofx.enableWhen
 import tornadofx.error
@@ -50,6 +52,7 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
     private val clearButton: Button by fxid("clear")
     private val output: TextArea by fxid("output")
     private val input: TextArea by fxid("input")
+    private val loadInputButton: Button by fxid("load_input")
     private val bots: ComboBox<String> by fxid("list_bot")
     private val reloadBots: Button by fxid("reload_bots")
     private val settings: Button by fxid("settings")
@@ -130,6 +133,14 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
 
         help.action {
             openBrowser.openUrl("https://github.com/alvr/ASFui/wiki")
+        }
+
+        loadInputButton.apply {
+            action {
+                val file = chooseFile("Choose file to load", arrayOf(FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt")))
+                input.text = file.first().readText()
+            }
+            enableWhen(ASFProcess.started)
         }
 
         botsButton.apply {
