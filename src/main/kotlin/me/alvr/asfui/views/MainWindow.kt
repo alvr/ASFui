@@ -86,7 +86,9 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
         if (ConfigManager.boolean(ConfigValues.AUTO_START)) {
             checkValidConfig()
             runLater(Duration(1000.0)) {
-                ASFProcess.start(output)
+                ASFProcess.input = input
+                ASFProcess.output = output
+                ASFProcess.start()
                 loadBots()
             }
         }
@@ -97,7 +99,9 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
                 checkValidConfig()
                 output.appendText("Starting ASF...\n")
                 runLater {
-                    ASFProcess.start(output)
+                    ASFProcess.input = input
+                    ASFProcess.output = output
+                    ASFProcess.start()
                     loadBots()
                 }
             }
