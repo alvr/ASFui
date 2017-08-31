@@ -46,22 +46,28 @@ class ASF : Fragment() {
         }
 
         asfUpdate.apply {
-            runAsync {
-                Command.sendCommand(Command.UPDATE)
+            asfUpdate.action {
+                runAsync {
+                    Command.sendCommand(Command.UPDATE)
+                }
             }
             enableWhen(ASFProcess.started)
         }
 
         asfVersion.apply {
-            runAsync {
-                Command.sendCommand(Command.VERSION)
+            asfVersion.action {
+                runAsync {
+                    Command.sendCommand(Command.VERSION)
+                }
             }
             enableWhen(ASFProcess.started)
         }
 
         asfApi.apply {
-            runAsync {
-                Command.sendCommand(Command.generateCommand(Command.API, bot))
+            asfApi.action {
+                runAsync {
+                    Command.sendCommand(Command.generateCommand(Command.API, bot))
+                }
             }
             enableWhen(ASFProcess.started)
         }
