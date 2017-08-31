@@ -12,4 +12,5 @@ object ConfigValues {
     const val OWNED = "owned"
     const val COOLDOWN = "cooldown"
     const val AUTO_START = "autostart"
+    const val TO_TRAY = "totray"
 }

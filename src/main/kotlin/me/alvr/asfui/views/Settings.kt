@@ -8,9 +8,9 @@ import javafx.scene.control.TextField
 import javafx.scene.control.ToggleButton
 import javafx.scene.layout.AnchorPane
 import javafx.util.Duration
-import me.alvr.asfui.util.checkRemote
 import me.alvr.asfui.util.ConfigManager
 import me.alvr.asfui.util.ConfigValues
+import me.alvr.asfui.util.checkRemote
 import tornadofx.View
 import tornadofx.action
 import tornadofx.c
@@ -32,6 +32,7 @@ class Settings : View("Settings") {
     private val owned: CheckBox by fxid("owned")
     private val cooldown: CheckBox by fxid("cooldown")
     private val autostart: CheckBox by fxid("autostart")
+    private val minimizeTray: CheckBox by fxid("minimize_tray")
     private val save: Button by fxid("save")
     private val status: Label by fxid("status")
 
@@ -70,6 +71,7 @@ class Settings : View("Settings") {
                 ConfigManager.set(ConfigValues.OWNED, owned.isSelected)
                 ConfigManager.set(ConfigValues.COOLDOWN, cooldown.isSelected)
                 ConfigManager.set(ConfigValues.AUTO_START, autostart.isSelected)
+                ConfigManager.set(ConfigValues.TO_TRAY, minimizeTray.isSelected)
                 MainWindow.isBinarySelected.value = !ConfigManager.string(ConfigValues.BINARY).isEmpty()
                 status.apply {
                     text = "Settings saved."
@@ -102,5 +104,6 @@ class Settings : View("Settings") {
         owned.isSelected = ConfigManager.boolean(ConfigValues.OWNED)
         cooldown.isSelected = ConfigManager.boolean(ConfigValues.COOLDOWN)
         autostart.isSelected = ConfigManager.boolean(ConfigValues.AUTO_START)
+        minimizeTray.isSelected = ConfigManager.boolean(ConfigValues.TO_TRAY)
     }
 }
