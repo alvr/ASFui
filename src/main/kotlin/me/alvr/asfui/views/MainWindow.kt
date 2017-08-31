@@ -137,8 +137,10 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
 
         loadInputButton.apply {
             action {
-                val file = chooseFile("Choose file to load", arrayOf(FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt")))
-                input.text = file.first().readText()
+                val file = chooseFile("Choose file to load", arrayOf(FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt"))).firstOrNull()
+                file?.let {
+                    input.text = file.readText()
+                }
             }
             enableWhen(ASFProcess.started)
         }
