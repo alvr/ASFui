@@ -23,6 +23,9 @@ import me.alvr.asfui.util.updateAvailable
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
 import org.apache.commons.io.filefilter.WildcardFileFilter
+import org.controlsfx.glyphfont.FontAwesome
+import org.controlsfx.glyphfont.GlyphFont
+import org.controlsfx.glyphfont.GlyphFontRegistry
 import tornadofx.View
 import tornadofx.action
 import tornadofx.alert
@@ -70,10 +73,11 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
     private val idlingButton: Button by fxid("idling")
 
     private val container: Pane by fxid("container")
+    private val fontAwesome: GlyphFont = GlyphFontRegistry.font("FontAwesome")
 
     companion object {
         private val isBinarySelectedProperty = SimpleBooleanProperty(!ConfigManager.string(ConfigValues.BINARY).isEmpty())
-        var isBinarySelected by property(isBinarySelectedProperty)
+        var isBinarySelected: SimpleBooleanProperty by property(isBinarySelectedProperty)
     }
 
     init {
@@ -127,16 +131,19 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
         }
 
         reloadBots.apply {
+            graphic = fontAwesome.create(FontAwesome.Glyph.REFRESH)
             action { loadBots() }
             enableWhen(ASFProcess.started)
         }
 
-        settings.action {
-            find(Settings::class).openModal(block = true, stageStyle = UTILITY)
+        settings.apply {
+            graphic = fontAwesome.create(FontAwesome.Glyph.COG)
+            action { find(Settings::class).openModal(block = true, stageStyle = UTILITY) }
         }
 
-        help.action {
-            openBrowser.openUrl("https://github.com/alvr/ASFui/wiki")
+        help.apply {
+            graphic = fontAwesome.create(FontAwesome.Glyph.QUESTION)
+            action { openBrowser.openUrl("https://github.com/alvr/ASFui/wiki") }
         }
 
         loadInputButton.apply {

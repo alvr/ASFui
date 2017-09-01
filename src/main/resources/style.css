@@ -12,15 +12,3 @@
     -fx-pref-height: 25px;
     -fx-pref-width: 25px;
 }
-
-.reload-button {
-    -fx-graphic: url('icons/refresh.png')
-}
-
-.settings-button {
-    -fx-graphic: url('icons/settings.png')
-}
-
-.help-button {
-    -fx-graphic: url('icons/help.png')
-}

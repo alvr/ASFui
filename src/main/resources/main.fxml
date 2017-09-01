@@ -86,21 +86,18 @@
             AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="160.0">
         <styleClass>
             <String fx:value="mini-button"/>
-            <String fx:value="reload-button"/>
         </styleClass>
     </Button>
     <Button fx:id="help" layoutX="509.0" layoutY="670.0" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0"
             AnchorPane.rightAnchor="251.0">
         <styleClass>
             <String fx:value="mini-button"/>
-            <String fx:value="help-button"/>
         </styleClass>
     </Button>
     <Button fx:id="settings" layoutX="526.0" layoutY="670.0" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0"
             AnchorPane.rightAnchor="214.0">
         <styleClass>
             <String fx:value="mini-button"/>
-            <String fx:value="settings-button"/>
         </styleClass>
     </Button>
     <Button fx:id="start" layoutX="568.0" layoutY="525.0" mnemonicParsing="false" styleClass="menu-button" text="Start"
