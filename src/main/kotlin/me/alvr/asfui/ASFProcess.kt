@@ -4,17 +4,19 @@ import javafx.beans.property.SimpleBooleanProperty
 import javafx.scene.control.TextArea
 import me.alvr.asfui.util.ConfigManager
 import me.alvr.asfui.util.ConfigValues
+import org.controlsfx.control.Notifications
 import org.zeroturnaround.exec.ProcessExecutor
 import org.zeroturnaround.exec.StartedProcess
 import org.zeroturnaround.exec.stream.LogOutputStream
 import tornadofx.Controller
 import tornadofx.property
+import tornadofx.runLater
 import kotlin.properties.Delegates
 
 object ASFProcess : Controller() {
     private lateinit var process: StartedProcess
     private val startedProperty = SimpleBooleanProperty(false)
-    var started by property(startedProperty)
+    var started: SimpleBooleanProperty by property(startedProperty)
 
     var output: TextArea by Delegates.notNull()
     var input: TextArea by Delegates.notNull()
@@ -50,6 +52,23 @@ object ASFProcess : Controller() {
             if (data.endsWith("Update process finished!")) {
                 stop()
                 start()
+            }
+
+            if (data.contains("Finished idling:") && ConfigManager.boolean(ConfigValues.NOTIFICATIONS)) {
+                val gameFinishedRegex = Regex(".*\\|.*\\|.*\\|(.*)\\|.* \\d+ \\((.*)\\) .*")
+                if (gameFinishedRegex.matches(data)) {
+                    val match = gameFinishedRegex.find(data)
+                    match?.let {
+                        val user = match.groups[1]!!.value
+                        val game = match.groups[2]!!.value
+                        runLater {
+                            Notifications.create()
+                                    .title("Idling finished!")
+                                    .text("$user has finishing farming all the cards from $game.")
+                                    .showInformation()
+                        }
+                    }
+                }
             }
 
             val keyRegex = Regex(".*Key: (.*) \\| Status: .*(NoDetail|Fail/DuplicateActivationCode|Fail/BadActivationCode|Fail/AlreadyPurchased|Fail/RateLimited)")

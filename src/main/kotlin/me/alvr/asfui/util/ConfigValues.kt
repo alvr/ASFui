@@ -13,4 +13,5 @@ object ConfigValues {
     const val COOLDOWN = "cooldown"
     const val AUTO_START = "autostart"
     const val TO_TRAY = "totray"
+    const val NOTIFICATIONS = "notifications"
 }

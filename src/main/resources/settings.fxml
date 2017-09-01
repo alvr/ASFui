@@ -42,23 +42,24 @@
                         <ToggleGroup fx:id="local_remote" />
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton fx:id="remote" mnemonicParsing="false" text="Remote" toggleGroup="$local_remote"/>
-                <TextField fx:id="host" HBox.hgrow="ALWAYS"/>
+                <RadioButton fx:id="remote" mnemonicParsing="false" text="Remote" toggleGroup="$local_remote" />
+                <TextField fx:id="host" HBox.hgrow="ALWAYS" />
             </HBox>
         </TitledPane>
         <TitledPane collapsible="false" prefHeight="65.0" prefWidth="600.0" text="Clear Keys">
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                 <CheckBox fx:id="redeemed" mnemonicParsing="false" selected="true" text="Redeemed" />
-                <CheckBox fx:id="duplicated" mnemonicParsing="false" selected="true" text="Duplicated"/>
-                <CheckBox fx:id="invalid" mnemonicParsing="false" text="Invalid"/>
-                <CheckBox fx:id="owned" mnemonicParsing="false" text="Owned"/>
-                <CheckBox fx:id="cooldown" mnemonicParsing="false" text="Cooldown"/>
+                <CheckBox fx:id="duplicated" mnemonicParsing="false" selected="true" text="Duplicated" />
+                <CheckBox fx:id="invalid" mnemonicParsing="false" text="Invalid" />
+                <CheckBox fx:id="owned" mnemonicParsing="false" text="Owned" />
+                <CheckBox fx:id="cooldown" mnemonicParsing="false" text="Cooldown" />
             </HBox>
         </TitledPane>
         <TitledPane collapsible="false" prefHeight="65.0" prefWidth="600.0" text="General">
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
-                <CheckBox fx:id="autostart" mnemonicParsing="false" text="Auto Start" />
+                <CheckBox fx:id="autostart" mnemonicParsing="false" text="Autostart" />
                 <CheckBox fx:id="minimize_tray" mnemonicParsing="false" text="Minimize to tray" />
+                <CheckBox fx:id="notifications" mnemonicParsing="false" text="Show notifications" />
             </HBox>
         </TitledPane>
        <HBox alignment="CENTER_RIGHT">

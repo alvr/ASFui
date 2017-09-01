@@ -33,6 +33,7 @@ class Settings : View("Settings") {
     private val cooldown: CheckBox by fxid("cooldown")
     private val autostart: CheckBox by fxid("autostart")
     private val minimizeTray: CheckBox by fxid("minimize_tray")
+    private val notifications: CheckBox by fxid("notifications")
     private val save: Button by fxid("save")
     private val status: Label by fxid("status")
 
@@ -72,6 +73,7 @@ class Settings : View("Settings") {
                 ConfigManager.set(ConfigValues.COOLDOWN, cooldown.isSelected)
                 ConfigManager.set(ConfigValues.AUTO_START, autostart.isSelected)
                 ConfigManager.set(ConfigValues.TO_TRAY, minimizeTray.isSelected)
+                ConfigManager.set(ConfigValues.NOTIFICATIONS, notifications.isSelected)
                 MainWindow.isBinarySelected.value = !ConfigManager.string(ConfigValues.BINARY).isEmpty()
                 status.apply {
                     text = "Settings saved."
@@ -105,5 +107,6 @@ class Settings : View("Settings") {
         cooldown.isSelected = ConfigManager.boolean(ConfigValues.COOLDOWN)
         autostart.isSelected = ConfigManager.boolean(ConfigValues.AUTO_START)
         minimizeTray.isSelected = ConfigManager.boolean(ConfigValues.TO_TRAY)
+        notifications.isSelected = ConfigManager.boolean(ConfigValues.NOTIFICATIONS)
     }
 }
