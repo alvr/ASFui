@@ -71,7 +71,7 @@ object ASFProcess : Controller() {
                 }
             }
 
-            val keyRegex = Regex(".*Key: (.*) \\| Status: .*(NoDetail|Fail/DuplicateActivationCode|Fail/BadActivationCode|Fail/AlreadyPurchased|Fail/RateLimited)")
+            val keyRegex = Regex(".*Key: (.*) \\| Status: .*(OK/NoDetail|Fail/DuplicateActivationCode|Fail/BadActivationCode|Fail/AlreadyPurchased|Fail/RateLimited) .*")
             if (keyRegex.matches(data)) {
                 val match = keyRegex.find(data)
                 match?.let {
