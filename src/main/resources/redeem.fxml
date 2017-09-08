@@ -20,19 +20,15 @@
             <items>
                 <CheckMenuItem fx:id="redeem_fd" mnemonicParsing="false" text="Force Distributing" userData="fd"/>
                 <CheckMenuItem fx:id="redeem_ff" mnemonicParsing="false" text="Force Forwarding" userData="ff"/>
-                <CheckMenuItem fx:id="redeem_fkmg" mnemonicParsing="false" text="Force Keep Missing Games"
-                               userData="fkmg"/>
+                <CheckMenuItem fx:id="redeem_fkmg" mnemonicParsing="false" text="Force Keep Missing Games" userData="fkmg"/>
                 <CheckMenuItem fx:id="redeem_sd" mnemonicParsing="false" text="Skip Distributing" userData="sd"/>
                 <CheckMenuItem fx:id="redeem_sf" mnemonicParsing="false" text="Skip Forwarding" userData="sf"/>
                 <CheckMenuItem fx:id="redeem_si" mnemonicParsing="false" text="Skip Initial" userData="si"/>
-                <CheckMenuItem fx:id="redeem_skmg" mnemonicParsing="false" text="Skip Keep Missing Games"
-                               userData="skmg"/>
+                <CheckMenuItem fx:id="redeem_skmg" mnemonicParsing="false" text="Skip Keep Missing Games" userData="skmg"/>
                 <CheckMenuItem fx:id="redeem_v" mnemonicParsing="false" text="Validate" userData="v"/>
             </items>
             <tooltip>
-                <Tooltip
-                        text="Force Distributing: Forces Distributing redeeming preference to be enabled.&#13;Force Forwarding: Forces Forwarding redeeming preference to be enabled.&#13;Force Keep Missing Games: Forces KeepMissingGames redeeming preference to be enabled.&#13;Skip Distributing: Forces Distributing redeeming preference to be disabled.&#13;Skip Forwarding: Forces Forwarding redeeming preference to be disabled&#13;Skip Initial: Skips key redemption on initial bot.&#13;Skip Keep Missing Games: Forces KeepMissingGames redeeming preference to be disabled."
-                        wrapText="true"/>
+                <Tooltip text="Force Distributing: Forces Distributing redeeming preference to be enabled.&#13;Force Forwarding: Forces Forwarding redeeming preference to be enabled.&#13;Force Keep Missing Games: Forces KeepMissingGames redeeming preference to be enabled.&#13;Skip Distributing: Forces Distributing redeeming preference to be disabled.&#13;Skip Forwarding: Forces Forwarding redeeming preference to be disabled&#13;Skip Initial: Skips key redemption on initial bot.&#13;Skip Keep Missing Games: Forces KeepMissingGames redeeming preference to be disabled."/>
             </tooltip>
         </SplitMenuButton>
     </VBox>

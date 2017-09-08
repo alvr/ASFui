@@ -16,19 +16,17 @@
         </Button>
         <Button fx:id="cards_loot" mnemonicParsing="false" styleClass="normal-button" text="Loot">
             <tooltip>
-                <Tooltip
-                        text="Sends all booster packs and Steam trading cards (including foils if IsBotAccount) of given bot instance to SteamMasterID."
-                        wrapText="true"/>
+                <Tooltip text="Sends all booster packs and Steam trading cards (including foils if IsBotAccount) of given bot instance to SteamMasterID."/>
             </tooltip>
         </Button>
         <Button fx:id="cards_lootall" mnemonicParsing="false" styleClass="normal-button" text="Loot All">
             <tooltip>
-                <Tooltip text="Empty Tooltip"/>
+                <Tooltip text="Sends all booster packs and Steam trading cards (including foils if IsBotAccount) of all bots instances to SteamMasterID."/>
             </tooltip>
         </Button>
         <Button fx:id="cards_unpack" mnemonicParsing="false" styleClass="normal-button" text="Unpack">
             <tooltip>
-                <Tooltip text="Empty Tooltip"/>
+                <Tooltip text="Unpacks all booster packs stored in the inventory of current bot instance."/>
             </tooltip>
         </Button>
     </VBox>

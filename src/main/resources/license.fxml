@@ -11,12 +11,12 @@
     <VBox alignment="CENTER" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" spacing="10.0">
         <Button fx:id="license_add" mnemonicParsing="false" styleClass="normal-button" text="Add">
             <tooltip>
-                <Tooltip text="Empty Tooltip"/>
+                <Tooltip text="Activates given appIDs (Steam Network) or subIDs (Steam Store) on current bot instance (free games only)."/>
             </tooltip>
         </Button>
         <Button fx:id="license_addall" mnemonicParsing="false" styleClass="normal-button" text="Add All">
             <tooltip>
-                <Tooltip text="Empty Tooltip"/>
+                <Tooltip text="Activates given appIDs (Steam Network) or subIDs (Steam Store) on all bots instances (free games only)."/>
             </tooltip>
         </Button>
     </VBox>

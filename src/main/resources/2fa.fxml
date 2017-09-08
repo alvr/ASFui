@@ -11,17 +11,17 @@
     <VBox alignment="CENTER" minHeight="400.0" minWidth="262.0" prefHeight="400.0" prefWidth="262.0" spacing="10.0">
         <Button fx:id="twofa_generate" mnemonicParsing="false" styleClass="normal-button" text="Generate Token">
             <tooltip>
-                <Tooltip text="Empty Tooltip"/>
+                <Tooltip text="Generates temporary 2FA token for current bot instance."/>
             </tooltip>
         </Button>
         <Button fx:id="twofa_accept" mnemonicParsing="false" styleClass="normal-button" text="Accept Pending">
             <tooltip>
-                <Tooltip text="Empty Tooltip"/>
+                <Tooltip text="Accepts all pending 2FA confirmations for current bot instance."/>
             </tooltip>
         </Button>
         <Button fx:id="twofa_deny" mnemonicParsing="false" styleClass="normal-button" text="Deny Pending">
             <tooltip>
-                <Tooltip text="Empty Tooltip"/>
+                <Tooltip text="Denies all pending 2FA confirmations for current bot instance."/>
             </tooltip>
         </Button>
     </VBox>
