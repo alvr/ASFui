@@ -39,6 +39,7 @@ import tornadofx.replaceChildren
 import tornadofx.runLater
 import tornadofx.toPrettyString
 import java.io.File
+import java.nio.charset.Charset
 import java.nio.file.Paths
 import javax.json.Json
 import javax.json.JsonObject
@@ -283,7 +284,7 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
             if (showMessage) {
                 alert(CONFIRMATION, "Config needs to be changed.", message, ButtonType.OK, ButtonType.CANCEL) {
                     when (it) {
-                        ButtonType.OK -> FileUtils.writeStringToFile(config.toFile(), json.toPrettyString())
+                        ButtonType.OK -> FileUtils.writeStringToFile(config.toFile(), json.toPrettyString(), Charset.defaultCharset())
                         ButtonType.CANCEL -> Platform.exit()
                     }
                 }
