@@ -16,7 +16,6 @@ import javafx.util.Duration
 import me.alvr.asfui.ASFProcess
 import me.alvr.asfui.util.ConfigManager
 import me.alvr.asfui.util.ConfigValues
-import me.alvr.asfui.util.OpenBrowser
 import me.alvr.asfui.util.checkRemote
 import me.alvr.asfui.util.getCurrentVersion
 import me.alvr.asfui.util.updateAvailable
@@ -47,7 +46,6 @@ import javax.json.JsonObjectBuilder
 
 class MainWindow : View("ASFui v${getCurrentVersion()}") {
     override val root: AnchorPane by fxml("/main.fxml")
-    private val openBrowser: OpenBrowser by inject()
 
     // Main
     private val startButton: Button by fxid("start")
@@ -83,7 +81,7 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
     init {
         if (updateAvailable()) {
             confirm("Update found", "A new version is available, download now?", actionFn = {
-                openBrowser.openUrl("https://github.com/alvr/ASFui/releases/latest")
+                hostServices.showDocument("https://github.com/alvr/ASFui/releases/latest")
             })
         }
 
@@ -143,7 +141,9 @@ class MainWindow : View("ASFui v${getCurrentVersion()}") {
 
         help.apply {
             graphic = fontAwesome.create(FontAwesome.Glyph.QUESTION)
-            action { openBrowser.openUrl("https://github.com/alvr/ASFui/wiki") }
+            action {
+                hostServices.showDocument("https://github.com/alvr/ASFui/wiki")
+            }
         }
 
         loadInputButton.apply {

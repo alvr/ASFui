@@ -5,7 +5,6 @@ import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
 import me.alvr.asfui.ASFProcess
 import me.alvr.asfui.util.Command
-import me.alvr.asfui.util.OpenBrowser
 import tornadofx.Fragment
 import tornadofx.action
 import tornadofx.enableWhen
@@ -13,7 +12,6 @@ import tornadofx.selectedItem
 
 class ASF : Fragment() {
     override val root: Parent by fxml("/asf.fxml")
-    private val openBrower: OpenBrowser by inject()
 
     private val asfHelp: Button by fxid("asf_help")
     private val asfRejoin: Button by fxid("asf_rejoin")
@@ -31,7 +29,7 @@ class ASF : Fragment() {
 
         asfHelp.apply {
             action {
-                openBrower.openUrl("https://github.com/JustArchi/ArchiSteamFarm/wiki")
+                hostServices.showDocument("https://github.com/JustArchi/ArchiSteamFarm/wiki")
             }
             enableWhen(ASFProcess.started)
         }
