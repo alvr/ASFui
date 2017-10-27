@@ -1,0 +1,4 @@
+psutil==5.4.0
+PyInstaller==3.3
+PyQt5==5.9
+requests==2.18.4
