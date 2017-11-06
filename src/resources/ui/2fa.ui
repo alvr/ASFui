@@ -28,6 +28,9 @@
        <height>25</height>
       </size>
      </property>
+     <property name="toolTip">
+      <string>Generates temporary 2FA token for current bot instance.</string>
+     </property>
      <property name="text">
       <string>Generate</string>
      </property>
@@ -41,6 +44,9 @@
        <height>25</height>
       </size>
      </property>
+     <property name="toolTip">
+      <string>Accepts all pending 2FA confirmations for current bot instance.</string>
+     </property>
      <property name="text">
       <string>Accept</string>
      </property>
@@ -53,6 +59,9 @@
        <width>0</width>
        <height>25</height>
       </size>
+     </property>
+     <property name="toolTip">
+      <string>Denies all pending 2FA confirmations for current bot instance.</string>
      </property>
      <property name="text">
       <string>Deny</string>
