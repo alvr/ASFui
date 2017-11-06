@@ -37,7 +37,7 @@ class ASFui(QMainWindow):
         self.btn_load_input.clicked.connect(self.load_input)        # Load Input
 
         # Controls
-        self.btn_manage.clicked.connect(self.manage)                # Manage Bots
+        self.btn_bots.clicked.connect(self.bots)                    # Manage Bots
         self.btn_redeem.clicked.connect(self.redeem)                # Redeem
         self.btn_licenses.clicked.connect(self.licenses)            # Licenses
         self.btn_cards.clicked.connect(self.cards)                  # Cards
@@ -91,8 +91,8 @@ class ASFui(QMainWindow):
                 self.input.appendPlainText(f.read())
 
     # Controls
-    def manage(self):
-        self._clear_layout(self.gb_options_layout)
+    def bots(self):
+        self._clear_layout()
         self.gb_options_layout.addWidget(Bots(self.cb_bots))
 
     def redeem(self):
