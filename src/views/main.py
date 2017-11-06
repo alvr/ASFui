@@ -115,10 +115,10 @@ class ASFui(QMainWindow):
 
     def asf(self):
         self._clear_layout()
-        self.gb_options_layout.addWidget(ASF())
+        self.gb_options_layout.addWidget(ASF(self.cb_bots))
 
     def twofa(self):
-        self._clear_layout(self.gb_options_layout)
+        self._clear_layout()
         self.gb_options_layout.addWidget(TwoFA(self.cb_bots))
 
     def blacklist(self):

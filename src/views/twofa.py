@@ -11,9 +11,9 @@ class TwoFA(QWidget):
     def __init__(self, bots):
         super().__init__()
 
-        self.bots = bots
         uic.loadUi(resource_path('src/resources/ui/2fa.ui'), self)
 
+        self.bots = bots
         self.twofa_generate.clicked.connect(self.generate)
         self.twofa_accept.clicked.connect(self.accept)
         self.twofa_deny.clicked.connect(self.deny)

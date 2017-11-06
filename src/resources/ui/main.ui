@@ -85,7 +85,7 @@
             <number>35</number>
            </property>
            <item>
-            <widget class="QPushButton" name="btn_manage">
+            <widget class="QPushButton" name="btn_bots">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -304,21 +304,6 @@
             <height>25</height>
            </size>
           </property>
-          <item>
-           <property name="text">
-            <string>asd</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>dy34y4</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>gfgt3t23</string>
-           </property>
-          </item>
          </widget>
         </item>
         <item>
@@ -393,6 +378,9 @@
             <height>25</height>
            </size>
           </property>
+          <property name="toolTip">
+           <string>Start ASF process.</string>
+          </property>
           <property name="text">
            <string>Start</string>
           </property>
@@ -406,6 +394,9 @@
             <height>25</height>
            </size>
           </property>
+          <property name="toolTip">
+           <string>Stop ASF process.</string>
+          </property>
           <property name="text">
            <string>Stop</string>
           </property>
@@ -418,6 +409,9 @@
             <width>0</width>
             <height>25</height>
            </size>
+          </property>
+          <property name="toolTip">
+           <string>Clear output log.</string>
           </property>
           <property name="text">
            <string>Clear Log</string>
