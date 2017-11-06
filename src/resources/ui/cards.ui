@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Cards</class>
+ <widget class="QWidget" name="Cards">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>227</width>
+    <height>414</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="bots_layout">
+   <property name="topMargin">
+    <number>35</number>
+   </property>
+   <property name="bottomMargin">
+    <number>35</number>
+   </property>
+   <item>
+    <widget class="QPushButton" name="cards_farm">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Restarts cards farming module for given bot instance.</string>
+     </property>
+     <property name="text">
+      <string>Farm</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="cards_loot">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Sends all booster packs and Steam trading cards (including foils if IsBotAccount) of given bot instance to SteamMasterID.</string>
+     </property>
+     <property name="text">
+      <string>Loot</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="cards_loot_all">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Sends all booster packs and Steam trading cards (including foils if IsBotAccount) of all bots instances to SteamMasterID.</string>
+     </property>
+     <property name="text">
+      <string>Loot All</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="cards_unpack">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Unpacks all booster packs stored in the inventory of current bot instance.</string>
+     </property>
+     <property name="text">
+      <string>Unpack</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
