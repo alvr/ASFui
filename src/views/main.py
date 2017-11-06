@@ -12,6 +12,7 @@ from views.asf import ASF
 from views.blacklist import Blacklist
 from views.bots import Bots
 from views.cards import Cards
+from views.games import Games
 from views.settings import Settings
 from views.twofa import TwoFA
 
@@ -109,8 +110,8 @@ class ASFui(QMainWindow):
         self.gb_options_layout.addWidget(Cards(self.cb_bots))
 
     def games(self):
-        self._clear_layout(self.gb_options_layout)
-        pass
+        self._clear_layout()
+        self.gb_options_layout.addWidget(Games(self.cb_bots, self.input))
 
     def asf(self):
         self._clear_layout()
