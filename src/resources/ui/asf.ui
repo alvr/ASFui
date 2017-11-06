@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ArchiSteamFarm</class>
+ <widget class="QWidget" name="ArchiSteamFarm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>227</width>
+    <height>414</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="bots_layout">
+   <property name="topMargin">
+    <number>35</number>
+   </property>
+   <property name="bottomMargin">
+    <number>35</number>
+   </property>
+   <item>
+    <widget class="QPushButton" name="asf_help">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Shows help link.</string>
+     </property>
+     <property name="text">
+      <string>Help</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="asf_rejoin">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Forces current bot instance to rejoin its SteamMasterClanID groupchat.</string>
+     </property>
+     <property name="text">
+      <string>Rejoin</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="asf_update">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Checks GitHub for ASF updates.</string>
+     </property>
+     <property name="text">
+      <string>Update</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="asf_version">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Prints version of ASF.</string>
+     </property>
+     <property name="text">
+      <string>Version</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="asf_api">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Returns ASF API response in JSON, for current bot instance.</string>
+     </property>
+     <property name="text">
+      <string>API</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

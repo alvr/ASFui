@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import QMainWindow, QFileDialog, QPushButton, QMessageBox
 from utils import command
 from utils.process import ASFProcess, is_asf_running
 from utils.resources import resource_path
+from views.asf import ASF
 from views.bots import Bots
 from views.settings import Settings
 from views.twofa import TwoFA
@@ -110,8 +111,8 @@ class ASFui(QMainWindow):
         pass
 
     def asf(self):
-        self._clear_layout(self.gb_options_layout)
-        pass
+        self._clear_layout()
+        self.gb_options_layout.addWidget(ASF())
 
     def twofa(self):
         self._clear_layout(self.gb_options_layout)
@@ -125,8 +126,8 @@ class ASFui(QMainWindow):
         self._clear_layout(self.gb_options_layout)
         pass
 
-    def _clear_layout(self, layout):
-        while layout.count():
-            child = layout.takeAt(0)
+    def _clear_layout(self):
+        while self.gb_options_layout.count():
+            child = self.gb_options_layout.takeAt(0)
             if child.widget():
                 child.widget().deleteLater()
