@@ -13,6 +13,7 @@ from views.blacklist import Blacklist
 from views.bots import Bots
 from views.cards import Cards
 from views.games import Games
+from views.idling import Idling
 from views.settings import Settings
 from views.twofa import TwoFA
 
@@ -126,8 +127,8 @@ class ASFui(QMainWindow):
         self.gb_options_layout.addWidget(Blacklist(self.cb_bots, self.input))
 
     def idling(self):
-        self._clear_layout(self.gb_options_layout)
-        pass
+        self._clear_layout()
+        self.gb_options_layout.addWidget(Idling(self.cb_bots, self.input))
 
     def _clear_layout(self):
         while self.gb_options_layout.count():
