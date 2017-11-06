@@ -14,6 +14,7 @@ from views.bots import Bots
 from views.cards import Cards
 from views.games import Games
 from views.idling import Idling
+from views.licenses import Licenses
 from views.settings import Settings
 from views.twofa import TwoFA
 
@@ -103,8 +104,8 @@ class ASFui(QMainWindow):
         pass
 
     def licenses(self):
-        self._clear_layout(self.gb_options_layout)
-        pass
+        self._clear_layout()
+        self.gb_options_layout.addWidget(Licenses(self.cb_bots, self.input))
 
     def cards(self):
         self._clear_layout()
