@@ -14,7 +14,7 @@ class Blacklist(QWidget):
         uic.loadUi(resource_path('src/resources/ui/blacklist.ui'), self)
 
         self.bots = bots
-        self.input = data
+        self.data = data
         self.blacklist_list.clicked.connect(self.list)
         self.blacklist_add.clicked.connect(self.add)
         self.blacklist_remove.clicked.connect(self.remove)
@@ -24,9 +24,9 @@ class Blacklist(QWidget):
         threading.Thread(target=send_command, args=(command,), daemon=True).start()
 
     def add(self):
-        command = generate_command(BLACKLIST_ADD, self.bots.currentText(), self.input.toPlainText())
+        command = generate_command(BLACKLIST_ADD, self.bots.currentText(), self.data.toPlainText())
         threading.Thread(target=send_command, args=(command,), daemon=True).start()
 
     def remove(self):
-        command = generate_command(BLACKLIST_REMOVE, self.bots.currentText(), self.input.toPlainText())
+        command = generate_command(BLACKLIST_REMOVE, self.bots.currentText(), self.data.toPlainText())
         threading.Thread(target=send_command, args=(command,), daemon=True).start()
