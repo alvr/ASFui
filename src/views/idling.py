@@ -15,7 +15,6 @@ class Idling(QWidget):
 
         self.bots = bots
         self.data = data
-
         self.idling_list.clicked.connect(self.list)
         self.idling_add.clicked.connect(self.add)
         self.idling_remove.clicked.connect(self.remove)
