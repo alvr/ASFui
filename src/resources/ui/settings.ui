@@ -95,7 +95,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="checkBoxv">
+       <widget class="QCheckBox" name="cb_minimize">
         <property name="text">
          <string>Minimize to tray</string>
         </property>

@@ -1,6 +1,7 @@
 import requests
 
 from requests.exceptions import ConnectionError
+from utils.config import Config
 
 
 REDEEM = 'r'
@@ -43,7 +44,7 @@ def generate_command(command, user='', args='', pre=''):
 
 def send_command(command):
     params = {'command': command}
-    base_url = Settings().get_setting('host')
+    base_url = Config().get('host')
 
     try:
         response = requests.get(base_url + '/IPC', params=params).text
