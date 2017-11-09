@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Redeem</class>
+ <widget class="QWidget" name="Redeem">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>227</width>
+    <height>414</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="bots_layout">
+   <property name="topMargin">
+    <number>35</number>
+   </property>
+   <property name="bottomMargin">
+    <number>35</number>
+   </property>
+   <item>
+    <widget class="QPushButton" name="redeem_normal">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Redeems given cd-keys on given bot instance.</string>
+     </property>
+     <property name="text">
+      <string>Redeem</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="redeem_si">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Skips key redemption on initial bot.</string>
+     </property>
+     <property name="text">
+      <string>Skip Initial</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="redeem_fd">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Forces Distributing redeeming preference to be enabled.</string>
+     </property>
+     <property name="text">
+      <string>Force Distributing</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">redeem_distributing</string>
+     </attribute>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="redeem_sd">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Forces Distributing redeeming preference to be disabled.</string>
+     </property>
+     <property name="text">
+      <string>Skip Distributing</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">redeem_distributing</string>
+     </attribute>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="redeem_ff">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Forces Forwarding redeeming preference to be enabled.</string>
+     </property>
+     <property name="text">
+      <string>Force Forwarding</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">redeem_forwarding</string>
+     </attribute>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="redeem_sf">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Forces Forwarding redeeming preference to be disabled.</string>
+     </property>
+     <property name="text">
+      <string>Skip Forwarding</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">redeem_forwarding</string>
+     </attribute>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="redeem_fkmg">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Forces KeepMissingGames redeeming preference to be enabled.</string>
+     </property>
+     <property name="text">
+      <string>Force Keep Missing Games</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">redeem_missing</string>
+     </attribute>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="redeem_skmg">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Forces KeepMissingGames redeeming preference to be disabled.</string>
+     </property>
+     <property name="text">
+      <string>Skip Keep Missing Games</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">redeem_missing</string>
+     </attribute>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="redeem_v">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Denies all pending 2FA confirmations for current bot instance.</string>
+     </property>
+     <property name="text">
+      <string>Validate</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+ <buttongroups>
+  <buttongroup name="redeem_distributing"/>
+  <buttongroup name="redeem_forwarding"/>
+  <buttongroup name="redeem_missing"/>
+ </buttongroups>
+</ui>
