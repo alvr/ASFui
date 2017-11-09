@@ -1,11 +1,12 @@
 import os
+import threading
 import webbrowser
 
 from PyQt5 import uic
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QFileDialog, QPushButton, QMessageBox
 
-from utils import command
+from utils.config import Config
 from utils.process import ASFProcess, is_asf_running
 from utils.resources import resource_path
 from views.asf import ASF
@@ -84,7 +85,7 @@ class ASFui(QMainWindow):
         webbrowser.open_new_tab('https://github.com/alvr/ASFui/wiki')
 
     def reload_bots(self):
-        pass
+        threading.Thread(target=self._get_bots, daemon=True).start()
 
     def load_input(self):
         dialog = QFileDialog()
@@ -131,6 +132,13 @@ class ASFui(QMainWindow):
     def idling(self):
         self._clear_layout()
         self.gb_options_layout.addWidget(Idling(self.cb_bots, self.input))
+
+    def _get_bots(self):
+        self.cb_bots.clear()
+        for file in os.listdir(os.path.join(os.path.dirname(Config().get('binary')), 'config')):
+            if file.endswith('.json') and not any(x in file for x in ['ASF', 'example', 'minimal']):
+                self.cb_bots.addItem(os.path.splitext(file)[0])
+                self.cb_bots.setCurrentIndex(0)
 
     def _clear_layout(self):
         while self.gb_options_layout.count():
