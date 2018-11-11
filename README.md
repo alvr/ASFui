@@ -1,6 +1,7 @@
 # ASFui v2  
 
-[![Travis](https://img.shields.io/travis/alvr/ASFui.svg)](https://travis-ci.org/alvr/ASFui)
+[![Travis](https://img.shields.io/travis/alvr/ASFui.svg)](https://travis-ci.org/alvr/ASFui)[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Falvr%2FASFui.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Falvr%2FASFui?ref=badge_shield)
+
 [![Latest Release](https://img.shields.io/github/release/alvr/ASFui.svg?label=latest%20stable)](https://github.com/alvr/ASFui/releases/latest)
 [![Latest Build](https://img.shields.io/badge/latest%20build-download-blue.svg)](https://hive.am/ASFui)
 [![Github All Releases](https://img.shields.io/github/downloads/alvr/ASFui/total.svg)](https://github.com/alvr/ASFui/releases)
@@ -19,3 +20,6 @@ If you don't, you can comment in the [SteamGifts thread](https://www.steamgifts.
 
 ## Changelog
 [Check the changelog](https://github.com/alvr/ASFui/wiki/Changelog)
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Falvr%2FASFui.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Falvr%2FASFui?ref=badge_large)
